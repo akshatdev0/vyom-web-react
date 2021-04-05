@@ -16,21 +16,19 @@
 
 */
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider as StoreProvider } from 'react-redux';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import { composeStore } from './store';
-import App from './app';
+import AdminLayout from 'layouts/Admin';
+import AuthLayout from 'layouts/Auth';
 
-import 'assets/plugins/nucleo/css/nucleo.css';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'assets/scss/argon-dashboard-react.scss';
-
-const store = composeStore();
-
-ReactDOM.render(
-  <StoreProvider store={store}>
-    <App />
-  </StoreProvider>,
-  document.getElementById('root'),
+const App: React.FunctionComponent = () => (
+  <BrowserRouter>
+    <Switch>
+      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
+      <Route path="/auth" render={() => <AuthLayout />} />
+      <Redirect from="/" to="/admin/index" />
+    </Switch>
+  </BrowserRouter>
 );
+
+export default App;
