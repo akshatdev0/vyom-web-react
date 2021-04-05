@@ -15,24 +15,16 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useState } from "react";
+import React, { useState } from 'react';
 // react component that copies the given text inside your clipboard
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import { CopyToClipboard } from 'react-copy-to-clipboard';
 // reactstrap components
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  Container,
-  Row,
-  Col,
-  UncontrolledTooltip,
-} from "reactstrap";
+import { Card, CardHeader, CardBody, Container, Row, Col, UncontrolledTooltip } from 'reactstrap';
 // core components
-import Header from "components/Headers/Header.js";
+import Header from 'components/Headers/Header';
 
-const Icons = () => {
-  const [copiedText, setCopiedText] = useState();
+const Icons: React.FunctionComponent = () => {
+  const [copiedText, setCopiedText] = useState('');
   return (
     <>
       <Header />
@@ -48,36 +40,20 @@ const Icons = () => {
               <CardBody>
                 <Row className="icon-examples">
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-active-40"}
-                      onCopy={() => setCopiedText("ni ni-active-40")}
-                    >
-                      <button
-                        className="btn-icon-clipboard"
-                        id="tooltip982655500"
-                        type="button"
-                      >
+                    <CopyToClipboard text={'ni ni-active-40'} onCopy={() => setCopiedText('ni ni-active-40')}>
+                      <button className="btn-icon-clipboard" id="tooltip982655500" type="button">
                         <div>
                           <i className="ni ni-active-40" />
                           <span>active-40</span>
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip982655500"
-                    >
-                      {copiedText === "ni ni-active-40"
-                        ? "This was Copied!"
-                        : "Copy To Clipboard"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip982655500">
+                      {copiedText === 'ni ni-active-40' ? 'This was Copied!' : 'Copy To Clipboard'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-air-baloon"}
-                      onCopy={() => setCopiedText("ni ni-air-baloon")}
-                    >
+                    <CopyToClipboard text={'ni ni-air-baloon'} onCopy={() => setCopiedText('ni ni-air-baloon')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="air-baloon"
@@ -90,21 +66,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip47550434"
-                    >
-                      {copiedText === "ni ni-air-baloon"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip47550434">
+                      {copiedText === 'ni ni-air-baloon' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-album-2"}
-                      onCopy={() => setCopiedText("ni ni-album-2")}
-                    >
+                    <CopyToClipboard text={'ni ni-album-2'} onCopy={() => setCopiedText('ni ni-album-2')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="album-2"
@@ -117,21 +84,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip945481346"
-                    >
-                      {copiedText === "ni ni-album-2"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip945481346">
+                      {copiedText === 'ni ni-album-2' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-align-center"}
-                      onCopy={() => setCopiedText("ni ni-align-center")}
-                    >
+                    <CopyToClipboard text={'ni ni-align-center'} onCopy={() => setCopiedText('ni ni-align-center')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="align-center"
@@ -144,21 +102,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip662352101"
-                    >
-                      {copiedText === "ni ni-align-center"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip662352101">
+                      {copiedText === 'ni ni-align-center' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-left-2"}
-                      onCopy={() => setCopiedText("ni ni-align-left-2")}
-                    >
+                    <CopyToClipboard text={'ni ni-left-2'} onCopy={() => setCopiedText('ni ni-align-left-2')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="align-left-2"
@@ -171,21 +120,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip125499785"
-                    >
-                      {copiedText === "ni ni-align-left-2"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip125499785">
+                      {copiedText === 'ni ni-align-left-2' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-ambulance"}
-                      onCopy={() => setCopiedText("ni ni-ambulance")}
-                    >
+                    <CopyToClipboard text={'ni ni-ambulance'} onCopy={() => setCopiedText('ni ni-ambulance')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="ambulance"
@@ -198,21 +138,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip382136785"
-                    >
-                      {copiedText === "ni ni-ambulance"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip382136785">
+                      {copiedText === 'ni ni-ambulance' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-asdasdsafsdsad"}
-                      onCopy={() => setCopiedText("ni ni-app")}
-                    >
+                    <CopyToClipboard text={'ni ni-asdasdsafsdsad'} onCopy={() => setCopiedText('ni ni-app')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="app"
@@ -225,21 +156,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip3354607"
-                    >
-                      {copiedText === "ni ni-app"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip3354607">
+                      {copiedText === 'ni ni-app' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-archive-2"}
-                      onCopy={() => setCopiedText("ni ni-archive-2")}
-                    >
+                    <CopyToClipboard text={'ni ni-archive-2'} onCopy={() => setCopiedText('ni ni-archive-2')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="archive-2"
@@ -252,21 +174,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip949558633"
-                    >
-                      {copiedText === "ni ni-archive-2"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip949558633">
+                      {copiedText === 'ni ni-archive-2' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-atom"}
-                      onCopy={() => setCopiedText("ni ni-atom")}
-                    >
+                    <CopyToClipboard text={'ni ni-atom'} onCopy={() => setCopiedText('ni ni-atom')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="atom"
@@ -279,21 +192,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip742747005"
-                    >
-                      {copiedText === "ni ni-atom"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip742747005">
+                      {copiedText === 'ni ni-atom' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-badge"}
-                      onCopy={() => setCopiedText("ni ni-badge")}
-                    >
+                    <CopyToClipboard text={'ni ni-badge'} onCopy={() => setCopiedText('ni ni-badge')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="badge"
@@ -306,21 +210,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip488565068"
-                    >
-                      {copiedText === "ni ni-badge"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip488565068">
+                      {copiedText === 'ni ni-badge' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-bag-17"}
-                      onCopy={() => setCopiedText("ni ni-bag-17")}
-                    >
+                    <CopyToClipboard text={'ni ni-bag-17'} onCopy={() => setCopiedText('ni ni-bag-17')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="bag-17"
@@ -333,21 +228,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip163626790"
-                    >
-                      {copiedText === "ni ni-bag-17"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip163626790">
+                      {copiedText === 'ni ni-bag-17' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-basket"}
-                      onCopy={() => setCopiedText("ni ni-basket")}
-                    >
+                    <CopyToClipboard text={'ni ni-basket'} onCopy={() => setCopiedText('ni ni-basket')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="basket"
@@ -360,21 +246,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip387253692"
-                    >
-                      {copiedText === "ni ni-basket"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip387253692">
+                      {copiedText === 'ni ni-basket' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-bell-55"}
-                      onCopy={() => setCopiedText("ni ni-bell-55")}
-                    >
+                    <CopyToClipboard text={'ni ni-bell-55'} onCopy={() => setCopiedText('ni ni-bell-55')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="bell-55"
@@ -387,21 +264,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip126752761"
-                    >
-                      {copiedText === "ni ni-bell-55"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip126752761">
+                      {copiedText === 'ni ni-bell-55' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-bold-down"}
-                      onCopy={() => setCopiedText("ni ni-bold-down")}
-                    >
+                    <CopyToClipboard text={'ni ni-bold-down'} onCopy={() => setCopiedText('ni ni-bold-down')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="bold-down"
@@ -414,21 +282,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip819281856"
-                    >
-                      {copiedText === "ni ni-bold-down"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip819281856">
+                      {copiedText === 'ni ni-bold-down' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-bold-left"}
-                      onCopy={() => setCopiedText("ni ni-bold-left")}
-                    >
+                    <CopyToClipboard text={'ni ni-bold-left'} onCopy={() => setCopiedText('ni ni-bold-left')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="bold-left"
@@ -441,21 +300,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip881699027"
-                    >
-                      {copiedText === "ni ni-bold-left"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip881699027">
+                      {copiedText === 'ni ni-bold-left' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-bold-right"}
-                      onCopy={() => setCopiedText("ni ni-bold-right")}
-                    >
+                    <CopyToClipboard text={'ni ni-bold-right'} onCopy={() => setCopiedText('ni ni-bold-right')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="bold-right"
@@ -468,21 +318,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip208507461"
-                    >
-                      {copiedText === "ni ni-bold-right"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip208507461">
+                      {copiedText === 'ni ni-bold-right' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-bold-up"}
-                      onCopy={() => setCopiedText("ni ni-bold-up")}
-                    >
+                    <CopyToClipboard text={'ni ni-bold-up'} onCopy={() => setCopiedText('ni ni-bold-up')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="bold-up"
@@ -495,21 +336,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip105289310"
-                    >
-                      {copiedText === "ni ni-bold-up"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip105289310">
+                      {copiedText === 'ni ni-bold-up' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-bold"}
-                      onCopy={() => setCopiedText("ni ni-bold")}
-                    >
+                    <CopyToClipboard text={'ni ni-bold'} onCopy={() => setCopiedText('ni ni-bold')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="bold"
@@ -522,21 +354,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip832362262"
-                    >
-                      {copiedText === "ni ni-bold"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip832362262">
+                      {copiedText === 'ni ni-bold' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-book-bookmark"}
-                      onCopy={() => setCopiedText("ni ni-book-bookmark")}
-                    >
+                    <CopyToClipboard text={'ni ni-book-bookmark'} onCopy={() => setCopiedText('ni ni-book-bookmark')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="book-bookmark"
@@ -549,21 +372,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip606002875"
-                    >
-                      {copiedText === "ni ni-book-bookmark"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip606002875">
+                      {copiedText === 'ni ni-book-bookmark' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-books"}
-                      onCopy={() => setCopiedText("ni ni-books")}
-                    >
+                    <CopyToClipboard text={'ni ni-books'} onCopy={() => setCopiedText('ni ni-books')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="books"
@@ -576,21 +390,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip484529730"
-                    >
-                      {copiedText === "ni ni-books"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip484529730">
+                      {copiedText === 'ni ni-books' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-box-2"}
-                      onCopy={() => setCopiedText("ni ni-box-2")}
-                    >
+                    <CopyToClipboard text={'ni ni-box-2'} onCopy={() => setCopiedText('ni ni-box-2')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="box-2"
@@ -603,21 +408,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip509205883"
-                    >
-                      {copiedText === "ni ni-box-2"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip509205883">
+                      {copiedText === 'ni ni-box-2' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-briefcase-24"}
-                      onCopy={() => setCopiedText("ni ni-briefcase-24")}
-                    >
+                    <CopyToClipboard text={'ni ni-briefcase-24'} onCopy={() => setCopiedText('ni ni-briefcase-24')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="briefcase-24"
@@ -630,21 +426,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip147778056"
-                    >
-                      {copiedText === "ni ni-briefcase-24"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip147778056">
+                      {copiedText === 'ni ni-briefcase-24' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-building"}
-                      onCopy={() => setCopiedText("ni ni-building")}
-                    >
+                    <CopyToClipboard text={'ni ni-building'} onCopy={() => setCopiedText('ni ni-building')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="building"
@@ -657,21 +444,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip157423388"
-                    >
-                      {copiedText === "ni ni-building"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip157423388">
+                      {copiedText === 'ni ni-building' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-bulb-61"}
-                      onCopy={() => setCopiedText("ni ni-bulb-61")}
-                    >
+                    <CopyToClipboard text={'ni ni-bulb-61'} onCopy={() => setCopiedText('ni ni-bulb-61')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="bulb-61"
@@ -684,21 +462,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip126210465"
-                    >
-                      {copiedText === "ni ni-bulb-61"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip126210465">
+                      {copiedText === 'ni ni-bulb-61' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-list-67"}
-                      onCopy={() => setCopiedText("ni ni-list-67")}
-                    >
+                    <CopyToClipboard text={'ni ni-list-67'} onCopy={() => setCopiedText('ni ni-list-67')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="bullet-list-67"
@@ -711,21 +480,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip672244852"
-                    >
-                      {copiedText === "ni ni-list-67"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip672244852">
+                      {copiedText === 'ni ni-list-67' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-bus-front-12"}
-                      onCopy={() => setCopiedText("ni ni-bus-front-12")}
-                    >
+                    <CopyToClipboard text={'ni ni-bus-front-12'} onCopy={() => setCopiedText('ni ni-bus-front-12')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="bus-front-12"
@@ -738,21 +498,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip17383590"
-                    >
-                      {copiedText === "ni ni-bus-front-12"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip17383590">
+                      {copiedText === 'ni ni-bus-front-12' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-button-pause"}
-                      onCopy={() => setCopiedText("ni ni-button-pause")}
-                    >
+                    <CopyToClipboard text={'ni ni-button-pause'} onCopy={() => setCopiedText('ni ni-button-pause')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="button-pause"
@@ -765,21 +516,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip721295259"
-                    >
-                      {copiedText === "ni ni-button-pause"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip721295259">
+                      {copiedText === 'ni ni-button-pause' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-button-play"}
-                      onCopy={() => setCopiedText("ni ni-button-play")}
-                    >
+                    <CopyToClipboard text={'ni ni-button-play'} onCopy={() => setCopiedText('ni ni-button-play')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="button-play"
@@ -792,21 +534,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip397403700"
-                    >
-                      {copiedText === "ni ni-button-play"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip397403700">
+                      {copiedText === 'ni ni-button-play' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-button-power"}
-                      onCopy={() => setCopiedText("ni ni-button-power")}
-                    >
+                    <CopyToClipboard text={'ni ni-button-power'} onCopy={() => setCopiedText('ni ni-button-power')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="button-power"
@@ -819,20 +552,14 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip286478188"
-                    >
-                      {copiedText === "ni ni-button-power"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip286478188">
+                      {copiedText === 'ni ni-button-power' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
                     <CopyToClipboard
-                      text={"ni ni-calendar-grid-58"}
-                      onCopy={() => setCopiedText("ni ni-calendar-grid-58")}
+                      text={'ni ni-calendar-grid-58'}
+                      onCopy={() => setCopiedText('ni ni-calendar-grid-58')}
                     >
                       <button
                         className="btn-icon-clipboard"
@@ -846,21 +573,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip332635506"
-                    >
-                      {copiedText === "ni ni-calendar-grid-58"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip332635506">
+                      {copiedText === 'ni ni-calendar-grid-58' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-camera-compact"}
-                      onCopy={() => setCopiedText("ni ni-camera-compact")}
-                    >
+                    <CopyToClipboard text={'ni ni-camera-compact'} onCopy={() => setCopiedText('ni ni-camera-compact')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="camera-compact"
@@ -873,21 +591,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip872817724"
-                    >
-                      {copiedText === "ni ni-camera-compact"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip872817724">
+                      {copiedText === 'ni ni-camera-compact' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-caps-small"}
-                      onCopy={() => setCopiedText("ni ni-caps-small")}
-                    >
+                    <CopyToClipboard text={'ni ni-caps-small'} onCopy={() => setCopiedText('ni ni-caps-small')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="caps-small"
@@ -900,21 +609,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip108271146"
-                    >
-                      {copiedText === "ni ni-caps-small"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip108271146">
+                      {copiedText === 'ni ni-caps-small' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-cart"}
-                      onCopy={() => setCopiedText("ni ni-cart")}
-                    >
+                    <CopyToClipboard text={'ni ni-cart'} onCopy={() => setCopiedText('ni ni-cart')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="cart"
@@ -927,21 +627,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip315375170"
-                    >
-                      {copiedText === "ni ni-cart"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip315375170">
+                      {copiedText === 'ni ni-cart' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-chart-bar-32"}
-                      onCopy={() => setCopiedText("ni ni-chart-bar-32")}
-                    >
+                    <CopyToClipboard text={'ni ni-chart-bar-32'} onCopy={() => setCopiedText('ni ni-chart-bar-32')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="chart-bar-32"
@@ -954,21 +645,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip906739900"
-                    >
-                      {copiedText === "ni ni-chart-bar-32"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip906739900">
+                      {copiedText === 'ni ni-chart-bar-32' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-chart-pie-35"}
-                      onCopy={() => setCopiedText("ni ni-chart-pie-35")}
-                    >
+                    <CopyToClipboard text={'ni ni-chart-pie-35'} onCopy={() => setCopiedText('ni ni-chart-pie-35')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="chart-pie-35"
@@ -981,21 +663,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip211198935"
-                    >
-                      {copiedText === "ni ni-chart-pie-35"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip211198935">
+                      {copiedText === 'ni ni-chart-pie-35' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-chat-round"}
-                      onCopy={() => setCopiedText("ni ni-chat-round")}
-                    >
+                    <CopyToClipboard text={'ni ni-chat-round'} onCopy={() => setCopiedText('ni ni-chat-round')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="chat-round"
@@ -1008,21 +681,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip452799920"
-                    >
-                      {copiedText === "ni ni-chat-round"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip452799920">
+                      {copiedText === 'ni ni-chat-round' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-check-bold"}
-                      onCopy={() => setCopiedText("ni ni-check-bold")}
-                    >
+                    <CopyToClipboard text={'ni ni-check-bold'} onCopy={() => setCopiedText('ni ni-check-bold')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="check-bold"
@@ -1035,21 +699,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip204269497"
-                    >
-                      {copiedText === "ni ni-check-bold"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip204269497">
+                      {copiedText === 'ni ni-check-bold' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-circle-08"}
-                      onCopy={() => setCopiedText("ni ni-circle-08")}
-                    >
+                    <CopyToClipboard text={'ni ni-circle-08'} onCopy={() => setCopiedText('ni ni-circle-08')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="circle-08"
@@ -1062,20 +717,14 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip63796078"
-                    >
-                      {copiedText === "ni ni-circle-08"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip63796078">
+                      {copiedText === 'ni ni-circle-08' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
                     <CopyToClipboard
-                      text={"ni ni-cloud-download-95"}
-                      onCopy={() => setCopiedText("ni ni-cloud-download-95")}
+                      text={'ni ni-cloud-download-95'}
+                      onCopy={() => setCopiedText('ni ni-cloud-download-95')}
                     >
                       <button
                         className="btn-icon-clipboard"
@@ -1089,20 +738,14 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip171823822"
-                    >
-                      {copiedText === "ni ni-cloud-download-95"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip171823822">
+                      {copiedText === 'ni ni-cloud-download-95' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
                     <CopyToClipboard
-                      text={"ni ni-cloud-upload-96"}
-                      onCopy={() => setCopiedText("ni ni-cloud-upload-96")}
+                      text={'ni ni-cloud-upload-96'}
+                      onCopy={() => setCopiedText('ni ni-cloud-upload-96')}
                     >
                       <button
                         className="btn-icon-clipboard"
@@ -1116,21 +759,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip603641354"
-                    >
-                      {copiedText === "ni ni-cloud-upload-96"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip603641354">
+                      {copiedText === 'ni ni-cloud-upload-96' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-compass-04"}
-                      onCopy={() => setCopiedText("ni ni-compass-04")}
-                    >
+                    <CopyToClipboard text={'ni ni-compass-04'} onCopy={() => setCopiedText('ni ni-compass-04')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="compass-04"
@@ -1143,21 +777,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip138747611"
-                    >
-                      {copiedText === "ni ni-compass-04"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip138747611">
+                      {copiedText === 'ni ni-compass-04' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-controller"}
-                      onCopy={() => setCopiedText("ni ni-controller")}
-                    >
+                    <CopyToClipboard text={'ni ni-controller'} onCopy={() => setCopiedText('ni ni-controller')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="controller"
@@ -1170,21 +795,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip477306514"
-                    >
-                      {copiedText === "ni ni-controller"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip477306514">
+                      {copiedText === 'ni ni-controller' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-credit-card"}
-                      onCopy={() => setCopiedText("ni ni-credit-card")}
-                    >
+                    <CopyToClipboard text={'ni ni-credit-card'} onCopy={() => setCopiedText('ni ni-credit-card')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="credit-card"
@@ -1197,21 +813,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip672313572"
-                    >
-                      {copiedText === "ni ni-credit-card"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip672313572">
+                      {copiedText === 'ni ni-credit-card' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-curved-next"}
-                      onCopy={() => setCopiedText("ni ni-curved-next")}
-                    >
+                    <CopyToClipboard text={'ni ni-curved-next'} onCopy={() => setCopiedText('ni ni-curved-next')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="curved-next"
@@ -1224,21 +831,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip228405488"
-                    >
-                      {copiedText === "ni ni-curved-next"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip228405488">
+                      {copiedText === 'ni ni-curved-next' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-delivery-fast"}
-                      onCopy={() => setCopiedText("ni ni-delivery-fast")}
-                    >
+                    <CopyToClipboard text={'ni ni-delivery-fast'} onCopy={() => setCopiedText('ni ni-delivery-fast')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="delivery-fast"
@@ -1251,21 +849,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip405559"
-                    >
-                      {copiedText === "ni ni-delivery-fast"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip405559">
+                      {copiedText === 'ni ni-delivery-fast' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-diamond"}
-                      onCopy={() => setCopiedText("ni ni-diamond")}
-                    >
+                    <CopyToClipboard text={'ni ni-diamond'} onCopy={() => setCopiedText('ni ni-diamond')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="diamond"
@@ -1278,21 +867,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip842334307"
-                    >
-                      {copiedText === "ni ni-diamond"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip842334307">
+                      {copiedText === 'ni ni-diamond' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-email-83"}
-                      onCopy={() => setCopiedText("ni ni-email-83")}
-                    >
+                    <CopyToClipboard text={'ni ni-email-83'} onCopy={() => setCopiedText('ni ni-email-83')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="email-83"
@@ -1305,21 +885,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip695661232"
-                    >
-                      {copiedText === "ni ni-email-83"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip695661232">
+                      {copiedText === 'ni ni-email-83' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-fat-add"}
-                      onCopy={() => setCopiedText("ni ni-fat-add")}
-                    >
+                    <CopyToClipboard text={'ni ni-fat-add'} onCopy={() => setCopiedText('ni ni-fat-add')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="fat-add"
@@ -1332,21 +903,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip112280005"
-                    >
-                      {copiedText === "ni ni-fat-add"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip112280005">
+                      {copiedText === 'ni ni-fat-add' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-fat-delete"}
-                      onCopy={() => setCopiedText("ni ni-fat-delete")}
-                    >
+                    <CopyToClipboard text={'ni ni-fat-delete'} onCopy={() => setCopiedText('ni ni-fat-delete')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="fat-delete"
@@ -1359,21 +921,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip361927124"
-                    >
-                      {copiedText === "ni ni-fat-delete"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip361927124">
+                      {copiedText === 'ni ni-fat-delete' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-fat-remove"}
-                      onCopy={() => setCopiedText("ni ni-fat-remove")}
-                    >
+                    <CopyToClipboard text={'ni ni-fat-remove'} onCopy={() => setCopiedText('ni ni-fat-remove')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="fat-remove"
@@ -1386,21 +939,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip451275187"
-                    >
-                      {copiedText === "ni ni-fat-remove"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip451275187">
+                      {copiedText === 'ni ni-fat-remove' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-favourite-28"}
-                      onCopy={() => setCopiedText("ni ni-favourite-28")}
-                    >
+                    <CopyToClipboard text={'ni ni-favourite-28'} onCopy={() => setCopiedText('ni ni-favourite-28')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="favourite-28"
@@ -1413,21 +957,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip893689512"
-                    >
-                      {copiedText === "ni ni-favourite-28"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip893689512">
+                      {copiedText === 'ni ni-favourite-28' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-folder-17"}
-                      onCopy={() => setCopiedText("ni ni-folder-17")}
-                    >
+                    <CopyToClipboard text={'ni ni-folder-17'} onCopy={() => setCopiedText('ni ni-folder-17')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="folder-17"
@@ -1440,21 +975,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip988458715"
-                    >
-                      {copiedText === "ni ni-folder-17"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip988458715">
+                      {copiedText === 'ni ni-folder-17' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-glasses-2"}
-                      onCopy={() => setCopiedText("ni ni-glasses-2")}
-                    >
+                    <CopyToClipboard text={'ni ni-glasses-2'} onCopy={() => setCopiedText('ni ni-glasses-2')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="glasses-2"
@@ -1467,21 +993,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip576477258"
-                    >
-                      {copiedText === "ni ni-glasses-2"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip576477258">
+                      {copiedText === 'ni ni-glasses-2' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-hat-3"}
-                      onCopy={() => setCopiedText("ni ni-hat-3")}
-                    >
+                    <CopyToClipboard text={'ni ni-hat-3'} onCopy={() => setCopiedText('ni ni-hat-3')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="hat-3"
@@ -1494,21 +1011,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip977228923"
-                    >
-                      {copiedText === "ni ni-hat-3"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip977228923">
+                      {copiedText === 'ni ni-hat-3' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-headphones"}
-                      onCopy={() => setCopiedText("ni ni-headphones")}
-                    >
+                    <CopyToClipboard text={'ni ni-headphones'} onCopy={() => setCopiedText('ni ni-headphones')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="headphones"
@@ -1521,21 +1029,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip711983709"
-                    >
-                      {copiedText === "ni ni-headphones"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip711983709">
+                      {copiedText === 'ni ni-headphones' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-html5"}
-                      onCopy={() => setCopiedText("ni ni-html5")}
-                    >
+                    <CopyToClipboard text={'ni ni-html5'} onCopy={() => setCopiedText('ni ni-html5')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="html5"
@@ -1548,21 +1047,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip346497134"
-                    >
-                      {copiedText === "ni ni-html5"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip346497134">
+                      {copiedText === 'ni ni-html5' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-istanbul"}
-                      onCopy={() => setCopiedText("ni ni-istanbul")}
-                    >
+                    <CopyToClipboard text={'ni ni-istanbul'} onCopy={() => setCopiedText('ni ni-istanbul')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="istanbul"
@@ -1575,21 +1065,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip344591402"
-                    >
-                      {copiedText === "ni ni-istanbul"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip344591402">
+                      {copiedText === 'ni ni-istanbul' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-circle-08"}
-                      onCopy={() => setCopiedText("ni ni-circle-08")}
-                    >
+                    <CopyToClipboard text={'ni ni-circle-08'} onCopy={() => setCopiedText('ni ni-circle-08')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="circle-08"
@@ -1602,21 +1083,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip815029398"
-                    >
-                      {copiedText === "ni ni-circle-08"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip815029398">
+                      {copiedText === 'ni ni-circle-08' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-key-25"}
-                      onCopy={() => setCopiedText("ni ni-key-25")}
-                    >
+                    <CopyToClipboard text={'ni ni-key-25'} onCopy={() => setCopiedText('ni ni-key-25')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="key-25"
@@ -1629,21 +1101,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip580511416"
-                    >
-                      {copiedText === "ni ni-key-25"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip580511416">
+                      {copiedText === 'ni ni-key-25' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-laptop"}
-                      onCopy={() => setCopiedText("ni ni-laptop")}
-                    >
+                    <CopyToClipboard text={'ni ni-laptop'} onCopy={() => setCopiedText('ni ni-laptop')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="laptop"
@@ -1656,21 +1119,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip455996160"
-                    >
-                      {copiedText === "ni ni-laptop"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip455996160">
+                      {copiedText === 'ni ni-laptop' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-like-2"}
-                      onCopy={() => setCopiedText("ni ni-like-2")}
-                    >
+                    <CopyToClipboard text={'ni ni-like-2'} onCopy={() => setCopiedText('ni ni-like-2')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="like-2"
@@ -1683,20 +1137,14 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip928932853"
-                    >
-                      {copiedText === "ni ni-like-2"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip928932853">
+                      {copiedText === 'ni ni-like-2' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
                     <CopyToClipboard
-                      text={"ni ni-lock-circle-open"}
-                      onCopy={() => setCopiedText("ni ni-lock-circle-open")}
+                      text={'ni ni-lock-circle-open'}
+                      onCopy={() => setCopiedText('ni ni-lock-circle-open')}
                     >
                       <button
                         className="btn-icon-clipboard"
@@ -1710,21 +1158,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip634042199"
-                    >
-                      {copiedText === "ni ni-lock-circle-open"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip634042199">
+                      {copiedText === 'ni ni-lock-circle-open' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-map-big"}
-                      onCopy={() => setCopiedText("ni ni-map-big")}
-                    >
+                    <CopyToClipboard text={'ni ni-map-big'} onCopy={() => setCopiedText('ni ni-map-big')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="map-big"
@@ -1737,21 +1176,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip615611081"
-                    >
-                      {copiedText === "ni ni-map-big"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip615611081">
+                      {copiedText === 'ni ni-map-big' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-mobile-button"}
-                      onCopy={() => setCopiedText("ni ni-mobile-button")}
-                    >
+                    <CopyToClipboard text={'ni ni-mobile-button'} onCopy={() => setCopiedText('ni ni-mobile-button')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="mobile-button"
@@ -1764,21 +1194,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip426682279"
-                    >
-                      {copiedText === "ni ni-mobile-button"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip426682279">
+                      {copiedText === 'ni ni-mobile-button' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-money-coins"}
-                      onCopy={() => setCopiedText("ni ni-money-coins")}
-                    >
+                    <CopyToClipboard text={'ni ni-money-coins'} onCopy={() => setCopiedText('ni ni-money-coins')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="money-coins"
@@ -1791,21 +1212,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip198953665"
-                    >
-                      {copiedText === "ni ni-money-coins"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip198953665">
+                      {copiedText === 'ni ni-money-coins' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-note-03"}
-                      onCopy={() => setCopiedText("ni ni-note-03")}
-                    >
+                    <CopyToClipboard text={'ni ni-note-03'} onCopy={() => setCopiedText('ni ni-note-03')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="note-03"
@@ -1818,20 +1230,14 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip909975995"
-                    >
-                      {copiedText === "ni ni-note-03"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip909975995">
+                      {copiedText === 'ni ni-note-03' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
                     <CopyToClipboard
-                      text={"ni ni-notification-70"}
-                      onCopy={() => setCopiedText("ni ni-notification-70")}
+                      text={'ni ni-notification-70'}
+                      onCopy={() => setCopiedText('ni ni-notification-70')}
                     >
                       <button
                         className="btn-icon-clipboard"
@@ -1845,21 +1251,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip942089221"
-                    >
-                      {copiedText === "ni ni-notification-70"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip942089221">
+                      {copiedText === 'ni ni-notification-70' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-palette"}
-                      onCopy={() => setCopiedText("ni ni-palette")}
-                    >
+                    <CopyToClipboard text={'ni ni-palette'} onCopy={() => setCopiedText('ni ni-palette')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="palette"
@@ -1872,21 +1269,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip721048582"
-                    >
-                      {copiedText === "ni ni-palette"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip721048582">
+                      {copiedText === 'ni ni-palette' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-paper-diploma"}
-                      onCopy={() => setCopiedText("ni ni-paper-diploma")}
-                    >
+                    <CopyToClipboard text={'ni ni-paper-diploma'} onCopy={() => setCopiedText('ni ni-paper-diploma')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="paper-diploma"
@@ -1899,21 +1287,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip875782946"
-                    >
-                      {copiedText === "ni ni-paper-diploma"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip875782946">
+                      {copiedText === 'ni ni-paper-diploma' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-pin-3"}
-                      onCopy={() => setCopiedText("ni ni-pin-3")}
-                    >
+                    <CopyToClipboard text={'ni ni-pin-3'} onCopy={() => setCopiedText('ni ni-pin-3')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="pin-3"
@@ -1926,21 +1305,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip945087492"
-                    >
-                      {copiedText === "ni ni-pin-3"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip945087492">
+                      {copiedText === 'ni ni-pin-3' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-planet"}
-                      onCopy={() => setCopiedText("ni ni-planet")}
-                    >
+                    <CopyToClipboard text={'ni ni-planet'} onCopy={() => setCopiedText('ni ni-planet')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="planet"
@@ -1953,21 +1323,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip482139663"
-                    >
-                      {copiedText === "ni ni-planet"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip482139663">
+                      {copiedText === 'ni ni-planet' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-ruler-pencil"}
-                      onCopy={() => setCopiedText("ni ni-ruler-pencil")}
-                    >
+                    <CopyToClipboard text={'ni ni-ruler-pencil'} onCopy={() => setCopiedText('ni ni-ruler-pencil')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="ruler-pencil"
@@ -1980,21 +1341,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip693938896"
-                    >
-                      {copiedText === "ni ni-ruler-pencil"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip693938896">
+                      {copiedText === 'ni ni-ruler-pencil' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-satisfied"}
-                      onCopy={() => setCopiedText("ni ni-satisfied")}
-                    >
+                    <CopyToClipboard text={'ni ni-satisfied'} onCopy={() => setCopiedText('ni ni-satisfied')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="satisfied"
@@ -2007,21 +1359,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip634575265"
-                    >
-                      {copiedText === "ni ni-satisfied"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip634575265">
+                      {copiedText === 'ni ni-satisfied' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-scissors"}
-                      onCopy={() => setCopiedText("ni ni-scissors")}
-                    >
+                    <CopyToClipboard text={'ni ni-scissors'} onCopy={() => setCopiedText('ni ni-scissors')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="scissors"
@@ -2034,21 +1377,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip688473648"
-                    >
-                      {copiedText === "ni ni-scissors"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip688473648">
+                      {copiedText === 'ni ni-scissors' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-send"}
-                      onCopy={() => setCopiedText("ni ni-send")}
-                    >
+                    <CopyToClipboard text={'ni ni-send'} onCopy={() => setCopiedText('ni ni-send')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="send"
@@ -2061,20 +1395,14 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip161268791"
-                    >
-                      {copiedText === "ni ni-send"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip161268791">
+                      {copiedText === 'ni ni-send' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
                     <CopyToClipboard
-                      text={"ni ni-settings-gear-65"}
-                      onCopy={() => setCopiedText("ni ni-settings-gear-65")}
+                      text={'ni ni-settings-gear-65'}
+                      onCopy={() => setCopiedText('ni ni-settings-gear-65')}
                     >
                       <button
                         className="btn-icon-clipboard"
@@ -2088,21 +1416,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip487959296"
-                    >
-                      {copiedText === "ni ni-settings-gear-65"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip487959296">
+                      {copiedText === 'ni ni-settings-gear-65' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-settings"}
-                      onCopy={() => setCopiedText("ni ni-settings")}
-                    >
+                    <CopyToClipboard text={'ni ni-settings'} onCopy={() => setCopiedText('ni ni-settings')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="settings"
@@ -2115,21 +1434,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip156598208"
-                    >
-                      {copiedText === "ni ni-settings"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip156598208">
+                      {copiedText === 'ni ni-settings' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-single-02"}
-                      onCopy={() => setCopiedText("ni ni-single-02")}
-                    >
+                    <CopyToClipboard text={'ni ni-single-02'} onCopy={() => setCopiedText('ni ni-single-02')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="single-02"
@@ -2142,21 +1452,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip487356467"
-                    >
-                      {copiedText === "ni ni-single-02"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip487356467">
+                      {copiedText === 'ni ni-single-02' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-single-copy-04"}
-                      onCopy={() => setCopiedText("ni ni-single-copy-04")}
-                    >
+                    <CopyToClipboard text={'ni ni-single-copy-04'} onCopy={() => setCopiedText('ni ni-single-copy-04')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="single-copy-04"
@@ -2169,21 +1470,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip340498904"
-                    >
-                      {copiedText === "ni ni-single-copy-04"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip340498904">
+                      {copiedText === 'ni ni-single-copy-04' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-sound-wave"}
-                      onCopy={() => setCopiedText("ni ni-sound-wave")}
-                    >
+                    <CopyToClipboard text={'ni ni-sound-wave'} onCopy={() => setCopiedText('ni ni-sound-wave')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="sound-wave"
@@ -2196,21 +1488,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip289156059"
-                    >
-                      {copiedText === "ni ni-sound-wave"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip289156059">
+                      {copiedText === 'ni ni-sound-wave' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-spaceship"}
-                      onCopy={() => setCopiedText("ni ni-spaceship")}
-                    >
+                    <CopyToClipboard text={'ni ni-spaceship'} onCopy={() => setCopiedText('ni ni-spaceship')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="spaceship"
@@ -2223,21 +1506,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip603604642"
-                    >
-                      {copiedText === "ni ni-spaceship"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip603604642">
+                      {copiedText === 'ni ni-spaceship' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-square-pin"}
-                      onCopy={() => setCopiedText("ni ni-square-pin")}
-                    >
+                    <CopyToClipboard text={'ni ni-square-pin'} onCopy={() => setCopiedText('ni ni-square-pin')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="square-pin"
@@ -2250,21 +1524,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip153036405"
-                    >
-                      {copiedText === "ni ni-square-pin"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip153036405">
+                      {copiedText === 'ni ni-square-pin' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-support-16"}
-                      onCopy={() => setCopiedText("ni ni-support-16")}
-                    >
+                    <CopyToClipboard text={'ni ni-support-16'} onCopy={() => setCopiedText('ni ni-support-16')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="support-16"
@@ -2277,21 +1542,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip906422211"
-                    >
-                      {copiedText === "ni ni-support-16"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip906422211">
+                      {copiedText === 'ni ni-support-16' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-tablet-button"}
-                      onCopy={() => setCopiedText("ni ni-tablet-button")}
-                    >
+                    <CopyToClipboard text={'ni ni-tablet-button'} onCopy={() => setCopiedText('ni ni-tablet-button')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="tablet-button"
@@ -2304,21 +1560,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip517579618"
-                    >
-                      {copiedText === "ni ni-tablet-button"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip517579618">
+                      {copiedText === 'ni ni-tablet-button' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-tag"}
-                      onCopy={() => setCopiedText("ni ni-tag")}
-                    >
+                    <CopyToClipboard text={'ni ni-tag'} onCopy={() => setCopiedText('ni ni-tag')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="tag"
@@ -2331,21 +1578,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip297195808"
-                    >
-                      {copiedText === "ni ni-tag"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip297195808">
+                      {copiedText === 'ni ni-tag' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-tie-bow"}
-                      onCopy={() => setCopiedText("ni ni-tie-bow")}
-                    >
+                    <CopyToClipboard text={'ni ni-tie-bow'} onCopy={() => setCopiedText('ni ni-tie-bow')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="tie-bow"
@@ -2358,21 +1596,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip793084796"
-                    >
-                      {copiedText === "ni ni-tie-bow"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip793084796">
+                      {copiedText === 'ni ni-tie-bow' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-time-alarm"}
-                      onCopy={() => setCopiedText("ni ni-time-alarm")}
-                    >
+                    <CopyToClipboard text={'ni ni-time-alarm'} onCopy={() => setCopiedText('ni ni-time-alarm')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="time-alarm"
@@ -2385,21 +1614,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip258891035"
-                    >
-                      {copiedText === "ni ni-time-alarm"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip258891035">
+                      {copiedText === 'ni ni-time-alarm' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-trophy"}
-                      onCopy={() => setCopiedText("ni ni-trophy")}
-                    >
+                    <CopyToClipboard text={'ni ni-trophy'} onCopy={() => setCopiedText('ni ni-trophy')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="trophy"
@@ -2412,21 +1632,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip881235890"
-                    >
-                      {copiedText === "ni ni-trophy"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip881235890">
+                      {copiedText === 'ni ni-trophy' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-tv-2"}
-                      onCopy={() => setCopiedText("ni ni-tv-2")}
-                    >
+                    <CopyToClipboard text={'ni ni-tv-2'} onCopy={() => setCopiedText('ni ni-tv-2')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="tv-2"
@@ -2439,21 +1650,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip330279137"
-                    >
-                      {copiedText === "ni ni-tv-2"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip330279137">
+                      {copiedText === 'ni ni-tv-2' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-umbrella-13"}
-                      onCopy={() => setCopiedText("ni ni-umbrella-13")}
-                    >
+                    <CopyToClipboard text={'ni ni-umbrella-13'} onCopy={() => setCopiedText('ni ni-umbrella-13')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="umbrella-13"
@@ -2466,21 +1668,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip412313570"
-                    >
-                      {copiedText === "ni ni-umbrella-13"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip412313570">
+                      {copiedText === 'ni ni-umbrella-13' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-user-run"}
-                      onCopy={() => setCopiedText("ni ni-user-run")}
-                    >
+                    <CopyToClipboard text={'ni ni-user-run'} onCopy={() => setCopiedText('ni ni-user-run')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="user-run"
@@ -2493,21 +1686,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip176201858"
-                    >
-                      {copiedText === "ni ni-user-run"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip176201858">
+                      {copiedText === 'ni ni-user-run' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-vector"}
-                      onCopy={() => setCopiedText("ni ni-vector")}
-                    >
+                    <CopyToClipboard text={'ni ni-vector'} onCopy={() => setCopiedText('ni ni-vector')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="vector"
@@ -2520,21 +1704,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip71164138"
-                    >
-                      {copiedText === "ni ni-vector"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip71164138">
+                      {copiedText === 'ni ni-vector' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-watch-time"}
-                      onCopy={() => setCopiedText("ni ni-watch-time")}
-                    >
+                    <CopyToClipboard text={'ni ni-watch-time'} onCopy={() => setCopiedText('ni ni-watch-time')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="watch-time"
@@ -2547,21 +1722,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip495578192"
-                    >
-                      {copiedText === "ni ni-watch-time"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip495578192">
+                      {copiedText === 'ni ni-watch-time' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-world"}
-                      onCopy={() => setCopiedText("ni ni-world")}
-                    >
+                    <CopyToClipboard text={'ni ni-world'} onCopy={() => setCopiedText('ni ni-world')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="world"
@@ -2574,21 +1740,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip604848245"
-                    >
-                      {copiedText === "ni ni-world"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip604848245">
+                      {copiedText === 'ni ni-world' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-zoom-split-in"}
-                      onCopy={() => setCopiedText("ni ni-zoom-split-in")}
-                    >
+                    <CopyToClipboard text={'ni ni-zoom-split-in'} onCopy={() => setCopiedText('ni ni-zoom-split-in')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="zoom-split-in"
@@ -2601,21 +1758,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip916423293"
-                    >
-                      {copiedText === "ni ni-zoom-split-in"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip916423293">
+                      {copiedText === 'ni ni-zoom-split-in' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-collection"}
-                      onCopy={() => setCopiedText("ni ni-collection")}
-                    >
+                    <CopyToClipboard text={'ni ni-collection'} onCopy={() => setCopiedText('ni ni-collection')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="collection"
@@ -2628,21 +1776,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip142934658"
-                    >
-                      {copiedText === "ni ni-collection"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip142934658">
+                      {copiedText === 'ni ni-collection' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-image"}
-                      onCopy={() => setCopiedText("ni ni-image")}
-                    >
+                    <CopyToClipboard text={'ni ni-image'} onCopy={() => setCopiedText('ni ni-image')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="image"
@@ -2655,21 +1794,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip842947283"
-                    >
-                      {copiedText === "ni ni-image"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip842947283">
+                      {copiedText === 'ni ni-image' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-shop"}
-                      onCopy={() => setCopiedText("ni ni-shop")}
-                    >
+                    <CopyToClipboard text={'ni ni-shop'} onCopy={() => setCopiedText('ni ni-shop')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="shop"
@@ -2682,21 +1812,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip531866818"
-                    >
-                      {copiedText === "ni ni-shop"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip531866818">
+                      {copiedText === 'ni ni-shop' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-ungroup"}
-                      onCopy={() => setCopiedText("ni ni-ungroup")}
-                    >
+                    <CopyToClipboard text={'ni ni-ungroup'} onCopy={() => setCopiedText('ni ni-ungroup')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="ungroup"
@@ -2709,21 +1830,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip470734151"
-                    >
-                      {copiedText === "ni ni-ungroup"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip470734151">
+                      {copiedText === 'ni ni-ungroup' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-world-2"}
-                      onCopy={() => setCopiedText("ni ni-world-2")}
-                    >
+                    <CopyToClipboard text={'ni ni-world-2'} onCopy={() => setCopiedText('ni ni-world-2')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="world-2"
@@ -2736,21 +1848,12 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip932383030"
-                    >
-                      {copiedText === "ni ni-world-2"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip932383030">
+                      {copiedText === 'ni ni-world-2' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                   <Col lg="3" md="6">
-                    <CopyToClipboard
-                      text={"ni ni-ui-04"}
-                      onCopy={() => setCopiedText("ni ni-ui-04")}
-                    >
+                    <CopyToClipboard text={'ni ni-ui-04'} onCopy={() => setCopiedText('ni ni-ui-04')}>
                       <button
                         className="btn-icon-clipboard"
                         data-clipboard-text="ui-04"
@@ -2763,14 +1866,8 @@ const Icons = () => {
                         </div>
                       </button>
                     </CopyToClipboard>
-                    <UncontrolledTooltip
-                      delay={0}
-                      trigger="hover focus"
-                      target="tooltip9332484"
-                    >
-                      {copiedText === "ni ni-ui-04"
-                        ? "This was Copied!"
-                        : "Copy To Clipbord"}
+                    <UncontrolledTooltip delay={0} trigger="hover focus" target="tooltip9332484">
+                      {copiedText === 'ni ni-ui-04' ? 'This was Copied!' : 'Copy To Clipbord'}
                     </UncontrolledTooltip>
                   </Col>
                 </Row>
