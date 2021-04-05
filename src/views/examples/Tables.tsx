@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React from 'react';
 
 // reactstrap components
 import {
@@ -36,11 +36,11 @@ import {
   Container,
   Row,
   UncontrolledTooltip,
-} from "reactstrap";
+} from 'reactstrap';
 // core components
-import Header from "components/Headers/Header.js";
+import Header from 'components/Headers/Header';
 
-const Tables = () => {
+const Tables: React.FunctionComponent = () => {
   return (
     <>
       <Header />
@@ -68,23 +68,11 @@ const Tables = () => {
                   <tr>
                     <th scope="row">
                       <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/bootstrap.jpg")
-                                .default
-                            }
-                          />
+                        <a className="avatar rounded-circle mr-3" href="#pablo" onClick={(e) => e.preventDefault()}>
+                          <img alt="..." src={require('../../assets/img/theme/bootstrap.jpg').default} />
                         </a>
                         <Media>
-                          <span className="mb-0 text-sm">
-                            Argon Design System
-                          </span>
+                          <span className="mb-0 text-sm">Argon Design System</span>
                         </Media>
                       </Media>
                     </th>
@@ -106,16 +94,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-1-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-1-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip742438047"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip742438047">
                           Ryan Tompson
                         </UncontrolledTooltip>
                         <a
@@ -127,16 +109,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-2-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-2-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip941738690"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip941738690">
                           Romina Hadid
                         </UncontrolledTooltip>
                         <a
@@ -148,16 +124,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-3-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-3-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip804044742"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip804044742">
                           Alexander Smith
                         </UncontrolledTooltip>
                         <a
@@ -169,16 +139,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-4-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-4-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip996637554"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip996637554">
                           Jessica Doe
                         </UncontrolledTooltip>
                       </div>
@@ -187,11 +151,7 @@ const Tables = () => {
                       <div className="d-flex align-items-center">
                         <span className="mr-2">60%</span>
                         <div>
-                          <Progress
-                            max="100"
-                            value="60"
-                            barClassName="bg-danger"
-                          />
+                          <Progress max="100" value="60" barClassName="bg-danger" />
                         </div>
                       </div>
                     </td>
@@ -208,22 +168,13 @@ const Tables = () => {
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Another action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Something else here
                           </DropdownItem>
                         </DropdownMenu>
@@ -233,23 +184,11 @@ const Tables = () => {
                   <tr>
                     <th scope="row">
                       <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/angular.jpg")
-                                .default
-                            }
-                          />
+                        <a className="avatar rounded-circle mr-3" href="#pablo" onClick={(e) => e.preventDefault()}>
+                          <img alt="..." src={require('../../assets/img/theme/angular.jpg').default} />
                         </a>
                         <Media>
-                          <span className="mb-0 text-sm">
-                            Angular Now UI Kit PRO
-                          </span>
+                          <span className="mb-0 text-sm">Angular Now UI Kit PRO</span>
                         </Media>
                       </Media>
                     </th>
@@ -271,16 +210,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-1-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-1-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip746418347"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip746418347">
                           Ryan Tompson
                         </UncontrolledTooltip>
                         <a
@@ -292,16 +225,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-2-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-2-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip102182364"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip102182364">
                           Romina Hadid
                         </UncontrolledTooltip>
                         <a
@@ -313,16 +240,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-3-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-3-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip406489510"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip406489510">
                           Alexander Smith
                         </UncontrolledTooltip>
                         <a
@@ -334,16 +255,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-4-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-4-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip476840018"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip476840018">
                           Jessica Doe
                         </UncontrolledTooltip>
                       </div>
@@ -352,11 +267,7 @@ const Tables = () => {
                       <div className="d-flex align-items-center">
                         <span className="mr-2">100%</span>
                         <div>
-                          <Progress
-                            max="100"
-                            value="100"
-                            barClassName="bg-success"
-                          />
+                          <Progress max="100" value="100" barClassName="bg-success" />
                         </div>
                       </div>
                     </td>
@@ -373,22 +284,13 @@ const Tables = () => {
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Another action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Something else here
                           </DropdownItem>
                         </DropdownMenu>
@@ -398,18 +300,8 @@ const Tables = () => {
                   <tr>
                     <th scope="row">
                       <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/sketch.jpg")
-                                .default
-                            }
-                          />
+                        <a className="avatar rounded-circle mr-3" href="#pablo" onClick={(e) => e.preventDefault()}>
+                          <img alt="..." src={require('../../assets/img/theme/sketch.jpg').default} />
                         </a>
                         <Media>
                           <span className="mb-0 text-sm">Black Dashboard</span>
@@ -434,16 +326,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-1-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-1-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip753056318"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip753056318">
                           Ryan Tompson
                         </UncontrolledTooltip>
                         <a
@@ -455,16 +341,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-2-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-2-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip441753266"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip441753266">
                           Romina Hadid
                         </UncontrolledTooltip>
                         <a
@@ -476,16 +356,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-3-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-3-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip188462246"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip188462246">
                           Alexander Smith
                         </UncontrolledTooltip>
                         <a
@@ -497,16 +371,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-4-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-4-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip621168444"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip621168444">
                           Jessica Doe
                         </UncontrolledTooltip>
                       </div>
@@ -515,11 +383,7 @@ const Tables = () => {
                       <div className="d-flex align-items-center">
                         <span className="mr-2">72%</span>
                         <div>
-                          <Progress
-                            max="100"
-                            value="72"
-                            barClassName="bg-danger"
-                          />
+                          <Progress max="100" value="72" barClassName="bg-danger" />
                         </div>
                       </div>
                     </td>
@@ -536,22 +400,13 @@ const Tables = () => {
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Another action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Something else here
                           </DropdownItem>
                         </DropdownMenu>
@@ -561,23 +416,11 @@ const Tables = () => {
                   <tr>
                     <th scope="row">
                       <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/react.jpg")
-                                .default
-                            }
-                          />
+                        <a className="avatar rounded-circle mr-3" href="#pablo" onClick={(e) => e.preventDefault()}>
+                          <img alt="..." src={require('../../assets/img/theme/react.jpg').default} />
                         </a>
                         <Media>
-                          <span className="mb-0 text-sm">
-                            React Material Dashboard
-                          </span>
+                          <span className="mb-0 text-sm">React Material Dashboard</span>
                         </Media>
                       </Media>
                     </th>
@@ -599,16 +442,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-1-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-1-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip875258217"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip875258217">
                           Ryan Tompson
                         </UncontrolledTooltip>
                         <a
@@ -620,16 +457,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-2-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-2-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip834416663"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip834416663">
                           Romina Hadid
                         </UncontrolledTooltip>
                         <a
@@ -641,16 +472,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-3-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-3-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip372449339"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip372449339">
                           Alexander Smith
                         </UncontrolledTooltip>
                         <a
@@ -662,16 +487,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-4-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-4-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip108714769"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip108714769">
                           Jessica Doe
                         </UncontrolledTooltip>
                       </div>
@@ -680,11 +499,7 @@ const Tables = () => {
                       <div className="d-flex align-items-center">
                         <span className="mr-2">90%</span>
                         <div>
-                          <Progress
-                            max="100"
-                            value="90"
-                            barClassName="bg-info"
-                          />
+                          <Progress max="100" value="90" barClassName="bg-info" />
                         </div>
                       </div>
                     </td>
@@ -701,22 +516,13 @@ const Tables = () => {
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Another action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Something else here
                           </DropdownItem>
                         </DropdownMenu>
@@ -726,22 +532,11 @@ const Tables = () => {
                   <tr>
                     <th scope="row">
                       <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/vue.jpg").default
-                            }
-                          />
+                        <a className="avatar rounded-circle mr-3" href="#pablo" onClick={(e) => e.preventDefault()}>
+                          <img alt="..." src={require('../../assets/img/theme/vue.jpg').default} />
                         </a>
                         <Media>
-                          <span className="mb-0 text-sm">
-                            Vue Paper UI Kit PRO
-                          </span>
+                          <span className="mb-0 text-sm">Vue Paper UI Kit PRO</span>
                         </Media>
                       </Media>
                     </th>
@@ -763,16 +558,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-1-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-1-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip664029969"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip664029969">
                           Ryan Tompson
                         </UncontrolledTooltip>
                         <a
@@ -784,16 +573,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-2-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-2-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip806693074"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip806693074">
                           Romina Hadid
                         </UncontrolledTooltip>
                         <a
@@ -805,16 +588,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-3-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-3-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip844096937"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip844096937">
                           Alexander Smith
                         </UncontrolledTooltip>
                         <a
@@ -826,16 +603,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-4-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-4-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip757459971"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip757459971">
                           Jessica Doe
                         </UncontrolledTooltip>
                       </div>
@@ -844,11 +615,7 @@ const Tables = () => {
                       <div className="d-flex align-items-center">
                         <span className="mr-2">100%</span>
                         <div>
-                          <Progress
-                            max="100"
-                            value="100"
-                            barClassName="bg-success"
-                          />
+                          <Progress max="100" value="100" barClassName="bg-success" />
                         </div>
                       </div>
                     </td>
@@ -865,22 +632,13 @@ const Tables = () => {
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Another action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Something else here
                           </DropdownItem>
                         </DropdownMenu>
@@ -891,49 +649,30 @@ const Tables = () => {
               </Table>
               <CardFooter className="py-4">
                 <nav aria-label="...">
-                  <Pagination
-                    className="pagination justify-content-end mb-0"
-                    listClassName="justify-content-end mb-0"
-                  >
+                  <Pagination className="pagination justify-content-end mb-0" listClassName="justify-content-end mb-0">
                     <PaginationItem className="disabled">
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                        tabIndex="-1"
-                      >
+                      <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()} tabIndex={-1}>
                         <i className="fas fa-angle-left" />
                         <span className="sr-only">Previous</span>
                       </PaginationLink>
                     </PaginationItem>
                     <PaginationItem className="active">
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
+                      <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
                         1
                       </PaginationLink>
                     </PaginationItem>
                     <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
+                      <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
                         2 <span className="sr-only">(current)</span>
                       </PaginationLink>
                     </PaginationItem>
                     <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
+                      <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
                         3
                       </PaginationLink>
                     </PaginationItem>
                     <PaginationItem>
-                      <PaginationLink
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
-                      >
+                      <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
                         <i className="fas fa-angle-right" />
                         <span className="sr-only">Next</span>
                       </PaginationLink>
@@ -951,10 +690,7 @@ const Tables = () => {
               <CardHeader className="bg-transparent border-0">
                 <h3 className="text-white mb-0">Card tables</h3>
               </CardHeader>
-              <Table
-                className="align-items-center table-dark table-flush"
-                responsive
-              >
+              <Table className="align-items-center table-dark table-flush" responsive>
                 <thead className="thead-dark">
                   <tr>
                     <th scope="col">Project</th>
@@ -969,23 +705,11 @@ const Tables = () => {
                   <tr>
                     <th scope="row">
                       <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/bootstrap.jpg")
-                                .default
-                            }
-                          />
+                        <a className="avatar rounded-circle mr-3" href="#pablo" onClick={(e) => e.preventDefault()}>
+                          <img alt="..." src={require('../../assets/img/theme/bootstrap.jpg').default} />
                         </a>
                         <Media>
-                          <span className="mb-0 text-sm">
-                            Argon Design System
-                          </span>
+                          <span className="mb-0 text-sm">Argon Design System</span>
                         </Media>
                       </Media>
                     </th>
@@ -1007,16 +731,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-1-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-1-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip731399078"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip731399078">
                           Ryan Tompson
                         </UncontrolledTooltip>
                         <a
@@ -1028,16 +746,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-2-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-2-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip491083084"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip491083084">
                           Romina Hadid
                         </UncontrolledTooltip>
                         <a
@@ -1049,16 +761,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-3-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-3-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip528540780"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip528540780">
                           Alexander Smith
                         </UncontrolledTooltip>
                         <a
@@ -1070,16 +776,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-4-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-4-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip237898869"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip237898869">
                           Jessica Doe
                         </UncontrolledTooltip>
                       </div>
@@ -1088,11 +788,7 @@ const Tables = () => {
                       <div className="d-flex align-items-center">
                         <span className="mr-2">60%</span>
                         <div>
-                          <Progress
-                            max="100"
-                            value="60"
-                            barClassName="bg-warning"
-                          />
+                          <Progress max="100" value="60" barClassName="bg-warning" />
                         </div>
                       </div>
                     </td>
@@ -1109,22 +805,13 @@ const Tables = () => {
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Another action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Something else here
                           </DropdownItem>
                         </DropdownMenu>
@@ -1134,23 +821,11 @@ const Tables = () => {
                   <tr>
                     <th scope="row">
                       <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/angular.jpg")
-                                .default
-                            }
-                          />
+                        <a className="avatar rounded-circle mr-3" href="#pablo" onClick={(e) => e.preventDefault()}>
+                          <img alt="..." src={require('../../assets/img/theme/angular.jpg').default} />
                         </a>
                         <Media>
-                          <span className="mb-0 text-sm">
-                            Angular Now UI Kit PRO
-                          </span>
+                          <span className="mb-0 text-sm">Angular Now UI Kit PRO</span>
                         </Media>
                       </Media>
                     </th>
@@ -1172,16 +847,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-1-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-1-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip188614932"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip188614932">
                           Ryan Tompson
                         </UncontrolledTooltip>
                         <a
@@ -1193,10 +862,7 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-2-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-2-800x800.jpg').default}
                           />
                         </a>
                         <UncontrolledTooltip delay={0} target="tooltip66535734">
@@ -1211,16 +877,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-3-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-3-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip427561578"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip427561578">
                           Alexander Smith
                         </UncontrolledTooltip>
                         <a
@@ -1232,16 +892,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-4-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-4-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip904098289"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip904098289">
                           Jessica Doe
                         </UncontrolledTooltip>
                       </div>
@@ -1250,11 +904,7 @@ const Tables = () => {
                       <div className="d-flex align-items-center">
                         <span className="mr-2">100%</span>
                         <div>
-                          <Progress
-                            max="100"
-                            value="100"
-                            barClassName="bg-success"
-                          />
+                          <Progress max="100" value="100" barClassName="bg-success" />
                         </div>
                       </div>
                     </td>
@@ -1271,22 +921,13 @@ const Tables = () => {
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Another action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Something else here
                           </DropdownItem>
                         </DropdownMenu>
@@ -1296,18 +937,8 @@ const Tables = () => {
                   <tr>
                     <th scope="row">
                       <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/sketch.jpg")
-                                .default
-                            }
-                          />
+                        <a className="avatar rounded-circle mr-3" href="#pablo" onClick={(e) => e.preventDefault()}>
+                          <img alt="..." src={require('../../assets/img/theme/sketch.jpg').default} />
                         </a>
                         <Media>
                           <span className="mb-0 text-sm">Black Dashboard</span>
@@ -1332,16 +963,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-1-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-1-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip707904950"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip707904950">
                           Ryan Tompson
                         </UncontrolledTooltip>
                         <a
@@ -1353,16 +978,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-2-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-2-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip353988222"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip353988222">
                           Romina Hadid
                         </UncontrolledTooltip>
                         <a
@@ -1374,16 +993,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-3-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-3-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip467171202"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip467171202">
                           Alexander Smith
                         </UncontrolledTooltip>
                         <a
@@ -1395,16 +1008,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-4-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-4-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip362118155"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip362118155">
                           Jessica Doe
                         </UncontrolledTooltip>
                       </div>
@@ -1413,11 +1020,7 @@ const Tables = () => {
                       <div className="d-flex align-items-center">
                         <span className="mr-2">72%</span>
                         <div>
-                          <Progress
-                            max="100"
-                            value="72"
-                            barClassName="bg-danger"
-                          />
+                          <Progress max="100" value="72" barClassName="bg-danger" />
                         </div>
                       </div>
                     </td>
@@ -1434,22 +1037,13 @@ const Tables = () => {
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Another action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Something else here
                           </DropdownItem>
                         </DropdownMenu>
@@ -1459,23 +1053,11 @@ const Tables = () => {
                   <tr>
                     <th scope="row">
                       <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/react.jpg")
-                                .default
-                            }
-                          />
+                        <a className="avatar rounded-circle mr-3" href="#pablo" onClick={(e) => e.preventDefault()}>
+                          <img alt="..." src={require('../../assets/img/theme/react.jpg').default} />
                         </a>
                         <Media>
-                          <span className="mb-0 text-sm">
-                            React Material Dashboard
-                          </span>
+                          <span className="mb-0 text-sm">React Material Dashboard</span>
                         </Media>
                       </Media>
                     </th>
@@ -1497,16 +1079,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-1-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-1-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip226319315"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip226319315">
                           Ryan Tompson
                         </UncontrolledTooltip>
                         <a
@@ -1518,16 +1094,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-2-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-2-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip711961370"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip711961370">
                           Romina Hadid
                         </UncontrolledTooltip>
                         <a
@@ -1539,16 +1109,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-3-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-3-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip216246707"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip216246707">
                           Alexander Smith
                         </UncontrolledTooltip>
                         <a
@@ -1560,16 +1124,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-4-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-4-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip638048561"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip638048561">
                           Jessica Doe
                         </UncontrolledTooltip>
                       </div>
@@ -1578,11 +1136,7 @@ const Tables = () => {
                       <div className="d-flex align-items-center">
                         <span className="mr-2">90%</span>
                         <div>
-                          <Progress
-                            max="100"
-                            value="90"
-                            barClassName="bg-info"
-                          />
+                          <Progress max="100" value="90" barClassName="bg-info" />
                         </div>
                       </div>
                     </td>
@@ -1599,22 +1153,13 @@ const Tables = () => {
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Another action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Something else here
                           </DropdownItem>
                         </DropdownMenu>
@@ -1624,22 +1169,11 @@ const Tables = () => {
                   <tr>
                     <th scope="row">
                       <Media className="align-items-center">
-                        <a
-                          className="avatar rounded-circle mr-3"
-                          href="#pablo"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          <img
-                            alt="..."
-                            src={
-                              require("../../assets/img/theme/vue.jpg").default
-                            }
-                          />
+                        <a className="avatar rounded-circle mr-3" href="#pablo" onClick={(e) => e.preventDefault()}>
+                          <img alt="..." src={require('../../assets/img/theme/vue.jpg').default} />
                         </a>
                         <Media>
-                          <span className="mb-0 text-sm">
-                            Vue Paper UI Kit PRO
-                          </span>
+                          <span className="mb-0 text-sm">Vue Paper UI Kit PRO</span>
                         </Media>
                       </Media>
                     </th>
@@ -1661,16 +1195,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-1-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-1-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip781594051"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip781594051">
                           Ryan Tompson
                         </UncontrolledTooltip>
                         <a
@@ -1682,16 +1210,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-2-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-2-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip840372212"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip840372212">
                           Romina Hadid
                         </UncontrolledTooltip>
                         <a
@@ -1703,16 +1225,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-3-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-3-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip497647175"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip497647175">
                           Alexander Smith
                         </UncontrolledTooltip>
                         <a
@@ -1724,16 +1240,10 @@ const Tables = () => {
                           <img
                             alt="..."
                             className="rounded-circle"
-                            src={
-                              require("../../assets/img/theme/team-4-800x800.jpg")
-                                .default
-                            }
+                            src={require('../../assets/img/theme/team-4-800x800.jpg').default}
                           />
                         </a>
-                        <UncontrolledTooltip
-                          delay={0}
-                          target="tooltip951447946"
-                        >
+                        <UncontrolledTooltip delay={0} target="tooltip951447946">
                           Jessica Doe
                         </UncontrolledTooltip>
                       </div>
@@ -1742,11 +1252,7 @@ const Tables = () => {
                       <div className="d-flex align-items-center">
                         <span className="mr-2">100%</span>
                         <div>
-                          <Progress
-                            max="100"
-                            value="100"
-                            barClassName="bg-danger"
-                          />
+                          <Progress max="100" value="100" barClassName="bg-danger" />
                         </div>
                       </div>
                     </td>
@@ -1763,22 +1269,13 @@ const Tables = () => {
                           <i className="fas fa-ellipsis-v" />
                         </DropdownToggle>
                         <DropdownMenu className="dropdown-menu-arrow" right>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Another action
                           </DropdownItem>
-                          <DropdownItem
-                            href="#pablo"
-                            onClick={(e) => e.preventDefault()}
-                          >
+                          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
                             Something else here
                           </DropdownItem>
                         </DropdownMenu>

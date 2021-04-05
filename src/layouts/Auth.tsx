@@ -15,43 +15,42 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
-import { useLocation, Route, Switch, Redirect } from "react-router-dom";
+import React, { useRef, RefObject } from 'react';
+import { useLocation, Route, Switch, Redirect } from 'react-router-dom';
 // reactstrap components
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col } from 'reactstrap';
 
 // core components
-import AuthNavbar from "components/Navbars/AuthNavbar.js";
-import AuthFooter from "components/Footers/AuthFooter.js";
+import AuthNavbar from 'components/Navbars/AuthNavbar';
+import AuthFooter from 'components/Footers/AuthFooter';
 
-import routes from "routes.js";
+import routes, { RouteParams } from 'routes';
 
-const Auth = (props) => {
-  const mainContent = React.useRef(null);
+const Auth: React.FunctionComponent = () => {
+  const mainContent: RefObject<HTMLDivElement> = useRef({}) as RefObject<HTMLDivElement>;
   const location = useLocation();
 
   React.useEffect(() => {
-    document.body.classList.add("bg-default");
+    document.body.classList.add('bg-default');
     return () => {
-      document.body.classList.remove("bg-default");
+      document.body.classList.remove('bg-default');
     };
   }, []);
+
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
-    document.scrollingElement.scrollTop = 0;
-    mainContent.current.scrollTop = 0;
+    if (document.scrollingElement) {
+      document.scrollingElement.scrollTop = 0;
+    }
+    if (mainContent && mainContent.current) {
+      mainContent.current.scrollTop = 0;
+    }
   }, [location]);
 
-  const getRoutes = (routes) => {
-    return routes.map((prop, key) => {
-      if (prop.layout === "/auth") {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
+  const getRoutes = (routes: RouteParams[]) => {
+    return routes.map((route, key) => {
+      if (route.layout === '/auth') {
+        return <Route path={route.layout + route.path} component={route.component} key={key} />;
       } else {
         return null;
       }
@@ -69,8 +68,7 @@ const Auth = (props) => {
                 <Col lg="5" md="6">
                   <h1 className="text-white">Welcome!</h1>
                   <p className="text-lead text-light">
-                    Use these awesome forms to login or create new account in
-                    your project for free.
+                    Use these awesome forms to login or create new account in your project for free.
                   </p>
                 </Col>
               </Row>
@@ -85,10 +83,7 @@ const Auth = (props) => {
               x="0"
               y="0"
             >
-              <polygon
-                className="fill-default"
-                points="2560 0 2560 100 0 100"
-              />
+              <polygon className="fill-default" points="2560 0 2560 100 0 100" />
             </svg>
           </div>
         </div>

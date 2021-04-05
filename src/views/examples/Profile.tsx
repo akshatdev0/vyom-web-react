@@ -15,25 +15,14 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from "react";
+import React from 'react';
 
 // reactstrap components
-import {
-  Button,
-  Card,
-  CardHeader,
-  CardBody,
-  FormGroup,
-  Form,
-  Input,
-  Container,
-  Row,
-  Col,
-} from "reactstrap";
+import { Button, Card, CardHeader, CardBody, FormGroup, Form, Input, Container, Row, Col } from 'reactstrap';
 // core components
-import UserHeader from "components/Headers/UserHeader.js";
+import UserHeader from 'components/Headers/UserHeader';
 
-const Profile = () => {
+const Profile: React.FunctionComponent = () => {
   return (
     <>
       <UserHeader />
@@ -49,10 +38,7 @@ const Profile = () => {
                       <img
                         alt="..."
                         className="rounded-circle"
-                        src={
-                          require("../../assets/img/theme/team-4-800x800.jpg")
-                            .default
-                        }
+                        src={require('../../assets/img/theme/team-4-800x800.jpg').default}
                       />
                     </a>
                   </div>
@@ -60,13 +46,7 @@ const Profile = () => {
               </Row>
               <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                 <div className="d-flex justify-content-between">
-                  <Button
-                    className="mr-4"
-                    color="info"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                    size="sm"
-                  >
+                  <Button className="mr-4" color="info" href="#pablo" onClick={(e) => e.preventDefault()} size="sm">
                     Connect
                   </Button>
                   <Button
@@ -118,9 +98,8 @@ const Profile = () => {
                   </div>
                   <hr className="my-4" />
                   <p>
-                    Ryan — the name taken by Melbourne-raised, Brooklyn-based
-                    Nick Murphy — writes, performs and records all of his own
-                    music.
+                    Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records
+                    all of his own music.
                   </p>
                   <a href="#pablo" onClick={(e) => e.preventDefault()}>
                     Show more
@@ -137,12 +116,7 @@ const Profile = () => {
                     <h3 className="mb-0">My account</h3>
                   </Col>
                   <Col className="text-right" xs="4">
-                    <Button
-                      color="primary"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
-                    >
+                    <Button color="primary" href="#pablo" onClick={(e) => e.preventDefault()} size="sm">
                       Settings
                     </Button>
                   </Col>
@@ -150,17 +124,12 @@ const Profile = () => {
               </CardHeader>
               <CardBody>
                 <Form>
-                  <h6 className="heading-small text-muted mb-4">
-                    User information
-                  </h6>
+                  <h6 className="heading-small text-muted mb-4">User information</h6>
                   <div className="pl-lg-4">
                     <Row>
                       <Col lg="6">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-username"
-                          >
+                          <label className="form-control-label" htmlFor="input-username">
                             Username
                           </label>
                           <Input
@@ -174,10 +143,7 @@ const Profile = () => {
                       </Col>
                       <Col lg="6">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-email"
-                          >
+                          <label className="form-control-label" htmlFor="input-email">
                             Email address
                           </label>
                           <Input
@@ -192,10 +158,7 @@ const Profile = () => {
                     <Row>
                       <Col lg="6">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-first-name"
-                          >
+                          <label className="form-control-label" htmlFor="input-first-name">
                             First name
                           </label>
                           <Input
@@ -209,10 +172,7 @@ const Profile = () => {
                       </Col>
                       <Col lg="6">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-last-name"
-                          >
+                          <label className="form-control-label" htmlFor="input-last-name">
                             Last name
                           </label>
                           <Input
@@ -228,17 +188,12 @@ const Profile = () => {
                   </div>
                   <hr className="my-4" />
                   {/* Address */}
-                  <h6 className="heading-small text-muted mb-4">
-                    Contact information
-                  </h6>
+                  <h6 className="heading-small text-muted mb-4">Contact information</h6>
                   <div className="pl-lg-4">
                     <Row>
                       <Col md="12">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-address"
-                          >
+                          <label className="form-control-label" htmlFor="input-address">
                             Address
                           </label>
                           <Input
@@ -254,10 +209,7 @@ const Profile = () => {
                     <Row>
                       <Col lg="4">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-city"
-                          >
+                          <label className="form-control-label" htmlFor="input-city">
                             City
                           </label>
                           <Input
@@ -271,10 +223,7 @@ const Profile = () => {
                       </Col>
                       <Col lg="4">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
+                          <label className="form-control-label" htmlFor="input-country">
                             Country
                           </label>
                           <Input
@@ -288,10 +237,7 @@ const Profile = () => {
                       </Col>
                       <Col lg="4">
                         <FormGroup>
-                          <label
-                            className="form-control-label"
-                            htmlFor="input-country"
-                          >
+                          <label className="form-control-label" htmlFor="input-country">
                             Postal code
                           </label>
                           <Input
