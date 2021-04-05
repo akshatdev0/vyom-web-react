@@ -1,0 +1,127 @@
+mutation SignIn($mobileNumber: String!, $password: String!) {
+  signIn(input: { identifier: $mobileNumber, password: $password }) {
+    jwt
+    user {
+      id
+      mobileNumber
+      firstName
+      lastName
+      gender
+      confirmed
+      blocked
+      role {
+        id
+        name
+        type
+      }
+      companyOwner {
+        id
+        company {
+          id
+        }
+      }
+      companyEmployee {
+        id
+        company {
+          id
+        }
+      }
+      shopkeeper {
+        id
+        shops {
+          id
+        }
+      }
+    }
+  }
+}
+
+mutation SignUp($mobileNumber: String!) {
+  signUp(mobileNumber: $mobileNumber) {
+    ok
+  }
+}
+
+mutation SendOtp($mobileNumber: String!) {
+  sendOtp(mobileNumber: $mobileNumber) {
+    mobileNumber
+    sent
+    token
+  }
+}
+
+mutation Verify($mobileNumber: String!, $token: String!) {
+  verify(mobileNumber: $mobileNumber, confirmation: $token) {
+    jwt
+    user {
+      id
+      mobileNumber
+      firstName
+      lastName
+      gender
+      confirmed
+      blocked
+      role {
+        id
+        name
+        type
+      }
+      companyOwner {
+        id
+        company {
+          id
+        }
+      }
+      companyEmployee {
+        id
+        company {
+          id
+        }
+      }
+      shopkeeper {
+        id
+        shops {
+          id
+        }
+      }
+    }
+  }
+}
+
+mutation CreatePassword($password: String!) {
+  createPassword(password: $password) {
+    jwt
+    user {
+      id
+      mobileNumber
+      firstName
+      lastName
+      gender
+      confirmed
+      blocked
+      role {
+        id
+        name
+        type
+      }
+      companyOwner {
+        id
+        company {
+          id
+        }
+      }
+      companyEmployee {
+        id
+        company {
+          id
+        }
+      }
+      shopkeeper {
+        id
+        shops {
+          id
+        }
+      }
+    }
+  }
+}
