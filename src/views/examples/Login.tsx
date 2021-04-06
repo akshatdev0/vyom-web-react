@@ -32,8 +32,20 @@ import {
   Row,
   Col,
 } from 'reactstrap';
+import { useSignInMutation } from 'generated/graphql';
+import { useAuthState } from 'features/auth';
 
 const Login: React.FunctionComponent = () => {
+  const { signIn } = useAuthState();
+  const { mutate } = useSignInMutation({
+    onSuccess: async (payload) => {
+      console.log(payload);
+      signIn(payload);
+    },
+  });
+
+  const handleClick = () => mutate({ mobileNumber: '8000000001', password: '8000000001' });
+
   return (
     <>
       <Col lg="5" md="7">
@@ -99,7 +111,7 @@ const Login: React.FunctionComponent = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button">
+                <Button className="my-4" color="primary" type="button" onClick={handleClick}>
                   Sign in
                 </Button>
               </div>
