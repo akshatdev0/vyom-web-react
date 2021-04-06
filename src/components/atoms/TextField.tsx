@@ -1,9 +1,11 @@
 import React from 'react';
 
-import { Control, Controller, FieldName, FieldValues } from 'react-hook-form';
+import { Control, useController, FieldName, FieldValues } from 'react-hook-form';
 import { FormGroup, Input, InputGroupAddon, InputGroupText, InputGroup } from 'reactstrap';
 
-type Props<TFieldValues extends FieldValues = FieldValues> = React.ComponentProps<typeof Input> & {
+type InputProps = React.ComponentProps<typeof Input>;
+
+type Props<TFieldValues extends FieldValues = FieldValues> = InputProps & {
   name: FieldName<TFieldValues>;
   control: Control<TFieldValues>;
   defaultValue?: any;
@@ -24,16 +26,26 @@ const TextField = ({
   placeholder,
   autoComplete,
 }: Props): JSX.Element => {
-  const controller = (
-    <Controller
-      name={name}
-      control={control}
-      defaultValue={defaultValue}
-      render={({ field }) => (
-        <Input id={name} type={type} placeholder={placeholder} autoComplete={autoComplete} {...field} />
-      )}
-    />
-  );
+  const {
+    field: { ref, ...rest },
+    // fieldState: { invalid, isTouched, isDirty },
+    // formState: { touchedFields, dirtyFields },
+  } = useController({
+    name,
+    control,
+    defaultValue,
+  });
+
+  const inputProps: InputProps = {
+    id: name,
+    type,
+    placeholder,
+    autoComplete,
+    innerRef: ref,
+    ...rest,
+  };
+
+  const input = <Input {...inputProps} />;
 
   switch (labelType) {
     case 'text':
@@ -42,7 +54,7 @@ const TextField = ({
           <label className="form-control-label" htmlFor={name}>
             {labelValue}
           </label>
-          {controller}
+          {input}
         </FormGroup>
       );
 
@@ -53,7 +65,7 @@ const TextField = ({
             <InputGroupAddon addonType="prepend">
               <InputGroupText>{labelValue}</InputGroupText>
             </InputGroupAddon>
-            {controller}
+            {input}
           </InputGroup>
         </FormGroup>
       );
@@ -62,7 +74,7 @@ const TextField = ({
       return (
         <FormGroup>
           <InputGroup>
-            {controller}
+            {input}
             <InputGroupAddon addonType="append">
               <InputGroupText>{labelValue}</InputGroupText>
             </InputGroupAddon>
@@ -79,7 +91,7 @@ const TextField = ({
                 <i className={labelValue} />
               </InputGroupText>
             </InputGroupAddon>
-            {controller}
+            {input}
           </InputGroup>
         </FormGroup>
       );
@@ -87,7 +99,7 @@ const TextField = ({
     case 'append-icon':
       return (
         <FormGroup>
-          {controller}
+          {input}
           <InputGroup>
             <InputGroupAddon addonType="append">
               <InputGroupText>
