@@ -19,6 +19,7 @@ import React from 'react';
 
 // reactstrap components
 import { Button, Card, CardBody, Form, Row, Col } from 'reactstrap';
+import { useForm } from 'react-hook-form';
 import TextField from 'components/atoms/TextField';
 import { useSignInMutation } from 'generated/graphql';
 import { useAuthState } from 'features/auth';
@@ -31,8 +32,8 @@ const Login: React.FunctionComponent = () => {
       signIn(payload);
     },
   });
-
-  const handleClick = () => mutate({ mobileNumber: '8000000001', password: '8000000001' });
+  const { control, handleSubmit } = useForm();
+  const onSubmit = async (variables: any) => mutate(variables);
 
   return (
     <>
@@ -44,12 +45,13 @@ const Login: React.FunctionComponent = () => {
             </div>
             <Form role="form">
               <TextField
-                name="mobile-number"
+                name="mobileNumber"
                 type="tel"
                 labelType="prepend-icon"
                 labelValue="ni ni-mobile-button"
                 placeholder="Mobile Number"
                 autoComplete="username"
+                control={control}
               />
               <TextField
                 name="password"
@@ -58,9 +60,10 @@ const Login: React.FunctionComponent = () => {
                 labelValue="ni ni-lock-circle-open"
                 placeholder="Password"
                 autoComplete="current-password"
+                control={control}
               />
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button" onClick={handleClick}>
+                <Button className="my-4" color="primary" type="button" onClick={handleSubmit(onSubmit)}>
                   Sign in
                 </Button>
               </div>
