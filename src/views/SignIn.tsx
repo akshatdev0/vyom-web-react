@@ -80,7 +80,7 @@ const Login: React.FunctionComponent = () => {
                 control={control}
               />
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button" onClick={handleSubmit(onSubmit)}>
+                <Button className="my-2" color="primary" type="button" onClick={handleSubmit(onSubmit)}>
                   Sign in
                 </Button>
               </div>
