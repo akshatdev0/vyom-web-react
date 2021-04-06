@@ -21,11 +21,11 @@ import React from 'react';
 import { Card, Container, Row } from 'reactstrap';
 
 // core components
-import Header from 'components/Headers/Header';
+import Header from 'components/organisms/Header';
 
 declare global {
   interface Window {
-    google: any;    // eslint-disable-line
+    google: any; // eslint-disable-line
   }
 }
 
