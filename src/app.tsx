@@ -18,17 +18,32 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import AdminLayout from 'layouts/Admin';
-import AuthLayout from 'layouts/Auth';
+import { Layout, AuthLayout, AdminLayout } from 'layouts';
+import { useAuthState } from 'features/auth';
 
-const App: React.FunctionComponent = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Route path="/auth" render={() => <AuthLayout />} />
-      <Redirect from="/" to="/admin/index" />
-    </Switch>
-  </BrowserRouter>
+const AuthSwitch = (
+  <Switch>
+    <Route path={Layout.Auth} render={() => <AuthLayout />} />
+    <Redirect from="/" to={Layout.Auth + '/sign-in'} />
+  </Switch>
 );
+
+const AdminSwitch = (
+  <Switch>
+    <Route path={Layout.Admin} render={(props) => <AdminLayout {...props} />} />
+    <Redirect from="/" to={Layout.Admin + '/index'} />
+  </Switch>
+);
+
+const App: React.FunctionComponent = () => {
+  const { isSignedIn } = useAuthState();
+
+  let sw = AuthSwitch;
+  if (isSignedIn) {
+    sw = AdminSwitch;
+  }
+
+  return <BrowserRouter>{sw}</BrowserRouter>;
+};
 
 export default App;

@@ -20,13 +20,14 @@ import { useLocation, Route, Switch, Redirect, RouteComponentProps } from 'react
 // reactstrap components
 import { Container } from 'reactstrap';
 // core components
-import AdminNavbar from 'components/Navbars/AdminNavbar';
-import AdminFooter from 'components/Footers/AdminFooter';
-import Sidebar from 'components/Sidebar/Sidebar';
+import AdminTopbar from 'components/organisms/AdminTopbar';
+import AdminFooter from 'components/organisms/AdminFooter';
+import Sidebar from 'components/organisms/Sidebar';
+import { Layout } from 'layouts';
+import { RouteParams } from 'types';
+import routes from './routes';
 
-import routes, { RouteParams } from 'routes';
-
-const Admin: React.FunctionComponent<RouteComponentProps> = (props: RouteComponentProps) => {
+const AdminLayout: React.FunctionComponent<RouteComponentProps> = (props: RouteComponentProps) => {
   const mainContent: RefObject<HTMLDivElement> = useRef({}) as RefObject<HTMLDivElement>;
   const location = useLocation();
 
@@ -41,40 +42,35 @@ const Admin: React.FunctionComponent<RouteComponentProps> = (props: RouteCompone
   }, [location]);
 
   const getRoutes = (routes: RouteParams[]) => {
-    return routes.map((prop, key) => {
-      if (prop.layout === '/admin') {
-        return <Route path={prop.layout + prop.path} component={prop.component} key={key} />;
-      } else {
-        return null;
-      }
-    });
+    return routes.map((prop, key) => <Route path={Layout.Admin + prop.path} component={prop.component} key={key} />);
   };
 
   const getBrandText = (path: string) => {
     for (let i = 0; i < routes.length; i++) {
-      if (path.indexOf(routes[i].layout + routes[i].path) !== -1) {
+      if (path.indexOf(Layout.Admin + routes[i].path) !== -1) {
         return routes[i].name;
       }
     }
-    return 'Brand';
+    return '';
   };
 
   return (
     <>
       <Sidebar
         {...props}
+        layout={Layout.Admin}
         routes={routes}
         logo={{
-          innerLink: '/admin/index',
-          imgSrc: require('../assets/img/brand/argon-react.png').default,
+          innerLink: Layout.Admin + '/index',
+          imgSrc: require('../../assets/img/brand/argon-react.png').default,
           imgAlt: '...',
         }}
       />
       <div className="main-content" ref={mainContent}>
-        <AdminNavbar {...props} brandText={getBrandText(props.location.pathname)} />
+        <AdminTopbar {...props} brandText={getBrandText(props.location.pathname)} />
         <Switch>
           {getRoutes(routes)}
-          <Redirect from="*" to="/admin/index" />
+          <Redirect from="*" to={Layout.Admin + '/index'} />
         </Switch>
         <Container fluid>
           <AdminFooter />
@@ -84,4 +80,4 @@ const Admin: React.FunctionComponent<RouteComponentProps> = (props: RouteCompone
   );
 };
 
-export default Admin;
+export default AdminLayout;

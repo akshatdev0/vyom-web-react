@@ -41,10 +41,11 @@ import {
   Row,
   Col,
 } from 'reactstrap';
-
-import { RouteParams } from 'routes';
+import { Layout } from 'layouts';
+import { RouteParams } from 'types';
 
 type Props = {
+  layout: Layout;
   // links that will be displayed inside the component
   routes: RouteParams[];
   location: any;
@@ -77,11 +78,11 @@ const Sidebar = (props: Props) => {
     setCollapseOpen(false);
   };
   // creates the links that appear in the left menu / Sidebar
-  const createLinks = (routes: RouteParams[]) => {
+  const createLinks = (layout: Layout, routes: RouteParams[]) => {
     return routes.map((prop, key) => {
       return (
         <NavItem key={key}>
-          <NavLink to={prop.layout + prop.path} tag={NavLinkRRD} onClick={closeCollapse} activeClassName="active">
+          <NavLink to={layout + prop.path} tag={NavLinkRRD} onClick={closeCollapse} activeClassName="active">
             <i className={prop.icon} />
             {prop.name}
           </NavLink>
@@ -90,7 +91,7 @@ const Sidebar = (props: Props) => {
     });
   };
 
-  const { routes, logo } = props;
+  const { layout, routes, logo } = props;
   let navbarBrandProps;
   if (logo && logo.innerLink) {
     navbarBrandProps = {
@@ -209,7 +210,7 @@ const Sidebar = (props: Props) => {
             </InputGroup>
           </Form>
           {/* Navigation */}
-          <Nav navbar>{createLinks(routes)}</Nav>
+          <Nav navbar>{createLinks(layout, routes)}</Nav>
           {/* Divider */}
           <hr className="my-3" />
           {/* Heading */}
@@ -217,19 +218,19 @@ const Sidebar = (props: Props) => {
           {/* Navigation */}
           <Nav className="mb-md-3" navbar>
             <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/overview?ref=adr-admin-sidebar">
+              <NavLink href="#">
                 <i className="ni ni-spaceship" />
                 Getting started
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/colors?ref=adr-admin-sidebar">
+              <NavLink href="#">
                 <i className="ni ni-palette" />
                 Foundation
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="https://demos.creative-tim.com/argon-dashboard-react/#/documentation/alerts?ref=adr-admin-sidebar">
+              <NavLink href="#">
                 <i className="ni ni-ui-04" />
                 Components
               </NavLink>
@@ -237,9 +238,9 @@ const Sidebar = (props: Props) => {
           </Nav>
           <Nav className="mb-md-3" navbar>
             <NavItem className="active-pro active">
-              <NavLink href="https://www.creative-tim.com/product/argon-dashboard-pro-react?ref=adr-admin-sidebar">
+              <NavLink href="#">
                 <i className="ni ni-spaceship" />
-                Upgrade to PRO
+                Upgrade
               </NavLink>
             </NavItem>
           </Nav>
