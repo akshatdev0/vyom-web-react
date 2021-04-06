@@ -35,11 +35,15 @@ import {
   Media,
 } from 'reactstrap';
 
+import { useAuthState } from 'features/auth';
+
 type Props = {
   brandText: string;
 };
 
 const AdminTopbar: React.FunctionComponent<Props> = (props: Props) => {
+  const { signOut } = useAuthState();
+
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -92,9 +96,9 @@ const AdminTopbar: React.FunctionComponent<Props> = (props: Props) => {
                   <span>Support</span>
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                <DropdownItem onClick={signOut}>
                   <i className="ni ni-user-run" />
-                  <span>Logout</span>
+                  <span>Sign Out</span>
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
