@@ -24,7 +24,7 @@ import { useAuthState } from 'features/auth';
 const AuthSwitch = (
   <Switch>
     <Route path={Layout.Auth} render={() => <AuthLayout />} />
-    <Redirect from="/" to={Layout.Auth + '/login'} />
+    <Redirect from="/" to={Layout.Auth + '/sign-in'} />
   </Switch>
 );
 

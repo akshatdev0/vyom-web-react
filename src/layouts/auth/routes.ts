@@ -17,14 +17,14 @@
 */
 import { RouteParams } from 'types';
 import Register from 'views/examples/Register';
-import Login from 'views/examples/Login';
+import SignIn from 'views/SignIn';
 
 const routes: RouteParams[] = [
   {
-    path: '/login',
-    name: 'Login',
+    path: '/sign-in',
+    name: 'Sign In',
     icon: 'ni ni-key-25 text-info',
-    component: Login,
+    component: SignIn,
   },
   {
     path: '/register',
