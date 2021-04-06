@@ -32,20 +32,8 @@ import {
   Row,
   Col,
 } from 'reactstrap';
-import { useSignInMutation } from 'generated/graphql';
-import { useAuthState } from 'features/auth';
 
 const Login: React.FunctionComponent = () => {
-  const { signIn } = useAuthState();
-  const { mutate } = useSignInMutation({
-    onSuccess: async (payload) => {
-      console.log(payload);
-      signIn(payload);
-    },
-  });
-
-  const handleClick = () => mutate({ mobileNumber: '8000000001', password: '8000000001' });
-
   return (
     <>
       <Col lg="5" md="7">
@@ -96,7 +84,7 @@ const Login: React.FunctionComponent = () => {
               </FormGroup>
               <FormGroup>
                 <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
+                  <InputGroupAddon addonType="append">
                     <InputGroupText>
                       <i className="ni ni-lock-circle-open" />
                     </InputGroupText>
@@ -111,7 +99,7 @@ const Login: React.FunctionComponent = () => {
                 </label>
               </div>
               <div className="text-center">
-                <Button className="my-4" color="primary" type="button" onClick={handleClick}>
+                <Button className="my-4" color="primary" type="button">
                   Sign in
                 </Button>
               </div>
