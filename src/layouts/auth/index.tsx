@@ -87,7 +87,7 @@ const AuthLayout: React.FunctionComponent = () => {
           <Row className="justify-content-center">
             <Switch>
               {getRoutes(routes)}
-              <Redirect from="*" to={Layout.Auth + '/login'} />
+              <Redirect from="*" to={Layout.Auth + '/sign-in'} />
             </Switch>
           </Row>
         </Container>
