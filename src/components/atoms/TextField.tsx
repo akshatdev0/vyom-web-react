@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Control, useController, FieldName, FieldValues } from 'react-hook-form';
 import { FormGroup, Input, InputGroupAddon, InputGroupText, InputGroup } from 'reactstrap';
+import styled from 'styled-components';
 
 type InputProps = React.ComponentProps<typeof Input>;
 
@@ -16,6 +17,20 @@ type Props<TFieldValues extends FieldValues = FieldValues> = InputProps & {
   autoComplete?: string | undefined;
 };
 
+const NoError = styled.div`
+  margin-top: 0.05rem;
+  height: 15px;
+  max-height: 15px;
+  width: 5px;
+`;
+
+const Error = styled(NoError)`
+  width: auto;
+  padding-left: 0.325rem;
+  font-size: 0.725rem;
+  color: #fb6340;
+`;
+
 const TextField = ({
   name,
   control,
@@ -29,7 +44,7 @@ const TextField = ({
   const {
     field: { ref, ...rest },
     fieldState: { invalid },
-    // formState: { errors },
+    formState: { errors },
   } = useController({
     name,
     control,
@@ -47,8 +62,9 @@ const TextField = ({
   };
 
   const input = <Input {...inputProps} />;
+  const error = invalid ? <Error>{errors[name]?.message}</Error> : <NoError />;
 
-  const formGroupClassName = invalid ? 'has-danger' : '';
+  const formGroupClassName = 'mb-3 ' + (invalid ? 'has-danger' : '');
 
   switch (labelType) {
     case 'text':
@@ -58,6 +74,7 @@ const TextField = ({
             {labelValue}
           </label>
           {input}
+          {error}
         </FormGroup>
       );
 
@@ -70,6 +87,7 @@ const TextField = ({
             </InputGroupAddon>
             {input}
           </InputGroup>
+          {error}
         </FormGroup>
       );
 
@@ -82,6 +100,7 @@ const TextField = ({
               <InputGroupText>{labelValue}</InputGroupText>
             </InputGroupAddon>
           </InputGroup>
+          {error}
         </FormGroup>
       );
 
@@ -96,6 +115,7 @@ const TextField = ({
             </InputGroupAddon>
             {input}
           </InputGroup>
+          {error}
         </FormGroup>
       );
 
@@ -110,6 +130,7 @@ const TextField = ({
               </InputGroupText>
             </InputGroupAddon>
           </InputGroup>
+          {error}
         </FormGroup>
       );
   }
