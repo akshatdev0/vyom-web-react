@@ -24,6 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
 import TextField from 'components/atoms/TextField';
+import { mobileNumberValidator } from 'core/utils';
 import { useSignInMutation } from 'generated/graphql';
 import { useAuthState } from 'features/auth';
 import ErrorAlert from 'components/atoms/ErrorAlert';
@@ -34,7 +35,9 @@ type FormValues = {
 };
 
 const schema = z.object({
-  mobileNumber: z.string().nonempty({ message: 'Please enter your mobile number!' }),
+  mobileNumber: z.string().nonempty({ message: 'Please enter your mobile number!' }).refine(mobileNumberValidator, {
+    message: 'Please enter a valid mobile number!',
+  }),
   password: z.string().nonempty({ message: 'Please enter your password!' }),
 });
 
