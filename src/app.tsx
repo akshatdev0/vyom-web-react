@@ -18,14 +18,13 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import AdminLayout from 'layouts/Admin';
-import AuthLayout from 'layouts/Auth';
+import { Layout, AuthLayout, AdminLayout } from 'layouts';
 
 const App: React.FunctionComponent = () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Route path="/auth" render={() => <AuthLayout />} />
+      <Route path={Layout.Admin} render={(props) => <AdminLayout {...props} />} />
+      <Route path={Layout.Auth} render={() => <AuthLayout />} />
       <Redirect from="/" to="/admin/index" />
     </Switch>
   </BrowserRouter>

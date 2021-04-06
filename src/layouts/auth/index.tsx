@@ -21,12 +21,13 @@ import { useLocation, Route, Switch, Redirect } from 'react-router-dom';
 import { Container, Row, Col } from 'reactstrap';
 
 // core components
-import AuthNavbar from 'components/Navbars/AuthNavbar';
-import AuthFooter from 'components/Footers/AuthFooter';
+import AuthTopbar from 'components/organisms/AuthTopbar';
+import AuthFooter from 'components/organisms/AuthFooter';
+import { Layout } from 'layouts';
+import { RouteParams } from 'types';
+import routes from './routes';
 
-import routes, { RouteParams } from 'routes';
-
-const Auth: React.FunctionComponent = () => {
+const AuthLayout: React.FunctionComponent = () => {
   const mainContent: RefObject<HTMLDivElement> = useRef({}) as RefObject<HTMLDivElement>;
   const location = useLocation();
 
@@ -48,19 +49,13 @@ const Auth: React.FunctionComponent = () => {
   }, [location]);
 
   const getRoutes = (routes: RouteParams[]) => {
-    return routes.map((route, key) => {
-      if (route.layout === '/auth') {
-        return <Route path={route.layout + route.path} component={route.component} key={key} />;
-      } else {
-        return null;
-      }
-    });
+    return routes.map((prop, key) => <Route path={Layout.Auth + prop.path} component={prop.component} key={key} />);
   };
 
   return (
     <>
       <div className="main-content" ref={mainContent}>
-        <AuthNavbar />
+        <AuthTopbar />
         <div className="header bg-gradient-info py-7 py-lg-8">
           <Container>
             <div className="header-body text-center mb-7">
@@ -92,7 +87,7 @@ const Auth: React.FunctionComponent = () => {
           <Row className="justify-content-center">
             <Switch>
               {getRoutes(routes)}
-              <Redirect from="*" to="/auth/login" />
+              <Redirect from="*" to={Layout.Auth + '/login'} />
             </Switch>
           </Row>
         </Container>
@@ -102,4 +97,4 @@ const Auth: React.FunctionComponent = () => {
   );
 };
 
-export default Auth;
+export default AuthLayout;

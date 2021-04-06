@@ -15,22 +15,10 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider as StoreProvider } from 'react-redux';
 
-import { composeStore } from './store';
-import App from './app';
-
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'assets/plugins/nucleo/css/nucleo.css';
-import 'assets/scss/argon-dashboard-react.scss';
-
-const store = composeStore();
-
-ReactDOM.render(
-  <StoreProvider store={store}>
-    <App />
-  </StoreProvider>,
-  document.getElementById('root'),
-);
+export type RouteParams = {
+  path: string;
+  name: string;
+  icon: string;
+  component: React.FC;
+};

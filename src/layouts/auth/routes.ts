@@ -15,22 +15,23 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider as StoreProvider } from 'react-redux';
+import { RouteParams } from 'types';
+import Register from 'views/examples/Register';
+import Login from 'views/examples/Login';
 
-import { composeStore } from './store';
-import App from './app';
+const routes: RouteParams[] = [
+  {
+    path: '/login',
+    name: 'Login',
+    icon: 'ni ni-key-25 text-info',
+    component: Login,
+  },
+  {
+    path: '/register',
+    name: 'Register',
+    icon: 'ni ni-circle-08 text-pink',
+    component: Register,
+  },
+];
 
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import 'assets/plugins/nucleo/css/nucleo.css';
-import 'assets/scss/argon-dashboard-react.scss';
-
-const store = composeStore();
-
-ReactDOM.render(
-  <StoreProvider store={store}>
-    <App />
-  </StoreProvider>,
-  document.getElementById('root'),
-);
+export default routes;
