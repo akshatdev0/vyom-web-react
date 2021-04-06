@@ -25,6 +25,7 @@ import * as z from 'zod';
 import TextField from 'components/atoms/TextField';
 import { useSignInMutation } from 'generated/graphql';
 import { useAuthState } from 'features/auth';
+import ErrorAlert from 'components/atoms/ErrorAlert';
 
 type FormValues = {
   mobileNumber: string;
@@ -38,19 +39,13 @@ const schema = z.object({
 
 const Login: React.FunctionComponent = () => {
   const { signIn } = useAuthState();
-  const { mutate } = useSignInMutation({
-    onSuccess: async (payload) => {
-      console.log(payload);
-      signIn(payload);
-    },
+  const { mutate, isLoading, isError, error } = useSignInMutation({
+    onSuccess: async (payload) => signIn(payload),
   });
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(schema),
   });
-  const onSubmit = async (variables: FormValues) => {
-    console.log(variables);
-    mutate(variables);
-  };
+  const onSubmit = async (variables: FormValues) => mutate(variables);
 
   return (
     <>
@@ -60,7 +55,8 @@ const Login: React.FunctionComponent = () => {
             <div className="text-center text-muted mb-4">
               <small>Sign in with credentials</small>
             </div>
-            <Form role="form">
+            <ErrorAlert isError={isError} error={error} />
+            <Form role="form" onSubmit={handleSubmit(onSubmit)}>
               <TextField
                 name="mobileNumber"
                 type="tel"
@@ -80,7 +76,7 @@ const Login: React.FunctionComponent = () => {
                 control={control}
               />
               <div className="text-center">
-                <Button className="my-2" color="primary" type="button" onClick={handleSubmit(onSubmit)}>
+                <Button className="my-2" color="primary" type="submit" disabled={isLoading}>
                   Sign in
                 </Button>
               </div>
