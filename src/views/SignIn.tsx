@@ -20,9 +20,21 @@ import React from 'react';
 // reactstrap components
 import { Button, Card, CardBody, Form, Row, Col } from 'reactstrap';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 import TextField from 'components/atoms/TextField';
 import { useSignInMutation } from 'generated/graphql';
 import { useAuthState } from 'features/auth';
+
+type FormValues = {
+  mobileNumber: string;
+  password: string;
+};
+
+const schema = z.object({
+  mobileNumber: z.string().nonempty({ message: 'Please enter your mobile number!' }),
+  password: z.string().nonempty({ message: 'Please enter your password!' }),
+});
 
 const Login: React.FunctionComponent = () => {
   const { signIn } = useAuthState();
@@ -32,8 +44,13 @@ const Login: React.FunctionComponent = () => {
       signIn(payload);
     },
   });
-  const { control, handleSubmit } = useForm();
-  const onSubmit = async (variables: any) => mutate(variables);
+  const { control, handleSubmit } = useForm({
+    resolver: zodResolver(schema),
+  });
+  const onSubmit = async (variables: FormValues) => {
+    console.log(variables);
+    mutate(variables);
+  };
 
   return (
     <>
