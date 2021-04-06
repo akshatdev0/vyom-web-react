@@ -28,8 +28,8 @@ const TextField = ({
 }: Props): JSX.Element => {
   const {
     field: { ref, ...rest },
-    // fieldState: { invalid, isTouched, isDirty },
-    // formState: { touchedFields, dirtyFields },
+    fieldState: { invalid },
+    // formState: { errors },
   } = useController({
     name,
     control,
@@ -42,15 +42,18 @@ const TextField = ({
     placeholder,
     autoComplete,
     innerRef: ref,
+    invalid,
     ...rest,
   };
 
   const input = <Input {...inputProps} />;
 
+  const formGroupClassName = invalid ? 'has-danger' : '';
+
   switch (labelType) {
     case 'text':
       return (
-        <FormGroup>
+        <FormGroup className={formGroupClassName}>
           <label className="form-control-label" htmlFor={name}>
             {labelValue}
           </label>
@@ -60,7 +63,7 @@ const TextField = ({
 
     case 'prepend-text':
       return (
-        <FormGroup>
+        <FormGroup className={formGroupClassName}>
           <InputGroup>
             <InputGroupAddon addonType="prepend">
               <InputGroupText>{labelValue}</InputGroupText>
@@ -72,7 +75,7 @@ const TextField = ({
 
     case 'append-text':
       return (
-        <FormGroup>
+        <FormGroup className={formGroupClassName}>
           <InputGroup>
             {input}
             <InputGroupAddon addonType="append">
@@ -84,7 +87,7 @@ const TextField = ({
 
     case 'prepend-icon':
       return (
-        <FormGroup>
+        <FormGroup className={formGroupClassName}>
           <InputGroup>
             <InputGroupAddon addonType="prepend">
               <InputGroupText>
@@ -98,7 +101,7 @@ const TextField = ({
 
     case 'append-icon':
       return (
-        <FormGroup>
+        <FormGroup className={formGroupClassName}>
           {input}
           <InputGroup>
             <InputGroupAddon addonType="append">
