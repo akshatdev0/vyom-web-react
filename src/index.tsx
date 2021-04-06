@@ -21,16 +21,24 @@ import { Provider as StoreProvider } from 'react-redux';
 
 import { composeStore } from './store';
 import App from './app';
+import { ClientProvider } from 'client';
+import { AuthProvider } from 'features/auth';
 
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'assets/plugins/nucleo/css/nucleo.css';
 import 'assets/scss/argon-dashboard-react.scss';
 
+const endpoint = process.env.REACT_APP_CLIENT_ENDPOINT;
+
 const store = composeStore();
 
 ReactDOM.render(
   <StoreProvider store={store}>
-    <App />
+    <ClientProvider endpoint={endpoint}>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </ClientProvider>
   </StoreProvider>,
   document.getElementById('root'),
 );

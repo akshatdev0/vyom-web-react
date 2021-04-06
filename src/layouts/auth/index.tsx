@@ -23,7 +23,6 @@ import { Container, Row, Col } from 'reactstrap';
 // core components
 import AuthTopbar from 'components/organisms/AuthTopbar';
 import AuthFooter from 'components/organisms/AuthFooter';
-import { Layout } from 'layouts';
 import { RouteParams } from 'types';
 import routes from './routes';
 
@@ -49,7 +48,7 @@ const AuthLayout: React.FunctionComponent = () => {
   }, [location]);
 
   const getRoutes = (routes: RouteParams[]) => {
-    return routes.map((prop, key) => <Route path={Layout.Auth + prop.path} component={prop.component} key={key} />);
+    return routes.map((prop, key) => <Route path={prop.path} component={prop.component} key={key} />);
   };
 
   return (
@@ -87,7 +86,7 @@ const AuthLayout: React.FunctionComponent = () => {
           <Row className="justify-content-center">
             <Switch>
               {getRoutes(routes)}
-              <Redirect from="*" to={Layout.Auth + '/login'} />
+              <Redirect from="*" to={'/login'} />
             </Switch>
           </Row>
         </Container>
