@@ -21,7 +21,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 // reactstrap components
 import { Card, CardHeader, CardBody, Container, Row, Col, UncontrolledTooltip } from 'reactstrap';
 // core components
-import Header from 'components/Headers/Header';
+import Header from 'components/organisms/Header';
 
 const Icons: React.FunctionComponent = () => {
   const [copiedText, setCopiedText] = useState('');
