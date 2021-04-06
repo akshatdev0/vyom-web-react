@@ -42,11 +42,11 @@ import {
 import { chartOptions, parseOptions } from 'variables/charts';
 import { chartExample1, chartExample2 } from 'variables/chartData';
 
-import Header from 'components/Headers/Header';
+import Header from 'components/organisms/Header';
 
 declare global {
   interface Window {
-    Chart: any;   // eslint-disable-line
+    Chart: any; // eslint-disable-line
   }
 }
 

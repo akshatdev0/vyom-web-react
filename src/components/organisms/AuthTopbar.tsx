@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 // reactstrap components
 import { UncontrolledCollapse, NavbarBrand, Navbar, NavItem, NavLink, Nav, Container, Row, Col } from 'reactstrap';
 
-const AdminNavbar: React.FunctionComponent = () => {
+const AdminTopbar: React.FunctionComponent = () => {
   return (
     <>
       <Navbar className="navbar-top navbar-horizontal navbar-dark" expand="md">
@@ -49,27 +49,16 @@ const AdminNavbar: React.FunctionComponent = () => {
             </div>
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink className="nav-link-icon" to="/" tag={Link}>
-                  <i className="ni ni-planet" />
-                  <span className="nav-link-inner--text">Dashboard</span>
-                </NavLink>
-              </NavItem>
-              <NavItem>
                 <NavLink className="nav-link-icon" to="/auth/register" tag={Link}>
                   <i className="ni ni-circle-08" />
-                  <span className="nav-link-inner--text">Register</span>
+                  <span className="nav-link-inner--text">Sign Up</span>
                 </NavLink>
               </NavItem>
+
               <NavItem>
-                <NavLink className="nav-link-icon" to="/auth/login" tag={Link}>
+                <NavLink className="nav-link-icon" to="/auth/sign-in" tag={Link}>
                   <i className="ni ni-key-25" />
-                  <span className="nav-link-inner--text">Login</span>
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className="nav-link-icon" to="/admin/user-profile" tag={Link}>
-                  <i className="ni ni-single-02" />
-                  <span className="nav-link-inner--text">Profile</span>
+                  <span className="nav-link-inner--text">Sign In</span>
                 </NavLink>
               </NavItem>
             </Nav>
@@ -80,4 +69,4 @@ const AdminNavbar: React.FunctionComponent = () => {
   );
 };
 
-export default AdminNavbar;
+export default AdminTopbar;
