@@ -40,6 +40,7 @@ const TextField = ({
   labelValue,
   placeholder,
   autoComplete,
+  disabled,
 }: Props): JSX.Element => {
   const {
     field: { ref, ...rest },
@@ -58,6 +59,7 @@ const TextField = ({
     autoComplete,
     innerRef: ref,
     invalid,
+    disabled,
     ...rest,
   };
 

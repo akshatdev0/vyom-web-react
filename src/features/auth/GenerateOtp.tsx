@@ -3,37 +3,24 @@ import React from 'react';
 // reactstrap components
 import { Button, Card, CardBody, Form, Row, Col } from 'reactstrap';
 
-import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 
 import { ErrorAlert, TextField } from 'components/atoms';
-import { mobileNumberValidator } from 'core/utils';
-import { useSignUpMutation } from 'generated/graphql';
+import { useSendOtpMutation } from 'generated/graphql';
 
 type FormValues = {
   mobileNumber: string;
 };
 
-const schema = z.object({
-  mobileNumber: z.string().nonempty({ message: 'Please enter your mobile number!' }).refine(mobileNumberValidator, {
-    message: 'Please enter a valid mobile number!',
-  }),
-});
-
-const CreateAccount: React.FunctionComponent = ({ setMobileNumber, nextStage }: any) => {
-  const { mutate, isLoading, isError, error } = useSignUpMutation({
-    onSuccess: (data, variables) => {
-      if (data?.signUp?.ok) {
-        setMobileNumber(variables.mobileNumber);
+const GenerateOtp: React.FunctionComponent = ({ mobileNumber, prevStage, nextStage }: any) => {
+  const { mutate, isLoading, isError, error } = useSendOtpMutation({
+    onSuccess: (data) => {
+      if (data?.sendOtp?.sent) {
         nextStage();
       }
     },
   });
-  const { control, handleSubmit } = useForm({
-    resolver: zodResolver(schema),
-  });
+  const { control, handleSubmit } = useForm();
   const onSubmit = async (variables: FormValues) => mutate(variables);
 
   return (
@@ -41,7 +28,7 @@ const CreateAccount: React.FunctionComponent = ({ setMobileNumber, nextStage }: 
       <Card className="bg-secondary shadow border-0">
         <CardBody className="px-lg-5 py-lg-5">
           <div className="text-center text-muted mb-4">
-            <small>Sign up using mobile number</small>
+            <small>Generate OTP</small>
           </div>
           <ErrorAlert isError={isError} error={error} />
           <Form role="form" onSubmit={handleSubmit(onSubmit)}>
@@ -52,11 +39,13 @@ const CreateAccount: React.FunctionComponent = ({ setMobileNumber, nextStage }: 
               labelValue="ni ni-mobile-button"
               placeholder="Mobile Number"
               autoComplete="username"
+              disabled
+              defaultValue={mobileNumber}
               control={control}
             />
             <div className="text-center">
               <Button className="my-2" color="primary" type="submit" disabled={isLoading}>
-                Next
+                Send
               </Button>
             </div>
           </Form>
@@ -64,13 +53,13 @@ const CreateAccount: React.FunctionComponent = ({ setMobileNumber, nextStage }: 
       </Card>
       <Row className="mt-3">
         <Col xs="6">
-          <Link className="text-light" to="/auth/sign-in">
-            <small>Sign in instead</small>
-          </Link>
+          <a className="text-light" href="#" onClick={() => prevStage()}>
+            <small>Change Mobile Number</small>
+          </a>
         </Col>
       </Row>
     </>
   );
 };
 
-export default CreateAccount;
+export default GenerateOtp;
