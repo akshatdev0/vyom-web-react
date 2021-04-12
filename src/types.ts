@@ -16,9 +16,13 @@
 
 */
 
+import { SignInMutation } from 'generated/graphql';
+
 export type RouteParams = {
   path: string;
   name: string;
   icon: string;
   component: React.FC;
 };
+
+export type AuthUserTokenPayload = SignInMutation['signIn'];

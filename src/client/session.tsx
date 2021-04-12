@@ -1,13 +1,13 @@
-import { SignInMutation } from 'generated/graphql';
+import { AuthUserTokenPayload } from 'types';
 
-export const createSession = (data: SignInMutation): void => {
+export const setSession = (data: AuthUserTokenPayload): void => {
   if (sessionStorage) {
     sessionStorage.clear();
-    if (data?.signIn?.jwt) {
-      sessionStorage.setItem('token', data.signIn.jwt);
+    if (data?.jwt) {
+      sessionStorage.setItem('token', data.jwt);
     }
-    if (data?.signIn?.user) {
-      sessionStorage.setItem('user', JSON.stringify(data.signIn.user));
+    if (data?.user) {
+      sessionStorage.setItem('user', JSON.stringify(data.user));
     }
   } else {
     throw new Error(`'SessionStorage' is not available.`);
@@ -22,7 +22,7 @@ export const clearSession = (): void => {
   }
 };
 
-export const getSession = (): SignInMutation => {
+export const getSession = (): AuthUserTokenPayload => {
   if (sessionStorage) {
     const token = sessionStorage.getItem('token');
     const user = sessionStorage.getItem('user');
@@ -30,10 +30,8 @@ export const getSession = (): SignInMutation => {
       throw new Error('Invalid session!');
     }
     return {
-      signIn: {
-        jwt: token,
-        user: JSON.parse(user),
-      },
+      jwt: token,
+      user: JSON.parse(user),
     };
   } else {
     throw new Error(`'SessionStorage' is not available.`);
@@ -42,8 +40,8 @@ export const getSession = (): SignInMutation => {
 
 export const getSessionToken = (): string | null | undefined => {
   try {
-    const session: SignInMutation = getSession();
-    return session.signIn.jwt;
+    const session: AuthUserTokenPayload = getSession();
+    return session?.jwt;
   } catch (e) {
     return null;
   }
