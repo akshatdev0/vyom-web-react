@@ -84,7 +84,7 @@ const Login: React.FunctionComponent = () => {
               </FormGroup>
               <FormGroup>
                 <InputGroup className="input-group-alternative">
-                  <InputGroupAddon addonType="prepend">
+                  <InputGroupAddon addonType="append">
                     <InputGroupText>
                       <i className="ni ni-lock-circle-open" />
                     </InputGroupText>

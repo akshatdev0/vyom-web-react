@@ -17,22 +17,29 @@
 */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { Provider as StoreProvider } from 'react-redux';
+
+import { composeStore } from './store';
+import App from './app';
+import { ClientProvider } from 'client';
+import { AuthProvider } from 'features/auth';
 
 import 'assets/plugins/nucleo/css/nucleo.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'assets/scss/argon-dashboard-react.scss';
+import 'assets/css/custom/vyom.css';
 
-import AdminLayout from 'layouts/Admin';
-import AuthLayout from 'layouts/Auth';
+const endpoint = process.env.REACT_APP_CLIENT_ENDPOINT;
+
+const store = composeStore();
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Switch>
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Route path="/auth" render={() => <AuthLayout />} />
-      <Redirect from="/" to="/admin/index" />
-    </Switch>
-  </BrowserRouter>,
+  <StoreProvider store={store}>
+    <ClientProvider endpoint={endpoint}>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </ClientProvider>
+  </StoreProvider>,
   document.getElementById('root'),
 );
