@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // reactstrap components
 import { Col } from 'reactstrap';
 
-import { CreateAccount, GenerateOtp, VerifyAccount } from 'features/auth';
+import { CreateAccount, GenerateOtp, VerifyAccount, CreatePassword } from 'features/auth';
 
 export enum Stage {
   ACCOUNT_CREATION,
@@ -37,9 +37,9 @@ const StageComponent = (props: any) => {
       component = <VerifyAccount {...props} />;
       break;
 
-    // case Stage.PASSWORD_CREATION:
-    //   component = <CreatePassword />;
-    //   break;
+    case Stage.PASSWORD_CREATION:
+      component = <CreatePassword />;
+      break;
 
     default:
       component = <CreateAccount {...props} />;
