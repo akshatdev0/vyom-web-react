@@ -19,7 +19,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import { Layout, AuthLayout, AdminLayout, CompanyOwnerLayout } from 'layouts';
-import { useAuthState } from 'features/auth';
+import { useAuthState, Role } from 'features/auth';
 
 const AuthSwitch = (
   <Switch>
@@ -49,11 +49,11 @@ const App: React.FunctionComponent = () => {
   if (isSignedIn) {
     if (user?.role?.type) {
       switch (user.role.type) {
-        case 'platform_master_admin':
+        case Role.PlatformMasterAdmin:
           sw = AdminSwitch;
           break;
 
-        case 'company_owner':
+        case Role.CompanyOwner:
           sw = CompanyOwnerSwitch;
           break;
 
