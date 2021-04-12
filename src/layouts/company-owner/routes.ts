@@ -18,9 +18,7 @@
 import { RouteParams } from 'types';
 import Index from 'views/Index';
 import Profile from 'views/examples/Profile';
-import Maps from 'views/examples/Maps';
 import Tables from 'views/examples/Tables';
-import Icons from 'views/examples/Icons';
 
 const routes: RouteParams[] = [
   {
@@ -28,18 +26,6 @@ const routes: RouteParams[] = [
     name: 'Dashboard',
     icon: 'ni ni-tv-2 text-primary',
     component: Index,
-  },
-  {
-    path: '/icons',
-    name: 'Icons',
-    icon: 'ni ni-planet text-blue',
-    component: Icons,
-  },
-  {
-    path: '/maps',
-    name: 'Maps',
-    icon: 'ni ni-pin-3 text-orange',
-    component: Maps,
   },
   {
     path: '/user-profile',
