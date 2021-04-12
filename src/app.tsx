@@ -18,8 +18,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import { Layout, AuthLayout, AdminLayout } from 'layouts';
-import { useAuthState } from 'features/auth';
+import { Layout, AuthLayout, AdminLayout, CompanyOwnerLayout } from 'layouts';
+import { useAuthState, Role } from 'features/auth';
 
 const AuthSwitch = (
   <Switch>
@@ -35,12 +35,32 @@ const AdminSwitch = (
   </Switch>
 );
 
+const CompanyOwnerSwitch = (
+  <Switch>
+    <Route path={Layout.CompanyOwner} render={(props) => <CompanyOwnerLayout {...props} />} />
+    <Redirect from="/" to={Layout.CompanyOwner + '/index'} />
+  </Switch>
+);
+
 const App: React.FunctionComponent = () => {
-  const { isSignedIn } = useAuthState();
+  const { isSignedIn, user } = useAuthState();
 
   let sw = AuthSwitch;
   if (isSignedIn) {
-    sw = AdminSwitch;
+    if (user?.role?.type) {
+      switch (user.role.type) {
+        case Role.PlatformMasterAdmin:
+          sw = AdminSwitch;
+          break;
+
+        case Role.CompanyOwner:
+          sw = CompanyOwnerSwitch;
+          break;
+
+        default:
+          break;
+      }
+    }
   }
 
   return <BrowserRouter>{sw}</BrowserRouter>;
