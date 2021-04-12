@@ -45,7 +45,7 @@ const schema = z.object({
 const Login: React.FunctionComponent = () => {
   const { signIn } = useAuthState();
   const { mutate, isLoading, isError, error } = useSignInMutation({
-    onSuccess: async (data) => signIn(data),
+    onSuccess: async (data) => signIn(data.signIn),
   });
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(schema),

@@ -8,20 +8,17 @@ import { useForm } from 'react-hook-form';
 import { ErrorAlert, TextField } from 'components/atoms';
 import { useSendOtpMutation } from 'generated/graphql';
 
-type FormValues = {
-  mobileNumber: string;
-};
-
 const GenerateOtp: React.FunctionComponent = ({ mobileNumber, prevStage, nextStage }: any) => {
   const { mutate, isLoading, isError, error } = useSendOtpMutation({
     onSuccess: (data) => {
       if (data?.sendOtp?.sent) {
+        console.log(data);
         nextStage();
       }
     },
   });
   const { control, handleSubmit } = useForm();
-  const onSubmit = async (variables: FormValues) => mutate(variables);
+  const onSubmit = async () => mutate({ mobileNumber });
 
   return (
     <>
