@@ -22,7 +22,7 @@ const schema = z.object({
   }),
 });
 
-const CreateAccount: React.FunctionComponent = ({ setMobileNumber, nextStage }: any) => {
+const CreateAccount: React.FunctionComponent = ({ mobileNumber, setMobileNumber, nextStage }: any) => {
   const { mutate, isLoading, isError, error } = useSignUpMutation({
     onSuccess: (data, variables) => {
       if (data?.signUp?.ok) {
@@ -52,6 +52,7 @@ const CreateAccount: React.FunctionComponent = ({ setMobileNumber, nextStage }: 
               labelValue="ni ni-mobile-button"
               placeholder="Mobile Number"
               autoComplete="username"
+              defaultValue={mobileNumber}
               control={control}
             />
             <div className="text-center">
