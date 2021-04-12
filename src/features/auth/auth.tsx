@@ -1,26 +1,31 @@
 import React, { createContext, useContext, useEffect, useReducer } from 'react';
-import { clearSession, createSession, getSession } from 'client/session';
-import { SignInMutation } from 'generated/graphql';
+import { clearSession, setSession, getSession } from 'client/session';
+import { AuthUserTokenPayload } from 'types';
 
 type InternalState = {
   isLoading: boolean;
   isSignedIn: boolean;
+  isSignedOut: boolean;
+  sessionPending: boolean;
   sessionExists: boolean;
-  data: SignInMutation | null | undefined;
+  data: AuthUserTokenPayload | null | undefined;
 };
 
 type AuthState = {
   isLoading: boolean;
   isSignedIn: boolean;
-  user: SignInMutation['signIn']['user'] | null | undefined;
-  signIn: (payload: SignInMutation) => void;
+  isSignedOut: boolean;
+  user: AuthUserTokenPayload['user'] | null | undefined;
+  signIn: (payload: AuthUserTokenPayload) => void;
   signOut: () => void;
+  createSession: (payload: AuthUserTokenPayload) => void;
 };
 
 type AuthAction =
-  | { type: 'RESTORE'; payload: SignInMutation }
-  | { type: 'SIGN_IN'; payload: SignInMutation }
+  | { type: 'RESTORE'; payload: AuthUserTokenPayload }
+  | { type: 'SIGN_IN'; payload: AuthUserTokenPayload }
   | { type: 'SIGN_OUT' }
+  | { type: 'CREATE_SESSION'; payload: AuthUserTokenPayload }
   | { type: 'SESSION_CREATED' }
   | { type: 'SESSION_CLEARED' };
 
@@ -33,6 +38,8 @@ type AuthProviderProps = {
 const initialInternalState: InternalState = {
   isLoading: true,
   isSignedIn: false,
+  isSignedOut: true,
+  sessionPending: false,
   sessionExists: false,
   data: null,
 };
@@ -44,6 +51,8 @@ const reducer: AuthReducer = (prevState: InternalState, action: AuthAction) => {
         ...prevState,
         isLoading: false,
         isSignedIn: true,
+        isSignedOut: false,
+        sessionPending: false,
         sessionExists: true,
         data: action.payload,
       };
@@ -52,6 +61,8 @@ const reducer: AuthReducer = (prevState: InternalState, action: AuthAction) => {
         ...prevState,
         isLoading: false,
         isSignedIn: true,
+        isSignedOut: false,
+        sessionPending: true,
         data: action.payload,
       };
     case 'SIGN_OUT':
@@ -59,16 +70,27 @@ const reducer: AuthReducer = (prevState: InternalState, action: AuthAction) => {
         ...prevState,
         isLoading: false,
         isSignedIn: false,
+        isSignedOut: true,
+        sessionPending: false,
         data: null,
+      };
+    case 'CREATE_SESSION':
+      return {
+        ...prevState,
+        isLoading: false,
+        sessionPending: true,
+        data: action.payload,
       };
     case 'SESSION_CREATED':
       return {
         ...prevState,
+        sessionPending: false,
         sessionExists: true,
       };
     case 'SESSION_CLEARED':
       return {
         ...prevState,
+        sessionPending: false,
         sessionExists: false,
       };
   }
@@ -77,11 +99,13 @@ const reducer: AuthReducer = (prevState: InternalState, action: AuthAction) => {
 const useAuth = (): AuthState => {
   const [state, dispatch] = useReducer<AuthReducer>(reducer, initialInternalState);
 
-  const restore = (payload: SignInMutation) => dispatch({ type: 'RESTORE', payload });
+  const restore = (payload: AuthUserTokenPayload) => dispatch({ type: 'RESTORE', payload });
 
-  const signIn = (payload: SignInMutation) => dispatch({ type: 'SIGN_IN', payload });
+  const signIn = (payload: AuthUserTokenPayload) => dispatch({ type: 'SIGN_IN', payload });
 
   const signOut = () => dispatch({ type: 'SIGN_OUT' });
+
+  const createSession = (payload: AuthUserTokenPayload) => dispatch({ type: 'CREATE_SESSION', payload });
 
   const sessionCreated = () => dispatch({ type: 'SESSION_CREATED' });
 
@@ -89,51 +113,48 @@ const useAuth = (): AuthState => {
 
   // Restore Session on bootstrap
   useEffect(() => {
-    const restoreAsync = () => {
+    if (state.isSignedOut) {
       try {
         const session = getSession();
         restore(session);
       } catch (e) {
         signOut();
       }
-    };
-
-    if (!state.isSignedIn) {
-      restoreAsync();
     }
   }, []);
 
-  // Manage Session on SignIn or SignOut
+  // Create session if it is pending to be created
   useEffect(() => {
-    const manageSession = () => {
-      if (state.isSignedIn) {
-        if (!state.sessionExists) {
-          try {
-            if (state.data) {
-              createSession(state.data);
-              sessionCreated();
-            }
-          } catch (e) {
-            signOut();
+    if (state.sessionPending) {
+      if (!state.sessionExists) {
+        try {
+          if (state.data) {
+            setSession(state.data);
+            sessionCreated();
           }
-        }
-      } else {
-        if (state.sessionExists) {
-          clearSession();
-          sessionCleared();
+        } catch (e) {
+          signOut();
         }
       }
-    };
+    }
+  }, [state.sessionPending]);
 
-    manageSession();
-  }, [state.isSignedIn]);
+  // Clear session if signed out
+  useEffect(() => {
+    if (state.isSignedOut && state.sessionExists) {
+      clearSession();
+      sessionCleared();
+    }
+  }, [state.isSignedOut]);
 
   return {
     isLoading: state.isLoading,
     isSignedIn: state.isSignedIn,
-    user: state.data?.signIn.user,
+    isSignedOut: state.isSignedOut,
+    user: state.data?.user,
     signIn,
     signOut,
+    createSession,
   };
 };
 
