@@ -1,0 +1,23 @@
+overwrite: true
+schema: 'https://api.exilien.cloud/graphql'
+documents: 'src/**/*.graphql'
+generates:
+  src/generated/graphql.ts:
+    plugins:
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-document-nodes'
+      - 'typescript-react-query'
+    config:
+      fetcher:
+        func: 'client/fetcher#useFetcher'
+        isReactHook: true
+  src/generated/modules.d.ts:
+    plugins:
+      - 'typescript-graphql-files-modules'
+  ./graphql.schema.json:
+    plugins:
+      - 'introspection'
+hooks:
+  afterOneFileWrite:
+    - prettier --write
