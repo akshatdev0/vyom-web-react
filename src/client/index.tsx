@@ -1,6 +1,7 @@
 import React, { useContext, createContext } from 'react';
 import { QueryClient, QueryClientProvider, useQueryClient } from 'react-query';
 import { GraphQLClient } from 'graphql-request';
+import { getSessionToken } from './session';
 
 type Props = {
   endpoint: string | undefined;
@@ -33,7 +34,8 @@ const useGraphQLClient = (): GraphQLClient => {
     throw new Error('Client not created yet! Use ClientProvider endpoint prop to create one');
   }
 
-  // graphQLClient.setHeader("authorization", token ? `Bearer ${token}` : "");
+  const token = getSessionToken();
+  graphQLClient.setHeader('authorization', token ? `Bearer ${token}` : '');
 
   return graphQLClient;
 };

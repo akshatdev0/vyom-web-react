@@ -16,8 +16,8 @@
 
 */
 import { RouteParams } from 'types';
-import Register from 'views/examples/Register';
 import SignIn from 'views/SignIn';
+import SignUp from 'views/SignUp';
 
 const routes: RouteParams[] = [
   {
@@ -27,10 +27,10 @@ const routes: RouteParams[] = [
     component: SignIn,
   },
   {
-    path: '/register',
-    name: 'Register',
+    path: '/sign-up',
+    name: 'Sign Up',
     icon: 'ni ni-circle-08 text-pink',
-    component: Register,
+    component: SignUp,
   },
 ];
 
