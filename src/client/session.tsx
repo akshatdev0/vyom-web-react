@@ -38,10 +38,9 @@ export const getSession = (): AuthUserTokenPayload => {
   }
 };
 
-export const getSessionToken = (): string | null | undefined => {
+export const getSessionToken = (): string | null => {
   try {
-    const session: AuthUserTokenPayload = getSession();
-    return session?.jwt;
+    return sessionStorage.getItem('token');
   } catch (e) {
     return null;
   }

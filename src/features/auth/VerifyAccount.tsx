@@ -6,7 +6,7 @@ import { Button, Card, CardBody, Form, Row, Col } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 
 import { ErrorAlert, TextField } from 'components/atoms';
-import { useAuthState } from 'features/auth';
+import { useAuthState } from './auth';
 import { Stage } from 'views/SignUp';
 import { useSendOtpMutation, useVerifyMutation } from 'generated/graphql';
 
