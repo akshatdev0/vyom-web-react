@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
 // reactstrap components
-import { Col } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
+import { AuthHeader } from 'components/molecules';
 import { CreateAccount, GenerateOtp, VerifyAccount, CreatePassword } from 'features/auth';
 
 export enum Stage {
@@ -60,9 +61,19 @@ const SignUp: React.FunctionComponent = () => {
   };
 
   return (
-    <Col lg="5" md="7">
-      <StageComponent {...stageProps} />
-    </Col>
+    <>
+      <AuthHeader
+        title="Create an account"
+        lead="Use these awesome forms to sign in or create new account in your project for free."
+      />
+      <Container className="mt--8 pb-5">
+        <Row className="justify-content-center">
+          <Col lg="5" md="7">
+            <StageComponent {...stageProps} />
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 

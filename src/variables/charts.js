@@ -1,12 +1,11 @@
 /*!
 
 =========================================================
-* Argon Dashboard React - v1.2.0
+* Argon Dashboard PRO React - v1.2.0
 =========================================================
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
+* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
 * Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
 
 * Coded by Creative Tim
 
@@ -15,9 +14,13 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import colors from './colors';
-
+/* eslint-disable */
 const Chart = require('chart.js');
+// Only for demo purposes - return a random number to generate datasets
+var randomScalingFactor = function () {
+  return Math.round(Math.random() * 100);
+};
+
 //
 // Chart extension for making the bars rounded
 // Code from: https://codepen.io/jedtrow/full/ygRYgo
@@ -152,10 +155,37 @@ var fonts = {
   base: 'Open Sans',
 };
 
+// Colors
+var colors = {
+  gray: {
+    100: '#f6f9fc',
+    200: '#e9ecef',
+    300: '#dee2e6',
+    400: '#ced4da',
+    500: '#adb5bd',
+    600: '#8898aa',
+    700: '#525f7f',
+    800: '#32325d',
+    900: '#212529',
+  },
+  theme: {
+    default: '#172b4d',
+    primary: '#5e72e4',
+    secondary: '#f4f5f7',
+    info: '#11cdef',
+    success: '#2dce89',
+    danger: '#f5365c',
+    warning: '#fb6340',
+  },
+  black: '#12263F',
+  white: '#FFFFFF',
+  transparent: 'transparent',
+};
+
 // Methods
 
 // Chart.js global options
-function chartOptions() {   // eslint-disable-line
+function chartOptions() {
   // Options
   var options = {
     defaults: {
@@ -233,8 +263,8 @@ function chartOptions() {   // eslint-disable-line
       color: mode === 'dark' ? colors.gray[900] : colors.gray[300],
       drawBorder: false,
       drawTicks: false,
-      lineWidth: 0,
-      zeroLineWidth: 0,
+      lineWidth: 1,
+      zeroLineWidth: 1,
       zeroLineColor: mode === 'dark' ? colors.gray[900] : colors.gray[300],
       zeroLineBorderDash: [2],
       zeroLineBorderDashOffset: [2],
@@ -266,7 +296,7 @@ function chartOptions() {   // eslint-disable-line
 }
 
 // Parse global options
-function parseOptions(parent, options) {   // eslint-disable-line
+function parseOptions(parent, options) {
   for (var item in options) {
     if (typeof options[item] !== 'object') {
       parent[item] = options[item];
@@ -276,7 +306,320 @@ function parseOptions(parent, options) {   // eslint-disable-line
   }
 }
 
-export {
-  chartOptions, // used inside src/views/Index.js
-  parseOptions, // used inside src/views/Index.js
+// Example 1 of Chart inside src/views/dashboards/Dashboard.js
+let chartExample1 = {
+  options: {
+    scales: {
+      yAxes: [
+        {
+          gridLines: {
+            color: colors.gray[700],
+            zeroLineColor: colors.gray[700],
+          },
+          ticks: {
+            callback: function (value) {
+              if (!(value % 10)) {
+                return '$' + value + 'k';
+              }
+            },
+          },
+        },
+      ],
+    },
+    tooltips: {
+      callbacks: {
+        label: function (item, data) {
+          var label = data.datasets[item.datasetIndex].label || '';
+          var yLabel = item.yLabel;
+          var content = '';
+
+          if (data.datasets.length > 1) {
+            content += label;
+          }
+
+          content += '$' + yLabel + 'k';
+          return content;
+        },
+      },
+    },
+  },
+  data1: (canvas) => {
+    return {
+      labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      datasets: [
+        {
+          label: 'Performance',
+          data: [0, 20, 10, 30, 15, 40, 20, 60, 60],
+        },
+      ],
+    };
+  },
+  data2: (canvas) => {
+    return {
+      labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      datasets: [
+        {
+          label: 'Performance',
+          data: [0, 20, 5, 25, 10, 30, 15, 40, 40],
+        },
+      ],
+    };
+  },
+};
+
+// Example 2 of Chart inside src/views/dashboards/Dashboard.js and src/views/dashboards/Alternative.js and src/views/pages/Charts.js
+let chartExample2 = {
+  options: {
+    scales: {
+      yAxes: [
+        {
+          gridLines: {
+            color: colors.gray[200],
+            zeroLineColor: colors.gray[200],
+          },
+          ticks: {
+            callback: function (value) {
+              if (!(value % 10)) {
+                //return '$' + value + 'k'
+                return value;
+              }
+            },
+          },
+        },
+      ],
+    },
+    tooltips: {
+      callbacks: {
+        label: function (item, data) {
+          var label = data.datasets[item.datasetIndex].label || '';
+          var yLabel = item.yLabel;
+          var content = '';
+          if (data.datasets.length > 1) {
+            content += label;
+          }
+          content += yLabel;
+          return content;
+        },
+      },
+    },
+  },
+  data: {
+    labels: ['Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    datasets: [
+      {
+        label: 'Sales',
+        data: [25, 20, 30, 22, 17, 29],
+        maxBarThickness: 10,
+      },
+    ],
+  },
+};
+
+// Example 3 of Chart inside src/views/dashboards/Alternative.js and src/views/pages/Charts.js
+let chartExample3 = {
+  options: {
+    scales: {
+      yAxes: [
+        {
+          gridLines: {
+            color: colors.gray[200],
+            zeroLineColor: colors.gray[200],
+          },
+          ticks: {},
+        },
+      ],
+    },
+  },
+  data: {
+    labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    datasets: [
+      {
+        label: 'Performance',
+        data: [0, 20, 10, 30, 15, 40, 20, 60, 60],
+      },
+    ],
+  },
+};
+
+// Example 4 of Chart inside src/views/pages/Charts.js
+const chartExample4 = {
+  options: {
+    scales: {
+      yAxes: [
+        {
+          gridLines: {
+            color: colors.gray[200],
+            zeroLineColor: colors.gray[200],
+          },
+          ticks: {},
+        },
+      ],
+    },
+  },
+  data: {
+    labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    datasets: [
+      {
+        label: 'Performance',
+        data: [10, 18, 28, 23, 28, 40, 36, 46, 52],
+        pointRadius: 10,
+        pointHoverRadius: 15,
+        showLine: false,
+      },
+    ],
+  },
+};
+
+// Example 5 of Chart inside src/views/pages/Charts.js
+const chartExample5 = {
+  data: {
+    labels: ['Danger', 'Warning', 'Success', 'Primary', 'Info'],
+    datasets: [
+      {
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+        ],
+        backgroundColor: [
+          colors.theme['danger'],
+          colors.theme['warning'],
+          colors.theme['success'],
+          colors.theme['primary'],
+          colors.theme['info'],
+        ],
+        label: 'Dataset 1',
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    legend: {
+      position: 'top',
+    },
+    animation: {
+      animateScale: true,
+      animateRotate: true,
+    },
+  },
+};
+
+// Example 6 of Chart inside src/views/pages/Charts.js
+const chartExample6 = {
+  data: {
+    labels: ['Danger', 'Warning', 'Success', 'Primary', 'Info'],
+    datasets: [
+      {
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+        ],
+        backgroundColor: [
+          colors.theme['danger'],
+          colors.theme['warning'],
+          colors.theme['success'],
+          colors.theme['primary'],
+          colors.theme['info'],
+        ],
+        label: 'Dataset 1',
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    legend: {
+      position: 'top',
+    },
+    animation: {
+      animateScale: true,
+      animateRotate: true,
+    },
+  },
+};
+
+// Example 7 of Chart inside src/views/pages/Charts.js
+const chartExample7 = {
+  data: {
+    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    datasets: [
+      {
+        label: 'Dataset 1',
+        backgroundColor: colors.theme['danger'],
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+        ],
+        maxBarThickness: 10,
+      },
+      {
+        label: 'Dataset 2',
+        backgroundColor: colors.theme['primary'],
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+        ],
+        maxBarThickness: 10,
+      },
+      {
+        label: 'Dataset 3',
+        backgroundColor: colors.theme['success'],
+        data: [
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+          randomScalingFactor(),
+        ],
+        maxBarThickness: 10,
+      },
+    ],
+  },
+  options: {
+    tooltips: {
+      mode: 'index',
+      intersect: false,
+    },
+    responsive: true,
+    scales: {
+      xAxes: [
+        {
+          stacked: true,
+        },
+      ],
+      yAxes: [
+        {
+          stacked: true,
+        },
+      ],
+    },
+  },
+};
+
+module.exports = {
+  chartOptions, // used alonside with the chartExamples variables
+  parseOptions, // used alonside with the chartExamples variables
+  chartExample1, // used inside src/views/dashboards/Dashboard.js
+  chartExample2, // used inside src/views/dashboards/Dashboard.js and src/views/dashboards/Alternative.js and src/views/pages/Charts.js
+  chartExample3, // used inside src/views/dashboards/Alternative.js and src/views/pages/Charts.js
+  chartExample4, // used inside src/views/pages/Charts.js
+  chartExample5, // used inside src/views/pages/Charts.js
+  chartExample6, // used inside src/views/pages/Charts.js
+  chartExample7, // used inside src/views/pages/Charts.js
 };
