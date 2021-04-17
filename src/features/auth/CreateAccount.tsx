@@ -44,7 +44,7 @@ const CreateAccount: React.FunctionComponent = ({ mobileNumber, setMobileNumber,
             <small>Sign up using mobile number</small>
           </div>
           <ErrorAlert isError={isError} error={error} />
-          <Form role="form" onSubmit={handleSubmit(onSubmit)}>
+          <Form role="form" onSubmit={handleSubmit(onSubmit)} className="needs-validation" noValidate>
             <TextField
               name="mobileNumber"
               type="tel"
