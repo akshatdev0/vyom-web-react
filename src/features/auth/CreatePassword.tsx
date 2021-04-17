@@ -48,7 +48,7 @@ const CreatePassword: React.FunctionComponent = () => {
             <small>Sign up using mobile number</small>
           </div>
           <ErrorAlert isError={isError} error={error} />
-          <Form role="form" onSubmit={handleSubmit(onSubmit)}>
+          <Form role="form" onSubmit={handleSubmit(onSubmit)} className="needs-validation" noValidate>
             <TextField
               name="password"
               type="password"
