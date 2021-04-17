@@ -44,7 +44,7 @@ const VerifyAccount: React.FunctionComponent = ({ mobileNumber, nextStage, setSt
             <small>Enter OTP sent to '{mobileNumber}'</small>
           </div>
           <ErrorAlert isError={isError} error={error} />
-          <Form role="form" onSubmit={handleSubmit(onSubmit)}>
+          <Form role="form" onSubmit={handleSubmit(onSubmit)} className="needs-validation" noValidate>
             <TextField
               name="token"
               type="number"
