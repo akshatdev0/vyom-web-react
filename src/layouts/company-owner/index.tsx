@@ -16,70 +16,57 @@
 
 */
 import React, { useRef, RefObject } from 'react';
-import { useLocation, Route, Switch, Redirect, RouteComponentProps } from 'react-router-dom';
-// reactstrap components
-import { Container } from 'reactstrap';
+// react library for routing
+import { useLocation, Switch, Redirect } from 'react-router-dom';
 // core components
-import AdminTopbar from 'components/organisms/AdminTopbar';
-import AdminFooter from 'components/organisms/AdminFooter';
-import Sidebar from 'components/organisms/Sidebar';
-import { Layout } from 'layouts';
-import { RouteParams } from 'types';
-import routes from './routes';
+import { AdminTopbar, AdminFooter, Sidebar } from 'components/molecules';
+import { useToggleSidebar } from 'hooks';
+import { Layout, getRoutes } from 'layouts';
+import menu from './menu';
 
-const AdminLayout: React.FunctionComponent<RouteComponentProps> = (props: RouteComponentProps) => {
-  const mainContent: RefObject<HTMLDivElement> = useRef({}) as RefObject<HTMLDivElement>;
+const CompanyOwnerLayout: React.FunctionComponent = () => {
+  const [sidebarOpen, toggleSidebar] = useToggleSidebar(true);
   const location = useLocation();
+  const mainContentRef: RefObject<HTMLDivElement> = useRef({}) as RefObject<HTMLDivElement>;
 
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
     if (document.scrollingElement) {
       document.scrollingElement.scrollTop = 0;
     }
-    if (mainContent && mainContent.current) {
-      mainContent.current.scrollTop = 0;
+    if (mainContentRef && mainContentRef.current) {
+      mainContentRef.current.scrollTop = 0;
     }
   }, [location]);
 
-  const getRoutes = (routes: RouteParams[]) => {
-    return routes.map((prop, key) => (
-      <Route path={Layout.CompanyOwner + prop.path} component={prop.component} key={key} />
-    ));
-  };
-
-  const getBrandText = (path: string) => {
-    for (let i = 0; i < routes.length; i++) {
-      if (path.indexOf(Layout.CompanyOwner + routes[i].path) !== -1) {
-        return routes[i].name;
-      }
-    }
-    return '';
+  const getNavbarTheme = () => {
+    return 'dark';
   };
 
   return (
     <>
       <Sidebar
-        {...props}
         layout={Layout.CompanyOwner}
-        routes={routes}
+        menu={menu}
+        sidebarOpen={sidebarOpen}
+        toggleSidebar={toggleSidebar}
         logo={{
-          innerLink: Layout.CompanyOwner + '/index',
-          imgSrc: require('../../assets/img/brand/argon-react.png').default,
+          innerLink: '/',
+          imgSrc: require('assets/img/brand/argon-react.png').default,
           imgAlt: '...',
         }}
       />
-      <div className="main-content" ref={mainContent}>
-        <AdminTopbar {...props} brandText={getBrandText(props.location.pathname)} />
+      <div className="main-content" ref={mainContentRef}>
+        <AdminTopbar theme={getNavbarTheme()} sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
         <Switch>
-          {getRoutes(routes)}
-          <Redirect from="*" to={Layout.CompanyOwner + '/index'} />
+          {getRoutes(Layout.CompanyOwner, menu)}
+          <Redirect from="*" to="/company-owner/dashboard" />
         </Switch>
-        <Container fluid>
-          <AdminFooter />
-        </Container>
+        <AdminFooter />
       </div>
+      {sidebarOpen ? <div className="backdrop d-xl-none" onClick={toggleSidebar} /> : null}
     </>
   );
 };
 
-export default AdminLayout;
+export default CompanyOwnerLayout;

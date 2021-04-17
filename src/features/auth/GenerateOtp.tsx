@@ -28,7 +28,7 @@ const GenerateOtp: React.FunctionComponent = ({ mobileNumber, prevStage, nextSta
             <small>Generate OTP</small>
           </div>
           <ErrorAlert isError={isError} error={error} />
-          <Form role="form" onSubmit={handleSubmit(onSubmit)}>
+          <Form role="form" onSubmit={handleSubmit(onSubmit)} className="needs-validation" noValidate>
             <TextField
               name="mobileNumber"
               type="tel"

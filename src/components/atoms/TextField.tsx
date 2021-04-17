@@ -1,8 +1,8 @@
-import React from 'react';
-
+import React, { useState } from 'react';
+// nodejs library that concatenates classes
+import classnames from 'classnames';
 import { Control, useController, FieldName, FieldValues } from 'react-hook-form';
 import { FormGroup, Input, InputGroupAddon, InputGroupText, InputGroup } from 'reactstrap';
-import styled from 'styled-components';
 
 type InputProps = React.ComponentProps<typeof Input>;
 
@@ -17,20 +17,6 @@ type Props<TFieldValues extends FieldValues = FieldValues> = InputProps & {
   autoComplete?: string | undefined;
 };
 
-const NoError = styled.div`
-  margin-top: 0.05rem;
-  height: 15px;
-  max-height: 15px;
-  width: 5px;
-`;
-
-const Error = styled(NoError)`
-  width: auto;
-  padding-left: 0.325rem;
-  font-size: 0.725rem;
-  color: #fb6340;
-`;
-
 const TextField = ({
   name,
   control,
@@ -42,12 +28,14 @@ const TextField = ({
   autoComplete,
   disabled,
 }: Props): JSX.Element => {
+  const [focused, setFocused] = useState(false);
+
   const {
-    field: { ref, ...rest },
+    field: { ref, onBlur: onBlurCallback, ...rest },
     fieldState: { invalid },
     formState: { errors },
   } = useController({
-    name,
+    name: `${name}` as const,
     control,
     defaultValue,
   });
@@ -60,13 +48,21 @@ const TextField = ({
     innerRef: ref,
     invalid,
     disabled,
+    onFocus: () => setFocused(true),
+    onBlur: () => {
+      setFocused(false);
+      onBlurCallback();
+    },
     ...rest,
   };
 
-  const input = <Input {...inputProps} />;
-  const error = invalid ? <Error>{errors[name]?.message}</Error> : <NoError />;
+  const formGroupClassName = classnames('mb-3', {
+    focused,
+    'has-danger': invalid,
+  });
 
-  const formGroupClassName = 'mb-3 ' + (invalid ? 'has-danger' : '');
+  const input = <Input {...inputProps} />;
+  const error = invalid ? <div className="invalid-feedback">{errors[name]?.message}</div> : null;
 
   switch (labelType) {
     case 'text':
@@ -83,7 +79,7 @@ const TextField = ({
     case 'prepend-text':
       return (
         <FormGroup className={formGroupClassName}>
-          <InputGroup>
+          <InputGroup className="input-group-merge">
             <InputGroupAddon addonType="prepend">
               <InputGroupText>{labelValue}</InputGroupText>
             </InputGroupAddon>
@@ -96,7 +92,7 @@ const TextField = ({
     case 'append-text':
       return (
         <FormGroup className={formGroupClassName}>
-          <InputGroup>
+          <InputGroup className="input-group-merge">
             {input}
             <InputGroupAddon addonType="append">
               <InputGroupText>{labelValue}</InputGroupText>
@@ -109,7 +105,7 @@ const TextField = ({
     case 'prepend-icon':
       return (
         <FormGroup className={formGroupClassName}>
-          <InputGroup>
+          <InputGroup className="input-group-merge">
             <InputGroupAddon addonType="prepend">
               <InputGroupText>
                 <i className={labelValue} />
@@ -125,7 +121,7 @@ const TextField = ({
       return (
         <FormGroup className={formGroupClassName}>
           {input}
-          <InputGroup>
+          <InputGroup className="input-group-merge">
             <InputGroupAddon addonType="append">
               <InputGroupText>
                 <i className={labelValue} />
