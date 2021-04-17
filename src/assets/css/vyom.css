@@ -1,0 +1,13 @@
+.has-danger.form-group .invalid-feedback {
+  display: block;
+}
+
+.rounded-circle,
+.avatar.rounded-circle > div {
+  border-radius: 50% !important;
+  overflow: hidden;
+}
+
+.avatar > div {
+  background-color: #fff;
+}
