@@ -1,5 +1,3 @@
-export { default as AdminFooter } from './AdminFooter';
-export { default as AdminTopbar } from './AdminTopbar';
 export { default as AlternativeHeader } from './AlternativeHeader';
 export { default as AuthFooter } from './AuthFooter';
 export { default as AuthHeader } from './AuthHeader';
@@ -11,4 +9,6 @@ export { default as ProTopbar } from './ProTopbar';
 export { default as RTLProfileHeader } from './RTLProfileHeader';
 export { default as Sidebar } from './Sidebar';
 export { default as SimpleHeader } from './SimpleHeader';
+export { default as UserFooter } from './UserFooter';
 export { default as UserHeader } from './UserHeader';
+export { default as UserTopbar } from './UserTopbar';

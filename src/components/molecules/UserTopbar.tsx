@@ -33,7 +33,6 @@ import {
   InputGroup,
   ListGroupItem,
   ListGroup,
-  Media,
   Navbar,
   NavItem,
   NavLink,
@@ -42,20 +41,27 @@ import {
   Row,
   Col,
 } from 'reactstrap';
-import Jdenticon from 'react-jdenticon';
 
-import { useAuthState } from 'features/auth';
+import UserAccountMenu from './UserAccountMenu';
+import { Navigation } from 'core/navigation';
 
 type Props = {
+  // The layout for which this menu will be used
+  layout: string;
   theme: string;
   sidebarOpen: boolean;
   toggleSidebar: () => void;
+  // navigation which will be displayed inside the component
+  accountMenu: Navigation;
 };
 
-const AdminTopbar: React.FunctionComponent<Props> = ({ theme = 'dark', sidebarOpen = false, toggleSidebar }: Props) => {
-  const { signOut, user } = useAuthState();
-  const name = user ? user.firstName + ' ' + user.lastName : '<unnamed>';
-
+const UserTopbar: React.FunctionComponent<Props> = ({
+  theme = 'dark',
+  sidebarOpen = false,
+  toggleSidebar,
+  layout,
+  accountMenu: navigation,
+}: Props) => {
   // function that on mobile devices makes the search open
   const openSearch = () => {
     document.body.classList.add('g-navbar-search-showing');
@@ -343,46 +349,7 @@ const AdminTopbar: React.FunctionComponent<Props> = ({ theme = 'dark', sidebarOp
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
-            <Nav className="align-items-center ml-auto ml-md-0" navbar>
-              <UncontrolledDropdown nav>
-                <DropdownToggle className="nav-link pr-0" color="" tag="a">
-                  <Media className="align-items-center">
-                    <span className="avatar avatar-sm rounded-circle">
-                      <Jdenticon size="36" value={user?.mobileNumber} />
-                    </span>
-                    <Media className="ml-2 d-none d-lg-block">
-                      <span className="mb-0 text-sm font-weight-bold">{name}</span>
-                    </Media>
-                  </Media>
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem className="noti-title" header tag="div">
-                    <h6 className="text-overflow m-0">Welcome!</h6>
-                  </DropdownItem>
-                  <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                    <i className="ni ni-single-02" />
-                    <span>My profile</span>
-                  </DropdownItem>
-                  <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                    <i className="ni ni-settings-gear-65" />
-                    <span>Settings</span>
-                  </DropdownItem>
-                  <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                    <i className="ni ni-calendar-grid-58" />
-                    <span>Activity</span>
-                  </DropdownItem>
-                  <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-                    <i className="ni ni-support-16" />
-                    <span>Support</span>
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem onClick={signOut}>
-                    <i className="ni ni-user-run" />
-                    <span>Sign Out</span>
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </Nav>
+            <UserAccountMenu layout={layout} navigation={navigation} />
           </Collapse>
         </Container>
       </Navbar>
@@ -390,4 +357,4 @@ const AdminTopbar: React.FunctionComponent<Props> = ({ theme = 'dark', sidebarOp
   );
 };
 
-export default AdminTopbar;
+export default UserTopbar;
