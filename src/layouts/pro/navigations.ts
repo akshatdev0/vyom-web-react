@@ -14,7 +14,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { MenuArray } from 'layouts';
+import { Navigation } from 'core/navigation';
 import Alternative from 'views/pro/pages/dashboards/Alternative.js';
 import Buttons from 'views/pro/pages/components/Buttons.js';
 import Calendar from 'views/pro/pages/Calendar.js';
@@ -41,7 +41,7 @@ import Validation from 'views/pro/pages/forms/Validation.js';
 import Vector from 'views/pro/pages/maps/Vector.js';
 import Widgets from 'views/pro/pages/Widgets.js';
 
-const menu: MenuArray = [
+const sidebarMenu: Navigation = [
   {
     identifier: 'dashboards',
     name: 'Dashboards',
@@ -267,4 +267,35 @@ const menu: MenuArray = [
   },
 ];
 
-export default menu;
+const userAccountMenu: Navigation = [
+  {
+    identifier: 'profile',
+    name: 'Profile',
+    icon: 'ni ni-single-02',
+    path: '/profile',
+    component: Profile,
+  },
+  {
+    identifier: 'settings',
+    name: 'Settings',
+    icon: 'ni ni-settings-gear-65',
+    path: '/settings',
+    component: Dashboard,
+  },
+  {
+    identifier: 'activity',
+    name: 'Activity',
+    icon: 'ni ni-calendar-grid-58',
+    path: '/activity',
+    component: Dashboard,
+  },
+  {
+    identifier: 'support',
+    name: 'Support',
+    icon: 'ni ni-support-16',
+    path: '/support',
+    component: Dashboard,
+  },
+];
+
+export { sidebarMenu, userAccountMenu };

@@ -15,11 +15,11 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { MenuArray } from 'layouts';
+import { Navigation } from 'core/navigation';
 import SignIn from 'views/SignIn';
 import SignUp from 'views/SignUp';
 
-const menu: MenuArray = [
+const views: Navigation = [
   {
     identifier: 'signIn',
     name: 'Sign In',
@@ -36,4 +36,4 @@ const menu: MenuArray = [
   },
 ];
 
-export default menu;
+export { views };
