@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { useMutation, UseMutationOptions } from 'react-query';
+import { useMutation, UseMutationOptions, useQuery, UseQueryOptions } from 'react-query';
 import { useFetcher } from 'client/fetcher';
 export type Maybe<T> = T | null;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -7314,6 +7314,73 @@ export type CreatePasswordMutation = { __typename?: 'Mutation' } & {
   >;
 };
 
+export type CompanyOwnerQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type CompanyOwnerQuery = { __typename?: 'Query' } & {
+  companyOwner?: Maybe<
+    { __typename?: 'CompanyOwner' } & Pick<CompanyOwner, 'id'> & {
+        user?: Maybe<
+          { __typename?: 'UsersPermissionsUser' } & Pick<
+            UsersPermissionsUser,
+            | 'id'
+            | 'firstName'
+            | 'lastName'
+            | 'gender'
+            | 'dateOfBirth'
+            | 'mobileNumber'
+            | 'alternateMobileNumber'
+            | 'email'
+          >
+        >;
+      }
+  >;
+};
+
+export type GetUserInfoQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type GetUserInfoQuery = { __typename?: 'Query' } & {
+  user?: Maybe<
+    { __typename?: 'UsersPermissionsUser' } & Pick<
+      UsersPermissionsUser,
+      'id' | 'firstName' | 'lastName' | 'mobileNumber'
+    >
+  >;
+};
+
+export type UpdateUserMutationVariables = Exact<{
+  id: Scalars['ID'];
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  gender?: Maybe<Enum_Userspermissionsuser_Gender>;
+  dateOfBirth?: Maybe<Scalars['Date']>;
+  alternateMobileNumber?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+}>;
+
+export type UpdateUserMutation = { __typename?: 'Mutation' } & {
+  updateUser?: Maybe<
+    { __typename?: 'updateUserPayload' } & {
+      user?: Maybe<
+        { __typename?: 'UsersPermissionsUser' } & Pick<
+          UsersPermissionsUser,
+          | 'id'
+          | 'firstName'
+          | 'lastName'
+          | 'gender'
+          | 'dateOfBirth'
+          | 'mobileNumber'
+          | 'alternateMobileNumber'
+          | 'email'
+        >
+      >;
+    }
+  >;
+};
+
 export const SignIn = gql`
   mutation SignIn($mobileNumber: String!, $password: String!) {
     signIn(input: { identifier: $mobileNumber, password: $password }) {
@@ -7443,6 +7510,69 @@ export const CreatePassword = gql`
             id
           }
         }
+      }
+    }
+  }
+`;
+export const CompanyOwner = gql`
+  query CompanyOwner($id: ID!) {
+    companyOwner(id: $id) {
+      id
+      user {
+        id
+        firstName
+        lastName
+        gender
+        dateOfBirth
+        mobileNumber
+        alternateMobileNumber
+        email
+      }
+    }
+  }
+`;
+export const GetUserInfo = gql`
+  query GetUserInfo($id: ID!) {
+    user(id: $id) {
+      id
+      firstName
+      lastName
+      mobileNumber
+    }
+  }
+`;
+export const UpdateUser = gql`
+  mutation UpdateUser(
+    $id: ID!
+    $firstName: String
+    $lastName: String
+    $gender: ENUM_USERSPERMISSIONSUSER_GENDER
+    $dateOfBirth: Date
+    $alternateMobileNumber: String
+    $email: String
+  ) {
+    updateUser(
+      input: {
+        where: { id: $id }
+        data: {
+          firstName: $firstName
+          lastName: $lastName
+          gender: $gender
+          dateOfBirth: $dateOfBirth
+          alternateMobileNumber: $alternateMobileNumber
+          email: $email
+        }
+      }
+    ) {
+      user {
+        id
+        firstName
+        lastName
+        gender
+        dateOfBirth
+        mobileNumber
+        alternateMobileNumber
+        email
       }
     }
   }
@@ -7614,5 +7744,75 @@ export const useCreatePasswordMutation = <TError = unknown, TContext = unknown>(
 ) =>
   useMutation<CreatePasswordMutation, TError, CreatePasswordMutationVariables, TContext>(
     useFetcher<CreatePasswordMutation, CreatePasswordMutationVariables>(CreatePasswordDocument),
+    options,
+  );
+export const CompanyOwnerDocument = `
+    query CompanyOwner($id: ID!) {
+  companyOwner(id: $id) {
+    id
+    user {
+      id
+      firstName
+      lastName
+      gender
+      dateOfBirth
+      mobileNumber
+      alternateMobileNumber
+      email
+    }
+  }
+}
+    `;
+export const useCompanyOwnerQuery = <TData = CompanyOwnerQuery, TError = unknown>(
+  variables: CompanyOwnerQueryVariables,
+  options?: UseQueryOptions<CompanyOwnerQuery, TError, TData>,
+) =>
+  useQuery<CompanyOwnerQuery, TError, TData>(
+    ['CompanyOwner', variables],
+    useFetcher<CompanyOwnerQuery, CompanyOwnerQueryVariables>(CompanyOwnerDocument).bind(null, variables),
+    options,
+  );
+export const GetUserInfoDocument = `
+    query GetUserInfo($id: ID!) {
+  user(id: $id) {
+    id
+    firstName
+    lastName
+    mobileNumber
+  }
+}
+    `;
+export const useGetUserInfoQuery = <TData = GetUserInfoQuery, TError = unknown>(
+  variables: GetUserInfoQueryVariables,
+  options?: UseQueryOptions<GetUserInfoQuery, TError, TData>,
+) =>
+  useQuery<GetUserInfoQuery, TError, TData>(
+    ['GetUserInfo', variables],
+    useFetcher<GetUserInfoQuery, GetUserInfoQueryVariables>(GetUserInfoDocument).bind(null, variables),
+    options,
+  );
+export const UpdateUserDocument = `
+    mutation UpdateUser($id: ID!, $firstName: String, $lastName: String, $gender: ENUM_USERSPERMISSIONSUSER_GENDER, $dateOfBirth: Date, $alternateMobileNumber: String, $email: String) {
+  updateUser(
+    input: {where: {id: $id}, data: {firstName: $firstName, lastName: $lastName, gender: $gender, dateOfBirth: $dateOfBirth, alternateMobileNumber: $alternateMobileNumber, email: $email}}
+  ) {
+    user {
+      id
+      firstName
+      lastName
+      gender
+      dateOfBirth
+      mobileNumber
+      alternateMobileNumber
+      email
+    }
+  }
+}
+    `;
+export const useUpdateUserMutation = <TError = unknown, TContext = unknown>(
+  options?: UseMutationOptions<UpdateUserMutation, TError, UpdateUserMutationVariables, TContext>,
+) =>
+  useMutation<UpdateUserMutation, TError, UpdateUserMutationVariables, TContext>(
+    useFetcher<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument),
     options,
   );

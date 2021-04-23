@@ -16,6 +16,15 @@
 
 */
 
-import { SignInMutation } from 'generated/graphql';
+import { SignInMutation, UsersPermissionsUser } from 'generated/graphql';
+
+export type Maybe<T> = T | null | undefined;
+
+export type Override<T1, T2> = Omit<T1, keyof T2> & T2;
 
 export type AuthUserTokenPayload = SignInMutation['signIn'];
+
+export type User = Pick<
+  UsersPermissionsUser,
+  'id' | 'firstName' | 'lastName' | 'dateOfBirth' | 'gender' | 'mobileNumber' | 'alternateMobileNumber' | 'email'
+>;

@@ -17,7 +17,7 @@
 */
 import React from 'react';
 
-import { UserLayout } from 'components/organisms';
+import { UserLayout } from 'components/templates';
 import { Layout } from 'layouts';
 import { sidebarMenu, userAccountMenu } from './navigations';
 

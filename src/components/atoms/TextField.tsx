@@ -4,12 +4,16 @@ import classnames from 'classnames';
 import { Control, useController, FieldName, FieldValues } from 'react-hook-form';
 import { FormGroup, Input, InputGroupAddon, InputGroupText, InputGroup } from 'reactstrap';
 
+import { Override } from 'types';
+
 type InputProps = React.ComponentProps<typeof Input>;
 
-type Props<TFieldValues extends FieldValues = FieldValues> = InputProps & {
+type Props<TFieldValues extends FieldValues = FieldValues> = Override<
+  InputProps,
+  { defaultValue?: string | number | string[] | undefined | null }
+> & {
   name: FieldName<TFieldValues>;
   control: Control<TFieldValues>;
-  defaultValue?: any;
   errorText?: any;
   labelType?: 'text' | 'prepend-text' | 'append-text' | 'prepend-icon' | 'append-icon';
   labelValue: string;
@@ -37,7 +41,7 @@ const TextField = ({
   } = useController({
     name: `${name}` as const,
     control,
-    defaultValue,
+    defaultValue: defaultValue || '',
   });
 
   const inputProps: InputProps = {

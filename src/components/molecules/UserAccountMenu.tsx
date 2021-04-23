@@ -6,6 +6,7 @@ import Jdenticon from 'react-jdenticon';
 
 import { useAuthState } from 'features/auth';
 import { isMenuItem, Navigation } from 'core/navigation';
+import { useGetUserInfoQuery } from 'generated/graphql';
 
 type Props = {
   // The layout for which this menu will be used
@@ -15,7 +16,9 @@ type Props = {
 };
 
 const UserAccountMenu: React.FunctionComponent<Props> = ({ layout, navigation }: Props) => {
-  const { signOut, user } = useAuthState();
+  const { signOut, user: sessionUser } = useAuthState();
+  const id = sessionUser?.id;
+  const { data: { user } = {} } = useGetUserInfoQuery({ id: id || '' }, { enabled: !!id });
   const name = user ? user.firstName + ' ' + user.lastName : '<unnamed>';
 
   // this function creates the links and collapses that appear in the sidebar (left menu)
