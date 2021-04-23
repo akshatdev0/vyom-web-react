@@ -15,13 +15,14 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useRef, RefObject } from 'react';
+import React from 'react';
 // react library for routing
-import { useLocation, Switch, Redirect } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 // core components
 import { getRoutes, Navigation } from 'core/navigation';
+import { NotificationContainer } from 'core/notification';
 import { UserTopbar, UserFooter, Sidebar } from 'components/molecules';
-import { useToggleSidebar } from 'hooks';
+import { useScrollTop, useToggleSidebar } from 'hooks';
 
 type Props = {
   // The layout for which this sidebar will be used
@@ -40,19 +41,8 @@ const UserLayout: React.FunctionComponent<Props> = ({
   userAccountMenu,
   navbarTheme = 'dark',
 }: Props) => {
+  const mainContentRef = useScrollTop();
   const [sidebarOpen, toggleSidebar] = useToggleSidebar(true);
-  const location = useLocation();
-  const mainContentRef: RefObject<HTMLDivElement> = useRef({}) as RefObject<HTMLDivElement>;
-
-  React.useEffect(() => {
-    document.documentElement.scrollTop = 0;
-    if (document.scrollingElement) {
-      document.scrollingElement.scrollTop = 0;
-    }
-    if (mainContentRef && mainContentRef.current) {
-      mainContentRef.current.scrollTop = 0;
-    }
-  }, [location]);
 
   return (
     <>
@@ -68,18 +58,20 @@ const UserLayout: React.FunctionComponent<Props> = ({
         }}
       />
       <div className="main-content" ref={mainContentRef}>
-        <UserTopbar
-          layout={layout}
-          theme={navbarTheme}
-          sidebarOpen={sidebarOpen}
-          toggleSidebar={toggleSidebar}
-          accountMenu={userAccountMenu}
-        />
-        <Switch>
-          {getRoutes(layout, sidebarMenu, userAccountMenu)}
-          <Redirect from="*" to={layout + '/dashboard'} />
-        </Switch>
-        <UserFooter />
+        <NotificationContainer place="br">
+          <UserTopbar
+            layout={layout}
+            theme={navbarTheme}
+            sidebarOpen={sidebarOpen}
+            toggleSidebar={toggleSidebar}
+            accountMenu={userAccountMenu}
+          />
+          <Switch>
+            {getRoutes(layout, sidebarMenu, userAccountMenu)}
+            <Redirect from="*" to={layout + '/dashboard'} />
+          </Switch>
+          <UserFooter />
+        </NotificationContainer>
       </div>
       {sidebarOpen ? <div className="backdrop d-xl-none" onClick={toggleSidebar} /> : null}
     </>
