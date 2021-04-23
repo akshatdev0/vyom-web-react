@@ -22,6 +22,7 @@ declare module '*/user.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const GetUserInfo: DocumentNode;
+  export const User: DocumentNode;
   export const UpdateUser: DocumentNode;
 
   export default defaultDocument;

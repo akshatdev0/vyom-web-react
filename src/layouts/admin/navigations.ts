@@ -22,8 +22,9 @@ import Cards from 'views/pro/pages/components/Cards.js';
 import Grid from 'views/pro/pages/components/Grid.js';
 import Icons from 'views/pro/pages/components/Icons.js';
 import Notifications from 'views/pro/pages/components/Notifications.js';
-import Profile from 'views/pro/pages/examples/Profile.js';
 import Typography from 'views/pro/pages/components/Typography.js';
+
+import { AdminProfile } from 'features/admin';
 
 const sidebarMenu: Navigation = [
   {
@@ -91,7 +92,7 @@ const userAccountMenu: Navigation = [
     name: 'Profile',
     icon: 'ni ni-single-02',
     path: '/profile',
-    component: Profile,
+    component: AdminProfile,
   },
   {
     identifier: 'settings',
