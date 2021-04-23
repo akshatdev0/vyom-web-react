@@ -7,6 +7,19 @@ query GetUserInfo($id: ID!) {
   }
 }
 
+query User($id: ID!) {
+  user(id: $id) {
+    id
+    firstName
+    lastName
+    gender
+    dateOfBirth
+    mobileNumber
+    alternateMobileNumber
+    email
+  }
+}
+
 mutation UpdateUser(
   $id: ID!
   $firstName: String

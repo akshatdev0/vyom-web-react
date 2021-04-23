@@ -7351,6 +7351,19 @@ export type GetUserInfoQuery = { __typename?: 'Query' } & {
   >;
 };
 
+export type UserQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type UserQuery = { __typename?: 'Query' } & {
+  user?: Maybe<
+    { __typename?: 'UsersPermissionsUser' } & Pick<
+      UsersPermissionsUser,
+      'id' | 'firstName' | 'lastName' | 'gender' | 'dateOfBirth' | 'mobileNumber' | 'alternateMobileNumber' | 'email'
+    >
+  >;
+};
+
 export type UpdateUserMutationVariables = Exact<{
   id: Scalars['ID'];
   firstName?: Maybe<Scalars['String']>;
@@ -7538,6 +7551,20 @@ export const GetUserInfo = gql`
       firstName
       lastName
       mobileNumber
+    }
+  }
+`;
+export const User = gql`
+  query User($id: ID!) {
+    user(id: $id) {
+      id
+      firstName
+      lastName
+      gender
+      dateOfBirth
+      mobileNumber
+      alternateMobileNumber
+      email
     }
   }
 `;
@@ -7789,6 +7816,29 @@ export const useGetUserInfoQuery = <TData = GetUserInfoQuery, TError = unknown>(
   useQuery<GetUserInfoQuery, TError, TData>(
     ['GetUserInfo', variables],
     useFetcher<GetUserInfoQuery, GetUserInfoQueryVariables>(GetUserInfoDocument).bind(null, variables),
+    options,
+  );
+export const UserDocument = `
+    query User($id: ID!) {
+  user(id: $id) {
+    id
+    firstName
+    lastName
+    gender
+    dateOfBirth
+    mobileNumber
+    alternateMobileNumber
+    email
+  }
+}
+    `;
+export const useUserQuery = <TData = UserQuery, TError = unknown>(
+  variables: UserQueryVariables,
+  options?: UseQueryOptions<UserQuery, TError, TData>,
+) =>
+  useQuery<UserQuery, TError, TData>(
+    ['User', variables],
+    useFetcher<UserQuery, UserQueryVariables>(UserDocument).bind(null, variables),
     options,
   );
 export const UpdateUserDocument = `
