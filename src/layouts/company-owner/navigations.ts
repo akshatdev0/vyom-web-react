@@ -20,12 +20,13 @@ import Components from 'views/pro/pages/forms/Components.js';
 import Dashboard from 'views/pro/pages/dashboards/Dashboard.js';
 import Elements from 'views/pro/pages/forms/Elements.js';
 import Google from 'views/pro/pages/maps/Google.js';
-import Profile from 'views/pro/pages/examples/Profile.js';
 import ReactBSTables from 'views/pro/pages/tables/ReactBSTables.js';
 import Sortable from 'views/pro/pages/tables/Sortable.js';
 import Tables from 'views/pro/pages/tables/Tables.js';
 import Validation from 'views/pro/pages/forms/Validation.js';
 import Vector from 'views/pro/pages/maps/Vector.js';
+
+import { CompanyOwnerProfile } from 'features/company-owner';
 
 const sidebarMenu: Navigation = [
   {
@@ -123,7 +124,7 @@ const userAccountMenu: Navigation = [
     name: 'Profile',
     icon: 'ni ni-single-02',
     path: '/profile',
-    component: Profile,
+    component: CompanyOwnerProfile,
   },
   {
     identifier: 'settings',

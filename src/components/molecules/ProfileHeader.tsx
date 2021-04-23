@@ -14,19 +14,24 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-/* eslint-disable */
 import React from 'react';
 
 // reactstrap components
-import { Button, Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
-function ProfileHeader() {
+import { Maybe, User } from 'types';
+
+type Props = {
+  user: Maybe<Partial<Omit<User, 'id'>>>;
+};
+
+const ProfileHeader: React.FunctionComponent<Props> = ({ user }: Props) => {
   return (
     <>
       <div
-        className="header pb-6 d-flex align-items-center"
+        className="header d-flex align-items-center"
         style={{
-          minHeight: '500px',
+          minHeight: '150px',
           backgroundImage: 'url("' + require('assets/img/theme/profile-cover.jpg').default + '")',
           backgroundSize: 'cover',
           backgroundPosition: 'center top',
@@ -34,23 +39,26 @@ function ProfileHeader() {
       >
         <span className="mask bg-gradient-info opacity-8" />
 
-        <Container className="d-flex align-items-center" fluid>
+        <Container className="" fluid>
           <Row>
-            <Col lg="7" md="10">
-              <h1 className="display-2 text-white">Hello Jesse</h1>
-              <p className="text-white mt-0 mb-5">
-                This is your profile page. You can see the progress you've made with your work and manage your projects
-                or assigned tasks
-              </p>
-              <Button className="btn-neutral" color="default" href="#pablo" onClick={(e) => e.preventDefault()}>
+            <Col md="8" lg="10">
+              <h1 className="display-2 text-white">Hello {user?.firstName}</h1>
+            </Col>
+            {/* <Col md="4" lg="2">
+              <Button
+                className="float-md-right btn-neutral"
+                color="default"
+                href="#pablo"
+                onClick={(e) => e.preventDefault()}
+              >
                 Edit profile
               </Button>
-            </Col>
+            </Col> */}
           </Row>
         </Container>
       </div>
     </>
   );
-}
+};
 
 export default ProfileHeader;

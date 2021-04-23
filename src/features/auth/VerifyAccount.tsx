@@ -8,11 +8,7 @@ import { useForm } from 'react-hook-form';
 import { ErrorAlert, TextField } from 'components/atoms';
 import { useAuthState } from './auth';
 import { Stage } from 'views/SignUp';
-import { useSendOtpMutation, useVerifyMutation } from 'generated/graphql';
-
-type FormValues = {
-  token: string;
-};
+import { useSendOtpMutation, useVerifyMutation, VerifyMutationVariables } from 'generated/graphql';
 
 const VerifyAccount: React.FunctionComponent = ({ mobileNumber, nextStage, setStage }: any) => {
   const { createSession } = useAuthState();
@@ -34,7 +30,7 @@ const VerifyAccount: React.FunctionComponent = ({ mobileNumber, nextStage, setSt
   const isLoading = sendOtpMutation.isLoading || verifyMutation.isLoading;
   const { isError, error } = verifyMutation;
   const { control, handleSubmit } = useForm();
-  const onSubmit = async (variables: FormValues) => verifyMutation.mutate({ mobileNumber, ...variables });
+  const onSubmit = async (variables: VerifyMutationVariables) => verifyMutation.mutate({ ...variables, mobileNumber });
 
   return (
     <>
