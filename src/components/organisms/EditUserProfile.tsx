@@ -11,7 +11,7 @@ import * as v from 'validations';
 import { ErrorAlert } from 'components/atoms';
 import { AccountInformation, PersonalInformation } from 'components/molecules';
 import { Maybe, User } from 'types';
-import useFillForm from 'hooks/useFillForm';
+import { useFillForm } from 'hooks';
 import { UpdateUserMutation, UpdateUserMutationVariables } from 'generated/graphql';
 
 type Props = {

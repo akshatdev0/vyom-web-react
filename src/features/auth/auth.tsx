@@ -167,13 +167,13 @@ const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
 };
 
 const useAuthState = (): AuthState => {
-  const state = useContext(AuthContext);
+  const value = useContext(AuthContext);
 
-  if (!state) {
-    throw new Error('No AuthContext set, use AuthProvider to set one');
+  if (!value) {
+    throw new Error('No AuthContext set');
   }
 
-  return state;
+  return value;
 };
 
 export { AuthProvider, useAuthState };
