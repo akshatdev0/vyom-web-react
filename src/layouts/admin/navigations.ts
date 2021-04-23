@@ -15,7 +15,7 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { MenuArray } from 'layouts';
+import { Navigation } from 'core/navigation';
 import Alternative from 'views/pro/pages/dashboards/Alternative.js';
 import Buttons from 'views/pro/pages/components/Buttons.js';
 import Cards from 'views/pro/pages/components/Cards.js';
@@ -24,7 +24,9 @@ import Icons from 'views/pro/pages/components/Icons.js';
 import Notifications from 'views/pro/pages/components/Notifications.js';
 import Typography from 'views/pro/pages/components/Typography.js';
 
-const menu: MenuArray = [
+import { AdminProfile } from 'features/admin';
+
+const sidebarMenu: Navigation = [
   {
     identifier: 'dashboard',
     name: 'Dashboard',
@@ -84,4 +86,35 @@ const menu: MenuArray = [
   },
 ];
 
-export default menu;
+const userAccountMenu: Navigation = [
+  {
+    identifier: 'profile',
+    name: 'Profile',
+    icon: 'ni ni-single-02',
+    path: '/profile',
+    component: AdminProfile,
+  },
+  {
+    identifier: 'settings',
+    name: 'Settings',
+    icon: 'ni ni-settings-gear-65',
+    path: '/settings',
+    component: Alternative,
+  },
+  {
+    identifier: 'activity',
+    name: 'Activity',
+    icon: 'ni ni-calendar-grid-58',
+    path: '/activity',
+    component: Alternative,
+  },
+  {
+    identifier: 'support',
+    name: 'Support',
+    icon: 'ni ni-support-16',
+    path: '/support',
+    component: Alternative,
+  },
+];
+
+export { sidebarMenu, userAccountMenu };

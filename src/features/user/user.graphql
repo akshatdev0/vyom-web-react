@@ -1,0 +1,56 @@
+query GetUserInfo($id: ID!) {
+  user(id: $id) {
+    id
+    firstName
+    lastName
+    mobileNumber
+  }
+}
+
+query User($id: ID!) {
+  user(id: $id) {
+    id
+    firstName
+    lastName
+    gender
+    dateOfBirth
+    mobileNumber
+    alternateMobileNumber
+    email
+  }
+}
+
+mutation UpdateUser(
+  $id: ID!
+  $firstName: String
+  $lastName: String
+  $gender: ENUM_USERSPERMISSIONSUSER_GENDER
+  $dateOfBirth: Date
+  $alternateMobileNumber: String
+  $email: String
+) {
+  updateUser(
+    input: {
+      where: { id: $id }
+      data: {
+        firstName: $firstName
+        lastName: $lastName
+        gender: $gender
+        dateOfBirth: $dateOfBirth
+        alternateMobileNumber: $alternateMobileNumber
+        email: $email
+      }
+    }
+  ) {
+    user {
+      id
+      firstName
+      lastName
+      gender
+      dateOfBirth
+      mobileNumber
+      alternateMobileNumber
+      email
+    }
+  }
+}

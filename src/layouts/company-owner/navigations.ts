@@ -15,18 +15,20 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import { MenuArray } from 'layouts';
+import { Navigation } from 'core/navigation';
 import Components from 'views/pro/pages/forms/Components.js';
 import Dashboard from 'views/pro/pages/dashboards/Dashboard.js';
 import Elements from 'views/pro/pages/forms/Elements.js';
+import Google from 'views/pro/pages/maps/Google.js';
 import ReactBSTables from 'views/pro/pages/tables/ReactBSTables.js';
 import Sortable from 'views/pro/pages/tables/Sortable.js';
 import Tables from 'views/pro/pages/tables/Tables.js';
 import Validation from 'views/pro/pages/forms/Validation.js';
-import Google from 'views/pro/pages/maps/Google.js';
 import Vector from 'views/pro/pages/maps/Vector.js';
 
-const menu: MenuArray = [
+import { CompanyOwnerProfile } from 'features/company-owner';
+
+const sidebarMenu: Navigation = [
   {
     identifier: 'dashboard',
     name: 'Dashboard',
@@ -116,4 +118,35 @@ const menu: MenuArray = [
   },
 ];
 
-export default menu;
+const userAccountMenu: Navigation = [
+  {
+    identifier: 'profile',
+    name: 'Profile',
+    icon: 'ni ni-single-02',
+    path: '/profile',
+    component: CompanyOwnerProfile,
+  },
+  {
+    identifier: 'settings',
+    name: 'Settings',
+    icon: 'ni ni-settings-gear-65',
+    path: '/settings',
+    component: Dashboard,
+  },
+  {
+    identifier: 'activity',
+    name: 'Activity',
+    icon: 'ni ni-calendar-grid-58',
+    path: '/activity',
+    component: Dashboard,
+  },
+  {
+    identifier: 'support',
+    name: 'Support',
+    icon: 'ni ni-support-16',
+    path: '/support',
+    component: Dashboard,
+  },
+];
+
+export { sidebarMenu, userAccountMenu };

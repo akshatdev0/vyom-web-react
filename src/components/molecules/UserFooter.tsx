@@ -21,7 +21,7 @@ import React from 'react';
 // reactstrap components
 import { NavItem, NavLink, Nav, Container, Row, Col } from 'reactstrap';
 
-function AdminFooter() {
+function UserFooter() {
   return (
     <>
       <Container fluid>
@@ -66,4 +66,4 @@ function AdminFooter() {
   );
 }
 
-export default AdminFooter;
+export default UserFooter;
