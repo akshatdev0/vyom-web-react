@@ -18,8 +18,6 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import { Layout } from './layout';
-
 type AbstractMenuProps = {
   identifier: string;
   name: string;
@@ -51,9 +49,9 @@ export type SubMenuItem = AbstractMenuProps &
     initial: string;
   };
 
-export type MenuArray = Array<Menu | MenuItem>;
+export type Navigation = Array<Menu | MenuItem>;
 
-export type SubMenuArray = Array<SubMenu | SubMenuItem>;
+export type SubNavigation = Array<SubMenu | SubMenuItem>;
 
 function hasComponent(v: MenuItem | SubMenu | SubMenuItem): v is MenuItem | SubMenuItem {
   return (v as AbstractMenuItem).component !== undefined;
@@ -75,21 +73,21 @@ export function isSubMenuItem(v: MenuItem | SubMenu | SubMenuItem): v is SubMenu
   return (v as SubMenuItem).initial !== undefined && (v as AbstractMenuItem).component !== undefined;
 }
 
-export const getRoutes = (
-  layout: Layout,
-  menu: Array<MenuItem | Menu> | Array<SubMenu | SubMenuItem> | undefined,
-): any => {
+export const getRoutes = (layout: string, ...navigations: Array<any>): any => {
   const routes: Array<any> = [];
-  if (menu) {
-    for (let i = 0; i < menu.length; i++) {
-      const view = menu[i];
-      if (isCollapsibleMenu(view) && view.collapse) {
-        routes.push(getRoutes(layout, view.children));
+  if (navigations) {
+    for (let i = 0; i < navigations.length; i++) {
+      const navigation = navigations[i];
+      for (let j = 0; j < navigation.length; j++) {
+        const view = navigation[j];
+        if (isCollapsibleMenu(view) && view.collapse) {
+          routes.push(getRoutes(layout, view.children));
+        }
+        if (hasComponent(view)) {
+          routes.push(<Route path={layout + view.path} component={view.component} key={j} />);
+        }
+        routes.push(null);
       }
-      if (hasComponent(view)) {
-        routes.push(<Route path={layout + view.path} component={view.component} key={i} />);
-      }
-      routes.push(null);
     }
   }
   return routes;

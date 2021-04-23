@@ -5,26 +5,13 @@ import { Button, Card, CardBody, Form } from 'reactstrap';
 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
 
+import * as v from 'validations';
 import { ErrorAlert, TextField } from 'components/atoms';
-import { useCreatePasswordMutation } from 'generated/graphql';
+import { CreatePasswordMutationVariables, useCreatePasswordMutation } from 'generated/graphql';
 import { useAuthState } from './auth';
 
-type FormValues = {
-  password: string;
-  confirmPassword: string;
-};
-
-const schema = z
-  .object({
-    password: z.string().nonempty({ message: 'Please enter a password!' }),
-    confirmPassword: z.string().nonempty({ message: 'Please confirm your password!' }),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: 'Passwords must match!',
-    path: ['confirmPassword'],
-  });
+const schema = v.createPassword;
 
 const CreatePassword: React.FunctionComponent = () => {
   const { signIn } = useAuthState();
@@ -38,7 +25,7 @@ const CreatePassword: React.FunctionComponent = () => {
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(schema),
   });
-  const onSubmit = async (variables: FormValues) => mutate(variables);
+  const onSubmit = async (variables: CreatePasswordMutationVariables) => mutate(variables);
 
   return (
     <>
