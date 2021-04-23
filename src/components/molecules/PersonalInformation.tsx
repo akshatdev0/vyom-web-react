@@ -18,7 +18,7 @@ const PersonalInformation: React.FunctionComponent<Props> = ({ control }: Props)
         <Col lg="6">
           <TextField
             name="firstName"
-            type="tel"
+            type="text"
             labelType="text"
             labelValue="First Name"
             placeholder="First Name"
@@ -28,7 +28,7 @@ const PersonalInformation: React.FunctionComponent<Props> = ({ control }: Props)
         <Col lg="6">
           <TextField
             name="lastName"
-            type="tel"
+            type="text"
             labelType="text"
             labelValue="Last Name"
             placeholder="Last Name"
