@@ -1,0 +1,15 @@
+query CompanyOwner($id: ID!) {
+  companyOwner(id: $id) {
+    id
+    user {
+      id
+      firstName
+      lastName
+      gender
+      dateOfBirth
+      mobileNumber
+      alternateMobileNumber
+      email
+    }
+  }
+}

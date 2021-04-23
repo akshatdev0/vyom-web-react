@@ -36,12 +36,12 @@ import {
   Col,
 } from 'reactstrap';
 // core components
-import { ProfileHeader } from 'components/molecules';
+import { ProProfileHeader } from 'components/molecules';
 
 function CompanyProfile() {
   return (
     <>
-      <ProfileHeader />
+      <ProProfileHeader />
       <Container className="mt--6" fluid>
         <Row>
           <Col className="order-xl-2" xl="4">
