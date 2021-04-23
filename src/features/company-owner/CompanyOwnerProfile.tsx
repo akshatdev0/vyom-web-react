@@ -17,6 +17,7 @@
 import React from 'react';
 import { useReactQueryClient } from 'client';
 
+import { useNotify } from 'core/notification';
 import { UserProfile } from 'components/templates';
 import { useAuthState } from 'features/auth';
 import { CompanyOwnerQuery, GetUserInfoQuery, useCompanyOwnerQuery, useUpdateUserMutation } from 'generated/graphql';
@@ -24,6 +25,8 @@ import { CompanyOwnerQuery, GetUserInfoQuery, useCompanyOwnerQuery, useUpdateUse
 const CompanyOwnerProfile: React.FunctionComponent = () => {
   const reactQueryClient = useReactQueryClient();
   const { user: sessionUser } = useAuthState();
+  const notify = useNotify();
+
   const userID = sessionUser?.id;
   const companyOwnerID = sessionUser?.companyOwner?.id;
   const { data: { companyOwner } = {} } = useCompanyOwnerQuery(
@@ -44,6 +47,7 @@ const CompanyOwnerProfile: React.FunctionComponent = () => {
       reactQueryClient.setQueryData<CompanyOwnerQuery>(['CompanyOwner', { id: companyOwnerID }], {
         companyOwner: { id: companyOwnerID || '', user: updatedUser },
       });
+      notify({ type: 'success', title: 'Profile', message: 'Successfully saved!' });
     },
   });
   const { user } = companyOwner || {};
