@@ -28,7 +28,9 @@ const UserProfileCard: React.FunctionComponent<Props> = ({ user }: Props) => {
           </div>
         </Col>
       </Row>
-      <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+      <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-6">
+        {' '}
+        {/* text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4 */}
         {/* <div className="d-flex justify-content-between">
             <Button className="mr-4" color="info" href="#pablo" onClick={(e) => e.preventDefault()} size="sm">
               Connect
@@ -63,7 +65,7 @@ const UserProfileCard: React.FunctionComponent<Props> = ({ user }: Props) => {
               </div>
             </div>
           </Row> */}
-        <div className="text-center mt-5">
+        <div className="text-center">
           <h3>
             {firstName} {lastName}
           </h3>
