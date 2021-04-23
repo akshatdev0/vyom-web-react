@@ -15,7 +15,6 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-/*eslint-disable*/
 import React, { useState, useEffect } from 'react';
 // react library for routing
 import { useLocation, NavLink as NavLinkRRD, Link } from 'react-router-dom';
@@ -25,18 +24,26 @@ import classnames from 'classnames';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 // reactstrap components
 import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav } from 'reactstrap';
-import { SubMenuArray, Layout } from 'layouts';
-import { SubMenuItem, MenuArray, SubMenu, isMenu, isSubMenuItem, isCollapsibleMenu, isMenuItem } from 'layouts';
+import {
+  SubNavigation,
+  SubMenuItem,
+  Navigation,
+  SubMenu,
+  isMenu,
+  isSubMenuItem,
+  isCollapsibleMenu,
+  isMenuItem,
+} from 'core/navigation';
 
 type Props = {
   // The layout for which this sidebar will be used
-  layout: Layout;
+  layout: string;
   // prop to know if the sidenav is mini or normal
   sidebarOpen: boolean;
   // function used to make sidenav mini or normal
   toggleSidebar: () => void;
-  // views whose links that will be displayed inside the component
-  menu: MenuArray;
+  // navigation which will be displayed inside the component
+  navigation: Navigation;
   logo: {
     // innerLink is for links that will direct the user within the app
     // it will be rendered as <Link to="...">...</Link> tag
@@ -53,12 +60,19 @@ type Props = {
   rtlActive?: boolean;
 };
 
-const Sidebar = ({ layout, sidebarOpen, toggleSidebar, menu, logo, rtlActive = false }: Props) => {
+const Sidebar: React.FunctionComponent<Props> = ({
+  layout,
+  sidebarOpen,
+  toggleSidebar,
+  navigation,
+  logo,
+  rtlActive = false,
+}: Props) => {
   const [state, setState] = useState<Record<string, boolean>>({});
   const location = useLocation();
 
   useEffect(() => {
-    setState(getCollapseStates(menu));
+    setState(getCollapseStates(navigation));
     // eslint-disable-next-line
   }, []);
 
@@ -80,7 +94,7 @@ const Sidebar = ({ layout, sidebarOpen, toggleSidebar, menu, logo, rtlActive = f
   };
   // this creates the intial state of this component based on the collapse views
   // that it gets through views
-  const getCollapseStates = (menu: MenuArray | SubMenuArray | undefined) => {
+  const getCollapseStates = (menu: Navigation | SubNavigation | undefined) => {
     let initialState = {};
     if (menu) {
       for (let i = 0; i < menu.length; i++) {
@@ -99,7 +113,7 @@ const Sidebar = ({ layout, sidebarOpen, toggleSidebar, menu, logo, rtlActive = f
   // this verifies if any of the collapses should be default opened on a rerender of this component
   // for example, on the refresh of the page,
   // while on the src/views/forms/RegularForms.js - route /admin/regular-forms
-  const getCollapseInitialState = (menu: SubMenuArray | undefined): boolean => {
+  const getCollapseInitialState = (menu: SubNavigation | undefined): boolean => {
     if (menu) {
       for (let i = 0; i < menu.length; i++) {
         const item: SubMenu | SubMenuItem = menu[i];
@@ -120,12 +134,12 @@ const Sidebar = ({ layout, sidebarOpen, toggleSidebar, menu, logo, rtlActive = f
     }
   };
   // this function creates the links and collapses that appear in the sidebar (left menu)
-  const createLinks = (menu: MenuArray | SubMenuArray | undefined) => {
+  const createLinks = (navigation: Navigation | SubNavigation | undefined) => {
     const links: Array<JSX.Element | null> = [];
 
-    if (menu) {
-      for (let i = 0; i < menu.length; i++) {
-        const item = menu[i];
+    if (navigation) {
+      for (let i = 0; i < navigation.length; i++) {
+        const item = navigation[i];
         if (item.redirect) {
           links.push(null);
         } else if (isCollapsibleMenu(item) && item.collapse) {
@@ -140,7 +154,7 @@ const Sidebar = ({ layout, sidebarOpen, toggleSidebar, menu, logo, rtlActive = f
                 })}
                 onClick={(e) => {
                   e.preventDefault();
-                  var st: Record<string, boolean> = {};
+                  const st: Record<string, boolean> = {};
                   st[item['identifier']] = !state[item.identifier];
                   setState(st);
                 }}
@@ -229,7 +243,7 @@ const Sidebar = ({ layout, sidebarOpen, toggleSidebar, menu, logo, rtlActive = f
       </div>
       <div className="navbar-inner">
         <Collapse navbar isOpen={true}>
-          <Nav navbar>{createLinks(menu)}</Nav>
+          <Nav navbar>{createLinks(navigation)}</Nav>
           <hr className="my-3" />
           <h6 className="navbar-heading p-0 text-muted">
             <span className="docs-normal">Documentation</span>

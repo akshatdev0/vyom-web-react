@@ -15,57 +15,15 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 */
-import React, { useRef, RefObject } from 'react';
-// react library for routing
-import { useLocation, Switch, Redirect } from 'react-router-dom';
-// core components
-import { AdminTopbar, AdminFooter, Sidebar } from 'components/molecules';
-import { useToggleSidebar } from 'hooks';
-import { Layout, getRoutes } from 'layouts';
-import menu from './menu';
+import React from 'react';
+
+import { UserLayout } from 'components/templates';
+import { Layout } from 'layouts';
+import { sidebarMenu, userAccountMenu } from './navigations';
 
 const AdminLayout: React.FunctionComponent = () => {
-  const [sidebarOpen, toggleSidebar] = useToggleSidebar(true);
-  const location = useLocation();
-  const mainContentRef: RefObject<HTMLDivElement> = useRef({}) as RefObject<HTMLDivElement>;
-
-  React.useEffect(() => {
-    document.documentElement.scrollTop = 0;
-    if (document.scrollingElement) {
-      document.scrollingElement.scrollTop = 0;
-    }
-    if (mainContentRef && mainContentRef.current) {
-      mainContentRef.current.scrollTop = 0;
-    }
-  }, [location]);
-
-  const getNavbarTheme = () => {
-    return 'light';
-  };
-
   return (
-    <>
-      <Sidebar
-        layout={Layout.Admin}
-        menu={menu}
-        sidebarOpen={sidebarOpen}
-        toggleSidebar={toggleSidebar}
-        logo={{
-          innerLink: '/',
-          imgSrc: require('assets/img/brand/argon-react.png').default,
-          imgAlt: '...',
-        }}
-      />
-      <div className="main-content" ref={mainContentRef}>
-        <AdminTopbar theme={getNavbarTheme()} sidebarOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
-        <Switch>
-          {getRoutes(Layout.Admin, menu)}
-          <Redirect from="*" to="/admin/dashboard" />
-        </Switch>
-        <AdminFooter />
-      </div>
-      {sidebarOpen ? <div className="backdrop d-xl-none" onClick={toggleSidebar} /> : null}
-    </>
+    <UserLayout layout={Layout.Admin} sidebarMenu={sidebarMenu} userAccountMenu={userAccountMenu} navbarTheme="light" />
   );
 };
 

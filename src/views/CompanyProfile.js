@@ -38,7 +38,7 @@ import {
 // core components
 import { ProProfileHeader } from 'components/molecules';
 
-function Profile() {
+function CompanyProfile() {
   return (
     <>
       <ProProfileHeader />
@@ -365,4 +365,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default CompanyProfile;

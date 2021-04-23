@@ -8,18 +8,12 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
+import * as v from 'validations';
 import { ErrorAlert, TextField } from 'components/atoms';
-import { mobileNumberValidator } from 'core/utils';
-import { useSignUpMutation } from 'generated/graphql';
-
-type FormValues = {
-  mobileNumber: string;
-};
+import { SignUpMutationVariables, useSignUpMutation } from 'generated/graphql';
 
 const schema = z.object({
-  mobileNumber: z.string().nonempty({ message: 'Please enter your mobile number!' }).refine(mobileNumberValidator, {
-    message: 'Please enter a valid mobile number!',
-  }),
+  mobileNumber: v.mobileNumber,
 });
 
 const CreateAccount: React.FunctionComponent = ({ mobileNumber, setMobileNumber, nextStage }: any) => {
@@ -34,7 +28,7 @@ const CreateAccount: React.FunctionComponent = ({ mobileNumber, setMobileNumber,
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(schema),
   });
-  const onSubmit = async (variables: FormValues) => mutate(variables);
+  const onSubmit = async (variables: SignUpMutationVariables) => mutate(variables);
 
   return (
     <>

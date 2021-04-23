@@ -9,3 +9,21 @@ declare module '*/auth.graphql' {
 
   export default defaultDocument;
 }
+
+declare module '*/company-owner.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const CompanyOwner: DocumentNode;
+
+  export default defaultDocument;
+}
+
+declare module '*/user.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const GetUserInfo: DocumentNode;
+  export const User: DocumentNode;
+  export const UpdateUser: DocumentNode;
+
+  export default defaultDocument;
+}
