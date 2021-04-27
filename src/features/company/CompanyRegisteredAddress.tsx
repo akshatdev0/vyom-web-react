@@ -9,14 +9,14 @@ import { useNotify } from 'core/notification';
 import { AddressInput } from 'components/molecules';
 import { Maybe } from 'types';
 import {
-  CompanyProfileQuery,
+  CompanyQuery,
   useCreateAddressMutation,
   useUpdateAddressMutation,
   useSetCompanyRegisteredAddressMutation,
 } from 'generated/graphql';
 
 type Props = {
-  company: Maybe<CompanyProfileQuery['company']>;
+  company: Maybe<CompanyQuery['company']>;
 };
 
 const CompanyRegisteredAddress: React.FunctionComponent<Props> = ({ company }: Props) => {

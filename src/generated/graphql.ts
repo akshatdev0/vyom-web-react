@@ -7425,11 +7425,11 @@ export type CompanyOwnerQuery = { __typename?: 'Query' } & {
   >;
 };
 
-export type CompanyProfileQueryVariables = Exact<{
+export type CompanyQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
-export type CompanyProfileQuery = { __typename?: 'Query' } & {
+export type CompanyQuery = { __typename?: 'Query' } & {
   company?: Maybe<
     { __typename?: 'Company' } & Pick<Company, 'id' | 'name' | 'sku'> & {
         businessType?: Maybe<{ __typename?: 'BusinessType' } & Pick<BusinessType, 'id'>>;
@@ -7910,8 +7910,8 @@ export const CompanyOwner = gql`
     }
   }
 `;
-export const CompanyProfile = gql`
-  query CompanyProfile($id: ID!) {
+export const Company = gql`
+  query Company($id: ID!) {
     company(id: $id) {
       id
       name
@@ -8444,8 +8444,8 @@ export const useCompanyOwnerQuery = <TData = CompanyOwnerQuery, TError = unknown
     useFetcher<CompanyOwnerQuery, CompanyOwnerQueryVariables>(CompanyOwnerDocument).bind(null, variables),
     options,
   );
-export const CompanyProfileDocument = `
-    query CompanyProfile($id: ID!) {
+export const CompanyDocument = `
+    query Company($id: ID!) {
   company(id: $id) {
     id
     name
@@ -8482,13 +8482,13 @@ export const CompanyProfileDocument = `
   }
 }
     `;
-export const useCompanyProfileQuery = <TData = CompanyProfileQuery, TError = unknown>(
-  variables: CompanyProfileQueryVariables,
-  options?: UseQueryOptions<CompanyProfileQuery, TError, TData>,
+export const useCompanyQuery = <TData = CompanyQuery, TError = unknown>(
+  variables: CompanyQueryVariables,
+  options?: UseQueryOptions<CompanyQuery, TError, TData>,
 ) =>
-  useQuery<CompanyProfileQuery, TError, TData>(
-    ['CompanyProfile', variables],
-    useFetcher<CompanyProfileQuery, CompanyProfileQueryVariables>(CompanyProfileDocument).bind(null, variables),
+  useQuery<CompanyQuery, TError, TData>(
+    ['Company', variables],
+    useFetcher<CompanyQuery, CompanyQueryVariables>(CompanyDocument).bind(null, variables),
     options,
   );
 export const CompanyBusinessTypesDocument = `

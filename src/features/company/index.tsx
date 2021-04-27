@@ -1,1 +1,1 @@
-export { default as CompanyProfile } from './CompanyProfile';
+export { default as Company } from './Company';
