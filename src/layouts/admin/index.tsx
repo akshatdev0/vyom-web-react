@@ -20,10 +20,28 @@ import React from 'react';
 import { UserLayout } from 'components/templates';
 import { Layout } from 'layouts';
 import { sidebarMenu, userAccountMenu } from './navigations';
+import { useAuthState } from 'features/auth';
+import { useGetUserInfoQuery } from 'generated/graphql';
 
 const AdminLayout: React.FunctionComponent = () => {
+  const { user: sessionUser } = useAuthState();
+  const userID = sessionUser?.id;
+  const { data: { user } = {} } = useGetUserInfoQuery({ id: userID || '' }, { enabled: !!userID });
+
+  const business = {
+    id: '0',
+    name: 'Vyom',
+  };
+
   return (
-    <UserLayout layout={Layout.Admin} sidebarMenu={sidebarMenu} userAccountMenu={userAccountMenu} navbarTheme="light" />
+    <UserLayout
+      layout={Layout.Admin}
+      sidebarMenu={sidebarMenu}
+      userAccountMenu={userAccountMenu}
+      user={user}
+      business={business}
+      navbarTheme="light"
+    />
   );
 };
 

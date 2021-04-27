@@ -6,12 +6,11 @@ import { FormGroup, Input, InputGroupAddon, InputGroupText, InputGroup } from 'r
 
 import { Override } from 'types';
 
-type InputProps = React.ComponentProps<typeof Input>;
+type ReactstrapInputProps = React.ComponentProps<typeof Input>;
 
-type Props<TFieldValues extends FieldValues = FieldValues> = Override<
-  InputProps,
-  { defaultValue?: string | number | string[] | undefined | null }
-> & {
+type InputProps = Override<ReactstrapInputProps, { defaultValue?: string | number | string[] | undefined | null }>;
+
+type Props<TFieldValues extends FieldValues = FieldValues> = InputProps & {
   name: FieldName<TFieldValues>;
   control: Control<TFieldValues>;
   errorText?: any;
@@ -44,7 +43,7 @@ const TextField = ({
     defaultValue: defaultValue || '',
   });
 
-  const inputProps: InputProps = {
+  const inputProps: ReactstrapInputProps = {
     id: name,
     type,
     placeholder,

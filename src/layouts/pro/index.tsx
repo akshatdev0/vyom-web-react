@@ -22,7 +22,15 @@ import { Layout } from 'layouts';
 import { sidebarMenu, userAccountMenu } from './navigations';
 
 const ProLayout: React.FunctionComponent = () => {
-  return <UserLayout layout={Layout.Pro} sidebarMenu={sidebarMenu} userAccountMenu={userAccountMenu} />;
+  return (
+    <UserLayout
+      layout={Layout.Pro}
+      sidebarMenu={sidebarMenu}
+      userAccountMenu={userAccountMenu}
+      user={null}
+      business={null}
+    />
+  );
 };
 
 export default ProLayout;

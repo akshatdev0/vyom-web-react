@@ -7188,6 +7188,85 @@ export type UpdateUserPayload = {
   user?: Maybe<UsersPermissionsUser>;
 };
 
+export type CreateAddressMutationVariables = Exact<{
+  addressLine1: Scalars['String'];
+  addressLine2?: Maybe<Scalars['String']>;
+  landmark?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
+  area: Scalars['ID'];
+}>;
+
+export type CreateAddressMutation = { __typename?: 'Mutation' } & {
+  createAddress?: Maybe<
+    { __typename?: 'createAddressPayload' } & {
+      address?: Maybe<
+        { __typename?: 'Address' } & Pick<
+          Address,
+          'id' | 'addressLine1' | 'addressLine2' | 'landmark' | 'postalCode'
+        > & {
+            area?: Maybe<
+              { __typename?: 'Area' } & Pick<Area, 'id' | 'name'> & {
+                  city?: Maybe<
+                    { __typename?: 'City' } & Pick<City, 'id' | 'name'> & {
+                        state?: Maybe<
+                          { __typename?: 'State' } & Pick<State, 'id' | 'name'> & {
+                              country?: Maybe<{ __typename?: 'Country' } & Pick<Country, 'id' | 'name'>>;
+                            }
+                        >;
+                      }
+                  >;
+                }
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type UpdateAddressMutationVariables = Exact<{
+  id: Scalars['ID'];
+  addressLine1: Scalars['String'];
+  addressLine2?: Maybe<Scalars['String']>;
+  landmark?: Maybe<Scalars['String']>;
+  postalCode?: Maybe<Scalars['String']>;
+  area: Scalars['ID'];
+}>;
+
+export type UpdateAddressMutation = { __typename?: 'Mutation' } & {
+  updateAddress?: Maybe<
+    { __typename?: 'updateAddressPayload' } & {
+      address?: Maybe<
+        { __typename?: 'Address' } & Pick<
+          Address,
+          'id' | 'addressLine1' | 'addressLine2' | 'landmark' | 'postalCode'
+        > & {
+            area?: Maybe<
+              { __typename?: 'Area' } & Pick<Area, 'id' | 'name'> & {
+                  city?: Maybe<
+                    { __typename?: 'City' } & Pick<City, 'id' | 'name'> & {
+                        state?: Maybe<
+                          { __typename?: 'State' } & Pick<State, 'id' | 'name'> & {
+                              country?: Maybe<{ __typename?: 'Country' } & Pick<Country, 'id' | 'name'>>;
+                            }
+                        >;
+                      }
+                  >;
+                }
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type AreasOfCityQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type AreasOfCityQuery = { __typename?: 'Query' } & {
+  areas?: Maybe<Array<Maybe<{ __typename?: 'Area' } & Pick<Area, 'id' | 'name'>>>>;
+};
+
 export type SignInMutationVariables = Exact<{
   mobileNumber: Scalars['String'];
   password: Scalars['String'];
@@ -7314,6 +7393,14 @@ export type CreatePasswordMutation = { __typename?: 'Mutation' } & {
   >;
 };
 
+export type CitiesOfStateQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type CitiesOfStateQuery = { __typename?: 'Query' } & {
+  cities?: Maybe<Array<Maybe<{ __typename?: 'City' } & Pick<City, 'id' | 'name'>>>>;
+};
+
 export type CompanyOwnerQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -7336,6 +7423,159 @@ export type CompanyOwnerQuery = { __typename?: 'Query' } & {
         >;
       }
   >;
+};
+
+export type CompanyQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type CompanyQuery = { __typename?: 'Query' } & {
+  company?: Maybe<
+    { __typename?: 'Company' } & Pick<Company, 'id' | 'name' | 'sku'> & {
+        businessType?: Maybe<{ __typename?: 'BusinessType' } & Pick<BusinessType, 'id'>>;
+        companyType?: Maybe<{ __typename?: 'CompanyType' } & Pick<CompanyType, 'id'>>;
+        registeredAddress?: Maybe<
+          { __typename?: 'Address' } & Pick<
+            Address,
+            'id' | 'addressLine1' | 'addressLine2' | 'landmark' | 'postalCode'
+          > & {
+              area?: Maybe<
+                { __typename?: 'Area' } & Pick<Area, 'id'> & {
+                    city?: Maybe<
+                      { __typename?: 'City' } & Pick<City, 'id'> & {
+                          state?: Maybe<
+                            { __typename?: 'State' } & Pick<State, 'id'> & {
+                                country?: Maybe<{ __typename?: 'Country' } & Pick<Country, 'id'>>;
+                              }
+                          >;
+                        }
+                    >;
+                  }
+              >;
+            }
+        >;
+        companyDetail?: Maybe<{ __typename?: 'CompanyDetail' } & Pick<CompanyDetail, 'id' | 'returnPolicy'>>;
+      }
+  >;
+};
+
+export type CompanyBusinessTypesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type CompanyBusinessTypesQuery = { __typename?: 'Query' } & {
+  companyTypes?: Maybe<Array<Maybe<{ __typename?: 'CompanyType' } & Pick<CompanyType, 'id' | 'name'>>>>;
+  businessTypes?: Maybe<Array<Maybe<{ __typename?: 'BusinessType' } & Pick<BusinessType, 'id' | 'name'>>>>;
+};
+
+export type UpdateCompanyInformationMutationVariables = Exact<{
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+  businessType?: Maybe<Scalars['ID']>;
+  companyType?: Maybe<Scalars['ID']>;
+}>;
+
+export type UpdateCompanyInformationMutation = { __typename?: 'Mutation' } & {
+  updateCompany?: Maybe<
+    { __typename?: 'updateCompanyPayload' } & {
+      company?: Maybe<
+        { __typename?: 'Company' } & Pick<Company, 'id' | 'name' | 'sku'> & {
+            businessType?: Maybe<{ __typename?: 'BusinessType' } & Pick<BusinessType, 'id' | 'name'>>;
+            companyType?: Maybe<{ __typename?: 'CompanyType' } & Pick<CompanyType, 'id' | 'name'>>;
+          }
+      >;
+    }
+  >;
+};
+
+export type SetCompanyRegisteredAddressMutationVariables = Exact<{
+  id: Scalars['ID'];
+  registeredAddress: Scalars['ID'];
+}>;
+
+export type SetCompanyRegisteredAddressMutation = { __typename?: 'Mutation' } & {
+  updateCompany?: Maybe<
+    { __typename?: 'updateCompanyPayload' } & {
+      company?: Maybe<
+        { __typename?: 'Company' } & Pick<Company, 'id'> & {
+            registeredAddress?: Maybe<
+              { __typename?: 'Address' } & Pick<
+                Address,
+                'id' | 'addressLine1' | 'addressLine2' | 'landmark' | 'postalCode'
+              > & {
+                  area?: Maybe<
+                    { __typename?: 'Area' } & Pick<Area, 'id' | 'name'> & {
+                        city?: Maybe<
+                          { __typename?: 'City' } & Pick<City, 'id' | 'name'> & {
+                              state?: Maybe<
+                                { __typename?: 'State' } & Pick<State, 'id' | 'name'> & {
+                                    country?: Maybe<{ __typename?: 'Country' } & Pick<Country, 'id' | 'name'>>;
+                                  }
+                              >;
+                            }
+                        >;
+                      }
+                  >;
+                }
+            >;
+          }
+      >;
+    }
+  >;
+};
+
+export type UpdateCompanyDetailMutationVariables = Exact<{
+  id: Scalars['ID'];
+  returnPolicy?: Maybe<Scalars['String']>;
+}>;
+
+export type UpdateCompanyDetailMutation = { __typename?: 'Mutation' } & {
+  updateCompanyDetail?: Maybe<
+    { __typename?: 'updateCompanyDetailPayload' } & {
+      companyDetail?: Maybe<{ __typename?: 'CompanyDetail' } & Pick<CompanyDetail, 'id' | 'returnPolicy'>>;
+    }
+  >;
+};
+
+export type CreateCompanyDetailMutationVariables = Exact<{
+  returnPolicy?: Maybe<Scalars['String']>;
+}>;
+
+export type CreateCompanyDetailMutation = { __typename?: 'Mutation' } & {
+  createCompanyDetail?: Maybe<
+    { __typename?: 'createCompanyDetailPayload' } & {
+      companyDetail?: Maybe<{ __typename?: 'CompanyDetail' } & Pick<CompanyDetail, 'id' | 'returnPolicy'>>;
+    }
+  >;
+};
+
+export type SetCompanyDetailMutationVariables = Exact<{
+  id: Scalars['ID'];
+  companyDetail: Scalars['ID'];
+}>;
+
+export type SetCompanyDetailMutation = { __typename?: 'Mutation' } & {
+  updateCompany?: Maybe<
+    { __typename?: 'updateCompanyPayload' } & {
+      company?: Maybe<
+        { __typename?: 'Company' } & Pick<Company, 'id'> & {
+            companyDetail?: Maybe<{ __typename?: 'CompanyDetail' } & Pick<CompanyDetail, 'id' | 'returnPolicy'>>;
+          }
+      >;
+    }
+  >;
+};
+
+export type CountriesQueryVariables = Exact<{ [key: string]: never }>;
+
+export type CountriesQuery = { __typename?: 'Query' } & {
+  countries?: Maybe<Array<Maybe<{ __typename?: 'Country' } & Pick<Country, 'id' | 'name'>>>>;
+};
+
+export type StatesOfCountryQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type StatesOfCountryQuery = { __typename?: 'Query' } & {
+  states?: Maybe<Array<Maybe<{ __typename?: 'State' } & Pick<State, 'id' | 'name'>>>>;
 };
 
 export type GetUserInfoQueryVariables = Exact<{
@@ -7394,6 +7634,124 @@ export type UpdateUserMutation = { __typename?: 'Mutation' } & {
   >;
 };
 
+export type CompanyOwnerLayoutQueryVariables = Exact<{
+  id: Scalars['ID'];
+}>;
+
+export type CompanyOwnerLayoutQuery = { __typename?: 'Query' } & {
+  companyOwner?: Maybe<
+    { __typename?: 'CompanyOwner' } & Pick<CompanyOwner, 'id'> & {
+        user?: Maybe<
+          { __typename?: 'UsersPermissionsUser' } & Pick<
+            UsersPermissionsUser,
+            'id' | 'firstName' | 'lastName' | 'mobileNumber'
+          >
+        >;
+        company?: Maybe<{ __typename?: 'Company' } & Pick<Company, 'id' | 'name'>>;
+      }
+  >;
+};
+
+export const CreateAddress = gql`
+  mutation CreateAddress(
+    $addressLine1: String!
+    $addressLine2: String
+    $landmark: String
+    $postalCode: String
+    $area: ID!
+  ) {
+    createAddress(
+      input: {
+        data: {
+          addressLine1: $addressLine1
+          addressLine2: $addressLine2
+          landmark: $landmark
+          postalCode: $postalCode
+          area: $area
+        }
+      }
+    ) {
+      address {
+        id
+        addressLine1
+        addressLine2
+        landmark
+        postalCode
+        area {
+          id
+          name
+          city {
+            id
+            name
+            state {
+              id
+              name
+              country {
+                id
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export const UpdateAddress = gql`
+  mutation UpdateAddress(
+    $id: ID!
+    $addressLine1: String!
+    $addressLine2: String
+    $landmark: String
+    $postalCode: String
+    $area: ID!
+  ) {
+    updateAddress(
+      input: {
+        where: { id: $id }
+        data: {
+          addressLine1: $addressLine1
+          addressLine2: $addressLine2
+          landmark: $landmark
+          postalCode: $postalCode
+          area: $area
+        }
+      }
+    ) {
+      address {
+        id
+        addressLine1
+        addressLine2
+        landmark
+        postalCode
+        area {
+          id
+          name
+          city {
+            id
+            name
+            state {
+              id
+              name
+              country {
+                id
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export const AreasOfCity = gql`
+  query AreasOfCity($id: ID!) {
+    areas(where: { city: { id: $id } }) {
+      id
+      name
+    }
+  }
+`;
 export const SignIn = gql`
   mutation SignIn($mobileNumber: String!, $password: String!) {
     signIn(input: { identifier: $mobileNumber, password: $password }) {
@@ -7527,6 +7885,14 @@ export const CreatePassword = gql`
     }
   }
 `;
+export const CitiesOfState = gql`
+  query CitiesOfState($id: ID!) {
+    cities(where: { state: { id: $id } }) {
+      id
+      name
+    }
+  }
+`;
 export const CompanyOwner = gql`
   query CompanyOwner($id: ID!) {
     companyOwner(id: $id) {
@@ -7541,6 +7907,158 @@ export const CompanyOwner = gql`
         alternateMobileNumber
         email
       }
+    }
+  }
+`;
+export const Company = gql`
+  query Company($id: ID!) {
+    company(id: $id) {
+      id
+      name
+      businessType {
+        id
+      }
+      companyType {
+        id
+      }
+      sku
+      registeredAddress {
+        id
+        addressLine1
+        addressLine2
+        landmark
+        postalCode
+        area {
+          id
+          city {
+            id
+            state {
+              id
+              country {
+                id
+              }
+            }
+          }
+        }
+      }
+      companyDetail {
+        id
+        returnPolicy
+      }
+    }
+  }
+`;
+export const CompanyBusinessTypes = gql`
+  query CompanyBusinessTypes {
+    companyTypes {
+      id
+      name
+    }
+    businessTypes {
+      id
+      name
+    }
+  }
+`;
+export const UpdateCompanyInformation = gql`
+  mutation UpdateCompanyInformation($id: ID!, $name: String, $businessType: ID, $companyType: ID) {
+    updateCompany(
+      input: { where: { id: $id }, data: { name: $name, businessType: $businessType, companyType: $companyType } }
+    ) {
+      company {
+        id
+        name
+        sku
+        businessType {
+          id
+          name
+        }
+        companyType {
+          id
+          name
+        }
+      }
+    }
+  }
+`;
+export const SetCompanyRegisteredAddress = gql`
+  mutation SetCompanyRegisteredAddress($id: ID!, $registeredAddress: ID!) {
+    updateCompany(input: { where: { id: $id }, data: { registeredAddress: $registeredAddress } }) {
+      company {
+        id
+        registeredAddress {
+          id
+          addressLine1
+          addressLine2
+          landmark
+          postalCode
+          area {
+            id
+            name
+            city {
+              id
+              name
+              state {
+                id
+                name
+                country {
+                  id
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export const UpdateCompanyDetail = gql`
+  mutation UpdateCompanyDetail($id: ID!, $returnPolicy: String) {
+    updateCompanyDetail(input: { where: { id: $id }, data: { returnPolicy: $returnPolicy } }) {
+      companyDetail {
+        id
+        returnPolicy
+      }
+    }
+  }
+`;
+export const CreateCompanyDetail = gql`
+  mutation CreateCompanyDetail($returnPolicy: String) {
+    createCompanyDetail(input: { data: { returnPolicy: $returnPolicy } }) {
+      companyDetail {
+        id
+        returnPolicy
+      }
+    }
+  }
+`;
+export const SetCompanyDetail = gql`
+  mutation SetCompanyDetail($id: ID!, $companyDetail: ID!) {
+    updateCompany(input: { where: { id: $id }, data: { companyDetail: $companyDetail } }) {
+      company {
+        id
+        companyDetail {
+          id
+          returnPolicy
+        }
+      }
+    }
+  }
+`;
+export const Countries = gql`
+  query Countries {
+    countries {
+      id
+      name
+    }
+  }
+`;
+export const StatesOfCountry = gql`
+  query StatesOfCountry($id: ID!) {
+    states(where: { country: { id: $id } }) {
+      id
+      name
     }
   }
 `;
@@ -7604,7 +8122,117 @@ export const UpdateUser = gql`
     }
   }
 `;
+export const CompanyOwnerLayout = gql`
+  query CompanyOwnerLayout($id: ID!) {
+    companyOwner(id: $id) {
+      id
+      user {
+        id
+        firstName
+        lastName
+        mobileNumber
+      }
+      company {
+        id
+        name
+      }
+    }
+  }
+`;
 
+export const CreateAddressDocument = `
+    mutation CreateAddress($addressLine1: String!, $addressLine2: String, $landmark: String, $postalCode: String, $area: ID!) {
+  createAddress(
+    input: {data: {addressLine1: $addressLine1, addressLine2: $addressLine2, landmark: $landmark, postalCode: $postalCode, area: $area}}
+  ) {
+    address {
+      id
+      addressLine1
+      addressLine2
+      landmark
+      postalCode
+      area {
+        id
+        name
+        city {
+          id
+          name
+          state {
+            id
+            name
+            country {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const useCreateAddressMutation = <TError = unknown, TContext = unknown>(
+  options?: UseMutationOptions<CreateAddressMutation, TError, CreateAddressMutationVariables, TContext>,
+) =>
+  useMutation<CreateAddressMutation, TError, CreateAddressMutationVariables, TContext>(
+    useFetcher<CreateAddressMutation, CreateAddressMutationVariables>(CreateAddressDocument),
+    options,
+  );
+export const UpdateAddressDocument = `
+    mutation UpdateAddress($id: ID!, $addressLine1: String!, $addressLine2: String, $landmark: String, $postalCode: String, $area: ID!) {
+  updateAddress(
+    input: {where: {id: $id}, data: {addressLine1: $addressLine1, addressLine2: $addressLine2, landmark: $landmark, postalCode: $postalCode, area: $area}}
+  ) {
+    address {
+      id
+      addressLine1
+      addressLine2
+      landmark
+      postalCode
+      area {
+        id
+        name
+        city {
+          id
+          name
+          state {
+            id
+            name
+            country {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const useUpdateAddressMutation = <TError = unknown, TContext = unknown>(
+  options?: UseMutationOptions<UpdateAddressMutation, TError, UpdateAddressMutationVariables, TContext>,
+) =>
+  useMutation<UpdateAddressMutation, TError, UpdateAddressMutationVariables, TContext>(
+    useFetcher<UpdateAddressMutation, UpdateAddressMutationVariables>(UpdateAddressDocument),
+    options,
+  );
+export const AreasOfCityDocument = `
+    query AreasOfCity($id: ID!) {
+  areas(where: {city: {id: $id}}) {
+    id
+    name
+  }
+}
+    `;
+export const useAreasOfCityQuery = <TData = AreasOfCityQuery, TError = unknown>(
+  variables: AreasOfCityQueryVariables,
+  options?: UseQueryOptions<AreasOfCityQuery, TError, TData>,
+) =>
+  useQuery<AreasOfCityQuery, TError, TData>(
+    ['AreasOfCity', variables],
+    useFetcher<AreasOfCityQuery, AreasOfCityQueryVariables>(AreasOfCityDocument).bind(null, variables),
+    options,
+  );
 export const SignInDocument = `
     mutation SignIn($mobileNumber: String!, $password: String!) {
   signIn(input: {identifier: $mobileNumber, password: $password}) {
@@ -7773,6 +8401,23 @@ export const useCreatePasswordMutation = <TError = unknown, TContext = unknown>(
     useFetcher<CreatePasswordMutation, CreatePasswordMutationVariables>(CreatePasswordDocument),
     options,
   );
+export const CitiesOfStateDocument = `
+    query CitiesOfState($id: ID!) {
+  cities(where: {state: {id: $id}}) {
+    id
+    name
+  }
+}
+    `;
+export const useCitiesOfStateQuery = <TData = CitiesOfStateQuery, TError = unknown>(
+  variables: CitiesOfStateQueryVariables,
+  options?: UseQueryOptions<CitiesOfStateQuery, TError, TData>,
+) =>
+  useQuery<CitiesOfStateQuery, TError, TData>(
+    ['CitiesOfState', variables],
+    useFetcher<CitiesOfStateQuery, CitiesOfStateQueryVariables>(CitiesOfStateDocument).bind(null, variables),
+    options,
+  );
 export const CompanyOwnerDocument = `
     query CompanyOwner($id: ID!) {
   companyOwner(id: $id) {
@@ -7797,6 +8442,250 @@ export const useCompanyOwnerQuery = <TData = CompanyOwnerQuery, TError = unknown
   useQuery<CompanyOwnerQuery, TError, TData>(
     ['CompanyOwner', variables],
     useFetcher<CompanyOwnerQuery, CompanyOwnerQueryVariables>(CompanyOwnerDocument).bind(null, variables),
+    options,
+  );
+export const CompanyDocument = `
+    query Company($id: ID!) {
+  company(id: $id) {
+    id
+    name
+    businessType {
+      id
+    }
+    companyType {
+      id
+    }
+    sku
+    registeredAddress {
+      id
+      addressLine1
+      addressLine2
+      landmark
+      postalCode
+      area {
+        id
+        city {
+          id
+          state {
+            id
+            country {
+              id
+            }
+          }
+        }
+      }
+    }
+    companyDetail {
+      id
+      returnPolicy
+    }
+  }
+}
+    `;
+export const useCompanyQuery = <TData = CompanyQuery, TError = unknown>(
+  variables: CompanyQueryVariables,
+  options?: UseQueryOptions<CompanyQuery, TError, TData>,
+) =>
+  useQuery<CompanyQuery, TError, TData>(
+    ['Company', variables],
+    useFetcher<CompanyQuery, CompanyQueryVariables>(CompanyDocument).bind(null, variables),
+    options,
+  );
+export const CompanyBusinessTypesDocument = `
+    query CompanyBusinessTypes {
+  companyTypes {
+    id
+    name
+  }
+  businessTypes {
+    id
+    name
+  }
+}
+    `;
+export const useCompanyBusinessTypesQuery = <TData = CompanyBusinessTypesQuery, TError = unknown>(
+  variables?: CompanyBusinessTypesQueryVariables,
+  options?: UseQueryOptions<CompanyBusinessTypesQuery, TError, TData>,
+) =>
+  useQuery<CompanyBusinessTypesQuery, TError, TData>(
+    ['CompanyBusinessTypes', variables],
+    useFetcher<CompanyBusinessTypesQuery, CompanyBusinessTypesQueryVariables>(CompanyBusinessTypesDocument).bind(
+      null,
+      variables,
+    ),
+    options,
+  );
+export const UpdateCompanyInformationDocument = `
+    mutation UpdateCompanyInformation($id: ID!, $name: String, $businessType: ID, $companyType: ID) {
+  updateCompany(
+    input: {where: {id: $id}, data: {name: $name, businessType: $businessType, companyType: $companyType}}
+  ) {
+    company {
+      id
+      name
+      sku
+      businessType {
+        id
+        name
+      }
+      companyType {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+export const useUpdateCompanyInformationMutation = <TError = unknown, TContext = unknown>(
+  options?: UseMutationOptions<
+    UpdateCompanyInformationMutation,
+    TError,
+    UpdateCompanyInformationMutationVariables,
+    TContext
+  >,
+) =>
+  useMutation<UpdateCompanyInformationMutation, TError, UpdateCompanyInformationMutationVariables, TContext>(
+    useFetcher<UpdateCompanyInformationMutation, UpdateCompanyInformationMutationVariables>(
+      UpdateCompanyInformationDocument,
+    ),
+    options,
+  );
+export const SetCompanyRegisteredAddressDocument = `
+    mutation SetCompanyRegisteredAddress($id: ID!, $registeredAddress: ID!) {
+  updateCompany(
+    input: {where: {id: $id}, data: {registeredAddress: $registeredAddress}}
+  ) {
+    company {
+      id
+      registeredAddress {
+        id
+        addressLine1
+        addressLine2
+        landmark
+        postalCode
+        area {
+          id
+          name
+          city {
+            id
+            name
+            state {
+              id
+              name
+              country {
+                id
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const useSetCompanyRegisteredAddressMutation = <TError = unknown, TContext = unknown>(
+  options?: UseMutationOptions<
+    SetCompanyRegisteredAddressMutation,
+    TError,
+    SetCompanyRegisteredAddressMutationVariables,
+    TContext
+  >,
+) =>
+  useMutation<SetCompanyRegisteredAddressMutation, TError, SetCompanyRegisteredAddressMutationVariables, TContext>(
+    useFetcher<SetCompanyRegisteredAddressMutation, SetCompanyRegisteredAddressMutationVariables>(
+      SetCompanyRegisteredAddressDocument,
+    ),
+    options,
+  );
+export const UpdateCompanyDetailDocument = `
+    mutation UpdateCompanyDetail($id: ID!, $returnPolicy: String) {
+  updateCompanyDetail(
+    input: {where: {id: $id}, data: {returnPolicy: $returnPolicy}}
+  ) {
+    companyDetail {
+      id
+      returnPolicy
+    }
+  }
+}
+    `;
+export const useUpdateCompanyDetailMutation = <TError = unknown, TContext = unknown>(
+  options?: UseMutationOptions<UpdateCompanyDetailMutation, TError, UpdateCompanyDetailMutationVariables, TContext>,
+) =>
+  useMutation<UpdateCompanyDetailMutation, TError, UpdateCompanyDetailMutationVariables, TContext>(
+    useFetcher<UpdateCompanyDetailMutation, UpdateCompanyDetailMutationVariables>(UpdateCompanyDetailDocument),
+    options,
+  );
+export const CreateCompanyDetailDocument = `
+    mutation CreateCompanyDetail($returnPolicy: String) {
+  createCompanyDetail(input: {data: {returnPolicy: $returnPolicy}}) {
+    companyDetail {
+      id
+      returnPolicy
+    }
+  }
+}
+    `;
+export const useCreateCompanyDetailMutation = <TError = unknown, TContext = unknown>(
+  options?: UseMutationOptions<CreateCompanyDetailMutation, TError, CreateCompanyDetailMutationVariables, TContext>,
+) =>
+  useMutation<CreateCompanyDetailMutation, TError, CreateCompanyDetailMutationVariables, TContext>(
+    useFetcher<CreateCompanyDetailMutation, CreateCompanyDetailMutationVariables>(CreateCompanyDetailDocument),
+    options,
+  );
+export const SetCompanyDetailDocument = `
+    mutation SetCompanyDetail($id: ID!, $companyDetail: ID!) {
+  updateCompany(input: {where: {id: $id}, data: {companyDetail: $companyDetail}}) {
+    company {
+      id
+      companyDetail {
+        id
+        returnPolicy
+      }
+    }
+  }
+}
+    `;
+export const useSetCompanyDetailMutation = <TError = unknown, TContext = unknown>(
+  options?: UseMutationOptions<SetCompanyDetailMutation, TError, SetCompanyDetailMutationVariables, TContext>,
+) =>
+  useMutation<SetCompanyDetailMutation, TError, SetCompanyDetailMutationVariables, TContext>(
+    useFetcher<SetCompanyDetailMutation, SetCompanyDetailMutationVariables>(SetCompanyDetailDocument),
+    options,
+  );
+export const CountriesDocument = `
+    query Countries {
+  countries {
+    id
+    name
+  }
+}
+    `;
+export const useCountriesQuery = <TData = CountriesQuery, TError = unknown>(
+  variables?: CountriesQueryVariables,
+  options?: UseQueryOptions<CountriesQuery, TError, TData>,
+) =>
+  useQuery<CountriesQuery, TError, TData>(
+    ['Countries', variables],
+    useFetcher<CountriesQuery, CountriesQueryVariables>(CountriesDocument).bind(null, variables),
+    options,
+  );
+export const StatesOfCountryDocument = `
+    query StatesOfCountry($id: ID!) {
+  states(where: {country: {id: $id}}) {
+    id
+    name
+  }
+}
+    `;
+export const useStatesOfCountryQuery = <TData = StatesOfCountryQuery, TError = unknown>(
+  variables: StatesOfCountryQueryVariables,
+  options?: UseQueryOptions<StatesOfCountryQuery, TError, TData>,
+) =>
+  useQuery<StatesOfCountryQuery, TError, TData>(
+    ['StatesOfCountry', variables],
+    useFetcher<StatesOfCountryQuery, StatesOfCountryQueryVariables>(StatesOfCountryDocument).bind(null, variables),
     options,
   );
 export const GetUserInfoDocument = `
@@ -7864,5 +8753,34 @@ export const useUpdateUserMutation = <TError = unknown, TContext = unknown>(
 ) =>
   useMutation<UpdateUserMutation, TError, UpdateUserMutationVariables, TContext>(
     useFetcher<UpdateUserMutation, UpdateUserMutationVariables>(UpdateUserDocument),
+    options,
+  );
+export const CompanyOwnerLayoutDocument = `
+    query CompanyOwnerLayout($id: ID!) {
+  companyOwner(id: $id) {
+    id
+    user {
+      id
+      firstName
+      lastName
+      mobileNumber
+    }
+    company {
+      id
+      name
+    }
+  }
+}
+    `;
+export const useCompanyOwnerLayoutQuery = <TData = CompanyOwnerLayoutQuery, TError = unknown>(
+  variables: CompanyOwnerLayoutQueryVariables,
+  options?: UseQueryOptions<CompanyOwnerLayoutQuery, TError, TData>,
+) =>
+  useQuery<CompanyOwnerLayoutQuery, TError, TData>(
+    ['CompanyOwnerLayout', variables],
+    useFetcher<CompanyOwnerLayoutQuery, CompanyOwnerLayoutQueryVariables>(CompanyOwnerLayoutDocument).bind(
+      null,
+      variables,
+    ),
     options,
   );
