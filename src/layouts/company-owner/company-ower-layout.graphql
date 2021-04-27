@@ -1,0 +1,15 @@
+query CompanyOwnerLayout($id: ID!) {
+  companyOwner(id: $id) {
+    id
+    user {
+      id
+      firstName
+      lastName
+      mobileNumber
+    }
+    company {
+      id
+      name
+    }
+  }
+}

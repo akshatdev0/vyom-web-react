@@ -6,20 +6,19 @@ import Jdenticon from 'react-jdenticon';
 
 import { useAuthState } from 'features/auth';
 import { isMenuItem, Navigation } from 'core/navigation';
-import { useGetUserInfoQuery } from 'generated/graphql';
+import { Maybe, User } from 'types';
 
 type Props = {
   // The layout for which this menu will be used
   layout: string;
   // navigation which will be displayed inside the component
   navigation: Navigation;
+  user: Maybe<User>;
 };
 
-const UserAccountMenu: React.FunctionComponent<Props> = ({ layout, navigation }: Props) => {
-  const { signOut, user: sessionUser } = useAuthState();
-  const id = sessionUser?.id;
-  const { data: { user } = {} } = useGetUserInfoQuery({ id: id || '' }, { enabled: !!id });
-  const name = user ? user.firstName + ' ' + user.lastName : '<unnamed>';
+const UserAccountMenu: React.FunctionComponent<Props> = ({ layout, navigation, user }: Props) => {
+  const { signOut } = useAuthState();
+  const name = user && user.firstName + ' ' + user.lastName;
 
   // this function creates the links and collapses that appear in the sidebar (left menu)
   const createItems = (navigation: Navigation) => {
@@ -48,11 +47,13 @@ const UserAccountMenu: React.FunctionComponent<Props> = ({ layout, navigation }:
         <DropdownToggle className="nav-link pr-0" color="" tag="a">
           <Media className="align-items-center">
             <span className="avatar avatar-sm rounded-circle">
-              <Jdenticon size="36" value={user ? user.mobileNumber : name} />
+              <Jdenticon size="36" value={user ? user.mobileNumber : 'default'} />
             </span>
-            <Media className="ml-2 d-none d-lg-block">
-              <span className="mb-0 text-sm font-weight-bold">{name}</span>
-            </Media>
+            {name && (
+              <Media className="ml-2 d-none d-lg-block">
+                <span className="mb-0 text-sm font-weight-bold">{name}</span>
+              </Media>
+            )}
           </Media>
         </DropdownToggle>
         <DropdownMenu right>

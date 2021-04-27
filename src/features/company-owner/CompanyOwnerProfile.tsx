@@ -18,30 +18,38 @@ import React from 'react';
 import { useReactQueryClient } from 'client';
 
 import { useNotify } from 'core/notification';
-import { UserProfile } from 'components/templates';
+import { UserProfile } from 'features/user';
 import { useAuthState } from 'features/auth';
-import { CompanyOwnerQuery, GetUserInfoQuery, useCompanyOwnerQuery, useUpdateUserMutation } from 'generated/graphql';
+import {
+  CompanyOwnerQuery,
+  CompanyOwnerLayoutQuery,
+  useCompanyOwnerQuery,
+  useUpdateUserMutation,
+} from 'generated/graphql';
 
 const CompanyOwnerProfile: React.FunctionComponent = () => {
-  const reactQueryClient = useReactQueryClient();
   const { user: sessionUser } = useAuthState();
-  const notify = useNotify();
-
   const userID = sessionUser?.id;
   const companyOwnerID = sessionUser?.companyOwner?.id;
   const { data: { companyOwner } = {} } = useCompanyOwnerQuery(
     { id: companyOwnerID || '' },
     { enabled: !!companyOwnerID },
   );
+
+  const reactQueryClient = useReactQueryClient();
+  const notify = useNotify();
   const mutation = useUpdateUserMutation({
     onSuccess: async (data) => {
       const updatedUser = data.updateUser?.user;
-      reactQueryClient.setQueryData<GetUserInfoQuery>(['GetUserInfo', { id: userID }], {
-        user: {
-          id: userID || '',
-          firstName: updatedUser?.firstName,
-          lastName: updatedUser?.lastName,
-          mobileNumber: updatedUser?.mobileNumber || '',
+      reactQueryClient.setQueryData<CompanyOwnerLayoutQuery>(['CompanyOwnerLayout', { id: companyOwnerID }], {
+        companyOwner: {
+          id: companyOwnerID || '',
+          user: {
+            id: userID || '',
+            firstName: updatedUser?.firstName,
+            lastName: updatedUser?.lastName,
+            mobileNumber: updatedUser?.mobileNumber || '',
+          },
         },
       });
       reactQueryClient.setQueryData<CompanyOwnerQuery>(['CompanyOwner', { id: companyOwnerID }], {

@@ -1,0 +1,6 @@
+query AreasOfCity($id: ID!) {
+  areas(where: { city: { id: $id } }) {
+    id
+    name
+  }
+}
