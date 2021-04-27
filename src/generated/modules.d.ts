@@ -46,7 +46,7 @@ declare module '*/company-owner.graphql' {
 declare module '*/company.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const CompanyProfile: DocumentNode;
+  export const Company: DocumentNode;
   export const CompanyBusinessTypes: DocumentNode;
   export const UpdateCompanyInformation: DocumentNode;
   export const SetCompanyRegisteredAddress: DocumentNode;

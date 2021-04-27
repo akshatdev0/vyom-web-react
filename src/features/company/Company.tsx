@@ -19,15 +19,15 @@ import React from 'react';
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
 
 import { useAuthState } from 'features/auth';
-import { useCompanyProfileQuery } from 'generated/graphql';
+import { useCompanyQuery } from 'generated/graphql';
 import CompanyDetails from './CompanyDetails';
 import CompanyInformation from './CompanyInformation';
 import CompanyRegisteredAddress from './CompanyRegisteredAddress';
 
-const CompanyProfile: React.FunctionComponent = () => {
+const Company: React.FunctionComponent = () => {
   const { user: sessionUser } = useAuthState();
   const companyID = sessionUser?.companyOwner?.company?.id;
-  const { data: { company } = {} } = useCompanyProfileQuery({ id: companyID || '' }, { enabled: !!companyID });
+  const { data: { company } = {} } = useCompanyQuery({ id: companyID || '' }, { enabled: !!companyID });
 
   return (
     <>
@@ -62,4 +62,4 @@ const CompanyProfile: React.FunctionComponent = () => {
   );
 };
 
-export default CompanyProfile;
+export default Company;

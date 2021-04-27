@@ -9,14 +9,10 @@ import { useFillForm } from 'hooks';
 import { useReactQueryClient } from 'client';
 import { useNotify } from 'core/notification';
 import { useAuthState } from 'features/auth';
-import {
-  CompanyProfileQuery,
-  useCompanyBusinessTypesQuery,
-  useUpdateCompanyInformationMutation,
-} from 'generated/graphql';
+import { CompanyQuery, useCompanyBusinessTypesQuery, useUpdateCompanyInformationMutation } from 'generated/graphql';
 
 type Props = {
-  company: Maybe<CompanyProfileQuery['company']>;
+  company: Maybe<CompanyQuery['company']>;
 };
 
 const CompanyInformation: React.FunctionComponent<Props> = ({ company }: Props) => {
@@ -29,7 +25,7 @@ const CompanyInformation: React.FunctionComponent<Props> = ({ company }: Props) 
   const { mutate, isLoading, isError, error } = useUpdateCompanyInformationMutation({
     onSuccess: async (data) => {
       const updatedCompanyInformation = data.updateCompany?.company;
-      reactQueryClient.setQueryData<CompanyProfileQuery>(['CompanyProfile', { id: company?.id }], {
+      reactQueryClient.setQueryData<CompanyQuery>(['Company', { id: company?.id }], {
         company: updatedCompanyInformation,
       });
       reactQueryClient.invalidateQueries(['CompanyOwnerLayout', { id: companyOwnerID }]);

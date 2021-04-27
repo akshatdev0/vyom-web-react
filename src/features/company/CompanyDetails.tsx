@@ -8,7 +8,7 @@ import { useFillForm } from 'hooks';
 import { useNotify } from 'core/notification';
 import { Maybe } from 'types';
 import {
-  CompanyProfileQuery,
+  CompanyQuery,
   useSetCompanyDetailMutation,
   useCreateCompanyDetailMutation,
   useUpdateCompanyDetailMutation,
@@ -17,7 +17,7 @@ import {
 } from 'generated/graphql';
 
 type Props = {
-  company: Maybe<CompanyProfileQuery['company']>;
+  company: Maybe<CompanyQuery['company']>;
 };
 
 const CompanyDetails: React.FunctionComponent<Props> = ({ company }: Props) => {
