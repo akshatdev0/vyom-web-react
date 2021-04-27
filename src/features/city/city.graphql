@@ -1,0 +1,6 @@
+query CitiesOfState($id: ID!) {
+  cities(where: { state: { id: $id } }) {
+    id
+    name
+  }
+}

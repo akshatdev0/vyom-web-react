@@ -4,32 +4,36 @@ import classnames from 'classnames';
 import { Control, useController, FieldName, FieldValues } from 'react-hook-form';
 import { FormGroup, Input } from 'reactstrap';
 
-import { Override } from 'types';
-
 type InputProps = React.ComponentProps<typeof Input>;
 
-type Props<TFieldValues extends FieldValues = FieldValues> = Override<
-  InputProps,
-  { defaultValue?: string | number | string[] | undefined | null }
-> & {
+type Props<TFieldValues extends FieldValues = FieldValues> = Omit<InputProps, 'defaultValue'> & {
   name: FieldName<TFieldValues>;
   control: Control<TFieldValues>;
   children: React.ReactNode;
   errorText?: any;
   labelValue: string;
+  selectedByDefault?: boolean;
 };
 
-const Select = ({ name, control, children, defaultValue = '', labelValue, disabled }: Props): JSX.Element => {
+const Select = ({
+  name,
+  control,
+  children,
+  labelValue,
+  disabled,
+  onChange,
+  selectedByDefault = false,
+}: Props): JSX.Element => {
   const [focused, setFocused] = useState(false);
 
   const {
-    field: { ref, onBlur: onBlurCallback, ...rest },
+    field: { ref, onBlur: onBlurControlled, onChange: onChangeControlled, ...rest },
     fieldState: { invalid },
     formState: { errors },
   } = useController({
     name: `${name}` as const,
     control,
-    defaultValue: defaultValue || '',
+    defaultValue: '',
   });
 
   const inputProps: InputProps = {
@@ -40,7 +44,13 @@ const Select = ({ name, control, children, defaultValue = '', labelValue, disabl
     onFocus: () => setFocused(true),
     onBlur: () => {
       setFocused(false);
-      onBlurCallback();
+      onBlurControlled();
+    },
+    onChange: (e) => {
+      if (onChange) {
+        onChange(e);
+      }
+      onChangeControlled(e);
     },
     ...rest,
   };
@@ -57,7 +67,10 @@ const Select = ({ name, control, children, defaultValue = '', labelValue, disabl
       <label className="form-control-label" htmlFor={name}>
         {labelValue}
       </label>
-      <Input {...inputProps}>{children}</Input>
+      <Input {...inputProps}>
+        {!selectedByDefault && <option value="0">-- select an option --</option>}
+        {children}
+      </Input>
       {error}
     </FormGroup>
   );

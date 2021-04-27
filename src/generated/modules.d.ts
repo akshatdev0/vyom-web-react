@@ -1,3 +1,20 @@
+declare module '*/address.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const CreateAddress: DocumentNode;
+  export const UpdateAddress: DocumentNode;
+
+  export default defaultDocument;
+}
+
+declare module '*/area.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const AreasOfCity: DocumentNode;
+
+  export default defaultDocument;
+}
+
 declare module '*/auth.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
@@ -10,10 +27,48 @@ declare module '*/auth.graphql' {
   export default defaultDocument;
 }
 
+declare module '*/city.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const CitiesOfState: DocumentNode;
+
+  export default defaultDocument;
+}
+
 declare module '*/company-owner.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const CompanyOwner: DocumentNode;
+
+  export default defaultDocument;
+}
+
+declare module '*/company.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const CompanyProfile: DocumentNode;
+  export const CompanyBusinessTypes: DocumentNode;
+  export const UpdateCompanyInformation: DocumentNode;
+  export const SetCompanyRegisteredAddress: DocumentNode;
+  export const UpdateCompanyDetail: DocumentNode;
+  export const CreateCompanyDetail: DocumentNode;
+  export const SetCompanyDetail: DocumentNode;
+
+  export default defaultDocument;
+}
+
+declare module '*/country.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const Countries: DocumentNode;
+
+  export default defaultDocument;
+}
+
+declare module '*/state.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const StatesOfCountry: DocumentNode;
 
   export default defaultDocument;
 }
@@ -24,6 +79,14 @@ declare module '*/user.graphql' {
   export const GetUserInfo: DocumentNode;
   export const User: DocumentNode;
   export const UpdateUser: DocumentNode;
+
+  export default defaultDocument;
+}
+
+declare module '*/company-ower-layout.graphql' {
+  import { DocumentNode } from 'graphql';
+  const defaultDocument: DocumentNode;
+  export const CompanyOwnerLayout: DocumentNode;
 
   export default defaultDocument;
 }

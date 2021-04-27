@@ -1,0 +1,89 @@
+mutation CreateAddress(
+  $addressLine1: String!
+  $addressLine2: String
+  $landmark: String
+  $postalCode: String
+  $area: ID!
+) {
+  createAddress(
+    input: {
+      data: {
+        addressLine1: $addressLine1
+        addressLine2: $addressLine2
+        landmark: $landmark
+        postalCode: $postalCode
+        area: $area
+      }
+    }
+  ) {
+    address {
+      id
+      addressLine1
+      addressLine2
+      landmark
+      postalCode
+      area {
+        id
+        name
+        city {
+          id
+          name
+          state {
+            id
+            name
+            country {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateAddress(
+  $id: ID!
+  $addressLine1: String!
+  $addressLine2: String
+  $landmark: String
+  $postalCode: String
+  $area: ID!
+) {
+  updateAddress(
+    input: {
+      where: { id: $id }
+      data: {
+        addressLine1: $addressLine1
+        addressLine2: $addressLine2
+        landmark: $landmark
+        postalCode: $postalCode
+        area: $area
+      }
+    }
+  ) {
+    address {
+      id
+      addressLine1
+      addressLine2
+      landmark
+      postalCode
+      area {
+        id
+        name
+        city {
+          id
+          name
+          state {
+            id
+            name
+            country {
+              id
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
