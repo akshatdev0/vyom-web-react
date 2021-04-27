@@ -1,10 +1,9 @@
-export { default as AccountInformation } from './AccountInformation';
+export { default as AddressInput } from './AddressInput';
 export { default as AlternativeHeader } from './AlternativeHeader';
 export { default as AuthFooter } from './AuthFooter';
 export { default as AuthHeader } from './AuthHeader';
 export { default as AuthTopbar } from './AuthTopbar';
 export { default as CardsHeader } from './CardsHeader';
-export { default as PersonalInformation } from './PersonalInformation';
 export { default as ProfileHeader } from './ProfileHeader';
 export { default as ProProfileHeader } from './ProProfileHeader';
 export { default as ProHeader } from './ProHeader';

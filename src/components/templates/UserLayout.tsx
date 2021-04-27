@@ -23,6 +23,7 @@ import { getRoutes, Navigation } from 'core/navigation';
 import { NotificationContainer } from 'core/notification';
 import { UserTopbar, UserFooter, Sidebar } from 'components/molecules';
 import { useScrollTop, useToggleSidebar } from 'hooks';
+import { Business, Maybe, User } from 'types';
 
 type Props = {
   // The layout for which this sidebar will be used
@@ -31,6 +32,8 @@ type Props = {
   sidebarMenu: Navigation;
   // user account menu which will be displayed inside the topbar
   userAccountMenu: Navigation;
+  user: Maybe<User>;
+  business: Maybe<Business>;
   // nav bar theme
   navbarTheme?: string;
 };
@@ -39,6 +42,8 @@ const UserLayout: React.FunctionComponent<Props> = ({
   layout,
   sidebarMenu,
   userAccountMenu,
+  user,
+  business,
   navbarTheme = 'dark',
 }: Props) => {
   const mainContentRef = useScrollTop();
@@ -65,6 +70,8 @@ const UserLayout: React.FunctionComponent<Props> = ({
             sidebarOpen={sidebarOpen}
             toggleSidebar={toggleSidebar}
             accountMenu={userAccountMenu}
+            user={user}
+            business={business}
           />
           <Switch>
             {getRoutes(layout, sidebarMenu, userAccountMenu)}

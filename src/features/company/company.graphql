@@ -1,0 +1,128 @@
+query Company($id: ID!) {
+  company(id: $id) {
+    id
+    name
+    businessType {
+      id
+    }
+    companyType {
+      id
+    }
+    sku
+    registeredAddress {
+      id
+      addressLine1
+      addressLine2
+      landmark
+      postalCode
+      area {
+        id
+        city {
+          id
+          state {
+            id
+            country {
+              id
+            }
+          }
+        }
+      }
+    }
+    companyDetail {
+      id
+      returnPolicy
+    }
+  }
+}
+
+query CompanyBusinessTypes {
+  companyTypes {
+    id
+    name
+  }
+  businessTypes {
+    id
+    name
+  }
+}
+
+mutation UpdateCompanyInformation($id: ID!, $name: String, $businessType: ID, $companyType: ID) {
+  updateCompany(
+    input: { where: { id: $id }, data: { name: $name, businessType: $businessType, companyType: $companyType } }
+  ) {
+    company {
+      id
+      name
+      sku
+      businessType {
+        id
+        name
+      }
+      companyType {
+        id
+        name
+      }
+    }
+  }
+}
+
+mutation SetCompanyRegisteredAddress($id: ID!, $registeredAddress: ID!) {
+  updateCompany(input: { where: { id: $id }, data: { registeredAddress: $registeredAddress } }) {
+    company {
+      id
+      registeredAddress {
+        id
+        addressLine1
+        addressLine2
+        landmark
+        postalCode
+        area {
+          id
+          name
+          city {
+            id
+            name
+            state {
+              id
+              name
+              country {
+                id
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateCompanyDetail($id: ID!, $returnPolicy: String) {
+  updateCompanyDetail(input: { where: { id: $id }, data: { returnPolicy: $returnPolicy } }) {
+    companyDetail {
+      id
+      returnPolicy
+    }
+  }
+}
+
+mutation CreateCompanyDetail($returnPolicy: String) {
+  createCompanyDetail(input: { data: { returnPolicy: $returnPolicy } }) {
+    companyDetail {
+      id
+      returnPolicy
+    }
+  }
+}
+
+mutation SetCompanyDetail($id: ID!, $companyDetail: ID!) {
+  updateCompany(input: { where: { id: $id }, data: { companyDetail: $companyDetail } }) {
+    company {
+      id
+      companyDetail {
+        id
+        returnPolicy
+      }
+    }
+  }
+}

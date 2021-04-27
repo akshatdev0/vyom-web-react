@@ -40,10 +40,12 @@ import {
   Container,
   Row,
   Col,
+  Media,
 } from 'reactstrap';
 
 import UserAccountMenu from './UserAccountMenu';
 import { Navigation } from 'core/navigation';
+import { Business, Maybe, User } from 'types';
 
 type Props = {
   // The layout for which this menu will be used
@@ -53,6 +55,8 @@ type Props = {
   toggleSidebar: () => void;
   // navigation which will be displayed inside the component
   accountMenu: Navigation;
+  user: Maybe<User>;
+  business: Maybe<Business>;
 };
 
 const UserTopbar: React.FunctionComponent<Props> = ({
@@ -61,6 +65,8 @@ const UserTopbar: React.FunctionComponent<Props> = ({
   toggleSidebar,
   layout,
   accountMenu: navigation,
+  user,
+  business,
 }: Props) => {
   // function that on mobile devices makes the search open
   const openSearch = () => {
@@ -101,6 +107,15 @@ const UserTopbar: React.FunctionComponent<Props> = ({
       >
         <Container fluid>
           <Collapse navbar isOpen={true}>
+            {business && (
+              <Nav className="align-items-center ml-auto ml-md-0 d-none d-lg-block" navbar>
+                <Media className="align-items-center">
+                  <Media className="ml-0 mr-6 d-none d-lg-block">
+                    <span className="mb-0 text-lg font-weight-bold">{business.name}</span>
+                  </Media>
+                </Media>
+              </Nav>
+            )}
             <Form
               className={classnames(
                 'navbar-search form-inline mr-sm-3',
@@ -349,7 +364,7 @@ const UserTopbar: React.FunctionComponent<Props> = ({
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
-            <UserAccountMenu layout={layout} navigation={navigation} />
+            <UserAccountMenu layout={layout} navigation={navigation} user={user} />
           </Collapse>
         </Container>
       </Navbar>
