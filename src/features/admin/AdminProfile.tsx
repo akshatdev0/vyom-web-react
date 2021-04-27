@@ -17,7 +17,7 @@
 import React from 'react';
 import { useReactQueryClient } from 'client';
 
-import { UserProfile } from 'components/templates';
+import { UserProfile } from 'features/user';
 import { useAuthState } from 'features/auth';
 import { UserQuery, GetUserInfoQuery, useUserQuery, useUpdateUserMutation } from 'generated/graphql';
 

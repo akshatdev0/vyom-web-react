@@ -27,6 +27,7 @@ import Validation from 'views/pro/pages/forms/Validation.js';
 import Vector from 'views/pro/pages/maps/Vector.js';
 
 import { CompanyOwnerProfile } from 'features/company-owner';
+import { CompanyProfile } from 'features/company';
 
 const sidebarMenu: Navigation = [
   {
@@ -125,6 +126,13 @@ const userAccountMenu: Navigation = [
     icon: 'ni ni-single-02',
     path: '/profile',
     component: CompanyOwnerProfile,
+  },
+  {
+    identifier: 'company',
+    name: 'Company',
+    icon: 'ni ni-building',
+    path: '/company',
+    component: CompanyProfile,
   },
   {
     identifier: 'settings',

@@ -20,9 +20,25 @@ import React from 'react';
 import { UserLayout } from 'components/templates';
 import { Layout } from 'layouts';
 import { sidebarMenu, userAccountMenu } from './navigations';
+import { useAuthState } from 'features/auth';
+import { useCompanyOwnerLayoutQuery } from 'generated/graphql';
 
 const CompanyOwnerLayout: React.FunctionComponent = () => {
-  return <UserLayout layout={Layout.CompanyOwner} sidebarMenu={sidebarMenu} userAccountMenu={userAccountMenu} />;
+  const { user: sessionUser } = useAuthState();
+  const companyOwnerID = sessionUser?.companyOwner?.id;
+  const { data: { companyOwner } = {} } = useCompanyOwnerLayoutQuery(
+    { id: companyOwnerID || '' },
+    { enabled: !!companyOwnerID },
+  );
+  return (
+    <UserLayout
+      layout={Layout.CompanyOwner}
+      sidebarMenu={sidebarMenu}
+      userAccountMenu={userAccountMenu}
+      user={companyOwner?.user}
+      business={companyOwner?.company}
+    />
+  );
 };
 
 export default CompanyOwnerLayout;

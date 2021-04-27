@@ -12,7 +12,7 @@ type Props<TFieldValues extends FieldValues = FieldValues> = {
 
 const AccountInformation: React.FunctionComponent<Props> = ({ control }: Props) => (
   <>
-    <h6 className="heading-small text-muted mb-4">Account information</h6>
+    <h6 className="heading-small text-muted mb-4">Account Information</h6>
     <div className="pl-lg-4">
       <Row>
         <Col lg="4">
