@@ -1,8 +1,6 @@
 import React from 'react';
-
 // reactstrap components
 import { Button, Card, CardBody, Form, Row, Col } from 'reactstrap';
-
 import { useForm } from 'react-hook-form';
 
 import { ErrorAlert, TextField } from 'components/atoms';

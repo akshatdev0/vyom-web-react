@@ -6,6 +6,7 @@ import { FormGroup, Input } from 'reactstrap';
 import ReactQuill from 'react-quill';
 
 import { Override } from 'types';
+import { getZodError } from 'core/utils';
 
 type ReactstrapInputProps = React.ComponentProps<typeof Input>;
 
@@ -131,7 +132,8 @@ const QuillEditor = ({
     disabled,
     ...rest,
   };
-  const error = invalid ? <div className="invalid-feedback">{errors[name]?.message}</div> : null;
+
+  const error = invalid ? <div className="invalid-feedback">{getZodError(name, errors)}</div> : null;
 
   return (
     <FormGroup>

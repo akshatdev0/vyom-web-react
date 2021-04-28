@@ -41,7 +41,7 @@ const PersonalInformation: React.FunctionComponent<Props> = ({ control }: Props)
           <DatePicker name="dateOfBirth" labelValue="Date of Birth" control={control} />
         </Col>
         <Col lg="6">
-          <Select name="gender" labelValue="Gender" control={control}>
+          <Select name="gender" labelValue="Gender" selectedByDefault control={control}>
             <option value="MALE">Male</option>
             <option value="FEMALE">Female</option>
           </Select>

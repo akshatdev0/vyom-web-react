@@ -57,6 +57,7 @@ const AddressInput: React.FunctionComponent<Props> = ({ labelValue, address, set
       setValue(`${stateFieldName}` as const, '');
       setValue(`${cityFieldName}` as const, '');
       setValue(`${areaFieldName}` as const, '');
+      setStateID('0');
       statesOfCountryQuery.refetch();
     }
   }, [countryID]);
@@ -65,6 +66,7 @@ const AddressInput: React.FunctionComponent<Props> = ({ labelValue, address, set
     if (stateID && stateID !== address?.area?.city?.state?.id) {
       setValue(`${cityFieldName}` as const, '');
       setValue(`${areaFieldName}` as const, '');
+      setCityID('0');
       citiesOfStateQuery.refetch();
     }
   }, [stateID]);
