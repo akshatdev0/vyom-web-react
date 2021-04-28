@@ -1,14 +1,23 @@
 import React from 'react';
-
 // reactstrap components
 import { Button, Card, CardBody, Form, Row, Col } from 'reactstrap';
-
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 
+import * as v from 'validations';
 import { ErrorAlert, TextField } from 'components/atoms';
 import { useAuthState } from './auth';
 import { Stage } from 'views/SignUp';
-import { useSendOtpMutation, useVerifyMutation, VerifyMutationVariables } from 'generated/graphql';
+import { useSendOtpMutation, useVerifyMutation } from 'generated/graphql';
+import { useFillForm } from 'hooks';
+
+const schema = z.object({
+  mobileNumber: v.mobileNumber(),
+  token: v.otp(),
+});
+
+type FormValues = z.infer<typeof schema>;
 
 const VerifyAccount: React.FunctionComponent = ({ mobileNumber, nextStage, setStage }: any) => {
   const { createSession } = useAuthState();
@@ -29,8 +38,11 @@ const VerifyAccount: React.FunctionComponent = ({ mobileNumber, nextStage, setSt
   });
   const isLoading = sendOtpMutation.isLoading || verifyMutation.isLoading;
   const { isError, error } = verifyMutation;
-  const { control, handleSubmit } = useForm();
-  const onSubmit = async (variables: VerifyMutationVariables) => verifyMutation.mutate({ ...variables, mobileNumber });
+  const { control, handleSubmit, setValue } = useForm({
+    resolver: zodResolver(schema),
+  });
+  useFillForm(setValue, { mobileNumber });
+  const onSubmit = async (variables: FormValues) => verifyMutation.mutate(variables);
 
   return (
     <>

@@ -5,6 +5,7 @@ import { Control, useController, FieldName, FieldValues } from 'react-hook-form'
 import { FormGroup, Input } from 'reactstrap';
 
 import { Override } from 'types';
+import { getZodError } from 'core/utils';
 
 type InputProps = React.ComponentProps<typeof Input>;
 
@@ -62,7 +63,7 @@ const DatePicker = ({
     'has-danger': invalid,
   });
 
-  const error = invalid ? <div className="invalid-feedback">{errors[name]?.message}</div> : null;
+  const error = invalid ? <div className="invalid-feedback">{getZodError(name, errors)}</div> : null;
 
   return (
     <FormGroup className={formGroupClassName}>
