@@ -1,17 +1,21 @@
 import React from 'react';
-
 // reactstrap components
 import { Button, Card, CardBody, Form } from 'reactstrap';
-
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 
 import * as v from 'validations';
 import { ErrorAlert, TextField } from 'components/atoms';
-import { CreatePasswordMutationVariables, useCreatePasswordMutation } from 'generated/graphql';
+import { useCreatePasswordMutation } from 'generated/graphql';
 import { useAuthState } from './auth';
 
-const schema = v.createPassword;
+const schema = v.createPassword();
+
+const valueSchema = z.object({
+  password: v.newPassword(),
+});
+type FormValues = z.infer<typeof valueSchema>;
 
 const CreatePassword: React.FunctionComponent = () => {
   const { signIn } = useAuthState();
@@ -25,7 +29,7 @@ const CreatePassword: React.FunctionComponent = () => {
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(schema),
   });
-  const onSubmit = async (variables: CreatePasswordMutationVariables) => mutate(variables);
+  const onSubmit = async (variables: FormValues) => mutate(variables);
 
   return (
     <>
