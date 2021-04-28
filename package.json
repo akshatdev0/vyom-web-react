@@ -1,6 +1,6 @@
 {
   "name": "vyom-web",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Vyom Web Application",
   "main": "index.js",
   "author": "Exilien Supreme",
