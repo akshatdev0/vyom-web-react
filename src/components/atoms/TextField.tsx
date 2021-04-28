@@ -5,6 +5,7 @@ import { Control, useController, FieldName, FieldValues } from 'react-hook-form'
 import { FormGroup, Input, InputGroupAddon, InputGroupText, InputGroup } from 'reactstrap';
 
 import { Override } from 'types';
+import { getZodError } from 'core/utils';
 
 type ReactstrapInputProps = React.ComponentProps<typeof Input>;
 
@@ -65,7 +66,7 @@ const TextField = ({
   });
 
   const input = <Input {...inputProps} />;
-  const error = invalid ? <div className="invalid-feedback">{errors[name]?.message}</div> : null;
+  const error = invalid ? <div className="invalid-feedback">{getZodError(name, errors)}</div> : null;
 
   switch (labelType) {
     case 'text':
