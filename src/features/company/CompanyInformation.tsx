@@ -1,8 +1,12 @@
 import React from 'react';
+import * as _ from 'lodash';
 // reactstrap components
 import { Row, Col, Form, Button } from 'reactstrap';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 
+import * as v from 'validations';
 import { ErrorAlert, Select, TextField } from 'components/atoms';
 import { Maybe } from 'types';
 import { useFillForm } from 'hooks';
@@ -14,6 +18,23 @@ import { CompanyQuery, useCompanyBusinessTypesQuery, useUpdateCompanyInformation
 type Props = {
   company: Maybe<CompanyQuery['company']>;
 };
+
+const schema = z.object({
+  id: v.id(),
+  name: v.companyName(),
+  registrationNumber: z.string().optional(),
+  companyType: z.object({
+    id: v.selected(),
+  }),
+  businessType: z.object({
+    id: v.selected(),
+  }),
+  sku: z.undefined(),
+});
+
+type FormValues = z.infer<typeof schema>;
+
+const paths = ['id', 'name', 'registrationNumber', 'companyType.id', 'businessType.id', 'sku'];
 
 const CompanyInformation: React.FunctionComponent<Props> = ({ company }: Props) => {
   const { data: { companyTypes, businessTypes } = {} } = useCompanyBusinessTypesQuery();
@@ -33,17 +54,17 @@ const CompanyInformation: React.FunctionComponent<Props> = ({ company }: Props) 
     },
   });
 
-  const { control, handleSubmit, setValue } = useForm();
-  useFillForm(setValue, company);
-  const onSubmit = async (variables: any) => {
-    if (company) {
-      mutate({
-        id: company?.id,
-        name: variables.name,
-        companyType: variables.companyType.id,
-        businessType: variables.businessType.id,
-      });
-    }
+  const { control, handleSubmit, setValue } = useForm({
+    resolver: zodResolver(schema),
+  });
+  useFillForm(setValue, _.pick(company, paths));
+  const onSubmit = async (variables: FormValues) => {
+    mutate({
+      id: variables.id,
+      name: variables.name,
+      companyType: variables.companyType.id,
+      businessType: variables.businessType.id,
+    });
   };
 
   return (

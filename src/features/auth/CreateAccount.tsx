@@ -1,8 +1,6 @@
 import React from 'react';
-
 // reactstrap components
 import { Button, Card, CardBody, Form, Row, Col } from 'reactstrap';
-
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,11 +8,13 @@ import * as z from 'zod';
 
 import * as v from 'validations';
 import { ErrorAlert, TextField } from 'components/atoms';
-import { SignUpMutationVariables, useSignUpMutation } from 'generated/graphql';
+import { useSignUpMutation } from 'generated/graphql';
 
 const schema = z.object({
-  mobileNumber: v.mobileNumber,
+  mobileNumber: v.mobileNumber(),
 });
+
+type FormValues = z.infer<typeof schema>;
 
 const CreateAccount: React.FunctionComponent = ({ mobileNumber, setMobileNumber, nextStage }: any) => {
   const { mutate, isLoading, isError, error } = useSignUpMutation({
@@ -28,7 +28,7 @@ const CreateAccount: React.FunctionComponent = ({ mobileNumber, setMobileNumber,
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(schema),
   });
-  const onSubmit = async (variables: SignUpMutationVariables) => mutate(variables);
+  const onSubmit = async (variables: FormValues) => mutate(variables);
 
   return (
     <>

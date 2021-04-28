@@ -2,6 +2,7 @@ import React from 'react';
 // reactstrap components
 import { Row, Col, Form, Button } from 'reactstrap';
 import { useForm } from 'react-hook-form';
+import * as z from 'zod';
 
 import { ErrorAlert, QuillEditor } from 'components/atoms';
 import { useFillForm } from 'hooks';
@@ -12,13 +13,17 @@ import {
   useSetCompanyDetailMutation,
   useCreateCompanyDetailMutation,
   useUpdateCompanyDetailMutation,
-  CreateCompanyDetailMutationVariables,
-  UpdateCompanyDetailMutationVariables,
 } from 'generated/graphql';
 
 type Props = {
   company: Maybe<CompanyQuery['company']>;
 };
+
+const schema = z.object({
+  returnPolicy: z.string().optional(),
+});
+
+type FormValues = z.infer<typeof schema>;
 
 const CompanyDetails: React.FunctionComponent<Props> = ({ company }: Props) => {
   const notify = useNotify();
@@ -46,7 +51,7 @@ const CompanyDetails: React.FunctionComponent<Props> = ({ company }: Props) => {
 
   const { control, handleSubmit, setValue } = useForm();
   useFillForm(setValue, company?.companyDetail);
-  const onSubmit = async (variables: CreateCompanyDetailMutationVariables | UpdateCompanyDetailMutationVariables) => {
+  const onSubmit = async (variables: FormValues) => {
     if (company?.companyDetail) {
       updateMutation.mutate({ id: company.id, ...variables });
     } else {

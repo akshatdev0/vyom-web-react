@@ -29,12 +29,14 @@ import * as v from 'validations';
 import { ErrorAlert, TextField } from 'components/atoms';
 import { AuthHeader } from 'components/molecules';
 import { useAuthState } from 'features/auth';
-import { SignInMutationVariables, useSignInMutation } from 'generated/graphql';
+import { useSignInMutation } from 'generated/graphql';
 
 const schema = z.object({
-  mobileNumber: v.mobileNumber,
-  password: v.password,
+  mobileNumber: v.mobileNumber(),
+  password: v.password(),
 });
+
+type FormValues = z.infer<typeof schema>;
 
 const Login: React.FunctionComponent = () => {
   const { signIn } = useAuthState();
@@ -44,7 +46,7 @@ const Login: React.FunctionComponent = () => {
   const { control, handleSubmit } = useForm({
     resolver: zodResolver(schema),
   });
-  const onSubmit = async (variables: SignInMutationVariables) => mutate(variables);
+  const onSubmit = async (variables: FormValues) => mutate(variables);
 
   return (
     <>

@@ -2,7 +2,10 @@ import React from 'react';
 // reactstrap components
 import { Form, Button } from 'reactstrap';
 import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
 
+import * as v from 'validations';
 import { ErrorAlert } from 'components/atoms';
 import { useFillForm } from 'hooks';
 import { useNotify } from 'core/notification';
@@ -18,6 +21,10 @@ import {
 type Props = {
   company: Maybe<CompanyQuery['company']>;
 };
+
+const schema = v.address();
+
+type FormValues = z.infer<typeof schema>;
 
 const CompanyRegisteredAddress: React.FunctionComponent<Props> = ({ company }: Props) => {
   const notify = useNotify();
@@ -43,9 +50,11 @@ const CompanyRegisteredAddress: React.FunctionComponent<Props> = ({ company }: P
     },
   });
 
-  const { control, handleSubmit, setValue } = useForm();
+  const { control, handleSubmit, setValue } = useForm({
+    resolver: zodResolver(schema),
+  });
   useFillForm(setValue, company?.registeredAddress);
-  const onSubmit = async (variables: any) => {
+  const onSubmit = async (variables: FormValues) => {
     const address = {
       addressLine1: variables.addressLine1,
       addressLine2: variables.addressLine2,
@@ -54,7 +63,7 @@ const CompanyRegisteredAddress: React.FunctionComponent<Props> = ({ company }: P
       area: variables.area.id,
     };
     if (company?.registeredAddress) {
-      updateMutation.mutate({ id: company.registeredAddress.id, ...address });
+      updateMutation.mutate({ id: variables.id, ...address });
     } else {
       createMutation.mutate(address);
     }
