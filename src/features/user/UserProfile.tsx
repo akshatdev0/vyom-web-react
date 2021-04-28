@@ -37,15 +37,17 @@ type Props = {
 };
 
 const schema = z.object({
-  id: z.string().nonempty(),
-  firstName: v.firstName,
-  lastName: v.lastName,
-  gender: v.gender,
+  id: v.id(),
+  firstName: v.firstName(),
+  lastName: v.lastName(),
+  gender: v.gender(),
   dateOfBirth: z.string().optional(),
   mobileNumber: z.undefined(),
-  alternateMobileNumber: v.alternateMobileNumber,
-  email: v.email,
+  alternateMobileNumber: v.alternateMobileNumber(),
+  email: v.email(),
 });
+
+type FormValues = z.infer<typeof schema>;
 
 const UserProfile: React.FunctionComponent<Props> = ({ mutation, user }: Props) => {
   const { control, handleSubmit, setValue } = useForm({
@@ -53,7 +55,7 @@ const UserProfile: React.FunctionComponent<Props> = ({ mutation, user }: Props) 
   });
   useFillForm(setValue, user);
   const { mutate, isLoading, isError, error } = mutation;
-  const onSubmit = async (variables: UpdateUserMutationVariables) => {
+  const onSubmit = async (variables: FormValues) => {
     mutate(variables);
   };
 
