@@ -2401,6 +2401,20 @@
   dependencies:
     parchment "^1.1.2"
 
+"@types/react-bootstrap-table-next@*":
+  version "4.0.13"
+  resolved "https://registry.yarnpkg.com/@types/react-bootstrap-table-next/-/react-bootstrap-table-next-4.0.13.tgz#0f02ef3f3dddff298564621ff5b86ca39f3aead2"
+  integrity sha512-vphk6SWBO/AOfimSLSONvWOMNQFQPJq+dFj6cikGtXsW9eRZu4U+lhAwtgtfYNgLgIWODA1U2D2GXljKQYm5EQ==
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-bootstrap-table2-paginator@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@types/react-bootstrap-table2-paginator/-/react-bootstrap-table2-paginator-2.1.1.tgz#43e625c3b11f06403b23eeb6b5d7661a4bc52623"
+  integrity sha512-Ho0lwDKguwHEme97oHgVQRI8t//4JfCRqnIzlLPuM+aU5LfGI8niXxuBmUPyXqdSXitZ1C9ANQAMGqqBmuW0NQ==
+  dependencies:
+    "@types/react-bootstrap-table-next" "*"
+
 "@types/react-copy-to-clipboard@5.0.0":
   version "5.0.0"
   resolved "https://registry.yarnpkg.com/@types/react-copy-to-clipboard/-/react-copy-to-clipboard-5.0.0.tgz#38b035ca0c28334d3e0efaf3f319b81eea9690cd"
