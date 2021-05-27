@@ -28,6 +28,7 @@ import Vector from 'views/pro/pages/maps/Vector.js';
 
 import { CompanyOwnerProfile } from 'features/company-owner';
 import { Company } from 'features/company';
+import { Products } from 'features/product-catalog';
 
 const sidebarMenu: Navigation = [
   {
@@ -36,6 +37,21 @@ const sidebarMenu: Navigation = [
     icon: 'ni ni-shop text-primary',
     path: '/dashboard',
     component: Dashboard,
+  },
+  {
+    identifier: 'product-catalog',
+    name: 'Product Catalog',
+    icon: 'ni ni-align-left-2 text-default',
+    collapse: true,
+    children: [
+      {
+        identifier: 'products',
+        path: '/products',
+        name: 'Products',
+        initial: 'P',
+        component: Products,
+      },
+    ],
   },
   {
     identifier: 'tables',

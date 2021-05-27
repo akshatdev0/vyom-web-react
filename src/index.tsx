@@ -35,15 +35,15 @@ import 'react-quill/dist/quill.snow.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 // syncfusion styles from node_modules
-import '@syncfusion/ej2-base/styles/material.css';
-import '@syncfusion/ej2-buttons/styles/material.css';
-import '@syncfusion/ej2-calendars/styles/material.css';
-import '@syncfusion/ej2-dropdowns/styles/material.css';
-import '@syncfusion/ej2-inputs/styles/material.css';
-import '@syncfusion/ej2-navigations/styles/material.css';
-import '@syncfusion/ej2-popups/styles/material.css';
-import '@syncfusion/ej2-splitbuttons/styles/material.css';
-import '@syncfusion/ej2-react-grids/styles/material.css';
+import '@syncfusion/ej2-base/styles/bootstrap4.css';
+import '@syncfusion/ej2-buttons/styles/bootstrap4.css';
+import '@syncfusion/ej2-calendars/styles/bootstrap4.css';
+import '@syncfusion/ej2-dropdowns/styles/bootstrap4.css';
+import '@syncfusion/ej2-inputs/styles/bootstrap4.css';
+import '@syncfusion/ej2-navigations/styles/bootstrap4.css';
+import '@syncfusion/ej2-popups/styles/bootstrap4.css';
+import '@syncfusion/ej2-splitbuttons/styles/bootstrap4.css';
+import '@syncfusion/ej2-react-grids/styles/bootstrap4.css';
 
 // plugins styles downloaded
 import 'assets/vendor/nucleo/css/nucleo.css';
