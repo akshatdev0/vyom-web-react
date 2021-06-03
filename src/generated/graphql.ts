@@ -7570,9 +7570,11 @@ export type CountriesQuery = { __typename?: 'Query' } & {
   countries?: Maybe<Array<Maybe<{ __typename?: 'Country' } & Pick<Country, 'id' | 'name'>>>>;
 };
 
-export type ProductsQueryVariables = Exact<{ [key: string]: never }>;
+export type ProductsOfCompanyQueryVariables = Exact<{
+  companyID: Scalars['ID'];
+}>;
 
-export type ProductsQuery = { __typename?: 'Query' } & {
+export type ProductsOfCompanyQuery = { __typename?: 'Query' } & {
   products?: Maybe<
     Array<
       Maybe<
@@ -8070,9 +8072,9 @@ export const Countries = gql`
     }
   }
 `;
-export const Products = gql`
-  query products {
-    products {
+export const ProductsOfCompany = gql`
+  query ProductsOfCompany($companyID: ID!) {
+    products(where: { company: { id: $companyID } }) {
       id
       title
       sku
@@ -8709,9 +8711,9 @@ export const useCountriesQuery = <TData = CountriesQuery, TError = unknown>(
     useFetcher<CountriesQuery, CountriesQueryVariables>(CountriesDocument).bind(null, variables),
     options,
   );
-export const ProductsDocument = `
-    query products {
-  products {
+export const ProductsOfCompanyDocument = `
+    query ProductsOfCompany($companyID: ID!) {
+  products(where: {company: {id: $companyID}}) {
     id
     title
     sku
@@ -8731,13 +8733,16 @@ export const ProductsDocument = `
   }
 }
     `;
-export const useProductsQuery = <TData = ProductsQuery, TError = unknown>(
-  variables?: ProductsQueryVariables,
-  options?: UseQueryOptions<ProductsQuery, TError, TData>,
+export const useProductsOfCompanyQuery = <TData = ProductsOfCompanyQuery, TError = unknown>(
+  variables: ProductsOfCompanyQueryVariables,
+  options?: UseQueryOptions<ProductsOfCompanyQuery, TError, TData>,
 ) =>
-  useQuery<ProductsQuery, TError, TData>(
-    ['products', variables],
-    useFetcher<ProductsQuery, ProductsQueryVariables>(ProductsDocument).bind(null, variables),
+  useQuery<ProductsOfCompanyQuery, TError, TData>(
+    ['ProductsOfCompany', variables],
+    useFetcher<ProductsOfCompanyQuery, ProductsOfCompanyQueryVariables>(ProductsOfCompanyDocument).bind(
+      null,
+      variables,
+    ),
     options,
   );
 export const StatesOfCountryDocument = `

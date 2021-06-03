@@ -68,7 +68,7 @@ declare module '*/country.graphql' {
 declare module '*/product.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
-  export const products: DocumentNode;
+  export const ProductsOfCompany: DocumentNode;
 
   export default defaultDocument;
 }
