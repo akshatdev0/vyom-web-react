@@ -32,11 +32,13 @@ import {
 } from '@syncfusion/ej2-react-grids';
 // core components
 import { SimpleHeader } from 'components/molecules';
-// import { data } from './datasource';
-import { useProductsQuery } from 'generated/graphql';
+import { useAuthState } from 'features/auth';
+import { useProductsOfCompanyQuery } from 'generated/graphql';
 
 const Products: React.FunctionComponent = () => {
-  const productsQuery = useProductsQuery();
+  const { user: sessionUser } = useAuthState();
+  const companyID = sessionUser?.companyOwner?.company?.id;
+  const productsQuery = useProductsOfCompanyQuery({ companyID: companyID || '' }, { enabled: !!companyID });
   const { data: { products = [] } = {} } = productsQuery;
   const pageSettings: PageSettingsModel = { pageSize: 10 };
 
