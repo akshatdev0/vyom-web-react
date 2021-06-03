@@ -7570,6 +7570,22 @@ export type CountriesQuery = { __typename?: 'Query' } & {
   countries?: Maybe<Array<Maybe<{ __typename?: 'Country' } & Pick<Country, 'id' | 'name'>>>>;
 };
 
+export type ProductsQueryVariables = Exact<{ [key: string]: never }>;
+
+export type ProductsQuery = { __typename?: 'Query' } & {
+  products?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'Product' } & Pick<Product, 'id' | 'title' | 'sku' | 'price'> & {
+            productCategory?: Maybe<{ __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id' | 'name'>>;
+            brand?: Maybe<{ __typename?: 'Brand' } & Pick<Brand, 'id' | 'name'>>;
+            company?: Maybe<{ __typename?: 'Company' } & Pick<Company, 'id' | 'name'>>;
+          }
+      >
+    >
+  >;
+};
+
 export type StatesOfCountryQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -8051,6 +8067,28 @@ export const Countries = gql`
     countries {
       id
       name
+    }
+  }
+`;
+export const Products = gql`
+  query products {
+    products {
+      id
+      title
+      sku
+      productCategory {
+        id
+        name
+      }
+      brand {
+        id
+        name
+      }
+      price
+      company {
+        id
+        name
+      }
     }
   }
 `;
@@ -8669,6 +8707,37 @@ export const useCountriesQuery = <TData = CountriesQuery, TError = unknown>(
   useQuery<CountriesQuery, TError, TData>(
     ['Countries', variables],
     useFetcher<CountriesQuery, CountriesQueryVariables>(CountriesDocument).bind(null, variables),
+    options,
+  );
+export const ProductsDocument = `
+    query products {
+  products {
+    id
+    title
+    sku
+    productCategory {
+      id
+      name
+    }
+    brand {
+      id
+      name
+    }
+    price
+    company {
+      id
+      name
+    }
+  }
+}
+    `;
+export const useProductsQuery = <TData = ProductsQuery, TError = unknown>(
+  variables?: ProductsQueryVariables,
+  options?: UseQueryOptions<ProductsQuery, TError, TData>,
+) =>
+  useQuery<ProductsQuery, TError, TData>(
+    ['products', variables],
+    useFetcher<ProductsQuery, ProductsQueryVariables>(ProductsDocument).bind(null, variables),
     options,
   );
 export const StatesOfCountryDocument = `
