@@ -1,0 +1,20 @@
+query products {
+  products {
+    id
+    title
+    sku
+    productCategory {
+      id
+      name
+    }
+    brand {
+      id
+      name
+    }
+    price
+    company {
+      id
+      name
+    }
+  }
+}
