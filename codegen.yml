@@ -1,5 +1,5 @@
 overwrite: true
-schema: 'https://api.exilien.cloud/graphql'
+schema: 'http://13.127.231.74:1337/graphql'
 documents: 'src/**/*.graphql'
 generates:
   src/generated/graphql.ts:
