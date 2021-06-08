@@ -19,7 +19,14 @@ import React from 'react';
 
 // reactstrap components
 import { Card, CardHeader, Container } from 'reactstrap';
-import { TreeGridComponent, ColumnsDirective, ColumnDirective } from '@syncfusion/ej2-react-treegrid';
+import {
+  TreeGridComponent,
+  ColumnsDirective,
+  ColumnDirective,
+  Inject,
+  Page,
+  PageSettingsModel,
+} from '@syncfusion/ej2-react-treegrid';
 // core components
 import { SimpleHeader } from 'components/molecules';
 import { useAuthState } from 'features/auth';
@@ -33,6 +40,7 @@ const ProductCategories: React.FunctionComponent = () => {
     { enabled: !!companyID },
   );
   const { data: { productCategories = [] } = {} } = productCategoriesQuery;
+  const pageSettings: PageSettingsModel = { pageSize: 12 };
 
   const gridData = productCategories ? productCategories : undefined;
 
@@ -44,12 +52,19 @@ const ProductCategories: React.FunctionComponent = () => {
           <CardHeader className="border-0">
             <h3 className="mb-0">Product Categories</h3>
           </CardHeader>
-          <TreeGridComponent dataSource={gridData} treeColumnIndex={1} childMapping="subcategories" height="410">
+          <TreeGridComponent
+            dataSource={gridData}
+            treeColumnIndex={1}
+            childMapping="subcategories"
+            allowPaging={true}
+            pageSettings={pageSettings}
+          >
             <ColumnsDirective>
               <ColumnDirective field="id" headerText="ID" width="20" textAlign="Right"></ColumnDirective>
               <ColumnDirective field="name" headerText="Name" width="100"></ColumnDirective>
               <ColumnDirective field="description" headerText="Description" width="200" />
             </ColumnsDirective>
+            <Inject services={[Page]} />
           </TreeGridComponent>
         </Card>
       </Container>

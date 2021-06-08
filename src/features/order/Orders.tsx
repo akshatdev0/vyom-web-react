@@ -19,6 +19,7 @@ import React from 'react';
 
 // reactstrap components
 import { Card, CardHeader, Container } from 'reactstrap';
+import { Internationalization } from '@syncfusion/ej2-base';
 import {
   ColumnDirective,
   ColumnsDirective,
@@ -39,13 +40,16 @@ const Orders: React.FunctionComponent = () => {
   const { data: { orders = [] } = {} } = ordersQuery;
   const pageSettings: PageSettingsModel = { pageSize: 10 };
 
+  let intl = new Internationalization();
+  let dateFormat = intl.getDateFormat({ skeleton: 'medium', type: 'dateTime' });
+
   const tableData = orders?.map((order) => {
     return {
       id: order?.id,
       number: order?.number,
       currentStatus: order?.currentStatus,
       paymentStatus: order?.paymentStatus,
-      createdAt: order?.created_at,
+      createdAt: dateFormat(new Date(order?.created_at)),
       shop: order?.shop?.name,
       shopkeeperMobileNumber: order?.shop?.shopkeepers?.[0]?.user?.mobileNumber,
       areaAndCity: order?.shop?.billingAddress?.area?.name + ', ' + order?.shop?.billingAddress?.area?.city?.name,
