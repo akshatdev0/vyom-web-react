@@ -7607,6 +7607,26 @@ export type OrdersOfCompanyQuery = { __typename?: 'Query' } & {
   >;
 };
 
+export type ProductCategoriesOfCompanyQueryVariables = Exact<{
+  companyID: Scalars['ID'];
+}>;
+
+export type ProductCategoriesOfCompanyQuery = { __typename?: 'Query' } & {
+  productCategories?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id' | 'name' | 'description'> & {
+            company?: Maybe<{ __typename?: 'Company' } & Pick<Company, 'id'>>;
+            subcategories?: Maybe<
+              Array<Maybe<{ __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id' | 'name' | 'description'>>>
+            >;
+            parentCategory?: Maybe<{ __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id'>>;
+          }
+      >
+    >
+  >;
+};
+
 export type ProductsOfCompanyQueryVariables = Exact<{
   companyID: Scalars['ID'];
 }>;
@@ -8132,6 +8152,26 @@ export const OrdersOfCompany = gql`
             }
           }
         }
+      }
+    }
+  }
+`;
+export const ProductCategoriesOfCompany = gql`
+  query ProductCategoriesOfCompany($companyID: ID!) {
+    productCategories(where: { company: { id: $companyID }, parentCategory_null: true }) {
+      id
+      name
+      description
+      company {
+        id
+      }
+      subcategories {
+        id
+        name
+        description
+      }
+      parentCategory {
+        id
       }
     }
   }
@@ -8809,6 +8849,37 @@ export const useOrdersOfCompanyQuery = <TData = OrdersOfCompanyQuery, TError = u
   useQuery<OrdersOfCompanyQuery, TError, TData>(
     ['OrdersOfCompany', variables],
     useFetcher<OrdersOfCompanyQuery, OrdersOfCompanyQueryVariables>(OrdersOfCompanyDocument).bind(null, variables),
+    options,
+  );
+export const ProductCategoriesOfCompanyDocument = `
+    query ProductCategoriesOfCompany($companyID: ID!) {
+  productCategories(where: {company: {id: $companyID}, parentCategory_null: true}) {
+    id
+    name
+    description
+    company {
+      id
+    }
+    subcategories {
+      id
+      name
+      description
+    }
+    parentCategory {
+      id
+    }
+  }
+}
+    `;
+export const useProductCategoriesOfCompanyQuery = <TData = ProductCategoriesOfCompanyQuery, TError = unknown>(
+  variables: ProductCategoriesOfCompanyQueryVariables,
+  options?: UseQueryOptions<ProductCategoriesOfCompanyQuery, TError, TData>,
+) =>
+  useQuery<ProductCategoriesOfCompanyQuery, TError, TData>(
+    ['ProductCategoriesOfCompany', variables],
+    useFetcher<ProductCategoriesOfCompanyQuery, ProductCategoriesOfCompanyQueryVariables>(
+      ProductCategoriesOfCompanyDocument,
+    ).bind(null, variables),
     options,
   );
 export const ProductsOfCompanyDocument = `
