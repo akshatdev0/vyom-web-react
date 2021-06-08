@@ -65,7 +65,7 @@ const sidebarMenu: Navigation = [
   {
     identifier: 'orders',
     name: 'Orders',
-    icon: 'ni ni-shop text-primary',
+    icon: 'ni ni-align-left-2 text-default',
     path: '/orders',
     component: Orders,
   },
