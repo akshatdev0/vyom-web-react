@@ -1,0 +1,25 @@
+query OrdersOfCompany {
+  orders {
+    id
+    number
+    currentStatus
+    paymentStatus
+    created_at
+    shop {
+      name
+      shopkeepers {
+        user {
+          mobileNumber
+        }
+      }
+      billingAddress {
+        area {
+          name
+          city {
+            name
+          }
+        }
+      }
+    }
+  }
+}

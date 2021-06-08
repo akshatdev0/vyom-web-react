@@ -29,6 +29,7 @@ import Vector from 'views/pro/pages/maps/Vector.js';
 import { CompanyOwnerProfile } from 'features/company-owner';
 import { Company } from 'features/company';
 import { Products } from 'features/product-catalog';
+import { Orders } from 'features/order';
 
 const sidebarMenu: Navigation = [
   {
@@ -52,6 +53,13 @@ const sidebarMenu: Navigation = [
         component: Products,
       },
     ],
+  },
+  {
+    identifier: 'orders',
+    name: 'Orders',
+    icon: 'ni ni-shop text-primary',
+    path: '/orders',
+    component: Orders,
   },
   {
     identifier: 'tables',
