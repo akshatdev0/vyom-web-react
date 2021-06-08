@@ -44,6 +44,7 @@ import '@syncfusion/ej2-navigations/styles/bootstrap4.css';
 import '@syncfusion/ej2-popups/styles/bootstrap4.css';
 import '@syncfusion/ej2-splitbuttons/styles/bootstrap4.css';
 import '@syncfusion/ej2-react-grids/styles/bootstrap4.css';
+import '@syncfusion/ej2-react-treegrid/styles/bootstrap4.css';
 
 // plugins styles downloaded
 import 'assets/vendor/nucleo/css/nucleo.css';
