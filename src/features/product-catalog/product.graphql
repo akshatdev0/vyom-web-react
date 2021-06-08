@@ -1,0 +1,20 @@
+query ProductsOfCompany($companyID: ID!) {
+  products(where: { company: { id: $companyID } }) {
+    id
+    title
+    sku
+    productCategory {
+      id
+      name
+    }
+    brand {
+      id
+      name
+    }
+    price
+    company {
+      id
+      name
+    }
+  }
+}
