@@ -172,6 +172,7 @@ const Sidebar: React.FunctionComponent<Props> = ({
                 ) : null}
               </NavLink>
               <Collapse isOpen={state[item.identifier]}>
+                {/* eslint-disable-next-line */}
                 <Nav className="nav-sm flex-column">{createLinks(item.children)}</Nav>
               </Collapse>
             </NavItem>
@@ -244,7 +245,7 @@ const Sidebar: React.FunctionComponent<Props> = ({
       <div className="navbar-inner">
         <Collapse navbar isOpen={true}>
           <Nav navbar>{createLinks(navigation)}</Nav>
-          <hr className="my-3" />
+          {/* <hr className="my-3" />
           <h6 className="navbar-heading p-0 text-muted">
             <span className="docs-normal">Documentation</span>
             <span className="docs-mini">D</span>
@@ -274,7 +275,7 @@ const Sidebar: React.FunctionComponent<Props> = ({
                 <span className="nav-link-text">Plugins</span>
               </NavLink>
             </NavItem>
-          </Nav>
+          </Nav> */}
         </Collapse>
       </div>
     </div>
