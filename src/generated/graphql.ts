@@ -7570,6 +7570,81 @@ export type CountriesQuery = { __typename?: 'Query' } & {
   countries?: Maybe<Array<Maybe<{ __typename?: 'Country' } & Pick<Country, 'id' | 'name'>>>>;
 };
 
+export type OrdersOfCompanyQueryVariables = Exact<{ [key: string]: never }>;
+
+export type OrdersOfCompanyQuery = { __typename?: 'Query' } & {
+  orders?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'Order' } & Pick<Order, 'id' | 'number' | 'currentStatus' | 'paymentStatus' | 'created_at'> & {
+            shop?: Maybe<
+              { __typename?: 'Shop' } & Pick<Shop, 'name'> & {
+                  shopkeepers?: Maybe<
+                    Array<
+                      Maybe<
+                        { __typename?: 'Shopkeeper' } & {
+                          user?: Maybe<
+                            { __typename?: 'UsersPermissionsUser' } & Pick<UsersPermissionsUser, 'mobileNumber'>
+                          >;
+                        }
+                      >
+                    >
+                  >;
+                  billingAddress?: Maybe<
+                    { __typename?: 'Address' } & {
+                      area?: Maybe<
+                        { __typename?: 'Area' } & Pick<Area, 'name'> & {
+                            city?: Maybe<{ __typename?: 'City' } & Pick<City, 'name'>>;
+                          }
+                      >;
+                    }
+                  >;
+                }
+            >;
+          }
+      >
+    >
+  >;
+};
+
+export type ProductCategoriesOfCompanyQueryVariables = Exact<{
+  companyID: Scalars['ID'];
+}>;
+
+export type ProductCategoriesOfCompanyQuery = { __typename?: 'Query' } & {
+  productCategories?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id' | 'name' | 'description'> & {
+            company?: Maybe<{ __typename?: 'Company' } & Pick<Company, 'id'>>;
+            subcategories?: Maybe<
+              Array<Maybe<{ __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id' | 'name' | 'description'>>>
+            >;
+            parentCategory?: Maybe<{ __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id'>>;
+          }
+      >
+    >
+  >;
+};
+
+export type ProductsOfCompanyQueryVariables = Exact<{
+  companyID: Scalars['ID'];
+}>;
+
+export type ProductsOfCompanyQuery = { __typename?: 'Query' } & {
+  products?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'Product' } & Pick<Product, 'id' | 'title' | 'sku' | 'price'> & {
+            productCategory?: Maybe<{ __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id' | 'name'>>;
+            brand?: Maybe<{ __typename?: 'Brand' } & Pick<Brand, 'id' | 'name'>>;
+            company?: Maybe<{ __typename?: 'Company' } & Pick<Company, 'id' | 'name'>>;
+          }
+      >
+    >
+  >;
+};
+
 export type StatesOfCountryQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -8051,6 +8126,75 @@ export const Countries = gql`
     countries {
       id
       name
+    }
+  }
+`;
+export const OrdersOfCompany = gql`
+  query OrdersOfCompany {
+    orders {
+      id
+      number
+      currentStatus
+      paymentStatus
+      created_at
+      shop {
+        name
+        shopkeepers {
+          user {
+            mobileNumber
+          }
+        }
+        billingAddress {
+          area {
+            name
+            city {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+export const ProductCategoriesOfCompany = gql`
+  query ProductCategoriesOfCompany($companyID: ID!) {
+    productCategories(where: { company: { id: $companyID }, parentCategory_null: true }) {
+      id
+      name
+      description
+      company {
+        id
+      }
+      subcategories {
+        id
+        name
+        description
+      }
+      parentCategory {
+        id
+      }
+    }
+  }
+`;
+export const ProductsOfCompany = gql`
+  query ProductsOfCompany($companyID: ID!) {
+    products(where: { company: { id: $companyID } }) {
+      id
+      title
+      sku
+      productCategory {
+        id
+        name
+      }
+      brand {
+        id
+        name
+      }
+      price
+      company {
+        id
+        name
+      }
     }
   }
 `;
@@ -8669,6 +8813,107 @@ export const useCountriesQuery = <TData = CountriesQuery, TError = unknown>(
   useQuery<CountriesQuery, TError, TData>(
     ['Countries', variables],
     useFetcher<CountriesQuery, CountriesQueryVariables>(CountriesDocument).bind(null, variables),
+    options,
+  );
+export const OrdersOfCompanyDocument = `
+    query OrdersOfCompany {
+  orders {
+    id
+    number
+    currentStatus
+    paymentStatus
+    created_at
+    shop {
+      name
+      shopkeepers {
+        user {
+          mobileNumber
+        }
+      }
+      billingAddress {
+        area {
+          name
+          city {
+            name
+          }
+        }
+      }
+    }
+  }
+}
+    `;
+export const useOrdersOfCompanyQuery = <TData = OrdersOfCompanyQuery, TError = unknown>(
+  variables?: OrdersOfCompanyQueryVariables,
+  options?: UseQueryOptions<OrdersOfCompanyQuery, TError, TData>,
+) =>
+  useQuery<OrdersOfCompanyQuery, TError, TData>(
+    ['OrdersOfCompany', variables],
+    useFetcher<OrdersOfCompanyQuery, OrdersOfCompanyQueryVariables>(OrdersOfCompanyDocument).bind(null, variables),
+    options,
+  );
+export const ProductCategoriesOfCompanyDocument = `
+    query ProductCategoriesOfCompany($companyID: ID!) {
+  productCategories(where: {company: {id: $companyID}, parentCategory_null: true}) {
+    id
+    name
+    description
+    company {
+      id
+    }
+    subcategories {
+      id
+      name
+      description
+    }
+    parentCategory {
+      id
+    }
+  }
+}
+    `;
+export const useProductCategoriesOfCompanyQuery = <TData = ProductCategoriesOfCompanyQuery, TError = unknown>(
+  variables: ProductCategoriesOfCompanyQueryVariables,
+  options?: UseQueryOptions<ProductCategoriesOfCompanyQuery, TError, TData>,
+) =>
+  useQuery<ProductCategoriesOfCompanyQuery, TError, TData>(
+    ['ProductCategoriesOfCompany', variables],
+    useFetcher<ProductCategoriesOfCompanyQuery, ProductCategoriesOfCompanyQueryVariables>(
+      ProductCategoriesOfCompanyDocument,
+    ).bind(null, variables),
+    options,
+  );
+export const ProductsOfCompanyDocument = `
+    query ProductsOfCompany($companyID: ID!) {
+  products(where: {company: {id: $companyID}}) {
+    id
+    title
+    sku
+    productCategory {
+      id
+      name
+    }
+    brand {
+      id
+      name
+    }
+    price
+    company {
+      id
+      name
+    }
+  }
+}
+    `;
+export const useProductsOfCompanyQuery = <TData = ProductsOfCompanyQuery, TError = unknown>(
+  variables: ProductsOfCompanyQueryVariables,
+  options?: UseQueryOptions<ProductsOfCompanyQuery, TError, TData>,
+) =>
+  useQuery<ProductsOfCompanyQuery, TError, TData>(
+    ['ProductsOfCompany', variables],
+    useFetcher<ProductsOfCompanyQuery, ProductsOfCompanyQueryVariables>(ProductsOfCompanyDocument).bind(
+      null,
+      variables,
+    ),
     options,
   );
 export const StatesOfCountryDocument = `

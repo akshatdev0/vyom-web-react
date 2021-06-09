@@ -33,10 +33,25 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 import 'select2/dist/css/select2.min.css';
 import 'react-quill/dist/quill.snow.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+
+// syncfusion styles from node_modules
+import '@syncfusion/ej2-base/styles/bootstrap4.css';
+import '@syncfusion/ej2-buttons/styles/bootstrap4.css';
+import '@syncfusion/ej2-calendars/styles/bootstrap4.css';
+import '@syncfusion/ej2-dropdowns/styles/bootstrap4.css';
+import '@syncfusion/ej2-inputs/styles/bootstrap4.css';
+import '@syncfusion/ej2-navigations/styles/bootstrap4.css';
+import '@syncfusion/ej2-popups/styles/bootstrap4.css';
+import '@syncfusion/ej2-splitbuttons/styles/bootstrap4.css';
+import '@syncfusion/ej2-react-grids/styles/bootstrap4.css';
+import '@syncfusion/ej2-react-treegrid/styles/bootstrap4.css';
+
 // plugins styles downloaded
 import 'assets/vendor/nucleo/css/nucleo.css';
+
 // core styles
 import 'assets/scss/argon-dashboard-pro-react.scss?v1.2.0';
+
 // custom styles
 import 'assets/css/vyom.css';
 
