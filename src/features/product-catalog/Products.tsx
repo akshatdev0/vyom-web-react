@@ -18,7 +18,7 @@
 import React from 'react';
 
 // reactstrap components
-import { Card, CardHeader, Container } from 'reactstrap';
+import { Card, CardHeader, Container, Row, Col, Button } from 'reactstrap';
 import {
   ColumnDirective,
   ColumnsDirective,
@@ -58,8 +58,17 @@ const Products: React.FunctionComponent = () => {
       <SimpleHeader name="Products" parentName="Product Catalog" />
       <Container className="mt--6" fluid>
         <Card>
-          <CardHeader className="border-0">
-            <h3 className="mb-0">Products</h3>
+          <CardHeader>
+            <Row className="align-items-center">
+              <Col xs="8">
+                <h3 className="mb-0">Products</h3>
+              </Col>
+              <Col className="text-right" xs="4">
+                <Button size="sm" color="primary" href="#pablo" onClick={(e) => e.preventDefault()}>
+                  New Product
+                </Button>
+              </Col>
+            </Row>
           </CardHeader>
           <GridComponent dataSource={tableData} allowPaging={true} pageSettings={pageSettings} allowSorting={true}>
             <ColumnsDirective>
