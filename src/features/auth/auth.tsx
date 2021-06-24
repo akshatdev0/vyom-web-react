@@ -12,10 +12,13 @@ type InternalState = {
 };
 
 type AuthState = {
-  isLoading: boolean;
   isSignedIn: boolean;
   isSignedOut: boolean;
   user: AuthUserTokenPayload['user'] | null | undefined;
+};
+
+type AuthContext = AuthState & {
+  isLoading: boolean;
   signIn: (payload: AuthUserTokenPayload) => void;
   signOut: () => void;
   createSession: (payload: AuthUserTokenPayload) => void;
@@ -96,7 +99,7 @@ const reducer: AuthReducer = (prevState: InternalState, action: AuthAction) => {
   }
 };
 
-const useAuth = (): AuthState => {
+const useAuth = (): AuthContext => {
   const [state, dispatch] = useReducer<AuthReducer>(reducer, initialInternalState);
 
   const restore = (payload: AuthUserTokenPayload) => dispatch({ type: 'RESTORE', payload });
@@ -158,16 +161,16 @@ const useAuth = (): AuthState => {
   };
 };
 
-const AuthContext = createContext<AuthState | undefined>(undefined);
+const Context = createContext<AuthContext | undefined>(undefined);
 
 const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
   const context = useAuth();
 
-  return <AuthContext.Provider value={context}>{children}</AuthContext.Provider>;
+  return <Context.Provider value={context}>{children}</Context.Provider>;
 };
 
-const useAuthState = (): AuthState => {
-  const value = useContext(AuthContext);
+const useAuthState = (): AuthContext => {
+  const value = useContext(Context);
 
   if (!value) {
     throw new Error('No AuthContext set');
@@ -176,4 +179,21 @@ const useAuthState = (): AuthState => {
   return value;
 };
 
-export { AuthProvider, useAuthState };
+const getAuthData = (): AuthState => {
+  try {
+    const session = getSession();
+    return {
+      isSignedIn: true,
+      isSignedOut: false,
+      user: session.user,
+    };
+  } catch (e) {
+    return {
+      isSignedIn: false,
+      isSignedOut: true,
+      user: null,
+    };
+  }
+};
+
+export { AuthProvider, useAuthState, getAuthData };
