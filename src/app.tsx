@@ -20,6 +20,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import { Layout, ProLayout, AuthLayout, AdminLayout, CompanyOwnerLayout } from 'layouts';
 import { useAuthState, Role } from 'features/auth';
+import { useRouteDebugger } from 'hooks';
 
 const AuthSwitch = (
   <Switch>
@@ -45,7 +46,8 @@ const CompanyOwnerSwitch = (
   </Switch>
 );
 
-const App: React.FunctionComponent = () => {
+const Switcher: React.FunctionComponent = () => {
+  useRouteDebugger();
   const { isSignedIn, user } = useAuthState();
 
   let sw = AuthSwitch;
@@ -65,8 +67,15 @@ const App: React.FunctionComponent = () => {
       }
     }
   }
+  return sw;
+};
 
-  return <BrowserRouter>{sw}</BrowserRouter>;
+const App: React.FunctionComponent = () => {
+  return (
+    <BrowserRouter>
+      <Switcher />
+    </BrowserRouter>
+  );
 };
 
 export default App;
