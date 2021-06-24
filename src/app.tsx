@@ -19,7 +19,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import { Layout, ProLayout, AuthLayout, AdminLayout, CompanyOwnerLayout } from 'layouts';
-import { useAuthState, Role } from 'features/auth';
+import { Role, getAuthData, useAuthState } from 'features/auth';
 import { useRouteDebugger } from 'hooks';
 
 const AuthSwitch = (
@@ -48,10 +48,11 @@ const CompanyOwnerSwitch = (
 
 const Switcher: React.FunctionComponent = () => {
   useRouteDebugger();
-  const { isSignedIn, user } = useAuthState();
+  const authState = useAuthState();
+  const { isSignedIn, user } = getAuthData();
 
   let sw = AuthSwitch;
-  if (isSignedIn) {
+  if (isSignedIn || authState.isSignedIn) {
     if (user?.role?.type) {
       switch (user.role.type) {
         case Role.PlatformMasterAdmin:
