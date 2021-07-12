@@ -121,7 +121,7 @@ const Sidebar: React.FunctionComponent<Props> = ({
         const item: SubMenu | SubMenuItem = menu[i];
         if (isCollapsibleMenu(item) && item.collapse && getCollapseInitialState(item.children)) {
           return true;
-        } else if (isSubMenuItem(item) && location.pathname.indexOf(getParts(item.route.parts)) !== -1) {
+        } else if (isSubMenuItem(item) && location.pathname.indexOf(getParts(item.route)) !== -1) {
           return true;
         }
       }
@@ -181,7 +181,7 @@ const Sidebar: React.FunctionComponent<Props> = ({
           );
           links.push(link);
         } else if (isMenuItem(item) || isSubMenuItem(item)) {
-          const path = getPath(layout, item.route.parts);
+          const path = getPath(layout, item.route);
           const link = (
             <NavItem className={activeRoute(path)} key={i}>
               <NavLink to={path} activeClassName="" onClick={closeSidenav} tag={NavLinkRRD}>
