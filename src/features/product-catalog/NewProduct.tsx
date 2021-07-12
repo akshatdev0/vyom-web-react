@@ -24,7 +24,7 @@ import { SimpleHeader } from 'components/molecules';
 // import { useAuthState } from 'features/auth';
 // import { useProductsOfCompanyQuery } from 'generated/graphql';
 
-const Products: React.FunctionComponent = () => {
+const NewProduct: React.FunctionComponent = () => {
   // const { user: sessionUser } = useAuthState();
   // const companyID = sessionUser?.companyOwner?.company?.id;
   // const productsQuery = useProductsOfCompanyQuery({ companyID: companyID || '' }, { enabled: !!companyID });
@@ -45,4 +45,4 @@ const Products: React.FunctionComponent = () => {
   );
 };
 
-export default Products;
+export default NewProduct;
