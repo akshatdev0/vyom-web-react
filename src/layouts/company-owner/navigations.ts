@@ -16,21 +16,14 @@
 
 */
 import { Navigation } from 'core/navigation';
-import Dashboard from 'views/pro/pages/dashboards/Dashboard.js';
-
-import { CompanyOwnerProfile } from 'features/company-owner';
-import { Company } from 'features/company';
-import { Products } from 'features/product-catalog';
-import { ProductCategories } from 'features/product-catalog';
-import { Orders } from 'features/order';
+import { routes } from 'routing';
 
 const sidebarMenu: Navigation = [
   {
     identifier: 'dashboard',
     name: 'Dashboard',
     icon: 'ni ni-shop text-primary',
-    path: '/dashboard',
-    component: Dashboard,
+    route: routes.companyOwnerDashboard,
   },
   {
     identifier: 'product-catalog',
@@ -40,17 +33,15 @@ const sidebarMenu: Navigation = [
     children: [
       {
         identifier: 'products',
-        path: '/products',
         name: 'Products',
         initial: 'P',
-        component: Products,
+        route: routes.products,
       },
       {
         identifier: 'product-categories',
-        path: '/product-categories',
         name: 'Categories',
         initial: 'C',
-        component: ProductCategories,
+        route: routes.productCategories,
       },
     ],
   },
@@ -58,8 +49,7 @@ const sidebarMenu: Navigation = [
     identifier: 'orders',
     name: 'Orders',
     icon: 'ni ni-align-left-2 text-default',
-    path: '/orders',
-    component: Orders,
+    route: routes.orders,
   },
 ];
 
@@ -68,36 +58,13 @@ const userAccountMenu: Navigation = [
     identifier: 'profile',
     name: 'Profile',
     icon: 'ni ni-single-02',
-    path: '/profile',
-    component: CompanyOwnerProfile,
+    route: routes.companyOwnerProfile,
   },
   {
     identifier: 'company',
     name: 'Company',
     icon: 'ni ni-building',
-    path: '/company',
-    component: Company,
-  },
-  {
-    identifier: 'settings',
-    name: 'Settings',
-    icon: 'ni ni-settings-gear-65',
-    path: '/settings',
-    component: Dashboard,
-  },
-  {
-    identifier: 'activity',
-    name: 'Activity',
-    icon: 'ni ni-calendar-grid-58',
-    path: '/activity',
-    component: Dashboard,
-  },
-  {
-    identifier: 'support',
-    name: 'Support',
-    icon: 'ni ni-support-16',
-    path: '/support',
-    component: Dashboard,
+    route: routes.company,
   },
 ];
 

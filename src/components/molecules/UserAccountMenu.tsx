@@ -7,10 +7,12 @@ import Jdenticon from 'react-jdenticon';
 import { useAuthState } from 'features/auth';
 import { isMenuItem, Navigation } from 'core/navigation';
 import { Maybe, User } from 'types';
+import { getPath } from 'routing';
+import { Layout } from 'layouts';
 
 type Props = {
   // The layout for which this menu will be used
-  layout: string;
+  layout: Layout;
   // navigation which will be displayed inside the component
   navigation: Navigation;
   user: Maybe<User>;
@@ -29,7 +31,7 @@ const UserAccountMenu: React.FunctionComponent<Props> = ({ layout, navigation, u
         const item = navigation[i];
         if (isMenuItem(item)) {
           const component = (
-            <DropdownItem key={i} to={layout + item.path} tag={NavLinkRRD}>
+            <DropdownItem key={i} to={getPath(layout, item.route.parts)} tag={NavLinkRRD}>
               <i className={item.icon} />
               <span>{item.name}</span>
             </DropdownItem>
