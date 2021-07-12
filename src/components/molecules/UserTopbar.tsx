@@ -46,10 +46,11 @@ import {
 import UserAccountMenu from './UserAccountMenu';
 import { Navigation } from 'core/navigation';
 import { Business, Maybe, User } from 'types';
+import { Layout } from 'layouts';
 
 type Props = {
   // The layout for which this menu will be used
-  layout: string;
+  layout: Layout;
   theme: string;
   sidebarOpen: boolean;
   toggleSidebar: () => void;

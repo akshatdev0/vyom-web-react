@@ -34,10 +34,12 @@ import {
   isCollapsibleMenu,
   isMenuItem,
 } from 'core/navigation';
+import { getParts, getPath } from 'routing';
+import { Layout } from 'layouts';
 
 type Props = {
   // The layout for which this sidebar will be used
-  layout: string;
+  layout: Layout;
   // prop to know if the sidenav is mini or normal
   sidebarOpen: boolean;
   // function used to make sidenav mini or normal
@@ -119,7 +121,7 @@ const Sidebar: React.FunctionComponent<Props> = ({
         const item: SubMenu | SubMenuItem = menu[i];
         if (isCollapsibleMenu(item) && item.collapse && getCollapseInitialState(item.children)) {
           return true;
-        } else if (isSubMenuItem(item) && location.pathname.indexOf(item.path) !== -1) {
+        } else if (isSubMenuItem(item) && location.pathname.indexOf(getParts(item.route.parts)) !== -1) {
           return true;
         }
       }
@@ -179,9 +181,10 @@ const Sidebar: React.FunctionComponent<Props> = ({
           );
           links.push(link);
         } else if (isMenuItem(item) || isSubMenuItem(item)) {
+          const path = getPath(layout, item.route.parts);
           const link = (
-            <NavItem className={activeRoute(layout + item.path)} key={i}>
-              <NavLink to={layout + item.path} activeClassName="" onClick={closeSidenav} tag={NavLinkRRD}>
+            <NavItem className={activeRoute(path)} key={i}>
+              <NavLink to={path} activeClassName="" onClick={closeSidenav} tag={NavLinkRRD}>
                 {isMenuItem(item) && item.icon ? (
                   <>
                     <i className={item.icon} />

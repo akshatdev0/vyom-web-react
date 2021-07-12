@@ -15,31 +15,7 @@
 
 */
 import { Navigation } from 'core/navigation';
-import Alternative from 'views/pro/pages/dashboards/Alternative.js';
-import Buttons from 'views/pro/pages/components/Buttons.js';
-import Calendar from 'views/pro/pages/Calendar.js';
-import Cards from 'views/pro/pages/components/Cards.js';
-import Charts from 'views/pro/pages/Charts.js';
-import Components from 'views/pro/pages/forms/Components.js';
-import Dashboard from 'views/pro/pages/dashboards/Dashboard.js';
-import Elements from 'views/pro/pages/forms/Elements.js';
-import Google from 'views/pro/pages/maps/Google.js';
-import Grid from 'views/pro/pages/components/Grid.js';
-import Icons from 'views/pro/pages/components/Icons.js';
-import Lock from 'views/pro/pages/examples/Lock.js';
-import Login from 'views/pro/pages/examples/Login.js';
-import Notifications from 'views/pro/pages/components/Notifications.js';
-import Pricing from 'views/pro/pages/examples/Pricing.js';
-import Profile from 'views/pro/pages/examples/Profile.js';
-import ReactBSTables from 'views/pro/pages/tables/ReactBSTables.js';
-import Register from 'views/pro/pages/examples/Register.js';
-import Sortable from 'views/pro/pages/tables/Sortable.js';
-import Tables from 'views/pro/pages/tables/Tables.js';
-import Timeline from 'views/pro/pages/examples/Timeline.js';
-import Typography from 'views/pro/pages/components/Typography.js';
-import Validation from 'views/pro/pages/forms/Validation.js';
-import Vector from 'views/pro/pages/maps/Vector.js';
-import Widgets from 'views/pro/pages/Widgets.js';
+import routes from './routes';
 
 const sidebarMenu: Navigation = [
   {
@@ -50,17 +26,15 @@ const sidebarMenu: Navigation = [
     children: [
       {
         identifier: 'dashboard',
-        path: '/dashboard',
         name: 'Dashboard',
         initial: 'D',
-        component: Dashboard,
+        route: routes.dashboard,
       },
       {
         identifier: 'alternative-dashboard',
-        path: '/alternative-dashboard',
         name: 'Alternative',
         initial: 'A',
-        component: Alternative,
+        route: routes.alternativeDashboard,
       },
     ],
   },
@@ -72,45 +46,39 @@ const sidebarMenu: Navigation = [
     children: [
       {
         identifier: 'pricing',
-        path: '/pricing',
         name: 'Pricing',
         initial: 'P',
-        component: Pricing,
+        route: routes.pricing,
       },
       {
         identifier: 'login',
-        path: '/login',
         name: 'Login',
         initial: 'L',
-        component: Login,
+        route: routes.login,
       },
       {
         identifier: 'register',
-        path: '/register',
         name: 'Register',
         initial: 'R',
-        component: Register,
+        route: routes.register,
       },
       {
         identifier: 'lock',
-        path: '/lock',
         name: 'Lock',
         initial: 'L',
-        component: Lock,
+        route: routes.lock,
       },
       {
         identifier: 'timeline',
-        path: '/timeline',
         name: 'Timeline',
         initial: 'T',
-        component: Timeline,
+        route: routes.timeline,
       },
       {
         identifier: 'profile',
-        path: '/profile',
         name: 'Profile',
         initial: 'P',
-        component: Profile,
+        route: routes.profile,
       },
     ],
   },
@@ -122,45 +90,39 @@ const sidebarMenu: Navigation = [
     children: [
       {
         identifier: 'buttons',
-        path: '/buttons',
         name: 'Buttons',
         initial: 'B',
-        component: Buttons,
+        route: routes.buttons,
       },
       {
         identifier: 'cards',
-        path: '/cards',
         name: 'Cards',
         initial: 'C',
-        component: Cards,
+        route: routes.cards,
       },
       {
         identifier: 'grid',
-        path: '/grid',
         name: 'Grid',
         initial: 'G',
-        component: Grid,
+        route: routes.grid,
       },
       {
         identifier: 'notifications',
-        path: '/notifications',
         name: 'Notifications',
         initial: 'N',
-        component: Notifications,
+        route: routes.notifications,
       },
       {
         identifier: 'icons',
-        path: '/icons',
         name: 'Icons',
         initial: 'I',
-        component: Icons,
+        route: routes.icons,
       },
       {
         identifier: 'typography',
-        path: '/typography',
         name: 'Typography',
         initial: 'T',
-        component: Typography,
+        route: routes.typography,
       },
     ],
   },
@@ -172,24 +134,21 @@ const sidebarMenu: Navigation = [
     children: [
       {
         identifier: 'elements',
-        path: '/elements',
         name: 'Elements',
         initial: 'E',
-        component: Elements,
+        route: routes.elements,
       },
       {
         identifier: 'components',
-        path: '/components',
         name: 'Components',
         initial: 'C',
-        component: Components,
+        route: routes.components,
       },
       {
         identifier: 'validation',
-        path: '/validation',
         name: 'Validation',
         initial: 'V',
-        component: Validation,
+        route: routes.validation,
       },
     ],
   },
@@ -201,24 +160,21 @@ const sidebarMenu: Navigation = [
     children: [
       {
         identifier: 'basic-tables',
-        path: '/basic-tables',
         name: 'Basic Tables',
         initial: 'BT',
-        component: Tables,
+        route: routes.basicTables,
       },
       {
         identifier: 'sortable',
-        path: '/sortable',
         name: 'Sortable',
         initial: 'S',
-        component: Sortable,
+        route: routes.sortable,
       },
       {
         identifier: 'react-bs-table',
-        path: '/react-bs-table',
         name: 'React BS Tables',
         initial: 'RBT',
-        component: ReactBSTables,
+        route: routes.reactBsTable,
       },
     ],
   },
@@ -230,40 +186,35 @@ const sidebarMenu: Navigation = [
     children: [
       {
         identifier: 'google',
-        path: '/google',
         name: 'Google',
         initial: 'G',
-        component: Google,
+        route: routes.google,
       },
       {
         identifier: 'vector',
-        path: '/vector',
         name: 'Vector',
         initial: 'V',
-        component: Vector,
+        route: routes.vector,
       },
     ],
   },
   {
     identifier: 'widgets',
-    path: '/widgets',
     name: 'Widgets',
     icon: 'ni ni-archive-2 text-green',
-    component: Widgets,
+    route: routes.widgets,
   },
   {
     identifier: 'charts',
-    path: '/charts',
     name: 'Charts',
     icon: 'ni ni-chart-pie-35 text-info',
-    component: Charts,
+    route: routes.charts,
   },
   {
     identifier: 'calendar',
-    path: '/calendar',
     name: 'Calendar',
     icon: 'ni ni-calendar-grid-58 text-red',
-    component: Calendar,
+    route: routes.calendar,
   },
 ];
 
@@ -272,29 +223,25 @@ const userAccountMenu: Navigation = [
     identifier: 'profile',
     name: 'Profile',
     icon: 'ni ni-single-02',
-    path: '/profile',
-    component: Profile,
+    route: routes.profile,
   },
   {
     identifier: 'settings',
     name: 'Settings',
     icon: 'ni ni-settings-gear-65',
-    path: '/settings',
-    component: Dashboard,
+    route: routes.dashboard,
   },
   {
     identifier: 'activity',
     name: 'Activity',
     icon: 'ni ni-calendar-grid-58',
-    path: '/activity',
-    component: Dashboard,
+    route: routes.dashboard,
   },
   {
     identifier: 'support',
     name: 'Support',
     icon: 'ni ni-support-16',
-    path: '/support',
-    component: Dashboard,
+    route: routes.dashboard,
   },
 ];
 
