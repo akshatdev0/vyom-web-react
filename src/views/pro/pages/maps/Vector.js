@@ -19,7 +19,6 @@ import React from 'react';
 // react plugin for creating vector maps
 import { VectorMap } from 'react-jvectormap';
 
-// reactstrap components
 import { Card, CardBody, Container, Row } from 'reactstrap';
 // core components
 import { SimpleHeader } from 'components/molecules';

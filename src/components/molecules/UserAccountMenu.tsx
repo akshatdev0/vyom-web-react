@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink as NavLinkRRD } from 'react-router-dom';
-// reactstrap components
 import { DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle, Media, Nav } from 'reactstrap';
 import Jdenticon from 'react-jdenticon';
 

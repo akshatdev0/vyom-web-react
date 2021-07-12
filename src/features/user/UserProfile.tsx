@@ -16,7 +16,6 @@
 */
 import React from 'react';
 import { UseMutationResult } from 'react-query';
-// reactstrap components
 import { Container, Button, Card, CardHeader, CardBody, Form, Row, Col, CardFooter } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';

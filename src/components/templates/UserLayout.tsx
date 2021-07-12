@@ -16,7 +16,6 @@
 
 */
 import React from 'react';
-// react library for routing
 import { Switch, Redirect } from 'react-router-dom';
 // core components
 import { Navigation } from 'core/navigation';

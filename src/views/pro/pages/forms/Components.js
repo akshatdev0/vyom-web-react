@@ -16,7 +16,6 @@
 */
 /* eslint-disable */
 import React from 'react';
-// nodejs library that concatenates classes
 import classnames from 'classnames';
 // react plugin used to create datetimepicker
 import ReactDatetime from 'react-datetime';
@@ -28,7 +27,6 @@ import Slider from 'nouislider';
 import ReactQuill from 'react-quill';
 // javascript plugin that creates nice dropzones for files
 import Dropzone from 'dropzone';
-// reactstrap components
 import {
   Button,
   Card,
