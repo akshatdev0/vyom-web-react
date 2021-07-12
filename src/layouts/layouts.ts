@@ -11,4 +11,7 @@ export const Layouts = {
   PRO: {
     path: '/pro',
   },
+  UNKNOWN: {
+    path: '/',
+  },
 };

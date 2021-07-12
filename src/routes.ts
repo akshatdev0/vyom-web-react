@@ -2,7 +2,7 @@ import SignIn from 'views/SignIn';
 import SignUp from 'views/SignUp';
 import { CompanyOwnerProfile } from 'features/company-owner';
 import { Company } from 'features/company';
-import { Products } from 'features/product-catalog';
+import { NewProduct, Products } from 'features/product-catalog';
 import { ProductCategories } from 'features/product-catalog';
 import { Orders } from 'features/order';
 
@@ -11,6 +11,7 @@ import { Layouts } from 'layouts';
 import { AdminProfile } from 'features/admin';
 import Alternative from 'views/pro/pages/dashboards/Alternative';
 
+const ADD = 'add';
 const COMPANY = 'company';
 const DASHBOARD = 'dashboard';
 const ORDERS = 'orders';
@@ -44,6 +45,11 @@ const routes = {
   companyOwnerDashboard: {
     parts: DASHBOARD,
     component: Dashboard,
+    layouts: [Layouts.COMPANY_OWNER],
+  },
+  newProduct: {
+    parts: [PRODUCTS, ADD],
+    component: NewProduct,
     layouts: [Layouts.COMPANY_OWNER],
   },
   products: {

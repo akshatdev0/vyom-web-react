@@ -31,7 +31,7 @@ const UserAccountMenu: React.FunctionComponent<Props> = ({ layout, navigation, u
         const item = navigation[i];
         if (isMenuItem(item)) {
           const component = (
-            <DropdownItem key={i} to={getPath(layout, item.route.parts)} tag={NavLinkRRD}>
+            <DropdownItem key={i} to={getPath(layout, item.route)} tag={NavLinkRRD}>
               <i className={item.icon} />
               <span>{item.name}</span>
             </DropdownItem>

@@ -34,8 +34,13 @@ import {
 import { SimpleHeader } from 'components/molecules';
 import { useAuthState } from 'features/auth';
 import { useProductsOfCompanyQuery } from 'generated/graphql';
+import { Link } from 'react-router-dom';
+import routes from 'routes';
+import { useLayout } from 'hooks';
+import { getPath } from 'core/routing';
 
 const Products: React.FunctionComponent = () => {
+  const layout = useLayout();
   const { user: sessionUser } = useAuthState();
   const companyID = sessionUser?.companyOwner?.company?.id;
   const productsQuery = useProductsOfCompanyQuery({ companyID: companyID || '' }, { enabled: !!companyID });
@@ -64,9 +69,11 @@ const Products: React.FunctionComponent = () => {
                 <h3 className="mb-0">Products</h3>
               </Col>
               <Col className="text-right" xs="4">
-                <Button size="sm" color="primary" href="#pablo" onClick={(e) => e.preventDefault()}>
-                  New Product
-                </Button>
+                <Link to={getPath(layout, routes.newProduct)}>
+                  <Button size="sm" color="primary">
+                    New Product
+                  </Button>
+                </Link>
               </Col>
             </Row>
           </CardHeader>
