@@ -18,11 +18,12 @@
 import React from 'react';
 
 import { UserLayout } from 'components/templates';
-import { Layouts } from 'layouts';
-import { sidebarMenu, userAccountMenu } from './navigations';
 import { useAuthState } from 'features/auth';
 import { useGetUserInfoQuery } from 'generated/graphql';
+import { Layouts } from 'layouts';
 import routes from 'routes';
+
+import { sidebarMenu, userAccountMenu } from './navigations';
 
 const AdminLayout: React.FunctionComponent = () => {
   const { user: sessionUser } = useAuthState();

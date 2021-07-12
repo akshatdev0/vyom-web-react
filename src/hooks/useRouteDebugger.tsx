@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { useHistory } from 'react-router';
 
 const useRouteDebugger = (): void => {

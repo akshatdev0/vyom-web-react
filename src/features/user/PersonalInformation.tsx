@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Row, Col } from 'reactstrap';
 import { Control, FieldValues } from 'react-hook-form';
+import { Row, Col } from 'reactstrap';
 
 import { DatePicker, Select, TextField } from 'components/atoms';
 

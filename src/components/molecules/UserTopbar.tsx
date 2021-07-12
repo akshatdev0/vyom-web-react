@@ -16,6 +16,7 @@
 
 */
 import React from 'react';
+
 import classnames from 'classnames';
 import {
   Collapse,
@@ -41,10 +42,11 @@ import {
   Media,
 } from 'reactstrap';
 
-import UserAccountMenu from './UserAccountMenu';
+import { Layout } from 'core/layout';
 import { Navigation } from 'core/navigation';
 import { Business, Maybe, User } from 'types';
-import { Layout } from 'core/layout';
+
+import UserAccountMenu from './UserAccountMenu';
 
 type Props = {
   // The layout for which this menu will be used

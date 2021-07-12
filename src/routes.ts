@@ -1,15 +1,13 @@
+import { AdminProfile } from 'features/admin';
+import { Company } from 'features/company';
+import { CompanyOwnerProfile } from 'features/company-owner';
+import { Orders } from 'features/order';
+import { NewProduct, Products, ProductCategories } from 'features/product-catalog';
+import { Layouts } from 'layouts';
+import Alternative from 'views/pro/pages/dashboards/Alternative';
+import Dashboard from 'views/pro/pages/dashboards/Dashboard.js';
 import SignIn from 'views/SignIn';
 import SignUp from 'views/SignUp';
-import { CompanyOwnerProfile } from 'features/company-owner';
-import { Company } from 'features/company';
-import { NewProduct, Products } from 'features/product-catalog';
-import { ProductCategories } from 'features/product-catalog';
-import { Orders } from 'features/order';
-
-import Dashboard from 'views/pro/pages/dashboards/Dashboard.js';
-import { Layouts } from 'layouts';
-import { AdminProfile } from 'features/admin';
-import Alternative from 'views/pro/pages/dashboards/Alternative';
 
 const ADD = 'add';
 const COMPANY = 'company';

@@ -16,15 +16,18 @@
 
 */
 import React from 'react';
+
 import { Switch, Redirect } from 'react-router-dom';
+
 // core components
+import { UserTopbar, UserFooter, Sidebar } from 'components/molecules';
+import { Layout } from 'core/layout';
 import { Navigation } from 'core/navigation';
 import { NotificationContainer } from 'core/notification';
-import { UserTopbar, UserFooter, Sidebar } from 'components/molecules';
+import { getRoutes } from 'core/routing';
 import { useScrollTop, useToggleSidebar } from 'hooks';
 import { Business, Maybe, User } from 'types';
-import { getRoutes } from 'core/routing';
-import { Layout } from 'core/layout';
+
 import routes from './routes';
 
 type Props = {

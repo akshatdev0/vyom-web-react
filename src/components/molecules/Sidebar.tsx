@@ -16,10 +16,13 @@
 
 */
 import React, { useState, useEffect } from 'react';
-import { useLocation, NavLink as NavLinkRRD, Link } from 'react-router-dom';
+
 import classnames from 'classnames';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { useLocation, NavLink as NavLinkRRD, Link } from 'react-router-dom';
 import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav } from 'reactstrap';
+
+import { Layout } from 'core/layout';
 import {
   SubNavigation,
   SubMenuItem,
@@ -31,7 +34,6 @@ import {
   isMenuItem,
 } from 'core/navigation';
 import { getParts, getPath } from 'core/routing';
-import { Layout } from 'core/layout';
 
 type Props = {
   // The layout for which this sidebar will be used

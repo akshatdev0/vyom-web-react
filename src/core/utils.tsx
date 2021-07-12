@@ -1,5 +1,5 @@
-import jsonpath from 'jsonpath';
 import { PhoneNumberUtil, PhoneNumberType } from 'google-libphonenumber';
+import jsonpath from 'jsonpath';
 import { DeepMap, FieldError, FieldValues } from 'react-hook-form';
 
 export const getGraphQLError = (error: unknown): string => {

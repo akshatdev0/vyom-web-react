@@ -1,29 +1,29 @@
-import Alternative from 'views/pro/pages/dashboards/Alternative.js';
-import Buttons from 'views/pro/pages/components/Buttons.js';
+import { Layouts } from 'layouts';
 import Calendar from 'views/pro/pages/Calendar.js';
-import Cards from 'views/pro/pages/components/Cards.js';
 import Charts from 'views/pro/pages/Charts.js';
-import Components from 'views/pro/pages/forms/Components.js';
-import Dashboard from 'views/pro/pages/dashboards/Dashboard.js';
-import Elements from 'views/pro/pages/forms/Elements.js';
-import Google from 'views/pro/pages/maps/Google.js';
+import Buttons from 'views/pro/pages/components/Buttons.js';
+import Cards from 'views/pro/pages/components/Cards.js';
 import Grid from 'views/pro/pages/components/Grid.js';
 import Icons from 'views/pro/pages/components/Icons.js';
+import Notifications from 'views/pro/pages/components/Notifications.js';
+import Typography from 'views/pro/pages/components/Typography.js';
+import Alternative from 'views/pro/pages/dashboards/Alternative.js';
+import Dashboard from 'views/pro/pages/dashboards/Dashboard.js';
 import Lock from 'views/pro/pages/examples/Lock.js';
 import Login from 'views/pro/pages/examples/Login.js';
-import Notifications from 'views/pro/pages/components/Notifications.js';
 import Pricing from 'views/pro/pages/examples/Pricing.js';
 import Profile from 'views/pro/pages/examples/Profile.js';
-import ReactBSTables from 'views/pro/pages/tables/ReactBSTables.js';
 import Register from 'views/pro/pages/examples/Register.js';
+import Timeline from 'views/pro/pages/examples/Timeline.js';
+import Components from 'views/pro/pages/forms/Components.js';
+import Elements from 'views/pro/pages/forms/Elements.js';
+import Validation from 'views/pro/pages/forms/Validation.js';
+import Google from 'views/pro/pages/maps/Google.js';
+import Vector from 'views/pro/pages/maps/Vector.js';
+import ReactBSTables from 'views/pro/pages/tables/ReactBSTables.js';
 import Sortable from 'views/pro/pages/tables/Sortable.js';
 import Tables from 'views/pro/pages/tables/Tables.js';
-import Timeline from 'views/pro/pages/examples/Timeline.js';
-import Typography from 'views/pro/pages/components/Typography.js';
-import Validation from 'views/pro/pages/forms/Validation.js';
-import Vector from 'views/pro/pages/maps/Vector.js';
 import Widgets from 'views/pro/pages/Widgets.js';
-import { Layouts } from 'layouts';
 
 const routes = {
   dashboard: {
