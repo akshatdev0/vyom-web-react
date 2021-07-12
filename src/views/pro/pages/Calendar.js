@@ -16,7 +16,6 @@
 */
 /* eslint-disable */
 import React from 'react';
-// nodejs library that concatenates classes
 import classnames from 'classnames';
 // JavaScript library that creates a callendar with events
 import { Calendar } from '@fullcalendar/core';
@@ -24,7 +23,6 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interaction from '@fullcalendar/interaction';
 // react component used to create sweet alerts
 import ReactBSAlert from 'react-bootstrap-sweetalert';
-// reactstrap components
 import {
   Button,
   ButtonGroup,

@@ -17,7 +17,6 @@
 */
 import React from 'react';
 
-// reactstrap components
 import { Button, Card, CardBody, Form, Container, Row, Col } from 'reactstrap';
 
 import { Link } from 'react-router-dom';

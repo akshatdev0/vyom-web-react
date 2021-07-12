@@ -15,7 +15,6 @@
 
 */
 import React from 'react';
-// reactstrap components
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
 
 import { useAuthState } from 'features/auth';

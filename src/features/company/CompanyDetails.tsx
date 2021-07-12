@@ -1,5 +1,4 @@
 import React from 'react';
-// reactstrap components
 import { Row, Col, Form, Button } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';

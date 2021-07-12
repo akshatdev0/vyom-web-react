@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// nodejs library that concatenates classes
 import classnames from 'classnames';
 import { Control, useController, FieldName, FieldValues } from 'react-hook-form';
 import { FormGroup, Input } from 'reactstrap';

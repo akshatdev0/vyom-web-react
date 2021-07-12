@@ -17,7 +17,6 @@
 /* eslint-disable */
 import React from 'react';
 
-// reactstrap components
 import { Card, CardHeader, Container } from 'reactstrap';
 import { Internationalization } from '@syncfusion/ej2-base';
 import {

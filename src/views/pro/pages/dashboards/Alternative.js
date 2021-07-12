@@ -22,7 +22,6 @@ import { VectorMap } from 'react-jvectormap';
 import Chart from 'chart.js';
 // react plugin used to create charts
 import { Line, Bar } from 'react-chartjs-2';
-// reactstrap components
 import {
   Badge,
   Button,

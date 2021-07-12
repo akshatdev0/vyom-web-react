@@ -1,6 +1,5 @@
 import React from 'react';
 import { Control, useController, FieldName, FieldValues } from 'react-hook-form';
-// reactstrap components
 import { FormGroup, Input } from 'reactstrap';
 // react plugin that creates text editor
 import ReactQuill from 'react-quill';

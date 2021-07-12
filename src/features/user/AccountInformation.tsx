@@ -1,6 +1,5 @@
 import React from 'react';
 
-// reactstrap components
 import { Row, Col } from 'reactstrap';
 import { Control, FieldValues } from 'react-hook-form';
 
