@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { Control, useController, FieldName, FieldValues } from 'react-hook-form';
+import ReactQuill from 'react-quill';
 import { FormGroup, Input } from 'reactstrap';
 // react plugin that creates text editor
-import ReactQuill from 'react-quill';
 
-import { Override } from 'types';
 import { getFormError } from 'core/utils';
+import { Override } from 'types';
 
 type ReactstrapInputProps = React.ComponentProps<typeof Input>;
 

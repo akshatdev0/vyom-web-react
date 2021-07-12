@@ -18,8 +18,9 @@
 import React from 'react';
 
 import { Layouts } from 'layouts';
-import { sidebarMenu, userAccountMenu } from './navigations';
+
 import AbstractProLayout from './AbstractProLayout';
+import { sidebarMenu, userAccountMenu } from './navigations';
 
 const ProLayout: React.FunctionComponent = () => {
   return (

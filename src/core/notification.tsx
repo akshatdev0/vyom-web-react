@@ -1,4 +1,5 @@
 import React, { useRef, RefObject, createContext, useContext } from 'react';
+
 import NotificationAlert, { AlertOptions } from 'react-notification-alert';
 
 type NotificationOptions = Omit<AlertOptions, 'type' | 'message'>;

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Alert } from 'reactstrap';
+
 import { getGraphQLError } from 'core/utils';
 
 type Props = {

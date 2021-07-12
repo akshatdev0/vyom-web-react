@@ -16,11 +16,12 @@
 
 */
 import React, { useEffect, useRef, RefObject } from 'react';
+
 import { useLocation, Switch, Redirect } from 'react-router-dom';
 
 // core components
-import { getRoutes } from 'core/routing';
 import { AuthTopbar, AuthFooter } from 'components/molecules';
+import { getRoutes } from 'core/routing';
 import { Layouts } from 'layouts';
 import routes from 'routes';
 

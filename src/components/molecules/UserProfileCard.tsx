@@ -1,6 +1,7 @@
 import React from 'react';
-import { Card, CardHeader, CardBody, CardImg, Row, Col } from 'reactstrap';
+
 import { parse, differenceInCalendarYears } from 'date-fns';
+import { Card, CardHeader, CardBody, CardImg, Row, Col } from 'reactstrap';
 
 import { Maybe, User } from 'types';
 
