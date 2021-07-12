@@ -18,7 +18,6 @@
 import React from 'react';
 // javascript plugin that creates a sortable object from a dom object
 import List from 'list.js';
-// reactstrap components
 import {
   Badge,
   Card,

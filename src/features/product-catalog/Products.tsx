@@ -17,7 +17,6 @@
 /* eslint-disable */
 import React from 'react';
 
-// reactstrap components
 import { Card, CardHeader, Container, Row, Col, Button } from 'reactstrap';
 import {
   ColumnDirective,

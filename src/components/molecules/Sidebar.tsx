@@ -16,13 +16,9 @@
 
 */
 import React, { useState, useEffect } from 'react';
-// react library for routing
 import { useLocation, NavLink as NavLinkRRD, Link } from 'react-router-dom';
-// nodejs library that concatenates classes
 import classnames from 'classnames';
-// react library that creates nice scrollbar on windows devices
 import PerfectScrollbar from 'react-perfect-scrollbar';
-// reactstrap components
 import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav } from 'reactstrap';
 import {
   SubNavigation,

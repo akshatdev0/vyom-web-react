@@ -1,5 +1,4 @@
 import React from 'react';
-// reactstrap components
 import { Button, Card, CardBody, Form, Row, Col } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';

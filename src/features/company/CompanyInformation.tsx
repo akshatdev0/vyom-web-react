@@ -1,6 +1,5 @@
 import React from 'react';
 import * as _ from 'lodash';
-// reactstrap components
 import { Row, Col, Form, Button } from 'reactstrap';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
