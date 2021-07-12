@@ -80,7 +80,7 @@ const UserLayout: React.FunctionComponent<Props> = ({
           <Switch>
             {getRoutes(layout, routes)}
             {/* TODO - 404 page redirect */}
-            <Redirect from="*" to={layout + '/dashboard'} />
+            <Redirect from="*" to={layout.path + '/dashboard'} />
           </Switch>
           <UserFooter />
         </NotificationContainer>
