@@ -7,8 +7,8 @@ import Jdenticon from 'react-jdenticon';
 import { useAuthState } from 'features/auth';
 import { isMenuItem, Navigation } from 'core/navigation';
 import { Maybe, User } from 'types';
-import { getPath } from 'routing';
-import { Layout } from 'layouts';
+import { getPath } from 'core/routing';
+import { Layout } from 'core/layout';
 
 type Props = {
   // The layout for which this menu will be used

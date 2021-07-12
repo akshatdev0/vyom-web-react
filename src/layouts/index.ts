@@ -1,4 +1,4 @@
-export * from './layout';
+export * from './layouts';
 export { default as ProLayout } from './pro';
 export { default as AuthLayout } from './auth';
 export { default as AdminLayout } from './admin';

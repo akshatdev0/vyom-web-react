@@ -18,31 +18,31 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import { Layout, ProLayout, AuthLayout, AdminLayout, CompanyOwnerLayout } from 'layouts';
+import { Layouts, ProLayout, AuthLayout, AdminLayout, CompanyOwnerLayout } from 'layouts';
 import { Role, getAuthData, useAuthState } from 'features/auth';
 import { useRouteDebugger } from 'hooks';
 
 const AuthSwitch = (
   <Switch>
-    <Route path={Layout.Pro} render={() => <ProLayout />} />
-    <Route path={Layout.Auth} render={() => <AuthLayout />} />
-    <Redirect from="/" to={Layout.Auth + '/sign-in'} />
+    <Route path={Layouts.PRO.path} render={() => <ProLayout />} />
+    <Route path={Layouts.AUTH.path} render={() => <AuthLayout />} />
+    <Redirect from="/" to={Layouts.AUTH.path + '/sign-in'} />
   </Switch>
 );
 
 const AdminSwitch = (
   <Switch>
-    <Route path={Layout.Pro} render={() => <ProLayout />} />
-    <Route path={Layout.Admin} render={() => <AdminLayout />} />
-    <Redirect from="/" to={Layout.Admin + '/index'} />
+    <Route path={Layouts.PRO.path} render={() => <ProLayout />} />
+    <Route path={Layouts.ADMIN.path} render={() => <AdminLayout />} />
+    <Redirect from="/" to={Layouts.ADMIN.path + '/index'} />
   </Switch>
 );
 
 const CompanyOwnerSwitch = (
   <Switch>
-    <Route path={Layout.Pro} render={() => <ProLayout />} />
-    <Route path={Layout.CompanyOwner} render={() => <CompanyOwnerLayout />} />
-    <Redirect from="/" to={Layout.CompanyOwner + '/index'} />
+    <Route path={Layouts.PRO.path} render={() => <ProLayout />} />
+    <Route path={Layouts.COMPANY_OWNER.path} render={() => <CompanyOwnerLayout />} />
+    <Redirect from="/" to={Layouts.COMPANY_OWNER.path + '/index'} />
   </Switch>
 );
 

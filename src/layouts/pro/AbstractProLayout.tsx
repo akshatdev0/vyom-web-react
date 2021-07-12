@@ -24,9 +24,9 @@ import { NotificationContainer } from 'core/notification';
 import { UserTopbar, UserFooter, Sidebar } from 'components/molecules';
 import { useScrollTop, useToggleSidebar } from 'hooks';
 import { Business, Maybe, User } from 'types';
+import { getRoutes } from 'core/routing';
+import { Layout } from 'core/layout';
 import routes from './routes';
-import { getRoutes } from 'routing/utils';
-import { Layout } from 'layouts/layout';
 
 type Props = {
   // The layout for which this sidebar will be used

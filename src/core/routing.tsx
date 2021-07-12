@@ -1,20 +1,21 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 
-import { Layout } from 'layouts';
-import { RouteMapping, routes } from 'routing';
+import { Layout } from './layout';
+
+export type RouteMapping = {
+  parts: string | Array<string>;
+  component: React.FunctionComponent;
+  layouts: Array<Layout>;
+};
 
 export const getPath = (layout: Layout, parts: string | Array<string>): string => {
   const path = getParts(parts);
-  return `${layout}/${path}`;
+  return `${layout.path}/${path}`;
 };
 
 export const getParts = (parts: string | Array<string>): string => {
   return Array.isArray(parts) ? parts.join('/') : parts;
-};
-
-export const getRoutesForLayout = (layout: Layout): any => {
-  return getRoutes(layout, routes);
 };
 
 export const getRoutes = (layout: Layout, routes: Record<string, RouteMapping>): any => {

@@ -46,7 +46,7 @@ import {
 import UserAccountMenu from './UserAccountMenu';
 import { Navigation } from 'core/navigation';
 import { Business, Maybe, User } from 'types';
-import { Layout } from 'layouts';
+import { Layout } from 'core/layout';
 
 type Props = {
   // The layout for which this menu will be used
