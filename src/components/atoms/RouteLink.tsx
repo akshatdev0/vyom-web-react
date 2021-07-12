@@ -1,8 +1,9 @@
 import React from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { getPath, RouteMapping } from 'core/routing';
 import { useLayout } from 'hooks';
-import { Link } from 'react-router-dom';
 
 type Props = {
   to: RouteMapping;

@@ -15,18 +15,20 @@
 
 */
 import React from 'react';
+
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
 import { UseMutationResult } from 'react-query';
 import { Container, Button, Card, CardHeader, CardBody, Form, Row, Col, CardFooter } from 'reactstrap';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 
-import * as v from 'validations';
 import { ErrorAlert } from 'components/atoms';
 import { ProfileHeader, UserProfileCard } from 'components/molecules';
-import { Maybe, User } from 'types';
-import { useFillForm } from 'hooks';
 import { UpdateUserMutation, UpdateUserMutationVariables } from 'generated/graphql';
+import { useFillForm } from 'hooks';
+import { Maybe, User } from 'types';
+import * as v from 'validations';
+
 import AccountInformation from './AccountInformation';
 import PersonalInformation from './PersonalInformation';
 

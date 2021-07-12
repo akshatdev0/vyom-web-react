@@ -26,7 +26,7 @@ module.exports = {
     'import/order': [
       'error',
       {
-        groups: ['builtin', 'external', 'internal', '- parent\n- sibling'],
+        groups: ['builtin', 'external', 'internal', ['sibling', 'parent']],
         pathGroups: [
           {
             pattern: 'react',
@@ -35,7 +35,7 @@ module.exports = {
           },
         ],
         pathGroupsExcludedImportTypes: ['builtin'],
-        newlinesbetween: 'always',
+        'newlines-between': 'always',
         alphabetize: {
           order: 'asc',
           caseInsensitive: true,

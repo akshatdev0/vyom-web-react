@@ -15,10 +15,12 @@
 
 */
 import React from 'react';
+
 import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
 
 import { useAuthState } from 'features/auth';
 import { useCompanyQuery } from 'generated/graphql';
+
 import CompanyDetails from './CompanyDetails';
 import CompanyInformation from './CompanyInformation';
 import CompanyRegisteredAddress from './CompanyRegisteredAddress';

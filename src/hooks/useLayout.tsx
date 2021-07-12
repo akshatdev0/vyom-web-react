@@ -1,6 +1,7 @@
 import { useLocation } from 'react-router-dom';
-import { Layouts } from 'layouts';
+
 import { Layout } from 'core/layout';
+import { Layouts } from 'layouts';
 
 const useLayout = (): Layout => {
   const location = useLocation();

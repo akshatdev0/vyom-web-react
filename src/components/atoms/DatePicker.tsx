@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+
 import classnames from 'classnames';
 import { Control, useController, FieldName, FieldValues } from 'react-hook-form';
 import { FormGroup, Input } from 'reactstrap';
 
-import { Override } from 'types';
 import { getFormError } from 'core/utils';
+import { Override } from 'types';
 
 type InputProps = React.ComponentProps<typeof Input>;
 

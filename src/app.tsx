@@ -16,11 +16,12 @@
 
 */
 import React from 'react';
+
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import { Layouts, ProLayout, AuthLayout, AdminLayout, CompanyOwnerLayout } from 'layouts';
 import { Role, getAuthData, useAuthState } from 'features/auth';
 import { useRouteDebugger } from 'hooks';
+import { Layouts, ProLayout, AuthLayout, AdminLayout, CompanyOwnerLayout } from 'layouts';
 
 const AuthSwitch = (
   <Switch>

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Card, CardBody, Form, Row, Col } from 'reactstrap';
+
 import { useForm } from 'react-hook-form';
+import { Button, Card, CardBody, Form, Row, Col } from 'reactstrap';
 
 import { ErrorAlert, TextField } from 'components/atoms';
 import { useSendOtpMutation } from 'generated/graphql';

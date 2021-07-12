@@ -1,13 +1,14 @@
 import React from 'react';
+
+import Jdenticon from 'react-jdenticon';
 import { NavLink as NavLinkRRD } from 'react-router-dom';
 import { DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle, Media, Nav } from 'reactstrap';
-import Jdenticon from 'react-jdenticon';
 
-import { useAuthState } from 'features/auth';
-import { isMenuItem, Navigation } from 'core/navigation';
-import { Maybe, User } from 'types';
-import { getPath } from 'core/routing';
 import { Layout } from 'core/layout';
+import { isMenuItem, Navigation } from 'core/navigation';
+import { getPath } from 'core/routing';
+import { useAuthState } from 'features/auth';
+import { Maybe, User } from 'types';
 
 type Props = {
   // The layout for which this menu will be used
