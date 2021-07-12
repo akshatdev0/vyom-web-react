@@ -23,133 +23,133 @@ import Typography from 'views/pro/pages/components/Typography.js';
 import Validation from 'views/pro/pages/forms/Validation.js';
 import Vector from 'views/pro/pages/maps/Vector.js';
 import Widgets from 'views/pro/pages/Widgets.js';
-import { Layout } from 'layouts/layout';
+import { Layouts } from 'layouts';
 
 const routes = {
   dashboard: {
     parts: 'dashboard',
     component: Dashboard,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   alternativeDashboard: {
     parts: 'alternative-dashboard',
     component: Alternative,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   pricing: {
     parts: 'pricing',
     component: Pricing,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   login: {
     parts: 'login',
     component: Login,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   register: {
     parts: 'register',
     component: Register,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   lock: {
     parts: 'lock',
     component: Lock,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   timeline: {
     parts: 'timeline',
     component: Timeline,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   profile: {
     parts: 'profile',
     component: Profile,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   buttons: {
     parts: 'buttons',
     component: Buttons,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   cards: {
     parts: 'cards',
     component: Cards,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   grid: {
     parts: 'grid',
     component: Grid,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   notifications: {
     parts: 'notifications',
     component: Notifications,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   icons: {
     parts: 'icons',
     component: Icons,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   typography: {
     parts: 'typography',
     component: Typography,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   elements: {
     parts: 'elements',
     component: Elements,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   components: {
     parts: 'components',
     component: Components,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   validation: {
     parts: 'validation',
     component: Validation,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   basicTables: {
     parts: 'basic-tables',
     component: Tables,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   sortable: {
     parts: 'sortable',
     component: Sortable,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   reactBsTable: {
     parts: 'react-bs-table',
     component: ReactBSTables,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   google: {
     parts: 'google',
     component: Google,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   vector: {
     parts: 'vector',
     component: Vector,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   widgets: {
     parts: 'widgets',
     component: Widgets,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   charts: {
     parts: 'charts',
     component: Charts,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
   calendar: {
     parts: 'calendar',
     component: Calendar,
-    layouts: [Layout.Pro],
+    layouts: [Layouts.PRO],
   },
 };
 

@@ -17,14 +17,14 @@
 */
 import React from 'react';
 
-import { Layout } from 'layouts';
+import { Layouts } from 'layouts';
 import { sidebarMenu, userAccountMenu } from './navigations';
 import AbstractProLayout from './AbstractProLayout';
 
 const ProLayout: React.FunctionComponent = () => {
   return (
     <AbstractProLayout
-      layout={Layout.Pro}
+      layout={Layouts.PRO}
       sidebarMenu={sidebarMenu}
       userAccountMenu={userAccountMenu}
       user={null}

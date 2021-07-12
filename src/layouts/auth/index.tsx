@@ -19,9 +19,10 @@ import React, { useEffect, useRef, RefObject } from 'react';
 import { useLocation, Switch, Redirect } from 'react-router-dom';
 
 // core components
+import { getRoutes } from 'core/routing';
 import { AuthTopbar, AuthFooter } from 'components/molecules';
-import { Layout } from 'layouts';
-import { getRoutesForLayout } from 'routing';
+import { Layouts } from 'layouts';
+import routes from 'routes';
 
 const AuthLayout: React.FunctionComponent = () => {
   const location = useLocation();
@@ -57,7 +58,7 @@ const AuthLayout: React.FunctionComponent = () => {
       <div className="main-content" ref={mainContentRef}>
         <AuthTopbar />
         <Switch>
-          {getRoutesForLayout(Layout.Auth)}
+          {getRoutes(Layouts.AUTH, routes)}
           <Redirect from="*" to="/auth/sign-in" />
         </Switch>
       </div>
