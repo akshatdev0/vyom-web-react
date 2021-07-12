@@ -24,8 +24,9 @@ import { NotificationContainer } from 'core/notification';
 import { UserTopbar, UserFooter, Sidebar } from 'components/molecules';
 import { useScrollTop, useToggleSidebar } from 'hooks';
 import { Business, Maybe, User } from 'types';
-import { getRoutesForLayout } from 'routing';
-import { Layout } from 'layouts';
+import routes from './routes';
+import { getRoutes } from 'routing/utils';
+import { Layout } from 'layouts/layout';
 
 type Props = {
   // The layout for which this sidebar will be used
@@ -40,7 +41,7 @@ type Props = {
   navbarTheme?: string;
 };
 
-const UserLayout: React.FunctionComponent<Props> = ({
+const AbstractProLayout: React.FunctionComponent<Props> = ({
   layout,
   sidebarMenu,
   userAccountMenu,
@@ -76,8 +77,7 @@ const UserLayout: React.FunctionComponent<Props> = ({
             business={business}
           />
           <Switch>
-            {getRoutesForLayout(layout)}
-            {/* TODO - 404 page redirect */}
+            {getRoutes(layout, routes)}
             <Redirect from="*" to={layout + '/dashboard'} />
           </Switch>
           <UserFooter />
@@ -88,4 +88,4 @@ const UserLayout: React.FunctionComponent<Props> = ({
   );
 };
 
-export default UserLayout;
+export default AbstractProLayout;
