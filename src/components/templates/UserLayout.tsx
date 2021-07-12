@@ -24,12 +24,13 @@ import { NotificationContainer } from 'core/notification';
 import { UserTopbar, UserFooter, Sidebar } from 'components/molecules';
 import { useScrollTop, useToggleSidebar } from 'hooks';
 import { Business, Maybe, User } from 'types';
-import { getRoutesForLayout } from 'routing';
-import { Layout } from 'layouts';
+import { getRoutes, RouteMapping } from 'core/routing';
+import { Layout } from 'core/layout';
 
 type Props = {
   // The layout for which this sidebar will be used
   layout: Layout;
+  routes: Record<string, RouteMapping>;
   // sidebar menu which will be displayed inside the sidebar
   sidebarMenu: Navigation;
   // user account menu which will be displayed inside the topbar
@@ -42,6 +43,7 @@ type Props = {
 
 const UserLayout: React.FunctionComponent<Props> = ({
   layout,
+  routes,
   sidebarMenu,
   userAccountMenu,
   user,
@@ -76,7 +78,7 @@ const UserLayout: React.FunctionComponent<Props> = ({
             business={business}
           />
           <Switch>
-            {getRoutesForLayout(layout)}
+            {getRoutes(layout, routes)}
             {/* TODO - 404 page redirect */}
             <Redirect from="*" to={layout + '/dashboard'} />
           </Switch>

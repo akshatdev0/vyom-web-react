@@ -34,8 +34,8 @@ import {
   isCollapsibleMenu,
   isMenuItem,
 } from 'core/navigation';
-import { getParts, getPath } from 'routing';
-import { Layout } from 'layouts';
+import { getParts, getPath } from 'core/routing';
+import { Layout } from 'core/layout';
 
 type Props = {
   // The layout for which this sidebar will be used
