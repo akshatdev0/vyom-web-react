@@ -16,17 +16,19 @@
 
 */
 import React from 'react';
-// react library for routing
+
 import { Switch, Redirect } from 'react-router-dom';
+
 // core components
+import { UserTopbar, UserFooter, Sidebar } from 'components/molecules';
+import { Layout } from 'core/layout';
 import { Navigation } from 'core/navigation';
 import { NotificationContainer } from 'core/notification';
-import { UserTopbar, UserFooter, Sidebar } from 'components/molecules';
+import { getRoutes } from 'core/routing';
 import { useScrollTop, useToggleSidebar } from 'hooks';
 import { Business, Maybe, User } from 'types';
+
 import routes from './routes';
-import { getRoutes } from 'routing/utils';
-import { Layout } from 'layouts/layout';
 
 type Props = {
   // The layout for which this sidebar will be used

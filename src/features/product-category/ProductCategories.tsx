@@ -17,7 +17,6 @@
 /* eslint-disable */
 import React from 'react';
 
-// reactstrap components
 import { Card, CardHeader, Container } from 'reactstrap';
 import {
   TreeGridComponent,
@@ -54,13 +53,12 @@ const ProductCategories: React.FunctionComponent = () => {
           </CardHeader>
           <TreeGridComponent
             dataSource={gridData}
-            treeColumnIndex={1}
+            treeColumnIndex={0}
             childMapping="subcategories"
             allowPaging={true}
             pageSettings={pageSettings}
           >
             <ColumnsDirective>
-              <ColumnDirective field="id" headerText="ID" width="20" textAlign="Right"></ColumnDirective>
               <ColumnDirective field="name" headerText="Name" width="100"></ColumnDirective>
               <ColumnDirective field="description" headerText="Description" width="200" />
             </ColumnsDirective>

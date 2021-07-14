@@ -1,19 +1,19 @@
 import React from 'react';
-// reactstrap components
-import { Row, Col, Form, Button } from 'reactstrap';
+
 import { useForm } from 'react-hook-form';
+import { Row, Col, Form, Button } from 'reactstrap';
 import * as z from 'zod';
 
 import { ErrorAlert, QuillEditor } from 'components/atoms';
-import { useFillForm } from 'hooks';
 import { useNotify } from 'core/notification';
-import { Maybe } from 'types';
 import {
   CompanyQuery,
   useSetCompanyDetailMutation,
   useCreateCompanyDetailMutation,
   useUpdateCompanyDetailMutation,
 } from 'generated/graphql';
+import { useFillForm } from 'hooks';
+import { Maybe } from 'types';
 
 type Props = {
   company: Maybe<CompanyQuery['company']>;

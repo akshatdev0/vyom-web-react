@@ -16,40 +16,44 @@
 
 */
 import React from 'react';
+
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import { Layout, ProLayout, AuthLayout, AdminLayout, CompanyOwnerLayout } from 'layouts';
-import { useAuthState, Role } from 'features/auth';
+import { Role, getAuthData, useAuthState } from 'features/auth';
+import { useRouteDebugger } from 'hooks';
+import { Layouts, ProLayout, AuthLayout, AdminLayout, CompanyOwnerLayout } from 'layouts';
 
 const AuthSwitch = (
   <Switch>
-    <Route path={Layout.Pro} render={() => <ProLayout />} />
-    <Route path={Layout.Auth} render={() => <AuthLayout />} />
-    <Redirect from="/" to={Layout.Auth + '/sign-in'} />
+    <Route path={Layouts.PRO.path} render={() => <ProLayout />} />
+    <Route path={Layouts.AUTH.path} render={() => <AuthLayout />} />
+    <Redirect from="/" to={Layouts.AUTH.path + '/sign-in'} />
   </Switch>
 );
 
 const AdminSwitch = (
   <Switch>
-    <Route path={Layout.Pro} render={() => <ProLayout />} />
-    <Route path={Layout.Admin} render={() => <AdminLayout />} />
-    <Redirect from="/" to={Layout.Admin + '/index'} />
+    <Route path={Layouts.PRO.path} render={() => <ProLayout />} />
+    <Route path={Layouts.ADMIN.path} render={() => <AdminLayout />} />
+    <Redirect from="/" to={Layouts.ADMIN.path + '/index'} />
   </Switch>
 );
 
 const CompanyOwnerSwitch = (
   <Switch>
-    <Route path={Layout.Pro} render={() => <ProLayout />} />
-    <Route path={Layout.CompanyOwner} render={() => <CompanyOwnerLayout />} />
-    <Redirect from="/" to={Layout.CompanyOwner + '/index'} />
+    <Route path={Layouts.PRO.path} render={() => <ProLayout />} />
+    <Route path={Layouts.COMPANY_OWNER.path} render={() => <CompanyOwnerLayout />} />
+    <Redirect from="/" to={Layouts.COMPANY_OWNER.path + '/index'} />
   </Switch>
 );
 
-const App: React.FunctionComponent = () => {
-  const { isSignedIn, user } = useAuthState();
+const Switcher: React.FunctionComponent = () => {
+  useRouteDebugger();
+  const authState = useAuthState();
+  const { isSignedIn, user } = getAuthData();
 
   let sw = AuthSwitch;
-  if (isSignedIn) {
+  if (isSignedIn || authState.isSignedIn) {
     if (user?.role?.type) {
       switch (user.role.type) {
         case Role.PlatformMasterAdmin:
@@ -65,8 +69,15 @@ const App: React.FunctionComponent = () => {
       }
     }
   }
+  return sw;
+};
 
-  return <BrowserRouter>{sw}</BrowserRouter>;
+const App: React.FunctionComponent = () => {
+  return (
+    <BrowserRouter>
+      <Switcher />
+    </BrowserRouter>
+  );
 };
 
 export default App;

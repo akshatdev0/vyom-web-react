@@ -1,13 +1,14 @@
 import React from 'react';
-// reactstrap components
-import { Button, Card, CardBody, Form } from 'reactstrap';
-import { useForm } from 'react-hook-form';
+
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Button, Card, CardBody, Form } from 'reactstrap';
 import * as z from 'zod';
 
-import * as v from 'validations';
 import { ErrorAlert, TextField } from 'components/atoms';
 import { useCreatePasswordMutation } from 'generated/graphql';
+import * as v from 'validations';
+
 import { useAuthState } from './auth';
 
 const schema = v.createPassword();

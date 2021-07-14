@@ -16,13 +16,15 @@
 
 */
 import React from 'react';
+
 import ReactDOM from 'react-dom';
 import { Provider as StoreProvider } from 'react-redux';
 
-import { composeStore } from './store';
-import App from './app';
 import { ClientProvider } from 'client';
 import { AuthProvider } from 'features/auth';
+
+import App from './app';
+import { composeStore } from './store';
 
 // plugins styles from node_modules
 import 'react-notification-alert/dist/animate.css';
@@ -50,6 +52,7 @@ import '@syncfusion/ej2-react-treegrid/styles/bootstrap4.css';
 import 'assets/vendor/nucleo/css/nucleo.css';
 
 // core styles
+// eslint-disable-next-line
 import 'assets/scss/argon-dashboard-pro-react.scss?v1.2.0';
 
 // custom styles

@@ -16,14 +16,13 @@
 
 */
 import React, { useState, useEffect } from 'react';
-// react library for routing
-import { useLocation, NavLink as NavLinkRRD, Link } from 'react-router-dom';
-// nodejs library that concatenates classes
+
 import classnames from 'classnames';
-// react library that creates nice scrollbar on windows devices
 import PerfectScrollbar from 'react-perfect-scrollbar';
-// reactstrap components
+import { useLocation, NavLink as NavLinkRRD, Link } from 'react-router-dom';
 import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav } from 'reactstrap';
+
+import { Layout } from 'core/layout';
 import {
   SubNavigation,
   SubMenuItem,
@@ -34,8 +33,7 @@ import {
   isCollapsibleMenu,
   isMenuItem,
 } from 'core/navigation';
-import { getParts, getPath } from 'routing';
-import { Layout } from 'layouts';
+import { getParts, getPath } from 'core/routing';
 
 type Props = {
   // The layout for which this sidebar will be used
@@ -121,7 +119,7 @@ const Sidebar: React.FunctionComponent<Props> = ({
         const item: SubMenu | SubMenuItem = menu[i];
         if (isCollapsibleMenu(item) && item.collapse && getCollapseInitialState(item.children)) {
           return true;
-        } else if (isSubMenuItem(item) && location.pathname.indexOf(getParts(item.route.parts)) !== -1) {
+        } else if (isSubMenuItem(item) && location.pathname.indexOf(getParts(item.route)) !== -1) {
           return true;
         }
       }
@@ -181,7 +179,7 @@ const Sidebar: React.FunctionComponent<Props> = ({
           );
           links.push(link);
         } else if (isMenuItem(item) || isSubMenuItem(item)) {
-          const path = getPath(layout, item.route.parts);
+          const path = getPath(layout, item.route);
           const link = (
             <NavItem className={activeRoute(path)} key={i}>
               <NavLink to={path} activeClassName="" onClick={closeSidenav} tag={NavLinkRRD}>

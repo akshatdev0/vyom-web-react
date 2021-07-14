@@ -15,10 +15,10 @@
 
 */
 import React from 'react';
-import { useReactQueryClient } from 'client';
 
-import { UserProfile } from 'features/user';
+import { useReactQueryClient } from 'client';
 import { useAuthState } from 'features/auth';
+import { UserProfile } from 'features/user';
 import { UserQuery, GetUserInfoQuery, useUserQuery, useUpdateUserMutation } from 'generated/graphql';
 
 const AdminProfile: React.FunctionComponent = () => {
