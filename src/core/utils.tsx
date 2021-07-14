@@ -1,5 +1,5 @@
-import jsonpath from 'jsonpath';
 import { PhoneNumberUtil, PhoneNumberType } from 'google-libphonenumber';
+import jsonpath from 'jsonpath';
 import { DeepMap, FieldError, FieldValues } from 'react-hook-form';
 
 export const getGraphQLError = (error: unknown): string => {
@@ -13,7 +13,7 @@ export const getGraphQLError = (error: unknown): string => {
   return 'Something went wrong. Please try again!';
 };
 
-export const getZodError = (path: string, errors: DeepMap<FieldValues, FieldError>): string => {
+export const getFormError = (path: string, errors: DeepMap<FieldValues, FieldError>): string => {
   if (path.indexOf('.') === -1) {
     return errors[path]?.message;
   }

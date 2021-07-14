@@ -1,19 +1,19 @@
 import React from 'react';
-import * as _ from 'lodash';
-// reactstrap components
-import { Row, Col, Form, Button } from 'reactstrap';
-import { useForm } from 'react-hook-form';
+
 import { zodResolver } from '@hookform/resolvers/zod';
+import * as _ from 'lodash';
+import { useForm } from 'react-hook-form';
+import { Row, Col, Form, Button } from 'reactstrap';
 import * as z from 'zod';
 
-import * as v from 'validations';
-import { ErrorAlert, Select, TextField } from 'components/atoms';
-import { Maybe } from 'types';
-import { useFillForm } from 'hooks';
 import { useReactQueryClient } from 'client';
+import { ErrorAlert, Select, TextField } from 'components/atoms';
 import { useNotify } from 'core/notification';
 import { useAuthState } from 'features/auth';
 import { CompanyQuery, useCompanyBusinessTypesQuery, useUpdateCompanyInformationMutation } from 'generated/graphql';
+import { useFillForm } from 'hooks';
+import { Maybe } from 'types';
+import * as v from 'validations';
 
 type Props = {
   company: Maybe<CompanyQuery['company']>;

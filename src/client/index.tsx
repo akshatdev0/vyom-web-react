@@ -1,6 +1,8 @@
 import React, { useContext, createContext } from 'react';
-import { QueryClient, QueryClientProvider, useQueryClient } from 'react-query';
+
 import { GraphQLClient } from 'graphql-request';
+import { QueryClient, QueryClientProvider, useQueryClient } from 'react-query';
+
 import { getSessionToken } from './session';
 
 type Props = {

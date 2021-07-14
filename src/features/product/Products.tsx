@@ -17,8 +17,7 @@
 /* eslint-disable */
 import React from 'react';
 
-// reactstrap components
-import { Card, CardHeader, Container } from 'reactstrap';
+import { Card, CardHeader, Container, Row, Col, Button } from 'reactstrap';
 import {
   ColumnDirective,
   ColumnsDirective,
@@ -34,6 +33,8 @@ import {
 import { SimpleHeader } from 'components/molecules';
 import { useAuthState } from 'features/auth';
 import { useProductsOfCompanyQuery } from 'generated/graphql';
+import routes from 'routes';
+import { RouteLink } from 'components/atoms';
 
 const Products: React.FunctionComponent = () => {
   const { user: sessionUser } = useAuthState();
@@ -58,8 +59,19 @@ const Products: React.FunctionComponent = () => {
       <SimpleHeader name="Products" parentName="Product Catalog" />
       <Container className="mt--6" fluid>
         <Card>
-          <CardHeader className="border-0">
-            <h3 className="mb-0">Products</h3>
+          <CardHeader>
+            <Row className="align-items-center">
+              <Col xs="8">
+                <h3 className="mb-0">Products</h3>
+              </Col>
+              <Col className="text-right" xs="4">
+                <RouteLink to={routes.newProduct}>
+                  <Button size="sm" color="primary">
+                    New Product
+                  </Button>
+                </RouteLink>
+              </Col>
+            </Row>
           </CardHeader>
           <GridComponent dataSource={tableData} allowPaging={true} pageSettings={pageSettings} allowSorting={true}>
             <ColumnsDirective>

@@ -8158,7 +8158,7 @@ export const OrdersOfCompany = gql`
 `;
 export const ProductCategoriesOfCompany = gql`
   query ProductCategoriesOfCompany($companyID: ID!) {
-    productCategories(where: { company: { id: $companyID }, parentCategory_null: true }) {
+    productCategories(where: { company: { id: $companyID }, parentCategory_null: true }, sort: "name") {
       id
       name
       description
@@ -8853,7 +8853,10 @@ export const useOrdersOfCompanyQuery = <TData = OrdersOfCompanyQuery, TError = u
   );
 export const ProductCategoriesOfCompanyDocument = `
     query ProductCategoriesOfCompany($companyID: ID!) {
-  productCategories(where: {company: {id: $companyID}, parentCategory_null: true}) {
+  productCategories(
+    where: {company: {id: $companyID}, parentCategory_null: true}
+    sort: "name"
+  ) {
     id
     name
     description

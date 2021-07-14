@@ -1,5 +1,5 @@
 query ProductCategoriesOfCompany($companyID: ID!) {
-  productCategories(where: { company: { id: $companyID }, parentCategory_null: true }) {
+  productCategories(where: { company: { id: $companyID }, parentCategory_null: true }, sort: "name") {
     id
     name
     description

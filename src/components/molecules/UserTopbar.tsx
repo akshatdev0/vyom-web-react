@@ -16,9 +16,8 @@
 
 */
 import React from 'react';
-// nodejs library that concatenates classes
+
 import classnames from 'classnames';
-// reactstrap components
 import {
   Collapse,
   DropdownMenu,
@@ -43,10 +42,11 @@ import {
   Media,
 } from 'reactstrap';
 
-import UserAccountMenu from './UserAccountMenu';
+import { Layout } from 'core/layout';
 import { Navigation } from 'core/navigation';
 import { Business, Maybe, User } from 'types';
-import { Layout } from 'layouts';
+
+import UserAccountMenu from './UserAccountMenu';
 
 type Props = {
   // The layout for which this menu will be used

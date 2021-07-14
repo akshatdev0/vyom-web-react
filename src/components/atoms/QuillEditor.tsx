@@ -1,12 +1,12 @@
 import React from 'react';
+
 import { Control, useController, FieldName, FieldValues } from 'react-hook-form';
-// reactstrap components
+import ReactQuill from 'react-quill';
 import { FormGroup, Input } from 'reactstrap';
 // react plugin that creates text editor
-import ReactQuill from 'react-quill';
 
+import { getFormError } from 'core/utils';
 import { Override } from 'types';
-import { getZodError } from 'core/utils';
 
 type ReactstrapInputProps = React.ComponentProps<typeof Input>;
 
@@ -133,7 +133,7 @@ const QuillEditor = ({
     ...rest,
   };
 
-  const error = invalid ? <div className="invalid-feedback">{getZodError(name, errors)}</div> : null;
+  const error = invalid ? <div className="invalid-feedback">{getFormError(name, errors)}</div> : null;
 
   return (
     <FormGroup>

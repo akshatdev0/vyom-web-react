@@ -17,7 +17,6 @@
 /* eslint-disable */
 import React from 'react';
 
-// reactstrap components
 import { Button, Card, CardHeader, CardBody, CardFooter, Table, Container, Row, Col } from 'reactstrap';
 // core components
 import { AuthHeader } from 'components/molecules';
