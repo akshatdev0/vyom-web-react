@@ -1,14 +1,14 @@
 import React from 'react';
-// reactstrap components
-import { Button, Card, CardBody, Form, Row, Col } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
+
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { Link } from 'react-router-dom';
+import { Button, Card, CardBody, Form, Row, Col } from 'reactstrap';
 import * as z from 'zod';
 
-import * as v from 'validations';
 import { ErrorAlert, TextField } from 'components/atoms';
 import { useSignUpMutation } from 'generated/graphql';
+import * as v from 'validations';
 
 const schema = z.object({
   mobileNumber: v.mobileNumber(),

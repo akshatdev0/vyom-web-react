@@ -18,10 +18,12 @@
 import React from 'react';
 
 import { UserLayout } from 'components/templates';
-import { Layout } from 'layouts';
-import { sidebarMenu, userAccountMenu } from './navigations';
 import { useAuthState } from 'features/auth';
 import { useCompanyOwnerLayoutQuery } from 'generated/graphql';
+import { Layouts } from 'layouts';
+import routes from 'routes';
+
+import { sidebarMenu, userAccountMenu } from './navigations';
 
 const CompanyOwnerLayout: React.FunctionComponent = () => {
   const { user: sessionUser } = useAuthState();
@@ -32,7 +34,8 @@ const CompanyOwnerLayout: React.FunctionComponent = () => {
   );
   return (
     <UserLayout
-      layout={Layout.CompanyOwner}
+      layout={Layouts.COMPANY_OWNER}
+      routes={routes}
       sidebarMenu={sidebarMenu}
       userAccountMenu={userAccountMenu}
       user={companyOwner?.user}

@@ -15,11 +15,11 @@
 
 */
 import React from 'react';
-import { useReactQueryClient } from 'client';
 
+import { useReactQueryClient } from 'client';
 import { useNotify } from 'core/notification';
-import { UserProfile } from 'features/user';
 import { useAuthState } from 'features/auth';
+import { UserProfile } from 'features/user';
 import {
   CompanyOwnerQuery,
   CompanyOwnerLayoutQuery,

@@ -15,6 +15,7 @@
 
 */
 import { Navigation } from 'core/navigation';
+
 import routes from './routes';
 
 const sidebarMenu: Navigation = [

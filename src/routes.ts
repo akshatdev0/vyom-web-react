@@ -1,16 +1,16 @@
+import { AdminProfile } from 'features/admin';
+import { Company } from 'features/company';
+import { CompanyOwnerProfile } from 'features/company-owner';
+import { Orders } from 'features/order';
+import { NewProduct, Products } from 'features/product';
+import { ProductCategories } from 'features/product-category';
+import { Layouts } from 'layouts';
+import Alternative from 'views/pro/pages/dashboards/Alternative';
+import Dashboard from 'views/pro/pages/dashboards/Dashboard.js';
 import SignIn from 'views/SignIn';
 import SignUp from 'views/SignUp';
-import { CompanyOwnerProfile } from 'features/company-owner';
-import { Company } from 'features/company';
-import { Products } from 'features/product-catalog';
-import { ProductCategories } from 'features/product-catalog';
-import { Orders } from 'features/order';
 
-import Dashboard from 'views/pro/pages/dashboards/Dashboard.js';
-import { Layout } from 'layouts';
-import { AdminProfile } from 'features/admin';
-import Alternative from 'views/pro/pages/dashboards/Alternative';
-
+const ADD = 'add';
 const COMPANY = 'company';
 const DASHBOARD = 'dashboard';
 const ORDERS = 'orders';
@@ -24,52 +24,57 @@ const routes = {
   adminProfile: {
     parts: PROFILE,
     component: AdminProfile,
-    layouts: [Layout.Admin],
+    layouts: [Layouts.ADMIN],
   },
   adminDashboard: {
     parts: DASHBOARD,
     component: Alternative,
-    layouts: [Layout.Admin],
+    layouts: [Layouts.ADMIN],
   },
   company: {
     parts: COMPANY,
     component: Company,
-    layouts: [Layout.CompanyOwner],
+    layouts: [Layouts.COMPANY_OWNER],
   },
   companyOwnerProfile: {
     parts: PROFILE,
     component: CompanyOwnerProfile,
-    layouts: [Layout.CompanyOwner],
+    layouts: [Layouts.COMPANY_OWNER],
   },
   companyOwnerDashboard: {
     parts: DASHBOARD,
     component: Dashboard,
-    layouts: [Layout.CompanyOwner],
+    layouts: [Layouts.COMPANY_OWNER],
+  },
+  newProduct: {
+    parts: [PRODUCTS, ADD],
+    component: NewProduct,
+    layouts: [Layouts.COMPANY_OWNER],
   },
   products: {
     parts: PRODUCTS,
     component: Products,
-    layouts: [Layout.CompanyOwner],
+    layouts: [Layouts.COMPANY_OWNER],
   },
   productCategories: {
     parts: PRODUCT_CATEGORIES,
     component: ProductCategories,
-    layouts: [Layout.CompanyOwner],
+    layouts: [Layouts.COMPANY_OWNER],
   },
   orders: {
     parts: ORDERS,
     component: Orders,
-    layouts: [Layout.CompanyOwner],
+    layouts: [Layouts.COMPANY_OWNER],
   },
   signIn: {
     parts: SIGN_IN,
     component: SignIn,
-    layouts: [Layout.Auth],
+    layouts: [Layouts.AUTH],
   },
   signUp: {
     parts: SIGN_UP,
     component: SignUp,
-    layouts: [Layout.Auth],
+    layouts: [Layouts.AUTH],
   },
 };
 

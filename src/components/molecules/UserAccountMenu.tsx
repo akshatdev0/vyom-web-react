@@ -1,14 +1,14 @@
 import React from 'react';
-import { NavLink as NavLinkRRD } from 'react-router-dom';
-// reactstrap components
-import { DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle, Media, Nav } from 'reactstrap';
-import Jdenticon from 'react-jdenticon';
 
-import { useAuthState } from 'features/auth';
+import Jdenticon from 'react-jdenticon';
+import { NavLink as NavLinkRRD } from 'react-router-dom';
+import { DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle, Media, Nav } from 'reactstrap';
+
+import { Layout } from 'core/layout';
 import { isMenuItem, Navigation } from 'core/navigation';
+import { getPath } from 'core/routing';
+import { useAuthState } from 'features/auth';
 import { Maybe, User } from 'types';
-import { getPath } from 'routing';
-import { Layout } from 'layouts';
 
 type Props = {
   // The layout for which this menu will be used
@@ -31,7 +31,7 @@ const UserAccountMenu: React.FunctionComponent<Props> = ({ layout, navigation, u
         const item = navigation[i];
         if (isMenuItem(item)) {
           const component = (
-            <DropdownItem key={i} to={getPath(layout, item.route.parts)} tag={NavLinkRRD}>
+            <DropdownItem key={i} to={getPath(layout, item.route)} tag={NavLinkRRD}>
               <i className={item.icon} />
               <span>{item.name}</span>
             </DropdownItem>
