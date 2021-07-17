@@ -32,6 +32,8 @@ export type Maybe<T> = T | null | undefined;
 
 export type Override<T1, T2> = Omit<T1, keyof T2> & T2;
 
+export type Unarray<T> = T extends Array<infer U> ? U : T;
+
 export type AuthUserTokenPayload = SignInMutation['signIn'];
 
 export type User = Pick<
