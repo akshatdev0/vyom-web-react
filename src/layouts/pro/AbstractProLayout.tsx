@@ -80,7 +80,7 @@ const AbstractProLayout: React.FunctionComponent<Props> = ({
           />
           <Switch>
             {getRoutes(layout, routes)}
-            <Redirect from="*" to={layout + '/dashboard'} />
+            <Redirect from="*" to={layout.path + '/dashboard'} />
           </Switch>
           <UserFooter />
         </NotificationContainer>
