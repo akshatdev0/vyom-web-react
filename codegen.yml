@@ -9,6 +9,7 @@ generates:
       - 'typescript-document-nodes'
       - 'typescript-react-query'
     config:
+      maybeValue: 'T'
       fetcher:
         func: 'client/fetcher#useFetcher'
         isReactHook: true
