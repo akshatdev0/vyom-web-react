@@ -5,14 +5,12 @@ import { Orders } from 'features/order';
 import { NewProduct, Products } from 'features/product';
 import { ProductCategories } from 'features/product-category';
 import { Layouts } from 'layouts';
-import Alternative from 'views/pro/pages/dashboards/Alternative';
-import Dashboard from 'views/pro/pages/dashboards/Dashboard.js';
 import SignIn from 'views/SignIn';
 import SignUp from 'views/SignUp';
 
 const ADD = 'add';
 const COMPANY = 'company';
-const DASHBOARD = 'dashboard';
+// const DASHBOARD = 'dashboard';
 const ORDERS = 'orders';
 const PRODUCTS = 'products';
 const PRODUCT_CATEGORIES = 'product-categories';
@@ -26,11 +24,6 @@ const routes = {
     component: AdminProfile,
     layouts: [Layouts.ADMIN],
   },
-  adminDashboard: {
-    parts: DASHBOARD,
-    component: Alternative,
-    layouts: [Layouts.ADMIN],
-  },
   company: {
     parts: COMPANY,
     component: Company,
@@ -39,11 +32,6 @@ const routes = {
   companyOwnerProfile: {
     parts: PROFILE,
     component: CompanyOwnerProfile,
-    layouts: [Layouts.COMPANY_OWNER],
-  },
-  companyOwnerDashboard: {
-    parts: DASHBOARD,
-    component: Dashboard,
     layouts: [Layouts.COMPANY_OWNER],
   },
   newProduct: {

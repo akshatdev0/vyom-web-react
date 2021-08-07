@@ -1,31 +1,13 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from 'react';
 
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
 import { Role, getAuthData, useAuthState } from 'features/auth';
 import { useRouteDebugger } from 'hooks';
-import { Layouts, ProLayout, AuthLayout, AdminLayout, CompanyOwnerLayout } from 'layouts';
+import { Layouts, AuthLayout, AdminLayout, CompanyOwnerLayout } from 'layouts';
 
 const AuthSwitch = (
   <Switch>
-    <Route path={Layouts.PRO.path} render={() => <ProLayout />} />
     <Route path={Layouts.AUTH.path} render={() => <AuthLayout />} />
     <Redirect from="/" to={Layouts.AUTH.path + '/sign-in'} />
   </Switch>
@@ -33,7 +15,6 @@ const AuthSwitch = (
 
 const AdminSwitch = (
   <Switch>
-    <Route path={Layouts.PRO.path} render={() => <ProLayout />} />
     <Route path={Layouts.ADMIN.path} render={() => <AdminLayout />} />
     <Redirect from="/" to={Layouts.ADMIN.path + '/index'} />
   </Switch>
@@ -41,7 +22,6 @@ const AdminSwitch = (
 
 const CompanyOwnerSwitch = (
   <Switch>
-    <Route path={Layouts.PRO.path} render={() => <ProLayout />} />
     <Route path={Layouts.COMPANY_OWNER.path} render={() => <CompanyOwnerLayout />} />
     <Redirect from="/" to={Layouts.COMPANY_OWNER.path + '/index'} />
   </Switch>

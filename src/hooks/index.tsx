@@ -3,3 +3,4 @@ export { default as useLayout } from './useLayout';
 export { default as useRouteDebugger } from './useRouteDebugger';
 export { default as useScrollTop } from './useScrollTop';
 export { default as useToggleSidebar } from './useToggleSidebar';
+export { default as useSidebarControls } from './useSidebarControls';

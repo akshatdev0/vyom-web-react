@@ -8,9 +8,6 @@ export const Layouts = {
   COMPANY_OWNER: {
     path: '/company-owner',
   },
-  PRO: {
-    path: '/pro',
-  },
   UNKNOWN: {
     path: '/',
   },

@@ -1351,7 +1351,7 @@ export type Country = {
   id: Scalars['ID'];
   created_at: Scalars['DateTime'];
   updated_at: Scalars['DateTime'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   states?: Maybe<Array<Maybe<State>>>;
 };
 
@@ -1408,7 +1408,7 @@ export type CountryGroupBy = {
 };
 
 export type CountryInput = {
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   states?: Maybe<Array<Maybe<Scalars['ID']>>>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;

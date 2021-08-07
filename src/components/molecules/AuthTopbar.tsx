@@ -1,144 +1,234 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from 'react';
 
+import AppBar from '@material-ui/core/AppBar';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import Divider from '@material-ui/core/Divider';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Menu from '@material-ui/core/Menu';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Clear from '@material-ui/icons/Clear';
+import MenuIcon from '@material-ui/icons/Menu';
+import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import { Link } from 'react-router-dom';
-import {
-  UncontrolledCollapse,
-  NavbarBrand,
-  Navbar,
-  NavItem,
-  NavLink,
-  Nav,
-  Container,
-  Row,
-  Col,
-  UncontrolledTooltip,
-  Button,
-} from 'reactstrap';
+
+import componentStyles from 'assets/theme/components/navbars/auth-navbar';
+
+const useStyles = makeStyles(componentStyles);
 
 const AuthTopbar: React.FunctionComponent = () => {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const isMenuOpen = Boolean(anchorEl);
+
+  const handleMenuOpen = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const menuId = 'responsive-menu-id';
+
+  const ListLeftObject = (
+    <Box display="flex" alignItems="center" width="auto" component={List} className={classes.flexDirectionColumn}>
+      <ListItem
+        component={Link}
+        to="/auth/sign-in"
+        onClick={handleMenuClose}
+        classes={{
+          root: classes.listItemRoot,
+        }}
+      >
+        Sign In
+      </ListItem>
+      <ListItem
+        component={Link}
+        to="/auth/sign-up"
+        onClick={handleMenuClose}
+        classes={{
+          root: classes.listItemRoot,
+        }}
+      >
+        Sign Up
+      </ListItem>
+    </Box>
+  );
+
+  const ListRightObject = (
+    <Box display="flex" alignItems="center" width="auto" component={List} className={classes.flexDirectionColumn}>
+      <ListItem
+        component="a"
+        href="https://www.facebook.com/CreativeTim/"
+        onClick={handleMenuClose}
+        classes={{
+          root: classes.listItemRoot,
+        }}
+      >
+        <Box
+          component="i"
+          className="fab fa-facebook-square"
+          fontSize="1.25rem!important"
+          marginRight=".5rem!important"
+        />
+        <Hidden lgUp implementation="css">
+          Facebook
+        </Hidden>
+      </ListItem>
+      <ListItem
+        component="a"
+        href="https://www.instagram.com/creativetimofficial/"
+        onClick={handleMenuClose}
+        classes={{
+          root: classes.listItemRoot,
+        }}
+      >
+        <Box component="i" className="fab fa-instagram" fontSize="1.25rem!important" marginRight=".5rem!important" />
+
+        <Hidden lgUp implementation="css">
+          Istagram
+        </Hidden>
+      </ListItem>
+      <ListItem
+        component="a"
+        href="https://twitter.com/creativetim"
+        onClick={handleMenuClose}
+        classes={{
+          root: classes.listItemRoot,
+        }}
+      >
+        <Box component="i" className="fab fa-twitter" fontSize="1.25rem!important" marginRight=".5rem!important" />
+        <Hidden lgUp implementation="css">
+          Twitter
+        </Hidden>
+      </ListItem>
+      <ListItem
+        component="a"
+        href="https://github.com/creativetimofficial"
+        onClick={handleMenuClose}
+        classes={{
+          root: classes.listItemRoot,
+        }}
+      >
+        <Box component="i" className="fab fa-github" fontSize="1.25rem!important" marginRight=".5rem!important" />
+        <Hidden lgUp implementation="css">
+          Github
+        </Hidden>
+      </ListItem>
+      <Button
+        variant="outlined"
+        color="primary"
+        classes={{
+          root: classes.buttonRootPurchase,
+          label: classes.buttonLabelPurchase,
+        }}
+      >
+        <Box
+          component={ShoppingCart}
+          position="relative"
+          width="1.25rem!important"
+          height="1.25rem!important"
+          marginRight=".25rem!important"
+        />
+        Purchase now
+      </Button>
+    </Box>
+  );
+
   return (
     <>
-      <Navbar className="navbar-horizontal navbar-main navbar-dark navbar-transparent" expand="lg" id="navbar-main">
-        <Container>
-          <NavbarBrand to="/" tag={Link}>
-            <img alt="..." src={require('assets/img/brand/argon-react-white.png').default} />
-          </NavbarBrand>
-          <button
-            aria-controls="navbar-collapse"
-            aria-expanded={false}
-            aria-label="Toggle navigation"
-            className="navbar-toggler"
-            data-target="#navbar-collapse"
-            data-toggle="collapse"
-            id="navbar-collapse"
-            type="button"
-          >
-            <span className="navbar-toggler-icon" />
-          </button>
-          <UncontrolledCollapse className="navbar-custom-collapse" navbar toggler="#navbar-collapse">
-            <div className="navbar-collapse-header">
-              <Row>
-                <Col className="collapse-brand" xs="6">
-                  <Link to="/admin/dashboard">
-                    <img alt="..." src={require('assets/img/brand/blue.png').default} />
-                  </Link>
-                </Col>
-                <Col className="collapse-close" xs="6">
-                  <button
-                    aria-controls="navbar-collapse"
-                    aria-expanded={false}
-                    aria-label="Toggle navigation"
-                    className="navbar-toggler"
-                    data-target="#navbar-collapse"
-                    data-toggle="collapse"
-                    id="navbar-collapse"
-                    type="button"
+      <AppBar position="absolute" color="transparent" elevation={0}>
+        <Toolbar>
+          <Container component={Box} classes={{ root: classes.containerRoot }}>
+            <Box display="flex" justifyContent="center" alignItems="center">
+              <img
+                className={classes.headerImgLgUp}
+                alt="..."
+                src={require('assets/img/brand/argon-react-white.png').default}
+              />
+              <Hidden mdDown implementation="css">
+                {ListLeftObject}
+              </Hidden>
+            </Box>
+            <Hidden mdDown implementation="css">
+              {ListRightObject}
+            </Hidden>
+            <Hidden lgUp implementation="css">
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={handleMenuOpen}
+                aria-controls={menuId}
+                aria-haspopup="true"
+              >
+                <Box
+                  component={MenuIcon}
+                  color={theme.palette.white.main}
+                  width="2rem!important"
+                  height="2rem!important"
+                />
+              </IconButton>
+              <Menu
+                anchorEl={anchorEl}
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                id={menuId}
+                keepMounted
+                transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+                open={isMenuOpen}
+                onClose={handleMenuClose}
+                classes={{ paper: classes.menuPaper }}
+              >
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  paddingLeft="1.25rem"
+                  paddingRight="1.25rem"
+                  paddingBottom="1rem"
+                  className={classes.outlineNone}
+                >
+                  <img
+                    className={classes.headerImg}
+                    alt="..."
+                    src={require('assets/img/brand/argon-react.png').default}
+                  />
+                  <IconButton
+                    edge="start"
+                    color="inherit"
+                    onClick={handleMenuClose}
+                    aria-controls={menuId}
+                    aria-haspopup="true"
                   >
-                    <span />
-                    <span />
-                  </button>
-                </Col>
-              </Row>
-            </div>
-            <Nav className="mr-auto" navbar>
-              <NavItem>
-                <NavLink to="/auth/sign-in" tag={Link}>
-                  <span className="nav-link-inner--text">Sign In</span>
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink to="/auth/sign-up" tag={Link}>
-                  <span className="nav-link-inner--text">Sign Up</span>
-                </NavLink>
-              </NavItem>
-            </Nav>
-            <hr className="d-lg-none" />
-            <Nav className="align-items-lg-center ml-lg-auto" navbar>
-              <NavItem>
-                <NavLink className="nav-link-icon" href="#" id="tooltip601201423" target="_blank">
-                  <i className="fab fa-facebook-square" />
-                  <span className="nav-link-inner--text d-lg-none">Facebook</span>
-                </NavLink>
-                <UncontrolledTooltip delay={0} target="tooltip601201423">
-                  Like us on Facebook
-                </UncontrolledTooltip>
-              </NavItem>
-              <NavItem>
-                <NavLink className="nav-link-icon" href="#" id="tooltip871243015" target="_blank">
-                  <i className="fab fa-instagram" />
-                  <span className="nav-link-inner--text d-lg-none">Instagram</span>
-                </NavLink>
-                <UncontrolledTooltip delay={0} target="tooltip871243015">
-                  Follow us on Instagram
-                </UncontrolledTooltip>
-              </NavItem>
-              <NavItem>
-                <NavLink className="nav-link-icon" href="#" id="tooltip366258619" target="_blank">
-                  <i className="fab fa-twitter-square" />
-                  <span className="nav-link-inner--text d-lg-none">Twitter</span>
-                </NavLink>
-                <UncontrolledTooltip delay={0} target="tooltip366258619">
-                  Follow us on Twitter
-                </UncontrolledTooltip>
-              </NavItem>
-              <NavItem>
-                <NavLink className="nav-link-icon" href="#" id="tooltip931502898" target="_blank">
-                  <i className="fab fa-github" />
-                  <span className="nav-link-inner--text d-lg-none">Github</span>
-                </NavLink>
-                <UncontrolledTooltip delay={0} target="tooltip931502898">
-                  Star us on Github
-                </UncontrolledTooltip>
-              </NavItem>
-              <NavItem className="d-none d-lg-block ml-lg-4">
-                <Button className="btn-neutral btn-icon" color="default" href="#">
-                  <span className="btn-inner--icon">
-                    <i className="fas fa-shopping-cart mr-2" />
-                  </span>
-                  <span className="nav-link-inner--text">Purchase now</span>
-                </Button>
-              </NavItem>
-            </Nav>
-          </UncontrolledCollapse>
-        </Container>
-      </Navbar>
+                    <Box component={Clear} width="2rem!important" height="2rem!important" />
+                  </IconButton>
+                </Box>
+                <Box
+                  component={Divider}
+                  marginBottom="1rem!important"
+                  marginLeft="1.25rem!important"
+                  marginRight="1.25rem!important"
+                />
+                {ListLeftObject}
+                <Box
+                  component={Divider}
+                  marginBottom="1rem!important"
+                  marginLeft="1.25rem!important"
+                  marginRight="1.25rem!important"
+                />
+                {ListRightObject}
+              </Menu>
+            </Hidden>
+          </Container>
+        </Toolbar>
+      </AppBar>
     </>
   );
 };
