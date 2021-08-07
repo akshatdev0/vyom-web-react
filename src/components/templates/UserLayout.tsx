@@ -12,7 +12,6 @@ import UserFooter from 'components/molecules/UserFooter';
 import UserTopbar from 'components/molecules/UserTopbar';
 import { Layout } from 'core/layout';
 import { Navigation } from 'core/navigation';
-import { NotificationContainer } from 'core/notification';
 import { getRoutes, RouteMapping } from 'core/routing';
 import { useSidebarControls } from 'hooks';
 import { Business, Maybe, User } from 'types';
@@ -57,23 +56,21 @@ const UserLayout: React.FunctionComponent<Props> = ({
           }}
         />
         <Box position="relative" flex="1" className={classes.mainContent}>
-          <Snackbars origin={{ horizontal: 'right', vertical: 'bottom' }}>
-            <NotificationContainer place="br">
-              <UserTopbar
-                layout={layout}
-                openSidebar={openSidebar}
-                accountMenu={userAccountMenu}
-                user={user}
-                business={business}
-              />
-              <Switch>
-                {getRoutes(layout, routes)}
-                {/* TODO: 404 page redirect */}
-              </Switch>
-              <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
-                <UserFooter />
-              </Container>
-            </NotificationContainer>
+          <Snackbars origin={{ vertical: 'bottom', horizontal: 'right' }}>
+            <UserTopbar
+              layout={layout}
+              openSidebar={openSidebar}
+              accountMenu={userAccountMenu}
+              user={user}
+              business={business}
+            />
+            <Switch>
+              {getRoutes(layout, routes)}
+              {/* TODO: 404 page redirect */}
+            </Switch>
+            <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
+              <UserFooter />
+            </Container>
           </Snackbars>
         </Box>
       </Box>
