@@ -15,9 +15,9 @@ type SnackbarsProps = {
 };
 
 type SnackbarOptions = {
+  severity: Color;
   title?: string | null;
   message: string;
-  severity: Color;
 };
 
 const SnackbarContext = createContext<((options: SnackbarOptions) => void) | undefined>(undefined);
