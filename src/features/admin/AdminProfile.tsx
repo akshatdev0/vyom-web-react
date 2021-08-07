@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useReactQueryClient } from 'client';
-import { useSnackbar } from 'components/molecules/Snackbars';
+import { useSnackbar } from 'components/molecules';
 import { useAuthState } from 'features/auth';
 import { UserProfile } from 'features/user';
 import { UserQuery, GetUserInfoQuery, useUserQuery, useUpdateUserMutation } from 'generated/graphql';
@@ -26,7 +26,7 @@ const AdminProfile: React.FunctionComponent = () => {
       reactQueryClient.setQueryData<UserQuery>(['User', { id: userID }], {
         user: updatedUser,
       });
-      showSnackbar({ title: 'Profile', message: 'Successfully saved!', severity: 'success' });
+      showSnackbar({ severity: 'success', title: 'Profile', message: 'Successfully saved!' });
     },
   });
 
