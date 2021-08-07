@@ -7,11 +7,11 @@ import { Switch } from 'react-router-dom';
 
 import componentStyles from 'assets/theme/layouts/admin.js';
 import Sidebar from 'components/molecules/Sidebar';
+import Snackbars from 'components/molecules/Snackbars';
 import UserFooter from 'components/molecules/UserFooter';
 import UserTopbar from 'components/molecules/UserTopbar';
 import { Layout } from 'core/layout';
 import { Navigation } from 'core/navigation';
-import { NotificationContainer } from 'core/notification';
 import { getRoutes, RouteMapping } from 'core/routing';
 import { useSidebarControls } from 'hooks';
 import { Business, Maybe, User } from 'types';
@@ -56,7 +56,7 @@ const UserLayout: React.FunctionComponent<Props> = ({
           }}
         />
         <Box position="relative" flex="1" className={classes.mainContent}>
-          <NotificationContainer place="br">
+          <Snackbars origin={{ vertical: 'bottom', horizontal: 'right' }}>
             <UserTopbar
               layout={layout}
               openSidebar={openSidebar}
@@ -71,7 +71,7 @@ const UserLayout: React.FunctionComponent<Props> = ({
             <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
               <UserFooter />
             </Container>
-          </NotificationContainer>
+          </Snackbars>
         </Box>
       </Box>
     </>

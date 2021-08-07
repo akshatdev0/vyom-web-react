@@ -36,6 +36,7 @@ const Company: React.FunctionComponent = () => {
             item
             component={Box}
             marginBottom="3rem"
+            flexGrow="1"
             classes={{ root: classes.gridItemRoot + ' ' + classes.order2 }}
           >
             <Card

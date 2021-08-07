@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useReactQueryClient } from 'client';
-import { useNotify } from 'core/notification';
+import { useSnackbar } from 'components/molecules';
 import { produce } from 'core/utils';
 import { useAuthState } from 'features/auth';
 import { UserProfile } from 'features/user';
@@ -21,7 +21,7 @@ const CompanyOwnerProfile: React.FunctionComponent = () => {
   );
 
   const reactQueryClient = useReactQueryClient();
-  const notify = useNotify();
+  const showSnackbar = useSnackbar();
   const mutation = useUpdateUserMutation({
     onSuccess: async (data) => {
       const updatedUser = data.updateUser?.user;
@@ -41,7 +41,7 @@ const CompanyOwnerProfile: React.FunctionComponent = () => {
             }
           }),
       );
-      notify({ type: 'success', title: 'Profile', message: 'Successfully saved!' });
+      showSnackbar({ severity: 'success', title: 'Profile', message: 'Successfully saved!' });
     },
   });
   const { user } = companyOwner || {};

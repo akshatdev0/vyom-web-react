@@ -115,7 +115,7 @@ const useAuth = (): AuthContext => {
 
   const sessionCleared = () => dispatch({ type: 'SESSION_CLEARED' });
 
-  // Restore Session on bootstrap
+  // Restore Session on initial load
   useEffect(() => {
     if (state.isSignedOut) {
       try {
