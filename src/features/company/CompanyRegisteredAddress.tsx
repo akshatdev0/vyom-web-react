@@ -1,10 +1,13 @@
 import React from 'react';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import Button from '@material-ui/core/Button';
+import CardActions from '@material-ui/core/CardActions';
+import { makeStyles } from '@material-ui/core/styles';
 import { useForm } from 'react-hook-form';
-import { Form, Button } from 'reactstrap';
 import * as z from 'zod';
 
+import componentStyles from 'assets/theme/views/admin/profile';
 import { ErrorAlert } from 'components/atoms';
 import { AddressInput } from 'components/molecules';
 import { useNotify } from 'core/notification';
@@ -26,7 +29,10 @@ const schema = v.address();
 
 type FormValues = z.infer<typeof schema>;
 
+const useStyles = makeStyles(componentStyles);
+
 const CompanyRegisteredAddress: React.FunctionComponent<Props> = ({ company }: Props) => {
+  const classes = useStyles();
   const notify = useNotify();
 
   const setMutation = useSetCompanyRegisteredAddressMutation({
@@ -75,7 +81,7 @@ const CompanyRegisteredAddress: React.FunctionComponent<Props> = ({ company }: P
 
   return (
     <>
-      <Form role="form" onSubmit={handleSubmit(onSubmit)} className="needs-validation" noValidate>
+      <form role="form" onSubmit={handleSubmit(onSubmit)} noValidate>
         <ErrorAlert isError={isError} error={error} />
         <AddressInput
           labelValue="Registered Address"
@@ -83,12 +89,12 @@ const CompanyRegisteredAddress: React.FunctionComponent<Props> = ({ company }: P
           setValue={setValue}
           control={control}
         />
-        <div className="text-center">
-          <Button className="my-2" color="primary" type="submit" disabled={isLoading}>
+        <CardActions classes={{ root: classes.cardActionsRoot }}>
+          <Button variant="contained" color="primary" type="submit" disabled={isLoading}>
             Save
           </Button>
-        </div>
-      </Form>
+        </CardActions>
+      </form>
     </>
   );
 };

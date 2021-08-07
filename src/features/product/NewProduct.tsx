@@ -1,29 +1,21 @@
-/*!
-
-=========================================================
-* Argon Dashboard PRO React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/* eslint-disable */
 import React from 'react';
 
-import { Card, CardHeader, CardBody, Container } from 'reactstrap';
-// core components
+import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
+import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
+
+import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
+import componentStyles from 'assets/theme/views/admin/tables';
 import { SimpleHeader } from 'components/molecules';
-// import { useAuthState } from 'features/auth';
-// import { useProductsOfCompanyQuery } from 'generated/graphql';
+
+const useStyles = makeStyles(componentStyles);
+const useTableStyles = makeStyles(tableComponentStyles);
 
 const NewProduct: React.FunctionComponent = () => {
+  const classes = { ...useStyles(), ...useTableStyles() };
   // const { user: sessionUser } = useAuthState();
   // const companyID = sessionUser?.companyOwner?.company?.id;
   // const productsQuery = useProductsOfCompanyQuery({ companyID: companyID || '' }, { enabled: !!companyID });
@@ -31,13 +23,19 @@ const NewProduct: React.FunctionComponent = () => {
 
   return (
     <>
-      <SimpleHeader name="New Product" parentName="Product Catalog" />
-      <Container className="mt--6" fluid>
-        <Card>
-          <CardHeader>
-            <h3 className="mb-0">New Product</h3>
-          </CardHeader>
-          <CardBody></CardBody>
+      <SimpleHeader section="Product Catalog" subsection="New Product" />
+      <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
+        <Card classes={{ root: classes.cardRoot }}>
+          <CardHeader
+            className={classes.cardHeader}
+            title="New Product"
+            titleTypographyProps={{
+              component: Box,
+              marginBottom: '0!important',
+              variant: 'h3',
+            }}
+          />
+          <CardContent></CardContent>
         </Card>
       </Container>
     </>

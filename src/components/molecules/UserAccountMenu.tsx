@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import Avatar from '@material-ui/core/Avatar';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import Hidden from '@material-ui/core/Hidden';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import DirectionsRun from '@material-ui/icons/DirectionsRun';
 import Jdenticon from 'react-jdenticon';
-import { NavLink as NavLinkRRD } from 'react-router-dom';
-import { DropdownMenu, DropdownItem, UncontrolledDropdown, DropdownToggle, Media, Nav } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
+import componentStyles from 'assets/theme/components/dropdowns/user-account-menu';
 import { Layout } from 'core/layout';
-import { isMenuItem, Navigation } from 'core/navigation';
+import { hasRoute, isDivider, isMenuItem, isTitle, Navigation } from 'core/navigation';
 import { getPath } from 'core/routing';
 import { useAuthState } from 'features/auth';
 import { Maybe, User } from 'types';
+
+const useStyles = makeStyles(componentStyles);
 
 type Props = {
   // The layout for which this menu will be used
@@ -19,22 +31,46 @@ type Props = {
 };
 
 const UserAccountMenu: React.FunctionComponent<Props> = ({ layout, navigation, user }: Props) => {
+  const classes = useStyles();
+  const [anchorEl, setAnchorEl] = useState(null);
   const { signOut } = useAuthState();
+
+  const isMenuOpen = Boolean(anchorEl);
   const name = user && user.firstName + ' ' + user.lastName;
 
-  // this function creates the links and collapses that appear in the sidebar (left menu)
-  const createItems = (navigation: Navigation) => {
+  const handleMenuOpen = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const menuId = 'dropdowns-user-dropdown-id';
+
+  // this function creates the titles, divider and links that appear in the user account menu
+  const createMenuItems = (navigation: Navigation) => {
     const items: Array<JSX.Element | null> = [];
 
     if (navigation) {
       for (let i = 0; i < navigation.length; i++) {
         const item = navigation[i];
-        if (isMenuItem(item)) {
+        if (isDivider(item)) {
+          const component = <Divider key={i} component="div" classes={{ root: classes.dividerRoot }} />;
+          items.push(component);
+        } else if (isTitle(item)) {
           const component = (
-            <DropdownItem key={i} to={getPath(layout, item.route)} tag={NavLinkRRD}>
-              <i className={item.icon} />
+            <Typography key={i} variant="h6" component="h6" classes={{ root: classes.menuTitle }}>
+              {item.title}
+            </Typography>
+          );
+          items.push(component);
+        } else if (isMenuItem(item) && hasRoute(item)) {
+          const component = (
+            <MenuItem key={i} component={Link} to={getPath(layout, item.route)} onClick={handleMenuClose}>
+              <Box component={item.icon} width="1.25rem!important" height="1.25rem!important" marginRight="1rem" />
               <span>{item.name}</span>
-            </DropdownItem>
+            </MenuItem>
           );
           items.push(component);
         }
@@ -44,33 +80,45 @@ const UserAccountMenu: React.FunctionComponent<Props> = ({ layout, navigation, u
   };
 
   return (
-    <Nav className="align-items-center ml-auto ml-md-0" navbar>
-      <UncontrolledDropdown nav>
-        <DropdownToggle className="nav-link pr-0" color="" tag="a">
-          <Media className="align-items-center">
-            <span className="avatar avatar-sm rounded-circle">
-              <Jdenticon size="36" value={user ? user.mobileNumber : 'default'} />
-            </span>
-            {name && (
-              <Media className="ml-2 d-none d-lg-block">
-                <span className="mb-0 text-sm font-weight-bold">{name}</span>
-              </Media>
-            )}
-          </Media>
-        </DropdownToggle>
-        <DropdownMenu right>
-          <DropdownItem className="noti-title" header tag="div">
-            <h6 className="text-overflow m-0">Welcome!</h6>
-          </DropdownItem>
-          {createItems(navigation)}
-          <DropdownItem divider />
-          <DropdownItem onClick={() => signOut()}>
-            <i className="ni ni-user-run" />
-            <span>Sign Out</span>
-          </DropdownItem>
-        </DropdownMenu>
-      </UncontrolledDropdown>
-    </Nav>
+    <>
+      <Button
+        aria-label="account of current user"
+        aria-controls={menuId}
+        aria-haspopup="true"
+        onClick={handleMenuOpen}
+        color="inherit"
+        classes={{
+          label: classes.buttonLabel,
+          root: classes.buttonRoot,
+        }}
+      >
+        <Avatar
+          classes={{
+            root: classes.avatarRoot,
+          }}
+        >
+          <Jdenticon size="36" value={user ? user.mobileNumber : 'default'} />
+        </Avatar>
+        {name && <Hidden mdDown>{name}</Hidden>}
+      </Button>
+      <Menu
+        anchorEl={anchorEl}
+        id={menuId}
+        keepMounted
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        open={isMenuOpen}
+        onClose={handleMenuClose}
+        getContentAnchorEl={null}
+      >
+        {createMenuItems(navigation)}
+        <Divider component="div" classes={{ root: classes.dividerRoot }} />
+        <Box display="flex!important" alignItems="center!important" component={MenuItem} onClick={() => signOut()}>
+          <Box component={DirectionsRun} width="1.25rem!important" height="1.25rem!important" marginRight="1rem" />
+          <span>Sign Out</span>
+        </Box>
+      </Menu>
+    </>
   );
 };
 

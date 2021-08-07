@@ -1,30 +1,29 @@
-/*!
+import SvgIcon from '@material-ui/core/SvgIcon';
 
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import { RouteMapping } from './routing';
 
 type AbstractMenuProps = {
   identifier: string;
   name: string;
-  redirect?: any;
 };
 
 type AbstractIconMenu = {
-  icon: string;
+  icon: typeof SvgIcon;
+};
+
+type AbstractColoredItem = {
+  color?:
+    | 'Primary'
+    | 'PrimaryLight'
+    | 'Error'
+    | 'ErrorLight'
+    | 'Warning'
+    | 'WarningLight'
+    | 'Info'
+    | 'InfoLight'
+    | 'Success'
+    | 'SuccessLight'
+    | 'Default';
 };
 
 type AbstractMenu = {
@@ -32,35 +31,75 @@ type AbstractMenu = {
   children?: Array<SubMenu | SubMenuItem>;
 };
 
-type AbstractMenuItem = {
+type AbstractRouteItem = {
   route: RouteMapping;
 };
 
-export type MenuItem = AbstractMenuProps & AbstractIconMenu & AbstractMenuItem;
+type AbstractLinkItem = {
+  href: string;
+};
 
-export type Menu = AbstractMenuProps & AbstractIconMenu & AbstractMenu;
+type Divider = {
+  light: boolean;
+};
+
+type Title = {
+  title: string;
+};
+
+export type MenuItem = AbstractMenuProps &
+  AbstractIconMenu &
+  AbstractColoredItem &
+  (AbstractRouteItem | AbstractLinkItem);
+
+export type Menu = AbstractMenuProps & AbstractIconMenu & AbstractColoredItem & AbstractMenu;
 
 export type SubMenu = AbstractMenuProps & AbstractMenu;
 
 export type SubMenuItem = AbstractMenuProps &
-  AbstractMenuItem & {
+  (AbstractRouteItem | AbstractLinkItem) &
+  AbstractColoredItem & {
     initial: string;
   };
 
-export type Navigation = Array<Menu | MenuItem>;
+export type Navigation = Array<Menu | MenuItem | Divider | Title>;
 
 export type SubNavigation = Array<SubMenu | SubMenuItem>;
 
-// function hasRoute(v: MenuItem | SubMenu | SubMenuItem): v is MenuItem | SubMenuItem {
-//   return (v as AbstractMenuItem).route !== undefined;
-// }
+export function isDivider(v: Menu | MenuItem | SubMenu | SubMenuItem | Divider | Title): v is Divider {
+  return (v as Divider).light !== undefined;
+}
 
-export function isCollapsibleMenu(v: MenuItem | SubMenu | SubMenuItem): v is Menu | SubMenu {
+export function isTitle(v: Menu | MenuItem | SubMenu | SubMenuItem | Divider | Title): v is Title {
+  return (v as Title).title !== undefined;
+}
+
+export function hasIcon(v: Menu | MenuItem | SubMenu | SubMenuItem | Divider | Title): v is Menu | MenuItem {
+  return (v as AbstractIconMenu).icon !== undefined;
+}
+
+export function hasInitial(v: Menu | MenuItem | SubMenu | SubMenuItem | Divider | Title): v is SubMenuItem {
+  return (v as SubMenuItem).initial !== undefined;
+}
+
+export function hasRoute(
+  v: Menu | MenuItem | SubMenu | SubMenuItem | Divider | Title | AbstractRouteItem | AbstractLinkItem,
+): v is AbstractRouteItem {
+  return (v as AbstractRouteItem).route !== undefined;
+}
+
+export function hasLink(
+  v: Menu | MenuItem | SubMenu | SubMenuItem | Divider | Title | AbstractRouteItem | AbstractLinkItem,
+): v is AbstractLinkItem {
+  return (v as AbstractLinkItem).href !== undefined;
+}
+
+export function isCollapsibleMenu(v: MenuItem | SubMenu | SubMenuItem | Divider | Title): v is Menu | SubMenu {
   return (v as AbstractMenu).collapse !== undefined;
 }
 
 export function isMenuItem(v: MenuItem | SubMenu | SubMenuItem): v is MenuItem {
-  return (v as AbstractIconMenu).icon !== undefined && (v as AbstractMenuItem).route !== undefined;
+  return (v as AbstractIconMenu).icon !== undefined && (v as AbstractRouteItem).route !== undefined;
 }
 
 export function isMenu(v: MenuItem | SubMenu | SubMenuItem): v is Menu {
@@ -68,5 +107,5 @@ export function isMenu(v: MenuItem | SubMenu | SubMenuItem): v is Menu {
 }
 
 export function isSubMenuItem(v: MenuItem | SubMenu | SubMenuItem): v is SubMenuItem {
-  return (v as SubMenuItem).initial !== undefined && (v as AbstractMenuItem).route !== undefined;
+  return (v as SubMenuItem).initial !== undefined && (v as AbstractRouteItem).route !== undefined;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Alert } from 'reactstrap';
+import Alert from '@material-ui/lab/Alert';
 
 import { getGraphQLError } from 'core/utils';
 
@@ -10,6 +10,6 @@ type Props = {
 };
 
 const ErrorAlert = ({ isError, error }: Props): JSX.Element | null =>
-  isError ? <Alert color="danger">{getGraphQLError(error)}</Alert> : null;
+  isError ? <Alert severity="error">{getGraphQLError(error)}</Alert> : null;
 
 export default ErrorAlert;

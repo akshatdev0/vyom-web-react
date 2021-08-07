@@ -1,23 +1,10 @@
-/*!
-
-=========================================================
-* Argon Dashboard PRO React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/* eslint-disable */
 import React from 'react';
 
-import { Card, CardHeader, Container, Row, Col, Button } from 'reactstrap';
+import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   ColumnDirective,
   ColumnsDirective,
@@ -29,14 +16,18 @@ import {
   PageSettingsModel,
   Sort,
 } from '@syncfusion/ej2-react-grids';
-// core components
+
+import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
+import componentStyles from 'assets/theme/views/admin/tables';
 import { SimpleHeader } from 'components/molecules';
 import { useAuthState } from 'features/auth';
 import { useProductsOfCompanyQuery } from 'generated/graphql';
-import routes from 'routes';
-import { RouteLink } from 'components/atoms';
+
+const useStyles = makeStyles(componentStyles);
+const useTableStyles = makeStyles(tableComponentStyles);
 
 const Products: React.FunctionComponent = () => {
+  const classes = { ...useStyles(), ...useTableStyles() };
   const { user: sessionUser } = useAuthState();
   const companyID = sessionUser?.companyOwner?.company?.id;
   const productsQuery = useProductsOfCompanyQuery({ companyID: companyID || '' }, { enabled: !!companyID });
@@ -56,23 +47,18 @@ const Products: React.FunctionComponent = () => {
 
   return (
     <>
-      <SimpleHeader name="Products" parentName="Product Catalog" />
-      <Container className="mt--6" fluid>
-        <Card>
-          <CardHeader>
-            <Row className="align-items-center">
-              <Col xs="8">
-                <h3 className="mb-0">Products</h3>
-              </Col>
-              <Col className="text-right" xs="4">
-                <RouteLink to={routes.newProduct}>
-                  <Button size="sm" color="primary">
-                    New Product
-                  </Button>
-                </RouteLink>
-              </Col>
-            </Row>
-          </CardHeader>
+      <SimpleHeader section="Product Catalog" subsection="Products" />
+      <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
+        <Card classes={{ root: classes.cardRoot }}>
+          <CardHeader
+            className={classes.cardHeader}
+            title="Products"
+            titleTypographyProps={{
+              component: Box,
+              marginBottom: '0!important',
+              variant: 'h3',
+            }}
+          />
           <GridComponent dataSource={tableData} allowPaging={true} pageSettings={pageSettings} allowSorting={true}>
             <ColumnsDirective>
               <ColumnDirective field="title" headerText="Title" autoFit={true} />
