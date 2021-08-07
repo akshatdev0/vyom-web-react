@@ -1,8 +1,12 @@
 import React, { createContext, useContext, useEffect } from 'react';
 
 import Snackbar, { SnackbarCloseReason, SnackbarOrigin } from '@material-ui/core/Snackbar';
+import { makeStyles } from '@material-ui/core/styles';
 import Alert, { Color } from '@material-ui/lab/Alert';
 import AlertTitle from '@material-ui/lab/AlertTitle';
+import clsx from 'clsx';
+
+import componentStyles from 'assets/theme/components/snackbar';
 
 type SnackbarsProps = {
   origin: SnackbarOrigin;
@@ -18,7 +22,10 @@ type SnackbarOptions = {
 
 const SnackbarContext = createContext<((options: SnackbarOptions) => void) | undefined>(undefined);
 
+const useStyles = makeStyles(componentStyles);
+
 const Snackbars: React.FunctionComponent<SnackbarsProps> = ({ origin, duration = 7000, children }: SnackbarsProps) => {
+  const classes = useStyles();
   const [snackbars, setSnackbars] = React.useState<Array<SnackbarOptions>>([]);
   const [open, setOpen] = React.useState(false);
   const [snackbar, setSnackbar] = React.useState<SnackbarOptions | undefined>(undefined);
@@ -36,6 +43,7 @@ const Snackbars: React.FunctionComponent<SnackbarsProps> = ({ origin, duration =
   }, [snackbars, snackbar, open]);
 
   const showSnackbar = (options: SnackbarOptions) => {
+    setSnackbar(undefined);
     setSnackbars((prev) => [...prev, options]);
   };
 
@@ -56,6 +64,25 @@ const Snackbars: React.FunctionComponent<SnackbarsProps> = ({ origin, duration =
     setSnackbar(undefined);
   };
 
+  const getSnackbarClass = (severity: Color) => {
+    if (!severity) {
+      return classes.infoSnackbar;
+    }
+    switch (severity) {
+      case 'success':
+        return classes.successSnackbar;
+
+      case 'info':
+        return classes.infoSnackbar;
+
+      case 'warning':
+        return classes.warningSnackbar;
+
+      case 'error':
+        return classes.errorSnackbar;
+    }
+  };
+
   return (
     <SnackbarContext.Provider value={showSnackbar}>
       <div>
@@ -68,7 +95,12 @@ const Snackbars: React.FunctionComponent<SnackbarsProps> = ({ origin, duration =
             onClose={handleClose}
             onExited={handleExited}
           >
-            <Alert onClose={handleAlertClose} severity={snackbar.severity}>
+            <Alert
+              className={clsx(classes.alertRoot, getSnackbarClass(snackbar.severity))}
+              onClose={handleAlertClose}
+              severity={snackbar.severity}
+              variant="filled"
+            >
               {snackbar.title && <AlertTitle>{snackbar.title}</AlertTitle>}
               {snackbar.message}
             </Alert>
