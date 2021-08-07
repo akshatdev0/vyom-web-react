@@ -1,22 +1,7 @@
-/*!
-
-=========================================================
-* Argon Dashboard PRO React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from 'react';
 
 import { useReactQueryClient } from 'client';
+import { useSnackbar } from 'components/molecules/Snackbars';
 import { useAuthState } from 'features/auth';
 import { UserProfile } from 'features/user';
 import { UserQuery, GetUserInfoQuery, useUserQuery, useUpdateUserMutation } from 'generated/graphql';
@@ -26,6 +11,7 @@ const AdminProfile: React.FunctionComponent = () => {
   const { user: sessionUser } = useAuthState();
   const userID = sessionUser?.id;
   const { data: { user } = {} } = useUserQuery({ id: userID || '' }, { enabled: !!userID });
+  const showSnackbar = useSnackbar();
   const mutation = useUpdateUserMutation({
     onSuccess: async (data) => {
       const updatedUser = data.updateUser?.user;
@@ -40,6 +26,7 @@ const AdminProfile: React.FunctionComponent = () => {
       reactQueryClient.setQueryData<UserQuery>(['User', { id: userID }], {
         user: updatedUser,
       });
+      showSnackbar({ title: 'Profile', message: 'Successfully saved!', severity: 'success' });
     },
   });
 

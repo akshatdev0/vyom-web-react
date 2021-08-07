@@ -7,6 +7,7 @@ import { Switch } from 'react-router-dom';
 
 import componentStyles from 'assets/theme/layouts/admin.js';
 import Sidebar from 'components/molecules/Sidebar';
+import Snackbars from 'components/molecules/Snackbars';
 import UserFooter from 'components/molecules/UserFooter';
 import UserTopbar from 'components/molecules/UserTopbar';
 import { Layout } from 'core/layout';
@@ -56,22 +57,24 @@ const UserLayout: React.FunctionComponent<Props> = ({
           }}
         />
         <Box position="relative" flex="1" className={classes.mainContent}>
-          <NotificationContainer place="br">
-            <UserTopbar
-              layout={layout}
-              openSidebar={openSidebar}
-              accountMenu={userAccountMenu}
-              user={user}
-              business={business}
-            />
-            <Switch>
-              {getRoutes(layout, routes)}
-              {/* TODO: 404 page redirect */}
-            </Switch>
-            <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
-              <UserFooter />
-            </Container>
-          </NotificationContainer>
+          <Snackbars origin={{ horizontal: 'right', vertical: 'bottom' }}>
+            <NotificationContainer place="br">
+              <UserTopbar
+                layout={layout}
+                openSidebar={openSidebar}
+                accountMenu={userAccountMenu}
+                user={user}
+                business={business}
+              />
+              <Switch>
+                {getRoutes(layout, routes)}
+                {/* TODO: 404 page redirect */}
+              </Switch>
+              <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
+                <UserFooter />
+              </Container>
+            </NotificationContainer>
+          </Snackbars>
         </Box>
       </Box>
     </>
