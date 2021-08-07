@@ -11,7 +11,7 @@ import * as z from 'zod';
 
 import componentStyles from 'assets/theme/views/admin/profile';
 import { ErrorAlert, QuillEditor } from 'components/atoms';
-import { useNotify } from 'core/notification';
+import { useSnackbar } from 'components/molecules';
 import {
   CompanyQuery,
   useSetCompanyDetailMutation,
@@ -35,11 +35,11 @@ const useStyles = makeStyles(componentStyles);
 
 const CompanyDetails: React.FunctionComponent<Props> = ({ company }: Props) => {
   const classes = useStyles();
-  const notify = useNotify();
+  const showSnackbar = useSnackbar();
 
   const setMutation = useSetCompanyDetailMutation({
     onSuccess: async () => {
-      notify({ type: 'success', title: 'Company', message: 'Details Saved!' });
+      showSnackbar({ severity: 'success', title: 'Company', message: 'Details Saved!' });
     },
   });
 
@@ -54,7 +54,7 @@ const CompanyDetails: React.FunctionComponent<Props> = ({ company }: Props) => {
 
   const updateMutation = useUpdateCompanyDetailMutation({
     onSuccess: async () => {
-      notify({ type: 'success', title: 'Company', message: 'Details Saved!' });
+      showSnackbar({ severity: 'success', title: 'Company', message: 'Details Saved!' });
     },
   });
 

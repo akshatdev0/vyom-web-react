@@ -9,8 +9,7 @@ import * as z from 'zod';
 
 import componentStyles from 'assets/theme/views/admin/profile';
 import { ErrorAlert } from 'components/atoms';
-import { AddressInput } from 'components/molecules';
-import { useNotify } from 'core/notification';
+import { AddressInput, useSnackbar } from 'components/molecules';
 import {
   CompanyQuery,
   useCreateAddressMutation,
@@ -33,11 +32,11 @@ const useStyles = makeStyles(componentStyles);
 
 const CompanyRegisteredAddress: React.FunctionComponent<Props> = ({ company }: Props) => {
   const classes = useStyles();
-  const notify = useNotify();
+  const showSnackbar = useSnackbar();
 
   const setMutation = useSetCompanyRegisteredAddressMutation({
     onSuccess: async () => {
-      notify({ type: 'success', title: 'Company', message: 'Registered Address Saved!' });
+      showSnackbar({ severity: 'success', title: 'Company', message: 'Registered Address Saved!' });
     },
   });
 
@@ -52,7 +51,7 @@ const CompanyRegisteredAddress: React.FunctionComponent<Props> = ({ company }: P
 
   const updateMutation = useUpdateAddressMutation({
     onSuccess: async () => {
-      notify({ type: 'success', title: 'Company', message: 'Registered Address Saved!' });
+      showSnackbar({ severity: 'success', title: 'Company', message: 'Registered Address Saved!' });
     },
   });
 
