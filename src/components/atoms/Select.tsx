@@ -1,34 +1,32 @@
-import React, { useState } from 'react';
-// nodejs library that concatenates classes
-import classnames from 'classnames';
+import React from 'react';
+
+import Box from '@material-ui/core/Box';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import FormLabel from '@material-ui/core/FormLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import MuiSelect, { SelectProps } from '@material-ui/core/Select';
+import { useTheme } from '@material-ui/core/styles';
+import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import { Control, useController, FieldName, FieldValues } from 'react-hook-form';
-import { FormGroup, Input } from 'reactstrap';
-import { getZodError } from 'core/utils';
 
-type InputProps = React.ComponentProps<typeof Input>;
+import { getFormError } from 'core/utils';
+import { Option } from 'types';
 
-type Props<TFieldValues extends FieldValues = FieldValues> = Omit<InputProps, 'defaultValue'> & {
+type Props<TFieldValues extends FieldValues = FieldValues> = Omit<SelectProps, 'defaultValue'> & {
   name: FieldName<TFieldValues>;
   control: Control<TFieldValues>;
-  children: React.ReactNode;
   errorText?: any;
   labelValue: string;
-  selectedByDefault?: boolean;
+  options?: Array<Option>;
+  placeholder?: string;
 };
 
-const Select = ({
-  name,
-  control,
-  children,
-  labelValue,
-  disabled,
-  onChange,
-  selectedByDefault = false,
-}: Props): JSX.Element => {
-  const [focused, setFocused] = useState(false);
-
+const Select = ({ name, control, labelValue, disabled, options, placeholder, onChange }: Props): JSX.Element => {
+  const theme = useTheme();
   const {
-    field: { ref, onBlur: onBlurControlled, onChange: onChangeControlled, ...rest },
+    field: { ref, onChange: onChangeControlled, ...rest },
     fieldState: { invalid },
     formState: { errors },
   } = useController({
@@ -37,42 +35,43 @@ const Select = ({
     defaultValue: '',
   });
 
-  const inputProps: InputProps = {
+  const selectProps: SelectProps = {
     id: name,
     type: 'select',
     innerRef: ref,
+    error: invalid,
     disabled,
-    onFocus: () => setFocused(true),
-    onBlur: () => {
-      setFocused(false);
-      onBlurControlled();
-    },
-    onChange: (e) => {
+    onChange: (e, child: React.ReactNode) => {
       if (onChange) {
-        onChange(e);
+        onChange(e, child);
       }
       onChangeControlled(e);
     },
     ...rest,
   };
 
-  const formGroupClassName = classnames('mb-3', {
-    focused,
-    'has-danger': invalid,
-  });
-
-  const error = invalid ? <div className="invalid-feedback">{getZodError(name, errors)}</div> : null;
-
   return (
-    <FormGroup className={formGroupClassName}>
-      <label className="form-control-label" htmlFor={name}>
-        {labelValue}
-      </label>
-      <Input {...inputProps}>
-        {!selectedByDefault && <option value="0">-- select an option --</option>}
-        {children}
-      </Input>
-      {error}
+    <FormGroup>
+      {labelValue ? <FormLabel>{labelValue}</FormLabel> : null}
+      <FormControl variant="outlined" fullWidth>
+        <MuiSelect IconComponent={KeyboardArrowDown} {...selectProps}>
+          {placeholder && (
+            <MenuItem value="" disabled>
+              {placeholder}
+            </MenuItem>
+          )}
+          {options?.map(({ value, label }: Option, index) => (
+            <MenuItem key={index} value={value}>
+              {label}
+            </MenuItem>
+          ))}
+        </MuiSelect>
+      </FormControl>
+      {invalid ? (
+        <FormHelperText component={Box} color={theme.palette.warning.main + '!important'}>
+          {getFormError(name, errors)}
+        </FormHelperText>
+      ) : null}
     </FormGroup>
   );
 };
