@@ -42,16 +42,6 @@ const AuthTopbar: React.FunctionComponent = () => {
     <Box display="flex" alignItems="center" width="auto" component={List} className={classes.flexDirectionColumn}>
       <ListItem
         component={Link}
-        to="/auth/sign-in"
-        onClick={handleMenuClose}
-        classes={{
-          root: classes.listItemRoot,
-        }}
-      >
-        Sign In
-      </ListItem>
-      <ListItem
-        component={Link}
         to="/auth/sign-up"
         onClick={handleMenuClose}
         classes={{
@@ -59,6 +49,16 @@ const AuthTopbar: React.FunctionComponent = () => {
         }}
       >
         Sign Up
+      </ListItem>
+      <ListItem
+        component={Link}
+        to="/auth/sign-in"
+        onClick={handleMenuClose}
+        classes={{
+          root: classes.listItemRoot,
+        }}
+      >
+        Sign In
       </ListItem>
     </Box>
   );
