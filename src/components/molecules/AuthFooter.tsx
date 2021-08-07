@@ -1,69 +1,83 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/*eslint-disable*/
 import React from 'react';
 
-// reactstrap components
-import { NavItem, NavLink, Nav, Container, Row, Col } from 'reactstrap';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import { makeStyles } from '@material-ui/core/styles';
 
-function AuthFooter() {
+import componentStyles from 'assets/theme/components/footers/auth-footer';
+
+const useStyles = makeStyles(componentStyles);
+
+const AuthFooter: React.FunctionComponent = () => {
+  const classes = useStyles();
   return (
-    <>
-      <footer className="py-5" id="footer-main">
-        <Container>
-          <Row className="align-items-center justify-content-xl-between">
-            <Col xl="6">
-              <div className="copyright text-center text-xl-left text-muted">
-                © {new Date().getFullYear()}{' '}
-                <a className="font-weight-bold ml-1" href="#" target="_blank">
-                  Vyom
-                </a>
-              </div>
-            </Col>
-            <Col xl="6">
-              <Nav className="nav-footer justify-content-center justify-content-xl-end">
-                <NavItem>
-                  <NavLink href="#" target="_blank">
-                    Vyom
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="#" target="_blank">
-                    About Us
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="#" target="_blank">
-                    Blog
-                  </NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="#" target="_blank">
-                    License
-                  </NavLink>
-                </NavItem>
-              </Nav>
-            </Col>
-          </Row>
-        </Container>
-      </footer>
-    </>
+    <Box component="footer" width="100%" paddingTop="1rem">
+      <Container
+        component={Box}
+        display="flex!important"
+        alignItems="center"
+        classes={{
+          root: classes.justifyContentCenter + ' ' + classes.flexDirectionColumn,
+        }}
+      >
+        <Grid item xs={12} xl={6}>
+          <div className={classes.copyrightWrapper}>
+            © {new Date().getFullYear()}{' '}
+            <a className={classes.copyrightLink} href="#" rel="noopener noreferrer" target="_blank">
+              Vyom
+            </a>
+          </div>
+        </Grid>
+
+        <Grid
+          item
+          xs={12}
+          xl={6}
+          component={Box}
+          display="flex"
+          justifyContent="flex-end"
+          classes={{
+            root: classes.justifyContentCenter + ' ' + classes.flexDirectionColumn,
+          }}
+        >
+          <Box
+            component={List}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            className={classes.justifyContentCenter + ' ' + classes.flexDirectionColumn}
+          >
+            <ListItem
+              component="a"
+              href="#"
+              rel="noopener noreferrer"
+              target="_blank"
+              classes={{
+                root: classes.listItemRoot,
+              }}
+            >
+              About Us
+            </ListItem>
+
+            <ListItem
+              component="a"
+              href="#"
+              rel="noopener noreferrer"
+              target="_blank"
+              classes={{
+                root: classes.listItemRoot,
+              }}
+            >
+              Blog
+            </ListItem>
+          </Box>
+        </Grid>
+      </Container>
+    </Box>
   );
-}
+};
 
 export default AuthFooter;

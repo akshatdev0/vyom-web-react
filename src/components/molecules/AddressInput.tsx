@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
-// reactstrap components
-import { Row, Col } from 'reactstrap';
+
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import { Control, FieldValues, UseFormSetValue } from 'react-hook-form';
 
+import componentStyles from 'assets/theme/views/admin/profile';
 import { Select, TextField } from 'components/atoms';
 import {
   useAreasOfCityQuery,
@@ -19,7 +23,10 @@ type Props<TFieldValues extends FieldValues = FieldValues> = {
   control: Control<TFieldValues>;
 };
 
+const useStyles = makeStyles(componentStyles);
+
 const AddressInput: React.FunctionComponent<Props> = ({ labelValue, address, setValue, control }: Props) => {
+  const classes = useStyles();
   const [countryID, setCountryID] = useState<string | undefined>();
   const [stateID, setStateID] = useState<string | undefined>();
   const [cityID, setCityID] = useState<string | undefined>();
@@ -80,106 +87,83 @@ const AddressInput: React.FunctionComponent<Props> = ({ labelValue, address, set
 
   return (
     <>
-      <h6 className="heading-small text-muted my-4">{labelValue}</h6>
-      <div className="pl-lg-4">
-        <Row>
-          <Col lg="6">
+      <Box paddingTop=".25rem" paddingBottom=".25rem" marginBottom="1.5rem!important">
+        <Typography variant="h6" classes={{ root: classes.typographyRootH6 }}>
+          {labelValue}
+        </Typography>
+      </Box>
+      <div>
+        <Grid container>
+          <Grid item lg={6}>
             <TextField
               name="addressLine1"
               type="text"
-              labelType="text"
               labelValue="Address Line 1"
               placeholder="Address Line 1"
               control={control}
             />
-          </Col>
-          <Col lg="6">
+          </Grid>
+          <Grid item lg={6}>
             <TextField
               name="addressLine2"
               type="text"
-              labelType="text"
               labelValue="Address Line 2"
               placeholder="Address Line 2"
               control={control}
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg="6">
-            <TextField
-              name="landmark"
-              type="text"
-              labelType="text"
-              labelValue="Landmark"
-              placeholder="Landmark"
+          </Grid>
+        </Grid>
+        <Grid container>
+          <Grid item lg={6}>
+            <TextField name="landmark" type="text" labelValue="Landmark" placeholder="Landmark" control={control} />
+          </Grid>
+          <Grid item lg={4}>
+            <Select
+              name={areaFieldName}
+              labelValue="Area"
               control={control}
+              options={areas?.map((area) => ({ value: area?.id, label: area?.name }))}
             />
-          </Col>
-          <Col lg="4">
-            <Select name={areaFieldName} labelValue="Area" control={control}>
-              {areas?.map((area, index) => (
-                <option key={index} value={area?.id}>
-                  {area?.name}
-                </option>
-              ))}
-            </Select>
-          </Col>
-          <Col lg="2">
-            <TextField
-              name="postalCode"
-              type="text"
-              labelType="text"
-              labelValue="Pincode"
-              placeholder="Pincode"
-              control={control}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg="4">
+          </Grid>
+          <Grid item lg={2}>
+            <TextField name="postalCode" type="text" labelValue="Pincode" placeholder="Pincode" control={control} />
+          </Grid>
+        </Grid>
+        <Grid container>
+          <Grid item lg={4}>
             <Select
               name={cityFieldName}
               labelValue="City"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCityID(e.target.value)}
+              onChange={(e: React.ChangeEvent<{ name?: string; value: unknown }>) =>
+                setCityID(e.target.value as string)
+              }
               control={control}
-            >
-              {cities?.map((city, index) => (
-                <option key={index} value={city?.id}>
-                  {city?.name}
-                </option>
-              ))}
-            </Select>
-          </Col>
-          <Col lg="4">
+              options={cities?.map((city) => ({ value: city?.id, label: city?.name }))}
+            />
+          </Grid>
+          <Grid item lg={4}>
             <Select
               name={stateFieldName}
               labelValue="State"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setStateID(e.target.value)}
+              onChange={(e: React.ChangeEvent<{ name?: string; value: unknown }>) =>
+                setStateID(e.target.value as string)
+              }
               control={control}
-            >
-              {states?.map((state, index) => (
-                <option key={index} value={state?.id}>
-                  {state?.name}
-                </option>
-              ))}
-            </Select>
-          </Col>
-          <Col lg="4">
+              options={states?.map((state) => ({ value: state?.id, label: state?.name }))}
+            />
+          </Grid>
+          <Grid item lg={4}>
             <Select
               name={countryFieldName}
               labelValue="Country"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCountryID(e.target.value)}
-              selectedByDefault
+              onChange={(e: React.ChangeEvent<{ name?: string; value: unknown }>) =>
+                setCountryID(e.target.value as string)
+              }
               control={control}
-            >
-              {countries?.map((country, index) => (
-                <option key={index} value={country?.id}>
-                  {country?.name}
-                </option>
-              ))}
-            </Select>
-          </Col>
-        </Row>
+              options={countries?.map((country) => ({ value: country?.id, label: country?.name }))}
+            />
+          </Grid>
+        </Grid>
       </div>
     </>
   );

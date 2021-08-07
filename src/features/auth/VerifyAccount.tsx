@@ -1,16 +1,24 @@
 import React from 'react';
-// reactstrap components
-import { Button, Card, CardBody, Form, Row, Col } from 'reactstrap';
-import { useForm } from 'react-hook-form';
+
 import { zodResolver } from '@hookform/resolvers/zod';
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import DialpadIcon from '@material-ui/icons/Dialpad';
+import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-import * as v from 'validations';
+import componentStyles from 'assets/theme/views/auth/register';
 import { ErrorAlert, TextField } from 'components/atoms';
-import { useAuthState } from './auth';
-import { Stage } from 'views/SignUp';
 import { useSendOtpMutation, useVerifyMutation } from 'generated/graphql';
 import { useFillForm } from 'hooks';
+import * as v from 'validations';
+import { Stage } from 'views/SignUp';
+
+import { useAuthState } from './auth';
 
 const schema = z.object({
   mobileNumber: v.mobileNumber(),
@@ -19,7 +27,11 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
+const useStyles = makeStyles(componentStyles);
+
 const VerifyAccount: React.FunctionComponent = ({ mobileNumber, nextStage, setStage }: any) => {
+  const classes = useStyles();
+  const theme = useTheme();
   const { createSession } = useAuthState();
   const sendOtpMutation = useSendOtpMutation({
     onSuccess: (data) => {
@@ -46,45 +58,53 @@ const VerifyAccount: React.FunctionComponent = ({ mobileNumber, nextStage, setSt
 
   return (
     <>
-      <Card className="bg-secondary shadow border-0">
-        <CardBody className="px-lg-5 py-lg-5">
-          <div className="text-center text-muted mb-4">
-            <small>Enter OTP sent to '{mobileNumber}'</small>
-          </div>
+      <Card classes={{ root: classes.cardRoot }}>
+        <CardContent classes={{ root: classes.cardContent }}>
+          <Box
+            color={theme.palette.gray[600]}
+            textAlign="center"
+            marginBottom="1.5rem"
+            marginTop=".5rem"
+            fontSize="1rem"
+          >
+            <Box fontSize="80%" fontWeight="400" component="small">
+              Enter OTP sent to '{mobileNumber}'
+            </Box>
+          </Box>
           <ErrorAlert isError={isError} error={error} />
-          <Form role="form" onSubmit={handleSubmit(onSubmit)} className="needs-validation" noValidate>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
             <TextField
               name="token"
               type="number"
-              labelType="prepend-icon"
-              labelValue="ni ni-mobile-button"
               placeholder="OTP (One Time Password)"
+              prepend={<DialpadIcon />}
               autoComplete="one-time-code"
               control={control}
             />
-            <div className="d-flex flex-row justify-content-between">
+            <Box display="flex" marginTop="1.5rem" marginBottom="1.5rem" justifyContent="space-between">
               <Button
-                className="my-2"
+                variant="contained"
                 color="secondary"
-                onClick={() => sendOtpMutation.mutate({ mobileNumber })}
+                type="submit"
                 disabled={isLoading}
+                onClick={() => sendOtpMutation.mutate({ mobileNumber })}
               >
                 Resend
               </Button>
-              <Button className="my-2" color="primary" type="submit" disabled={isLoading}>
+              <Button variant="contained" color="primary" type="submit" disabled={isLoading}>
                 Next
               </Button>
-            </div>
-          </Form>
-        </CardBody>
+            </Box>
+          </form>
+        </CardContent>
       </Card>
-      <Row className="mt-3">
-        <Col xs="6">
-          <a className="text-light" href="#" onClick={() => setStage(Stage.ACCOUNT_CREATION)}>
-            <small>Change Mobile Number</small>
+      <Grid container component={Box} marginTop="1rem">
+        <Grid item xs={6} component={Box}>
+          <a className={classes.footerLinks} href="#" onClick={() => setStage(Stage.ACCOUNT_CREATION)}>
+            Change Mobile Number
           </a>
-        </Col>
-      </Row>
+        </Grid>
+      </Grid>
     </>
   );
 };

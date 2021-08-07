@@ -1,19 +1,25 @@
 import React from 'react';
-// reactstrap components
-import { Row, Col, Form, Button } from 'reactstrap';
+
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import CardActions from '@material-ui/core/CardActions';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
+import componentStyles from 'assets/theme/views/admin/profile';
 import { ErrorAlert, QuillEditor } from 'components/atoms';
-import { useFillForm } from 'hooks';
 import { useNotify } from 'core/notification';
-import { Maybe } from 'types';
 import {
   CompanyQuery,
   useSetCompanyDetailMutation,
   useCreateCompanyDetailMutation,
   useUpdateCompanyDetailMutation,
 } from 'generated/graphql';
+import { useFillForm } from 'hooks';
+import { Maybe } from 'types';
 
 type Props = {
   company: Maybe<CompanyQuery['company']>;
@@ -25,7 +31,10 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
+const useStyles = makeStyles(componentStyles);
+
 const CompanyDetails: React.FunctionComponent<Props> = ({ company }: Props) => {
+  const classes = useStyles();
   const notify = useNotify();
 
   const setMutation = useSetCompanyDetailMutation({
@@ -65,27 +74,31 @@ const CompanyDetails: React.FunctionComponent<Props> = ({ company }: Props) => {
 
   return (
     <>
-      <Form role="form" onSubmit={handleSubmit(onSubmit)} className="needs-validation" noValidate>
+      <form role="form" onSubmit={handleSubmit(onSubmit)} noValidate>
         <ErrorAlert isError={isError} error={error} />
-        <h6 className="heading-small text-muted mb-4">Company Details</h6>
-        <div className="pl-lg-4">
-          <Row>
-            <Col lg="12">
+        <Box paddingTop=".25rem" paddingBottom=".25rem" marginBottom="1.5rem!important">
+          <Typography variant="h6" classes={{ root: classes.typographyRootH6 }}>
+            Company Details
+          </Typography>
+        </Box>
+        <div>
+          <Grid container>
+            <Grid item lg={12}>
               <QuillEditor
                 name="returnPolicy"
                 labelValue="Return Policy"
                 placeholder="Your company return policy"
                 control={control}
               />
-            </Col>
-          </Row>
+            </Grid>
+          </Grid>
         </div>
-        <div className="text-center">
-          <Button className="my-2" color="primary" type="submit" disabled={isLoading}>
+        <CardActions classes={{ root: classes.cardActionsRoot }}>
+          <Button variant="contained" color="primary" type="submit" disabled={isLoading}>
             Save
           </Button>
-        </div>
-      </Form>
+        </CardActions>
+      </form>
     </>
   );
 };

@@ -1,102 +1,72 @@
 import React from 'react';
 
-// reactstrap components
-import { Row, Col } from 'reactstrap';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import { Control, FieldValues } from 'react-hook-form';
 
+import componentStyles from 'assets/theme/views/admin/profile';
 import { DatePicker, Select, TextField } from 'components/atoms';
+import { Option } from 'types';
 
 type Props<TFieldValues extends FieldValues = FieldValues> = {
   control: Control<TFieldValues>;
 };
 
-const PersonalInformation: React.FunctionComponent<Props> = ({ control }: Props) => (
-  <>
-    <h6 className="heading-small text-muted mb-4">Personal Information</h6>
-    <div className="pl-lg-4">
-      <Row>
-        <Col lg="6">
-          <TextField
-            name="firstName"
-            type="text"
-            labelType="text"
-            labelValue="First Name"
-            placeholder="First Name"
-            control={control}
-          />
-        </Col>
-        <Col lg="6">
-          <TextField
-            name="lastName"
-            type="text"
-            labelType="text"
-            labelValue="Last Name"
-            placeholder="Last Name"
-            control={control}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col lg="6">
-          <DatePicker name="dateOfBirth" labelValue="Date of Birth" control={control} />
-        </Col>
-        <Col lg="6">
-          <Select name="gender" labelValue="Gender" selectedByDefault control={control}>
-            <option value="MALE">Male</option>
-            <option value="FEMALE">Female</option>
-          </Select>
-        </Col>
-        {/* <Row>
-          <Col md="12">
+const useStyles = makeStyles(componentStyles);
+
+const PersonalInformation: React.FunctionComponent<Props> = ({ control }: Props) => {
+  const classes = useStyles();
+  const genderOptions: Array<Option> = [
+    {
+      value: 'MALE',
+      label: 'Male',
+    },
+    {
+      value: 'FEMALE',
+      label: 'Female',
+    },
+  ];
+  return (
+    <>
+      <Box paddingTop=".25rem" paddingBottom=".25rem" marginBottom="1.5rem!important">
+        <Typography variant="h6" classes={{ root: classes.typographyRootH6 }}>
+          Personal Information
+        </Typography>
+      </Box>
+      <div>
+        <Grid container>
+          <Grid item lg={6}>
             <TextField
-              name="address"
+              name="firstName"
               type="text"
-              labelType="text"
-              labelValue="Home Address"
-              placeholder="Home Address"
+              labelValue="First Name"
+              placeholder="First Name"
               control={control}
-              defaultValue={address}
             />
-          </Col>
-        </Row>
-        <Row>
-          <Col lg="4">
-            <TextField
-              name="city"
-              type="text"
-              labelType="text"
-              labelValue="City"
-              placeholder="City"
+          </Grid>
+          <Grid item lg={6}>
+            <TextField name="lastName" type="text" labelValue="Last Name" placeholder="Last Name" control={control} />
+          </Grid>
+        </Grid>
+        <Grid container>
+          <Grid item lg={6}>
+            <DatePicker name="dateOfBirth" labelValue="Date of Birth" control={control} />
+          </Grid>
+          <Grid item lg={6}>
+            <Select
+              name="gender"
+              labelValue="Gender"
               control={control}
-              defaultValue={city}
+              options={genderOptions}
+              placeholder="Please select"
             />
-          </Col>
-          <Col lg="4">
-            <TextField
-              name="country"
-              type="text"
-              labelType="text"
-              labelValue="Country"
-              placeholder="Country"
-              control={control}
-              defaultValue={country}
-            />
-          </Col>
-          <Col lg="4">
-            <TextField
-              name="pincode"
-              type="text"
-              labelType="text"
-              labelValue="Pincode"
-              placeholder="Pincode"
-              control={control}
-              defaultValue={pincode}
-            />
-          </Col>
-        </Row> */}
-      </Row>
-    </div>
-  </>
-);
+          </Grid>
+        </Grid>
+      </div>
+    </>
+  );
+};
 
 export default PersonalInformation;

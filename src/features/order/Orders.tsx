@@ -1,24 +1,10 @@
-/*!
-
-=========================================================
-* Argon Dashboard PRO React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-/* eslint-disable */
 import React from 'react';
 
-// reactstrap components
-import { Card, CardHeader, Container } from 'reactstrap';
+import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core/styles';
 import { Internationalization } from '@syncfusion/ej2-base';
 import {
   ColumnDirective,
@@ -31,17 +17,23 @@ import {
   PageSettingsModel,
   Sort,
 } from '@syncfusion/ej2-react-grids';
-// core components
+
+import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
+import componentStyles from 'assets/theme/views/admin/tables';
 import { SimpleHeader } from 'components/molecules';
 import { useOrdersOfCompanyQuery } from 'generated/graphql';
 
+const useStyles = makeStyles(componentStyles);
+const useTableStyles = makeStyles(tableComponentStyles);
+
 const Orders: React.FunctionComponent = () => {
+  const classes = { ...useStyles(), ...useTableStyles() };
   const ordersQuery = useOrdersOfCompanyQuery();
   const { data: { orders = [] } = {} } = ordersQuery;
   const pageSettings: PageSettingsModel = { pageSize: 10 };
 
-  let intl = new Internationalization();
-  let dateFormat = intl.getDateFormat({ skeleton: 'medium', type: 'dateTime' });
+  const intl = new Internationalization();
+  const dateFormat = intl.getDateFormat({ skeleton: 'medium', type: 'dateTime' });
 
   const tableData = orders?.map((order) => {
     return {
@@ -58,12 +50,18 @@ const Orders: React.FunctionComponent = () => {
 
   return (
     <>
-      <SimpleHeader name="Orders" parentName="Orders" />
-      <Container className="mt--6" fluid>
-        <Card>
-          <CardHeader className="border-0">
-            <h3 className="mb-0">Orders</h3>
-          </CardHeader>
+      <SimpleHeader section="Orders" subsection="Orders" />
+      <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
+        <Card classes={{ root: classes.cardRoot }}>
+          <CardHeader
+            className={classes.cardHeader}
+            title="Orders"
+            titleTypographyProps={{
+              component: Box,
+              marginBottom: '0!important',
+              variant: 'h3',
+            }}
+          />
           <GridComponent dataSource={tableData} allowPaging={true} pageSettings={pageSettings} allowSorting={true}>
             <ColumnsDirective>
               <ColumnDirective field="number" headerText="Order Number" autoFit={true} />
