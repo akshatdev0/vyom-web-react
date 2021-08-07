@@ -1,9 +1,15 @@
 import React, { useState } from 'react';
 
-import { Container, Row, Col } from 'reactstrap';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
 
+import componentStyles from 'assets/theme/views/auth/register';
 import { AuthHeader } from 'components/molecules';
 import { CreateAccount, GenerateOtp, VerifyAccount, CreatePassword } from 'features/auth';
+
+const useStyles = makeStyles(componentStyles);
 
 export enum Stage {
   ACCOUNT_CREATION,
@@ -48,6 +54,7 @@ const StageComponent = (props: any) => {
 };
 
 const SignUp: React.FunctionComponent = () => {
+  const classes = useStyles();
   const [stage, prevStage, nextStage, setStage] = useStage();
   const [mobileNumber, setMobileNumber] = useState<string>('');
   const stageProps = {
@@ -63,14 +70,14 @@ const SignUp: React.FunctionComponent = () => {
     <>
       <AuthHeader
         title="Create an account"
-        lead="Use these awesome forms to sign in or create new account in your project for free."
+        description="Use these awesome forms to sign in or create new account in your project for free."
       />
-      <Container className="mt--8 pb-5">
-        <Row className="justify-content-center">
-          <Col lg="5" md="7">
+      <Container component={Box} classes={{ root: classes.containerRoot }}>
+        <Grid container classes={{ root: classes.gridContainerRoot }}>
+          <Grid item xs={12} lg={6} md={8}>
             <StageComponent {...stageProps} />
-          </Col>
-        </Row>
+          </Grid>
+        </Grid>
       </Container>
     </>
   );

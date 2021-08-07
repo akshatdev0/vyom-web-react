@@ -1,25 +1,11 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from 'react';
 
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider } from '@material-ui/core/styles';
 import ReactDOM from 'react-dom';
 import { Provider as StoreProvider } from 'react-redux';
 
+import theme from 'assets/theme/theme';
 import { ClientProvider } from 'client';
 import { AuthProvider } from 'features/auth';
 
@@ -27,15 +13,13 @@ import App from './app';
 import { composeStore } from './store';
 
 // plugins styles from node_modules
-import 'react-notification-alert/dist/animate.css';
 import 'react-perfect-scrollbar/dist/css/styles.css';
 import '@fullcalendar/common/main.min.css';
 import '@fullcalendar/daygrid/main.min.css';
-import 'sweetalert2/dist/sweetalert2.min.css';
-import 'select2/dist/css/select2.min.css';
 import 'react-quill/dist/quill.snow.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
+// TODO: Remove
 // syncfusion styles from node_modules
 import '@syncfusion/ej2-base/styles/bootstrap4.css';
 import '@syncfusion/ej2-buttons/styles/bootstrap4.css';
@@ -48,12 +32,12 @@ import '@syncfusion/ej2-splitbuttons/styles/bootstrap4.css';
 import '@syncfusion/ej2-react-grids/styles/bootstrap4.css';
 import '@syncfusion/ej2-react-treegrid/styles/bootstrap4.css';
 
-// plugins styles downloaded
+// plugins styles
 import 'assets/vendor/nucleo/css/nucleo.css';
 
 // core styles
 // eslint-disable-next-line
-import 'assets/scss/argon-dashboard-pro-react.scss?v1.2.0';
+import 'assets/scss/argon-dashboard-pro-material-ui.scss?v1.0.0';
 
 // custom styles
 import 'assets/css/vyom.css';
@@ -66,7 +50,10 @@ ReactDOM.render(
   <StoreProvider store={store}>
     <ClientProvider endpoint={endpoint}>
       <AuthProvider>
-        <App />
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
       </AuthProvider>
     </ClientProvider>
   </StoreProvider>,

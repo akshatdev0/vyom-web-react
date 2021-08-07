@@ -1,16 +1,15 @@
 import React from 'react';
 
+import FormGroup from '@material-ui/core/FormGroup';
 import { Control, useController, FieldName, FieldValues } from 'react-hook-form';
-import ReactQuill from 'react-quill';
-import { FormGroup, Input } from 'reactstrap';
-// react plugin that creates text editor
+import ReactQuill, { ReactQuillProps } from 'react-quill';
 
 import { getFormError } from 'core/utils';
 import { Override } from 'types';
 
-type ReactstrapInputProps = React.ComponentProps<typeof Input>;
-
-type InputProps = Override<ReactstrapInputProps, { defaultValue?: string; value?: string }>;
+type InputProps = Override<ReactQuillProps, { defaultValue?: string; value?: string }> & {
+  innerRef?: React.Ref<any>;
+};
 
 type Props<TFieldValues extends FieldValues = FieldValues> = InputProps & {
   name: FieldName<TFieldValues>;
@@ -111,7 +110,6 @@ const QuillEditor = ({
   defaultValue = '',
   labelValue,
   placeholder,
-  disabled,
   theme = 'snow',
   mode = 'minimal',
 }: Props): JSX.Element => {
@@ -128,8 +126,6 @@ const QuillEditor = ({
   const inputProps: InputProps = {
     id: name,
     innerRef: ref,
-    invalid,
-    disabled,
     ...rest,
   };
 

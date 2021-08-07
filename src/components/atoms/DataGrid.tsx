@@ -1,15 +1,30 @@
 /* eslint-disable react/jsx-key */
-/* eslint-disable @typescript-eslint/ban-types */
 import React from 'react';
 
+import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardHeader from '@material-ui/core/CardHeader';
+import { makeStyles } from '@material-ui/core/styles';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableContainer from '@material-ui/core/TableContainer';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Pagination from '@material-ui/lab/Pagination';
 import { TableOptions, usePagination, useTable } from 'react-table';
-import { Card, CardHeader, CardFooter, Pagination, PaginationItem, PaginationLink, Table } from 'reactstrap';
+
+import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
 
 type DataGridOptions<D extends Record<string, unknown>> = {
   title: string;
 } & Pick<TableOptions<D>, 'columns' | 'data'>;
 
+const useTableStyles = makeStyles(tableComponentStyles);
+
 const DataGrid = <D extends Record<string, unknown>>({ title, columns, data }: DataGridOptions<D>): JSX.Element => {
+  const classes = useTableStyles();
   const {
     getTableProps,
     getTableBodyProps,
@@ -35,80 +50,60 @@ const DataGrid = <D extends Record<string, unknown>>({ title, columns, data }: D
 
   return (
     <>
-      <Card>
-        <CardHeader className="border-0">
-          <h3 className="mb-0">{title}</h3>
-        </CardHeader>
-        <Table {...getTableProps()} className="align-items-center table-flush" responsive>
-          <thead className="thead-light">
-            {headerGroups.map((headerGroup) => (
-              <tr {...headerGroup.getHeaderGroupProps()}>
-                {headerGroup.headers.map((column) => (
-                  <th {...column.getHeaderProps()}>{column.render('Header')}</th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody {...getTableBodyProps()} className="list">
-            {page.map((row) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => {
-                    return <td {...cell.getCellProps()}>{cell.render('Cell')}</td>;
-                  })}
-                </tr>
-              );
-            })}
-          </tbody>
-        </Table>
-        <CardFooter className="py-4">
-          <nav aria-label="...">
-            <Pagination className="pagination justify-content-end mb-0" listClassName="justify-content-end mb-0">
-              {/* <PaginationItem className="disabled">
-                <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()} tabIndex={-1}>
-                  <i className="fas fa-angle-left" />
-                  <i className="fas fa-angle-left" />
-                  <span className="sr-only">First</span>
-                </PaginationLink>
-              </PaginationItem> */}
-              <PaginationItem className="disabled">
-                <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()} tabIndex={-1}>
-                  <i className="fas fa-angle-left" />
-                  <span className="sr-only">Previous</span>
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem className="active">
-                <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
-                  1
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
-                  2 <span className="sr-only">(current)</span>
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
-                  3
-                </PaginationLink>
-              </PaginationItem>
-              <PaginationItem>
-                <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()}>
-                  <i className="fas fa-angle-right" />
-                  <span className="sr-only">Next</span>
-                </PaginationLink>
-              </PaginationItem>
-              {/* <PaginationItem className="disabled">
-                <PaginationLink href="#pablo" onClick={(e) => e.preventDefault()} tabIndex={-1}>
-                  <i className="fas fa-angle-right" />
-                  <i className="fas fa-angle-right" />
-                  <span className="sr-only">Last</span>
-                </PaginationLink>
-              </PaginationItem> */}
-            </Pagination>
-          </nav>
-        </CardFooter>
+      <Card classes={{ root: classes.cardRoot }}>
+        <CardHeader
+          className={classes.cardHeader}
+          title={title}
+          titleTypographyProps={{
+            component: Box,
+            marginBottom: '0!important',
+            variant: 'h3',
+          }}
+        />
+        <TableContainer>
+          <Box component={Table} {...getTableProps()} alignItems="center" marginBottom="0!important">
+            <TableHead>
+              {headerGroups.map((headerGroup) => (
+                <TableRow {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map((column) => (
+                    <TableCell
+                      {...column.getHeaderProps()}
+                      classes={{
+                        root: classes.tableCellRoot + ' ' + classes.tableCellRootHead,
+                      }}
+                    >
+                      {column.render('Header')}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))}
+            </TableHead>
+            <TableBody {...getTableBodyProps()}>
+              {page.map((row) => {
+                prepareRow(row);
+                return (
+                  <TableRow {...row.getRowProps()}>
+                    {row.cells.map((cell) => {
+                      return (
+                        <TableCell
+                          {...cell.getCellProps()}
+                          classes={{
+                            root: classes.tableCellRoot + ' ' + classes.tableCellRootBodyHead,
+                          }}
+                        >
+                          {cell.render('Cell')}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Box>
+        </TableContainer>
+        <CardActions classes={{ root: classes.cardActionsRoot }}>
+          <Pagination count={3} color="primary" variant="outlined" />
+        </CardActions>
       </Card>
       <div className="pagination">
         <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>

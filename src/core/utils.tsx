@@ -1,4 +1,5 @@
 import { PhoneNumberUtil, PhoneNumberType } from 'google-libphonenumber';
+import iproduce, { Draft } from 'immer';
 import jsonpath from 'jsonpath';
 import { DeepMap, FieldError, FieldValues } from 'react-hook-form';
 
@@ -44,4 +45,11 @@ export const mobileNumberValidator = (mobileNumber: string, isOptional?: boolean
     return false;
   }
   return false;
+};
+
+export const produce = <T,>(base: T, drafter: (draft: Draft<T>) => void): Exclude<T, undefined> => {
+  if (!base) {
+    return {} as Exclude<T, undefined>;
+  }
+  return iproduce(base, drafter) as Exclude<T, undefined>;
 };

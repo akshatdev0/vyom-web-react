@@ -1,59 +1,33 @@
-/*!
+import React, { useState } from 'react';
 
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
+import { Typography } from '@material-ui/core';
+import AppBar from '@material-ui/core/AppBar';
+import Box from '@material-ui/core/Box';
+import Container from '@material-ui/core/Container';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import InputBase from '@material-ui/core/InputBase';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import Clear from '@material-ui/icons/Clear';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import ZoomIn from '@material-ui/icons/ZoomIn';
+import clsx from 'clsx';
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React from 'react';
-
-import classnames from 'classnames';
-import {
-  Collapse,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  ListGroupItem,
-  ListGroup,
-  Navbar,
-  NavItem,
-  NavLink,
-  Nav,
-  Container,
-  Row,
-  Col,
-  Media,
-} from 'reactstrap';
-
+import componentStyles from 'assets/theme/components/navbars/user-topbar';
 import { Layout } from 'core/layout';
 import { Navigation } from 'core/navigation';
 import { Business, Maybe, User } from 'types';
 
 import UserAccountMenu from './UserAccountMenu';
 
+const useStyles = makeStyles(componentStyles);
+
 type Props = {
   // The layout for which this menu will be used
   layout: Layout;
-  theme: string;
-  sidebarOpen: boolean;
-  toggleSidebar: () => void;
+  openSidebar: () => void;
   // navigation which will be displayed inside the component
   accountMenu: Navigation;
   user: Maybe<User>;
@@ -61,314 +35,98 @@ type Props = {
 };
 
 const UserTopbar: React.FunctionComponent<Props> = ({
-  theme = 'dark',
-  sidebarOpen = false,
-  toggleSidebar,
+  openSidebar,
   layout,
   accountMenu: navigation,
   user,
   business,
 }: Props) => {
-  // function that on mobile devices makes the search open
-  const openSearch = () => {
-    document.body.classList.add('g-navbar-search-showing');
-    setTimeout(function () {
-      document.body.classList.remove('g-navbar-search-showing');
-      document.body.classList.add('g-navbar-search-show');
-    }, 150);
-    setTimeout(function () {
-      document.body.classList.add('g-navbar-search-shown');
-    }, 300);
-  };
-
-  // function that on mobile devices makes the search close
-  const closeSearch = () => {
-    document.body.classList.remove('g-navbar-search-shown');
-    setTimeout(function () {
-      document.body.classList.remove('g-navbar-search-show');
-      document.body.classList.add('g-navbar-search-hiding');
-    }, 150);
-    setTimeout(function () {
-      document.body.classList.remove('g-navbar-search-hiding');
-      document.body.classList.add('g-navbar-search-hidden');
-    }, 300);
-    setTimeout(function () {
-      document.body.classList.remove('g-navbar-search-hidden');
-    }, 500);
-  };
+  const classes = useStyles();
+  const theme = useTheme();
+  const [showSearch, setShowSearch] = useState(false);
 
   return (
     <>
-      <Navbar
-        className={classnames(
-          'navbar-top navbar-expand border-bottom',
-          { 'navbar-dark bg-info': theme === 'dark' },
-          { 'navbar-light bg-secondary': theme === 'light' },
-        )}
-      >
-        <Container fluid>
-          <Collapse navbar isOpen={true}>
-            {business && (
-              <Nav className="align-items-center ml-auto ml-md-0 d-none d-lg-block" navbar>
-                <Media className="align-items-center">
-                  <Media className="ml-0 mr-6 d-none d-lg-block">
-                    <span className="mb-0 text-lg font-weight-bold">{business.name}</span>
-                  </Media>
-                </Media>
-              </Nav>
-            )}
-            <Form
-              className={classnames(
-                'navbar-search form-inline mr-sm-3',
-                { 'navbar-search-light': theme === 'dark' },
-                { 'navbar-search-dark': theme === 'light' },
-              )}
+      <AppBar position="relative" elevation={0} classes={{ root: classes.appBarRoot }}>
+        <Toolbar disableGutters>
+          <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
+            <Box
+              display="flex"
+              justifyContent="center"
+              alignItems="center"
+              width="100%"
+              marginTop="1rem"
+              marginBottom="1rem"
             >
-              <FormGroup className="mb-0">
-                <InputGroup className="input-group-alternative input-group-merge">
-                  <InputGroupAddon addonType="prepend">
-                    <InputGroupText>
-                      <i className="fas fa-search" />
-                    </InputGroupText>
-                  </InputGroupAddon>
-                  <Input placeholder="Search" type="text" />
-                </InputGroup>
-              </FormGroup>
-              <button aria-label="Close" className="close" type="button" onClick={closeSearch}>
-                <span aria-hidden={true}>×</span>
-              </button>
-            </Form>
-
-            <Nav className="align-items-center ml-md-auto" navbar>
-              <NavItem className="d-xl-none">
-                <div
-                  className={classnames(
-                    'pr-3 sidenav-toggler',
-                    { active: sidebarOpen },
-                    { 'sidenav-toggler-dark': theme === 'dark' },
-                  )}
-                  onClick={toggleSidebar}
-                >
-                  <div className="sidenav-toggler-inner">
-                    <i className="sidenav-toggler-line" />
-                    <i className="sidenav-toggler-line" />
-                    <i className="sidenav-toggler-line" />
-                  </div>
-                </div>
-              </NavItem>
-              <NavItem className="d-sm-none">
-                <NavLink onClick={openSearch}>
-                  <i className="ni ni-zoom-split-in" />
-                </NavLink>
-              </NavItem>
-              <UncontrolledDropdown nav>
-                <DropdownToggle className="nav-link" color="" tag="a">
-                  <i className="ni ni-bell-55" />
-                </DropdownToggle>
-                <DropdownMenu className="dropdown-menu-xl py-0 overflow-hidden" right>
-                  <div className="px-3 py-3">
-                    <h6 className="text-sm text-muted m-0">
-                      You have <strong className="text-info">13</strong> notifications.
-                    </h6>
-                  </div>
-
-                  <ListGroup flush>
-                    <ListGroupItem
-                      className="list-group-item-action"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      tag="a"
-                    >
-                      <Row className="align-items-center">
-                        <Col className="col-auto">
-                          <img
-                            alt="..."
-                            className="avatar rounded-circle"
-                            src={require('assets/img/theme/team-1.jpg').default}
-                          />
-                        </Col>
-                        <div className="col ml--2">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <div>
-                              <h4 className="mb-0 text-sm">John Snow</h4>
-                            </div>
-                            <div className="text-right text-muted">
-                              <small>2 hrs ago</small>
-                            </div>
-                          </div>
-                          <p className="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                        </div>
-                      </Row>
-                    </ListGroupItem>
-                    <ListGroupItem
-                      className="list-group-item-action"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      tag="a"
-                    >
-                      <Row className="align-items-center">
-                        <Col className="col-auto">
-                          <img
-                            alt="..."
-                            className="avatar rounded-circle"
-                            src={require('assets/img/theme/team-2.jpg').default}
-                          />
-                        </Col>
-                        <div className="col ml--2">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <div>
-                              <h4 className="mb-0 text-sm">John Snow</h4>
-                            </div>
-                            <div className="text-right text-muted">
-                              <small>3 hrs ago</small>
-                            </div>
-                          </div>
-                          <p className="text-sm mb-0">A new issue has been reported for Argon.</p>
-                        </div>
-                      </Row>
-                    </ListGroupItem>
-                    <ListGroupItem
-                      className="list-group-item-action"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      tag="a"
-                    >
-                      <Row className="align-items-center">
-                        <Col className="col-auto">
-                          <img
-                            alt="..."
-                            className="avatar rounded-circle"
-                            src={require('assets/img/theme/team-3.jpg').default}
-                          />
-                        </Col>
-                        <div className="col ml--2">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <div>
-                              <h4 className="mb-0 text-sm">John Snow</h4>
-                            </div>
-                            <div className="text-right text-muted">
-                              <small>5 hrs ago</small>
-                            </div>
-                          </div>
-                          <p className="text-sm mb-0">Your posts have been liked a lot.</p>
-                        </div>
-                      </Row>
-                    </ListGroupItem>
-                    <ListGroupItem
-                      className="list-group-item-action"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      tag="a"
-                    >
-                      <Row className="align-items-center">
-                        <Col className="col-auto">
-                          <img
-                            alt="..."
-                            className="avatar rounded-circle"
-                            src={require('assets/img/theme/team-4.jpg').default}
-                          />
-                        </Col>
-                        <div className="col ml--2">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <div>
-                              <h4 className="mb-0 text-sm">John Snow</h4>
-                            </div>
-                            <div className="text-right text-muted">
-                              <small>2 hrs ago</small>
-                            </div>
-                          </div>
-                          <p className="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                        </div>
-                      </Row>
-                    </ListGroupItem>
-                    <ListGroupItem
-                      className="list-group-item-action"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      tag="a"
-                    >
-                      <Row className="align-items-center">
-                        <Col className="col-auto">
-                          <img
-                            alt="..."
-                            className="avatar rounded-circle"
-                            src={require('assets/img/theme/team-5.jpg').default}
-                          />
-                        </Col>
-                        <div className="col ml--2">
-                          <div className="d-flex justify-content-between align-items-center">
-                            <div>
-                              <h4 className="mb-0 text-sm">John Snow</h4>
-                            </div>
-                            <div className="text-right text-muted">
-                              <small>3 hrs ago</small>
-                            </div>
-                          </div>
-                          <p className="text-sm mb-0">A new issue has been reported for Argon.</p>
-                        </div>
-                      </Row>
-                    </ListGroupItem>
-                  </ListGroup>
-
-                  <DropdownItem
-                    className="text-center text-info font-weight-bold py-3"
-                    href="#pablo"
-                    onClick={(e) => e.preventDefault()}
-                  >
-                    View all
-                  </DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-              <UncontrolledDropdown nav>
-                <DropdownToggle className="nav-link" color="" tag="a">
-                  <i className="ni ni-ungroup" />
-                </DropdownToggle>
-                <DropdownMenu className="dropdown-menu-lg dropdown-menu-dark bg-default" right>
-                  <Row className="shortcuts px-4">
-                    <Col className="shortcut-item" href="#pablo" onClick={(e) => e.preventDefault()} xs="4" tag="a">
-                      <span className="shortcut-media avatar rounded-circle bg-gradient-red">
-                        <i className="ni ni-calendar-grid-58" />
-                      </span>
-                      <small>Calendar</small>
-                    </Col>
-                    <Col className="shortcut-item" href="#pablo" onClick={(e) => e.preventDefault()} xs="4" tag="a">
-                      <span className="shortcut-media avatar rounded-circle bg-gradient-orange">
-                        <i className="ni ni-email-83" />
-                      </span>
-                      <small>Email</small>
-                    </Col>
-                    <Col className="shortcut-item" href="#pablo" onClick={(e) => e.preventDefault()} xs="4" tag="a">
-                      <span className="shortcut-media avatar rounded-circle bg-gradient-info">
-                        <i className="ni ni-credit-card" />
-                      </span>
-                      <small>Payments</small>
-                    </Col>
-                    <Col className="shortcut-item" href="#pablo" onClick={(e) => e.preventDefault()} xs="4" tag="a">
-                      <span className="shortcut-media avatar rounded-circle bg-gradient-green">
-                        <i className="ni ni-books" />
-                      </span>
-                      <small>Reports</small>
-                    </Col>
-                    <Col className="shortcut-item" href="#pablo" onClick={(e) => e.preventDefault()} xs="4" tag="a">
-                      <span className="shortcut-media avatar rounded-circle bg-gradient-purple">
-                        <i className="ni ni-pin-3" />
-                      </span>
-                      <small>Maps</small>
-                    </Col>
-                    <Col className="shortcut-item" href="#pablo" onClick={(e) => e.preventDefault()} xs="4" tag="a">
-                      <span className="shortcut-media avatar rounded-circle bg-gradient-yellow">
-                        <i className="ni ni-basket" />
-                      </span>
-                      <small>Shop</small>
-                    </Col>
-                  </Row>
-                </DropdownMenu>
-              </UncontrolledDropdown>
-            </Nav>
-            <UserAccountMenu layout={layout} navigation={navigation} user={user} />
-          </Collapse>
-        </Container>
-      </Navbar>
+              <Box display="flex" alignItems="center" width="auto" marginRight="2rem" className={classes.brandBox}>
+                <Typography variant="h2" component="h6" className={classes.brandTitle}>
+                  {business?.name}
+                </Typography>
+              </Box>
+              <Box
+                display="flex"
+                alignItems="center"
+                width="auto"
+                marginRight="1rem"
+                className={clsx(classes.searchBox, {
+                  [classes.searchBoxShow]: showSearch,
+                })}
+              >
+                <SearchIcon className={classes.searchIcon} />
+                <InputBase
+                  placeholder="Search"
+                  classes={{
+                    input: classes.searchInput,
+                  }}
+                />
+                <Hidden smUp implementation="css">
+                  <Clear className={classes.searchClose} onClick={() => setShowSearch(false)} />
+                </Hidden>
+              </Box>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                marginLeft="auto"
+                className={clsx(classes.marginLeftNone, {
+                  [classes.displayNone]: showSearch,
+                })}
+              >
+                <Hidden xlUp implementation="css">
+                  <IconButton onClick={openSidebar}>
+                    <Box
+                      component={MenuIcon}
+                      color={theme.palette.white.main}
+                      width="1.5rem!important"
+                      height="1.5rem!important"
+                    />
+                  </IconButton>
+                </Hidden>
+                <Hidden smUp implementation="css">
+                  <IconButton onClick={() => setShowSearch(true)}>
+                    <Box
+                      component={ZoomIn}
+                      color={theme.palette.white.main}
+                      width="1.5rem!important"
+                      height="1.5rem!important"
+                    />
+                  </IconButton>
+                </Hidden>
+              </Box>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                className={clsx(classes.marginLeftAuto, {
+                  [classes.displayNone]: showSearch,
+                })}
+              >
+                <UserAccountMenu layout={layout} navigation={navigation} user={user} />
+              </Box>
+            </Box>
+          </Container>
+        </Toolbar>
+      </AppBar>
     </>
   );
 };
