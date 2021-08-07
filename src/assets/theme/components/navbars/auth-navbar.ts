@@ -30,6 +30,7 @@ const componentStyles = (theme: Theme) => createStyles({
     },
   },
   listItemRoot: {
+    width: "auto",
     display: "flex",
     alignItems: "center",
     fontSize: ".875rem",

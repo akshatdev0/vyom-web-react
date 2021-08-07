@@ -13,7 +13,7 @@ import * as z from 'zod';
 import componentStyles from 'assets/theme/views/admin/profile';
 import { useReactQueryClient } from 'client';
 import { ErrorAlert, Select, TextField } from 'components/atoms';
-import { useNotify } from 'core/notification';
+import { useSnackbar } from 'components/molecules';
 import { produce } from 'core/utils';
 import { useAuthState } from 'features/auth';
 import {
@@ -56,7 +56,7 @@ const CompanyInformation: React.FunctionComponent<Props> = ({ company }: Props) 
   const { user: sessionUser } = useAuthState();
   const companyOwnerID = sessionUser?.companyOwner?.id;
   const reactQueryClient = useReactQueryClient();
-  const notify = useNotify();
+  const showSnackbar = useSnackbar();
   const { mutate, isLoading, isError, error } = useUpdateCompanyInformationMutation({
     onSuccess: async (data) => {
       const updatedCompany = data.updateCompany?.company;
@@ -71,12 +71,15 @@ const CompanyInformation: React.FunctionComponent<Props> = ({ company }: Props) 
       );
       reactQueryClient.setQueryData<CompanyQuery>(['Company', { id: company?.id }], (oldData) =>
         produce(oldData, (draft) => {
-          if (draft) {
-            draft.company = updatedCompany;
+          if (updatedCompany && draft?.company) {
+            draft.company.name = updatedCompany.name;
+            draft.company.companyType = updatedCompany.companyType;
+            draft.company.businessType = updatedCompany.businessType;
+            draft.company.sku = updatedCompany.sku;
           }
         }),
       );
-      notify({ type: 'success', title: 'Company', message: 'Successfully saved!' });
+      showSnackbar({ severity: 'success', title: 'Company', message: 'Successfully saved!' });
     },
   });
 

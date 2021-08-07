@@ -1,4 +1,20 @@
-const componentStyles = (theme) => ({
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import { Theme } from "@material-ui/core/styles";;
+import createStyles from "@material-ui/styles/createStyles";
+
+const componentStyles = (theme: Theme) => createStyles({
+  alertRoot: {
+    "& .MuiAlert-icon": {
+      padding: "9px 0",
+    },
+    "& .MuiSvgIcon-root": {
+      width: "1em",
+      height: "1em"
+    },
+    "& .MuiAlertTitle-root": {
+      fontWeight: 600,
+    }
+  },
   defaultSnackbar: {
     color: theme.palette.white.main,
     borderColor: theme.palette.dark.snackbar,
