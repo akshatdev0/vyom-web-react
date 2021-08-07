@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 import { useMutation, UseMutationOptions, useQuery, UseQueryOptions } from 'react-query';
 import { useFetcher } from 'client/fetcher';
-export type Maybe<T> = T | null;
+export type Maybe<T> = T;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -1351,7 +1351,7 @@ export type Country = {
   id: Scalars['ID'];
   created_at: Scalars['DateTime'];
   updated_at: Scalars['DateTime'];
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   states?: Maybe<Array<Maybe<State>>>;
 };
 
@@ -1408,7 +1408,7 @@ export type CountryGroupBy = {
 };
 
 export type CountryInput = {
-  name?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
   states?: Maybe<Array<Maybe<Scalars['ID']>>>;
   created_by?: Maybe<Scalars['ID']>;
   updated_by?: Maybe<Scalars['ID']>;
@@ -8158,7 +8158,7 @@ export const OrdersOfCompany = gql`
 `;
 export const ProductCategoriesOfCompany = gql`
   query ProductCategoriesOfCompany($companyID: ID!) {
-    productCategories(where: { company: { id: $companyID }, parentCategory_null: true }) {
+    productCategories(where: { company: { id: $companyID }, parentCategory_null: true }, sort: "name") {
       id
       name
       description
@@ -8853,7 +8853,10 @@ export const useOrdersOfCompanyQuery = <TData = OrdersOfCompanyQuery, TError = u
   );
 export const ProductCategoriesOfCompanyDocument = `
     query ProductCategoriesOfCompany($companyID: ID!) {
-  productCategories(where: {company: {id: $companyID}, parentCategory_null: true}) {
+  productCategories(
+    where: {company: {id: $companyID}, parentCategory_null: true}
+    sort: "name"
+  ) {
     id
     name
     description

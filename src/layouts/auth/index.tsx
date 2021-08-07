@@ -1,41 +1,29 @@
-/*!
+import React, { useEffect } from 'react';
 
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
+import { makeStyles } from '@material-ui/core/styles';
+import { Switch, Redirect } from 'react-router-dom';
 
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import React, { useEffect, useRef, RefObject } from 'react';
-import { useLocation, Switch, Redirect } from 'react-router-dom';
-
-// core components
-import { getRoutes } from 'core/navigation';
+import componentStyles from 'assets/theme/layouts/auth';
 import { AuthTopbar, AuthFooter } from 'components/molecules';
-import { Layout } from 'layouts';
-import { views } from './navigations';
+import { getRoutes } from 'core/routing';
+import { useScrollTop } from 'hooks';
+import { Layouts } from 'layouts';
+import routes from 'routes';
+
+const useStyles = makeStyles(componentStyles);
 
 const AuthLayout: React.FunctionComponent = () => {
-  const location = useLocation();
-  const mainContentRef: RefObject<HTMLDivElement> = useRef({}) as RefObject<HTMLDivElement>;
+  const classes = useStyles();
+  const mainContentRef = useScrollTop();
 
   useEffect(() => {
-    document.documentElement.scrollTop = 0;
-    if (document.scrollingElement) {
-      document.scrollingElement.scrollTop = 0;
-    }
-    if (mainContentRef && mainContentRef.current) {
-      mainContentRef.current.scrollTop = 0;
-    }
+    document.body.classList.add(classes.bgDefault);
+    return () => {
+      document.body.classList.remove(classes.bgDefault);
+    };
+  });
+
+  useEffect(() => {
     document.body.classList.add('bg-default');
     // Specify how to clean up after this effect:
     return function cleanup() {
@@ -43,23 +31,13 @@ const AuthLayout: React.FunctionComponent = () => {
     };
   });
 
-  useEffect(() => {
-    document.documentElement.scrollTop = 0;
-    if (document.scrollingElement) {
-      document.scrollingElement.scrollTop = 0;
-    }
-    if (mainContentRef && mainContentRef.current) {
-      mainContentRef.current.scrollTop = 0;
-    }
-  }, [location]);
-
   return (
     <>
       <div className="main-content" ref={mainContentRef}>
         <AuthTopbar />
         <Switch>
-          {getRoutes(Layout.Auth, views)}
-          <Redirect from="*" to="/auth/sign-in" />
+          {getRoutes(Layouts.AUTH, routes)}
+          <Redirect from="*" to={Layouts.AUTH.path + '/sign-in'} />
         </Switch>
       </div>
       <AuthFooter />

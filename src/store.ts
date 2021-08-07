@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux';
 import { configureStore, EnhancedStore } from '@reduxjs/toolkit';
-import createSagaMiddleware from 'redux-saga';
+import { combineReducers } from 'redux';
 import { createInjectorsEnhancer } from 'redux-injectors';
+import createSagaMiddleware from 'redux-saga';
 
 function defaultReducer(state = {}) {
   return state;

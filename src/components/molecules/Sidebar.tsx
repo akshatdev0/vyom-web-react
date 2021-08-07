@@ -1,47 +1,49 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React, { useState, useEffect } from 'react';
-// react library for routing
-import { useLocation, NavLink as NavLinkRRD, Link } from 'react-router-dom';
-// nodejs library that concatenates classes
-import classnames from 'classnames';
-// react library that creates nice scrollbar on windows devices
+
+import Box from '@material-ui/core/Box';
+import Collapse from '@material-ui/core/Collapse';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import Hidden from '@material-ui/core/Hidden';
+import IconButton from '@material-ui/core/IconButton';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import MenuIcon from '@material-ui/icons/Menu';
+import MenuOpen from '@material-ui/icons/MenuOpen';
+import NavigateNext from '@material-ui/icons/NavigateNext';
+import clsx from 'clsx';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-// reactstrap components
-import { Collapse, NavbarBrand, Navbar, NavItem, NavLink, Nav } from 'reactstrap';
+import { useLocation, Link } from 'react-router-dom';
+
+import componentStyles from 'assets/theme/components/sidebar';
+import { Layout } from 'core/layout';
 import {
   SubNavigation,
   SubMenuItem,
   Navigation,
   SubMenu,
-  isMenu,
+  isDivider,
   isSubMenuItem,
   isCollapsibleMenu,
-  isMenuItem,
+  isTitle,
+  MenuItem,
+  hasIcon,
+  Menu,
+  hasInitial,
+  hasLink,
+  hasRoute,
 } from 'core/navigation';
+import { getParts, getPath } from 'core/routing';
 
 type Props = {
   // The layout for which this sidebar will be used
-  layout: string;
+  layout: Layout;
   // prop to know if the sidenav is mini or normal
   sidebarOpen: boolean;
   // function used to make sidenav mini or normal
-  toggleSidebar: () => void;
+  closeSidebar: () => void;
   // navigation which will be displayed inside the component
   navigation: Navigation;
   logo: {
@@ -56,42 +58,46 @@ type Props = {
     // the alt for the img
     imgAlt: string;
   };
-  // rtl active, this will make the sidebar to stay on the right side
-  rtlActive?: boolean;
 };
 
-const Sidebar: React.FunctionComponent<Props> = ({
-  layout,
-  sidebarOpen,
-  toggleSidebar,
-  navigation,
-  logo,
-  rtlActive = false,
-}: Props) => {
-  const [state, setState] = useState<Record<string, boolean>>({});
+const useStyles = makeStyles(componentStyles);
+
+const Sidebar: React.FunctionComponent<Props> = ({ layout, sidebarOpen, closeSidebar, navigation, logo }: Props) => {
+  const classes = useStyles();
   const location = useLocation();
+  const [state, setState] = useState<Record<string, boolean>>({});
+  const [compact, setCompact] = useState(false);
+  const [mouseEnter, setMouseEnter] = useState(false);
 
   useEffect(() => {
     setState(getCollapseStates(navigation));
     // eslint-disable-next-line
   }, []);
 
-  // verifies if routeName is the one active (in browser input)
-  const activeRoute = (routeName: string) => {
-    return location.pathname.indexOf(routeName) > -1 ? 'active' : '';
+  const toggleCompactView = () => {
+    if (mouseEnter) {
+      setCompact(false);
+      setMouseEnter(false);
+    } else {
+      setCompact(!compact);
+    }
   };
-  // makes the sidenav normal on hover (actually when mouse enters on it)
+
+  // dmakes the sidenav normal on hover (actually when mouse enters on it)
   const onMouseEnterSidebar = () => {
-    if (!document.body.classList.contains('g-sidenav-pinned')) {
-      document.body.classList.add('g-sidenav-show');
+    if (compact && !mouseEnter) {
+      setCompact(false);
+      setMouseEnter(true);
     }
   };
   // makes the sidenav mini on hover (actually when mouse leaves from it)
   const onMouseLeaveSidebar = () => {
-    if (!document.body.classList.contains('g-sidenav-pinned')) {
-      document.body.classList.remove('g-sidenav-show');
+    if (mouseEnter) {
+      setCompact(true);
+      setMouseEnter(false);
     }
   };
+
   // this creates the intial state of this component based on the collapse views
   // that it gets through views
   const getCollapseStates = (menu: Navigation | SubNavigation | undefined) => {
@@ -110,6 +116,7 @@ const Sidebar: React.FunctionComponent<Props> = ({
     }
     return initialState;
   };
+
   // this verifies if any of the collapses should be default opened on a rerender of this component
   // for example, on the refresh of the page,
   // while on the src/views/forms/RegularForms.js - route /admin/regular-forms
@@ -119,175 +126,253 @@ const Sidebar: React.FunctionComponent<Props> = ({
         const item: SubMenu | SubMenuItem = menu[i];
         if (isCollapsibleMenu(item) && item.collapse && getCollapseInitialState(item.children)) {
           return true;
-        } else if (isSubMenuItem(item) && location.pathname.indexOf(item.path) !== -1) {
+        } else if (isSubMenuItem(item) && hasRoute(item) && location.pathname.indexOf(getParts(item.route)) !== -1) {
           return true;
         }
       }
     }
     return false;
   };
+
   // this is used on mobile devices, when a user navigates
   // the sidebar will autoclose
-  const closeSidenav = () => {
+  const handleCloseSidebar = () => {
     if (window.innerWidth < 1200) {
-      toggleSidebar();
+      closeSidebar();
     }
   };
-  // this function creates the links and collapses that appear in the sidebar (left menu)
-  const createLinks = (navigation: Navigation | SubNavigation | undefined) => {
-    const links: Array<JSX.Element | null> = [];
+
+  const getColorClassName = (color: string | undefined) => {
+    if (!color) {
+      return classes.textDefault;
+    }
+    switch (color) {
+      case 'Primary':
+        return classes.textPrimary;
+
+      case 'PrimaryLight':
+        return classes.textPrimaryLight;
+
+      case 'Error':
+        return classes.textError;
+
+      case 'ErrorLight':
+        return classes.textErrorLight;
+
+      case 'Warning':
+        return classes.textWarning;
+
+      case 'WarningLight':
+        return classes.textWarningLight;
+
+      case 'Info':
+        return classes.textInfo;
+
+      case 'InfoLight':
+        return classes.textInfoLight;
+
+      case 'Success':
+        return classes.textSuccess;
+
+      case 'SuccessLight':
+        return classes.textSuccessLight;
+
+      default:
+        return classes.textDefault;
+    }
+  };
+
+  const createLinkLabel = (item: Menu | MenuItem | SubMenu | SubMenuItem) => (
+    <>
+      <Box minWidth="2.25rem" display="flex" alignItems="center">
+        {hasIcon(item) ? (
+          <Box
+            component={item.icon}
+            width="1.25rem!important"
+            height="1.25rem!important"
+            marginLeft={compact ? '-.25rem' : ''}
+            className={getColorClassName(item.color)}
+          />
+        ) : null}
+        {hasInitial(item) ? (
+          <Box component="span" className={getColorClassName(item.color)}>
+            {item.initial}
+          </Box>
+        ) : null}
+      </Box>
+      {compact ? null : item.name}
+    </>
+  );
+
+  // this function creates the menu, titles, dividers, links and collapses that appear in the sidebar (left menu)
+  const createMenuItems = (navigation: Navigation | SubNavigation | undefined) => {
+    const items: Array<JSX.Element | null> = [];
 
     if (navigation) {
       for (let i = 0; i < navigation.length; i++) {
         const item = navigation[i];
-        if (item.redirect) {
-          links.push(null);
+        if (isDivider(item)) {
+          const component = <Divider key={i} classes={{ root: classes.divider }} />;
+          items.push(component);
+        } else if (isTitle(item)) {
+          if (compact) {
+            return null;
+          }
+          const component = (
+            <Typography key={i} variant="h6" component="h6" classes={{ root: classes.title }}>
+              {item.title}
+            </Typography>
+          );
+          items.push(component);
         } else if (isCollapsibleMenu(item) && item.collapse) {
-          const link = (
-            <NavItem key={i}>
-              <NavLink
-                href="#pablo"
-                data-toggle="collapse"
-                aria-expanded={state[item.identifier]}
-                className={classnames({
-                  active: getCollapseInitialState(item.children),
-                })}
-                onClick={(e) => {
+          const st: Record<string, boolean> = {};
+          st[item['identifier']] = !state[item.identifier];
+          // TODO: Multi states
+          const component = (
+            <React.Fragment key={i}>
+              <ListItem
+                component={'a'}
+                href="#mui"
+                onClick={(e: any) => {
                   e.preventDefault();
-                  const st: Record<string, boolean> = {};
-                  st[item['identifier']] = !state[item.identifier];
                   setState(st);
                 }}
+                classes={{
+                  root: clsx(classes.listItemRoot, {
+                    [classes.listItemRootCollapseActive]: getCollapseInitialState(item.children),
+                  }),
+                }}
               >
-                {isMenu(item) && item.icon ? (
-                  <>
-                    <i className={item.icon} />
-                    <span className="nav-link-text">{item.name}</span>
-                  </>
-                ) : isSubMenuItem(item) && item.initial ? (
-                  <>
-                    <span className="sidenav-mini-icon"> {item.initial} </span>
-                    <span className="sidenav-normal"> {item.name} </span>
-                  </>
-                ) : null}
-              </NavLink>
-              <Collapse isOpen={state[item.identifier]}>
-                {/* eslint-disable-next-line */}
-                <Nav className="nav-sm flex-column">{createLinks(item.children)}</Nav>
-              </Collapse>
-            </NavItem>
-          );
-          links.push(link);
-        } else if (isMenuItem(item) || isSubMenuItem(item)) {
-          const link = (
-            <NavItem className={activeRoute(layout + item.path)} key={i}>
-              <NavLink to={layout + item.path} activeClassName="" onClick={closeSidenav} tag={NavLinkRRD}>
-                {isMenuItem(item) && item.icon ? (
-                  <>
-                    <i className={item.icon} />
-                    <span className="nav-link-text">{item.name}</span>
-                  </>
-                ) : isSubMenuItem(item) && item.initial ? (
-                  <>
-                    <span className="sidenav-mini-icon"> {item.initial} </span>
-                    <span className="sidenav-normal"> {item.name} </span>
-                  </>
-                ) : (
-                  item.name
+                {createLinkLabel(item)}
+                {compact ? null : (
+                  <Box
+                    component={NavigateNext}
+                    marginLeft="auto"
+                    width="1rem!important"
+                    height="1rem!important"
+                    className={clsx(classes.listItemRootCollapseIcon, {
+                      [classes.listItemRootCollapseActiveIcon]: state[item.identifier],
+                    })}
+                  />
                 )}
-              </NavLink>
-            </NavItem>
+              </ListItem>
+              <Collapse in={state[item.identifier]} unmountOnExit className={classes.collapseRoot}>
+                <List classes={{ root: classes.listRootCollapse }}>{createMenuItems(item.children)}</List>
+              </Collapse>
+            </React.Fragment>
           );
-          links.push(link);
+          items.push(component);
+        } else if (hasLink(item)) {
+          const component = (
+            <ListItem
+              key={i}
+              component={'a'}
+              href={item.href}
+              onClick={handleCloseSidebar}
+              classes={{
+                root: classes.listItemRoot,
+                selected: classes.listItemSelected,
+              }}
+              target="_blank"
+            >
+              {createLinkLabel(item)}
+            </ListItem>
+          );
+          items.push(component);
+        } else if (hasRoute(item)) {
+          const path = getPath(layout, item.route);
+          const component = (
+            <ListItem
+              key={i}
+              component={Link}
+              onClick={handleCloseSidebar}
+              to={path}
+              classes={{
+                root: classes.listItemRoot,
+                selected: classes.listItemSelected,
+              }}
+              selected={location.pathname === path}
+            >
+              {createLinkLabel(item)}
+            </ListItem>
+          );
+          items.push(component);
         } else {
-          links.push(null);
+          // TODO: Check if required
+          items.push(null);
         }
       }
     }
-    return links;
+    return items;
   };
 
-  let navbarBrandProps;
-  if (logo && logo.innerLink) {
-    navbarBrandProps = {
-      to: logo.innerLink,
-      tag: Link,
-    };
-  } else if (logo && logo.outterLink) {
-    navbarBrandProps = {
-      href: logo.outterLink,
-      target: '_blank',
-    };
-  }
-  const scrollBarInner = (
-    <div className="scrollbar-inner">
-      <div className="sidenav-header d-flex align-items-center">
-        {logo ? (
-          <NavbarBrand {...navbarBrandProps}>
-            <img alt={logo.imgAlt} className="navbar-brand-img" src={logo.imgSrc} />
-          </NavbarBrand>
-        ) : null}
-        <div className="ml-auto">
-          <div
-            className={classnames('sidenav-toggler d-none d-xl-block', {
-              active: sidebarOpen,
-            })}
-            onClick={toggleSidebar}
-          >
-            <div className="sidenav-toggler-inner">
-              <i className="sidenav-toggler-line" />
-              <i className="sidenav-toggler-line" />
-              <i className="sidenav-toggler-line" />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="navbar-inner">
-        <Collapse navbar isOpen={true}>
-          <Nav navbar>{createLinks(navigation)}</Nav>
-          {/* <hr className="my-3" />
-          <h6 className="navbar-heading p-0 text-muted">
-            <span className="docs-normal">Documentation</span>
-            <span className="docs-mini">D</span>
-          </h6>
-          <Nav className="mb-md-3" navbar>
-            <NavItem>
-              <NavLink href="#" target="_blank">
-                <i className="ni ni-spaceship" />
-                <span className="nav-link-text">Getting started</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="#" target="_blank">
-                <i className="ni ni-palette" />
-                <span className="nav-link-text">Foundation</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="#" target="_blank">
-                <i className="ni ni-ui-04" />
-                <span className="nav-link-text">Components</span>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="#" target="_blank">
-                <i className="ni ni-chart-pie-35" />
-                <span className="nav-link-text">Plugins</span>
-              </NavLink>
-            </NavItem>
-          </Nav> */}
-        </Collapse>
-      </div>
-    </div>
+  const logoImage = <img alt={logo.imgAlt} className={classes.logoClasses} src={logo.imgSrc} />;
+  const logoObject =
+    logo && logo.innerLink ? (
+      <Link to={logo.innerLink} className={classes.logoLinkClasses}>
+        {logoImage}
+      </Link>
+    ) : logo && logo.outterLink ? (
+      <a href={logo.outterLink} className={classes.logoLinkClasses}>
+        {logoImage}
+      </a>
+    ) : null;
+
+  const desktopObject = (
+    <>
+      <Box
+        padding={compact ? '0 0 1rem 0' : '0 1rem 1rem 1.5rem'}
+        display="flex"
+        justifyContent={compact ? 'center' : 'space-between'}
+        alignItems="center"
+      >
+        {compact ? null : logoObject}
+        <IconButton onClick={toggleCompactView}>
+          <Box
+            component={compact || mouseEnter ? MenuOpen : MenuIcon}
+            width="1.5rem!important"
+            height="1.5rem!important"
+          />
+        </IconButton>
+      </Box>
+      <List classes={{ root: classes.listRoot }}>{createMenuItems(navigation)}</List>
+    </>
+  );
+  const mobileObject = (
+    <>
+      <Box padding={'0 1rem 1rem 1.5rem'} display="flex" justifyContent="flex-start" alignItems="center">
+        {logoObject}
+      </Box>
+      <List classes={{ root: classes.listRoot }}>{createMenuItems(navigation)}</List>
+    </>
   );
   return (
-    <Navbar
-      className={'sidenav navbar-vertical navbar-expand-xs navbar-light bg-white ' + (rtlActive ? '' : 'fixed-left')}
-      onMouseEnter={onMouseEnterSidebar}
-      onMouseLeave={onMouseLeaveSidebar}
-    >
-      {navigator.platform.indexOf('Win') > -1 ? <PerfectScrollbar>{scrollBarInner}</PerfectScrollbar> : scrollBarInner}
-    </Navbar>
+    <>
+      <Hidden lgDown implementation="css">
+        <Drawer
+          variant="permanent"
+          anchor="left"
+          open
+          classes={{
+            paper: clsx({ [classes.drawerDockedCompact]: compact }),
+            docked: clsx({ [classes.drawerPaperCompact]: compact }),
+          }}
+          onMouseEnter={onMouseEnterSidebar}
+          onMouseLeave={onMouseLeaveSidebar}
+        >
+          {navigator.platform.indexOf('Win') > -1 ? (
+            <PerfectScrollbar>{desktopObject}</PerfectScrollbar>
+          ) : (
+            desktopObject
+          )}
+        </Drawer>
+      </Hidden>
+      <Hidden xlUp implementation="js">
+        <Drawer variant="temporary" anchor="left" open={sidebarOpen} onClose={closeSidebar}>
+          {navigator.platform.indexOf('Win') > -1 ? <PerfectScrollbar>{mobileObject}</PerfectScrollbar> : mobileObject}
+        </Drawer>
+      </Hidden>
+    </>
   );
 };
 

@@ -1,62 +1,77 @@
-/*!
-
-=========================================================
-* Argon Dashboard PRO React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-pro-react
-* Copyright 2021 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from 'react';
-// reactstrap components
-import { Container, Row, Col, Card, CardHeader, CardBody } from 'reactstrap';
 
+import Box from '@material-ui/core/Box';
+import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+
+import componentStyles from 'assets/theme/views/admin/profile';
+import { SimpleHeader } from 'components/molecules';
 import { useAuthState } from 'features/auth';
 import { useCompanyQuery } from 'generated/graphql';
+
 import CompanyDetails from './CompanyDetails';
 import CompanyInformation from './CompanyInformation';
 import CompanyRegisteredAddress from './CompanyRegisteredAddress';
 
+const useStyles = makeStyles(componentStyles);
+
 const Company: React.FunctionComponent = () => {
+  const classes = useStyles();
   const { user: sessionUser } = useAuthState();
   const companyID = sessionUser?.companyOwner?.company?.id;
   const { data: { company } = {} } = useCompanyQuery({ id: companyID || '' }, { enabled: !!companyID });
 
   return (
     <>
-      <Container className="mt-4" fluid>
-        <Row>
-          <Col>
-            <Card>
-              <CardHeader>
-                <Row className="align-items-center">
-                  <Col xs="8">
-                    <h3 className="mb-0">Company</h3>
-                  </Col>
-                  {/* <Col className="text-right" xs="4">
-                    <Button color="primary" href="#pablo" onClick={(e) => e.preventDefault()} size="sm">
-                      Settings
-                    </Button>
-                  </Col> */}
-                </Row>
-              </CardHeader>
-              <CardBody>
+      <SimpleHeader section="Settings" subsection="Company" />
+      <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
+        <Grid container>
+          <Grid
+            item
+            component={Box}
+            marginBottom="3rem"
+            classes={{ root: classes.gridItemRoot + ' ' + classes.order2 }}
+          >
+            <Card
+              classes={{
+                root: classes.cardRoot,
+              }}
+            >
+              <CardHeader
+                subheader={
+                  <Grid container classes={{ root: classes.cardHeaderGrid }}>
+                    <Grid item xs="auto">
+                      <Box marginBottom="0!important">
+                        <Typography variant="h3">Company</Typography>
+                      </Box>
+                    </Grid>
+                    <Grid item xs="auto">
+                      <Box justifyContent="flex-end" display="flex" flexWrap="wrap">
+                        <Button variant="contained" color="primary" size="small">
+                          Settings
+                        </Button>
+                      </Box>
+                    </Grid>
+                  </Grid>
+                }
+                classes={{ root: classes.cardHeaderRoot }}
+              />
+              <CardContent>
                 <CompanyInformation company={company} />
                 <hr className="my-4" />
                 <CompanyRegisteredAddress company={company} />
                 <hr className="my-4" />
                 <CompanyDetails company={company} />
-              </CardBody>
+              </CardContent>
             </Card>
-          </Col>
-        </Row>
+          </Grid>
+        </Grid>
       </Container>
     </>
   );

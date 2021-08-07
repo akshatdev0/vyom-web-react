@@ -1,0 +1,18 @@
+query ProductCategoriesOfCompany($companyID: ID!) {
+  productCategories(where: { company: { id: $companyID }, parentCategory_null: true }, sort: "name") {
+    id
+    name
+    description
+    company {
+      id
+    }
+    subcategories {
+      id
+      name
+      description
+    }
+    parentCategory {
+      id
+    }
+  }
+}
