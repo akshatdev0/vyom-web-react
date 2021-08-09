@@ -9,6 +9,9 @@ import MuiTableCell from '@material-ui/core/TableCell';
 import MuiTableContainer from '@material-ui/core/TableContainer';
 import MuiTableHead from '@material-ui/core/TableHead';
 import MuiTableRow from '@material-ui/core/TableRow';
+import MuiTableSortLabel from '@material-ui/core/TableSortLabel';
+import Tooltip from '@material-ui/core/Tooltip';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import {
   TableBodyProps,
   TableCellProps,
@@ -23,6 +26,17 @@ import tableComponentStyles from 'assets/theme/components/cards/tables/card-ligh
 const useTableStyles = makeStyles(tableComponentStyles);
 
 type CN = { children: React.ReactNode };
+
+type TableHeadCellContentProps = CN & {
+  canGroupBy: boolean;
+  canSortBy: boolean;
+  groupByTitle?: string;
+  sortByTitle?: string;
+  isGrouped: boolean;
+  isSorted: boolean;
+  isSortedDescending: boolean | undefined;
+  align?: string;
+};
 
 const areEqual = (prevProps: any, nextProps: any) =>
   prevProps.checked === nextProps.checked && prevProps.indeterminate === nextProps.indeterminate;
@@ -89,12 +103,47 @@ export const TableCell: React.FunctionComponent<TableCellProps & CN> = ({ childr
   );
 };
 
-export const TableLabel: React.FunctionComponent<CN> = ({ children, align = 'left' }: CN & { align?: string }) => {
+export const TableHeadCellContent: React.FunctionComponent<TableHeadCellContentProps> = ({
+  children,
+  canGroupBy,
+  canSortBy,
+  groupByTitle = '',
+  sortByTitle = '',
+  isGrouped,
+  isSorted,
+  isSortedDescending,
+  align = 'left',
+}: TableHeadCellContentProps) => {
   const classes = useTableStyles();
   return (
-    <div className={classes.tableLabel} style={{ textAlign: align } as CSSProperties}>
-      {children}
-    </div>
+    <>
+      {canGroupBy && (
+        <Tooltip title={groupByTitle}>
+          <MuiTableSortLabel
+            active
+            direction={isGrouped ? 'desc' : 'asc'}
+            IconComponent={KeyboardArrowRight}
+            className={classes.headerIcon}
+          />
+        </Tooltip>
+      )}
+      {canSortBy ? (
+        <Tooltip title={sortByTitle}>
+          <MuiTableSortLabel
+            active={isSorted}
+            direction={isSortedDescending ? 'desc' : 'asc'}
+            className={classes.tableSortLabel}
+            style={{ textAlign: align } as CSSProperties}
+          >
+            {children}
+          </MuiTableSortLabel>
+        </Tooltip>
+      ) : (
+        <div className={classes.tableLabel} style={{ textAlign: align } as CSSProperties}>
+          {children}
+        </div>
+      )}
+    </>
   );
 };
 

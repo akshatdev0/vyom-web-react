@@ -79,6 +79,22 @@ const componentStyles = (theme: Theme) => createStyles({
     fontSize: ".8125rem",
   },
   tableLabel: {},
+  tableSortLabel: {
+    '& svg': {
+      width: 16,
+      height: 16,
+      marginTop: 0,
+      marginLeft: 2,
+    },
+  },
+  headerIcon: {
+    '& svg': {
+      width: 16,
+      height: 16,
+      marginTop: 4,
+      marginRight: 0,
+    },
+  },  
   linearProgressRoot: {
     height: "3px!important",
     width: "120px!important",
