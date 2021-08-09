@@ -78,6 +78,7 @@ const componentStyles = (theme: Theme) => createStyles({
     textTransform: "unset!important" as "unset",
     fontSize: ".8125rem",
   },
+  tableLabel: {},
   linearProgressRoot: {
     height: "3px!important",
     width: "120px!important",
