@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react';
 
 import Box from '@material-ui/core/Box';
 import Checkbox from '@material-ui/core/Checkbox';
-import { makeStyles, styled } from '@material-ui/core/styles';
+import { makeStyles, styled, withStyles } from '@material-ui/core/styles';
 import MuiTable from '@material-ui/core/Table';
 import MuiTableBody from '@material-ui/core/TableBody';
 import MuiTableCell from '@material-ui/core/TableCell';
@@ -10,15 +10,17 @@ import MuiTableContainer from '@material-ui/core/TableContainer';
 import MuiTableHead from '@material-ui/core/TableHead';
 import MuiTableRow from '@material-ui/core/TableRow';
 import MuiTableSortLabel from '@material-ui/core/TableSortLabel';
-import Tooltip from '@material-ui/core/Tooltip';
+import MuiTooltip from '@material-ui/core/Tooltip';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import {
   TableBodyProps,
   TableCellProps,
+  TableGroupByToggleProps,
   TableHeaderGroupProps,
   TableHeaderProps,
   TableProps,
   TableRowProps,
+  TableSortByToggleProps,
 } from 'react-table';
 
 import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
@@ -30,12 +32,12 @@ type CN = { children: React.ReactNode };
 type TableHeadCellContentProps = CN & {
   canGroupBy: boolean;
   canSortBy: boolean;
-  groupByTitle?: string;
-  sortByTitle?: string;
   isGrouped: boolean;
   isSorted: boolean;
   isSortedDescending: boolean | undefined;
   align?: string;
+  groupByToggleProps?: TableGroupByToggleProps;
+  sortByToggleProps?: TableSortByToggleProps;
 };
 
 const areEqual = (prevProps: any, nextProps: any) =>
@@ -103,37 +105,47 @@ export const TableCell: React.FunctionComponent<TableCellProps & CN> = ({ childr
   );
 };
 
+const Tooltip = withStyles({
+  tooltip: {
+    fontSize: '0.725rem',
+  },
+})(MuiTooltip);
+
 export const TableHeadCellContent: React.FunctionComponent<TableHeadCellContentProps> = ({
   children,
   canGroupBy,
   canSortBy,
-  groupByTitle = '',
-  sortByTitle = '',
   isGrouped,
   isSorted,
   isSortedDescending,
   align = 'left',
+  groupByToggleProps = {},
+  sortByToggleProps = {},
 }: TableHeadCellContentProps) => {
   const classes = useTableStyles();
+  const { title: groupByTitle = '', ...restGroupByToggleProps } = groupByToggleProps;
+  const { title: sortByTitle = '', ...restSortByToggleProps } = sortByToggleProps;
   return (
     <>
       {canGroupBy && (
-        <Tooltip title={groupByTitle}>
+        <Tooltip arrow title={groupByTitle} placement="left">
           <MuiTableSortLabel
+            className={classes.headerIcon}
             active
             direction={isGrouped ? 'desc' : 'asc'}
             IconComponent={KeyboardArrowRight}
-            className={classes.headerIcon}
+            {...restGroupByToggleProps}
           />
         </Tooltip>
       )}
       {canSortBy ? (
-        <Tooltip title={sortByTitle}>
+        <Tooltip arrow title={sortByTitle} placement="top">
           <MuiTableSortLabel
-            active={isSorted}
-            direction={isSortedDescending ? 'desc' : 'asc'}
             className={classes.tableSortLabel}
             style={{ textAlign: align } as CSSProperties}
+            active={isSorted}
+            direction={isSortedDescending ? 'desc' : 'asc'}
+            {...restSortByToggleProps}
           >
             {children}
           </MuiTableSortLabel>
