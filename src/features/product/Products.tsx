@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Column } from 'react-table';
 
 import componentStyles from 'assets/theme/views/admin/tables';
-import { DataGrid } from 'components/atoms';
+import { Table } from 'components/atoms';
 import { SimpleHeader } from 'components/molecules';
 import { useAuthState } from 'features/auth';
 import { ProductsOfCompanyQuery, useProductsOfCompanyQuery } from 'generated/graphql';
@@ -51,7 +51,7 @@ const Products: React.FunctionComponent = () => {
     <>
       <SimpleHeader section="Product Catalog" subsection="Products" />
       <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
-        <DataGrid<Product> title="Products" columns={columns} data={products} />
+        <Table<Product> title="Products" columns={columns} data={products} />
       </Container>
     </>
   );
