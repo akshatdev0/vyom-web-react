@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-key */
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import { makeStyles } from '@material-ui/core/styles';
-import { TableOptions as ReactTableOptions, usePagination, useTable } from 'react-table';
+import { TableOptions as ReactTableOptions, useTable, useSortBy, SortingRule } from 'react-table';
 
 import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
 
@@ -21,21 +21,43 @@ import {
   TableCell,
 } from './TableParts';
 
-type TableOptions<D extends Record<string, unknown>> = {
+type OnFetchDataProps<D extends Record<string, unknown>> = {
+  sortBy: SortingRule<D>[];
+};
+
+type TableOptions<D extends Record<string, unknown>> = Pick<ReactTableOptions<D>, 'columns' | 'data'> & {
   title: string;
-} & Pick<ReactTableOptions<D>, 'columns' | 'data'>;
+  onFetchData: ({ sortBy }: OnFetchDataProps<D>) => void;
+};
 
 const useTableStyles = makeStyles(tableComponentStyles);
 
-const Table = <D extends Record<string, unknown>>({ title, columns, data }: TableOptions<D>): JSX.Element => {
+const Table = <D extends Record<string, unknown>>({
+  title,
+  columns,
+  data,
+  onFetchData,
+}: TableOptions<D>): JSX.Element => {
   const classes = useTableStyles();
-  const { getTableProps, getTableBodyProps, headerGroups, prepareRow, page } = useTable(
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow,
+    state: { sortBy },
+  } = useTable(
     {
       columns,
       data,
+      manualSortBy: true,
     },
-    usePagination,
+    useSortBy,
   );
+
+  useEffect(() => {
+    onFetchData({ sortBy });
+  }, [onFetchData, sortBy]);
 
   return (
     <>
@@ -59,12 +81,12 @@ const Table = <D extends Record<string, unknown>>({ title, columns, data }: Tabl
                       <TableHeadCellContent
                         canGroupBy={column.canGroupBy}
                         canSortBy={column.canSort}
-                        groupByTitle={column.getGroupByToggleProps && column.getGroupByToggleProps().title}
-                        sortByTitle={column.getSortByToggleProps && column.getSortByToggleProps().title}
                         isGrouped={column.isGrouped}
                         isSorted={column.isSorted}
                         isSortedDescending={column.isSortedDesc}
                         align={column.align}
+                        groupByToggleProps={column.getGroupByToggleProps && column.getGroupByToggleProps()}
+                        sortByToggleProps={column.getSortByToggleProps && column.getSortByToggleProps()}
                       >
                         {column.render('Header')}
                       </TableHeadCellContent>
@@ -74,7 +96,7 @@ const Table = <D extends Record<string, unknown>>({ title, columns, data }: Tabl
               ))}
             </TableHead>
             <TableBody {...getTableBodyProps()}>
-              {page.map((row) => {
+              {rows.map((row) => {
                 prepareRow(row);
                 return (
                   <TableRow {...row.getRowProps()}>
