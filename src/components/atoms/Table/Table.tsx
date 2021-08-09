@@ -15,10 +15,10 @@ import {
   TableHead,
   TableHeadRow,
   TableHeadCell,
+  TableHeadCellContent,
   TableBody,
   TableRow,
   TableCell,
-  TableLabel,
 } from './TableParts';
 
 type TableOptions<D extends Record<string, unknown>> = {
@@ -56,7 +56,18 @@ const Table = <D extends Record<string, unknown>>({ title, columns, data }: Tabl
                 <TableHeadRow {...headerGroup.getHeaderGroupProps()}>
                   {headerGroup.headers.map((column) => (
                     <TableHeadCell {...column.getHeaderProps()}>
-                      <TableLabel>{column.render('Header')}</TableLabel>
+                      <TableHeadCellContent
+                        canGroupBy={column.canGroupBy}
+                        canSortBy={column.canSort}
+                        groupByTitle={column.getGroupByToggleProps && column.getGroupByToggleProps().title}
+                        sortByTitle={column.getSortByToggleProps && column.getSortByToggleProps().title}
+                        isGrouped={column.isGrouped}
+                        isSorted={column.isSorted}
+                        isSortedDescending={column.isSortedDesc}
+                        align={column.align}
+                      >
+                        {column.render('Header')}
+                      </TableHeadCellContent>
                     </TableHeadCell>
                   ))}
                 </TableHeadRow>
