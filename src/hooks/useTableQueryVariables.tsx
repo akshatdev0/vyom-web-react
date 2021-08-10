@@ -10,8 +10,8 @@ type QueryVariables<T extends Record<string, unknown>> = T & {
 };
 
 type TableQueryVariables<T extends Record<string, unknown>, D extends Record<string, unknown>> = {
-  variables: QueryVariables<T>;
   initialState: Partial<TableState<D>>;
+  variables: QueryVariables<T>;
   setVariables: (tableState: TableState<D>) => void;
 };
 
@@ -41,8 +41,8 @@ const useTableQueryVariables = <T extends Record<string, unknown>, D extends Rec
   };
 
   return {
-    variables,
     initialState,
+    variables,
     setVariables,
   };
 };
