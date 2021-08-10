@@ -24,12 +24,12 @@ const columns: Array<Column<Product>> = [
     accessor: 'sku',
   },
   {
-    id: 'category',
+    id: 'productCategory.name',
     Header: 'Category',
     accessor: (row) => row.productCategory?.name,
   },
   {
-    id: 'brand',
+    id: 'brand.name',
     Header: 'Brand',
     accessor: (row) => row.brand?.name,
   },
@@ -45,7 +45,7 @@ const Products: React.FunctionComponent = () => {
   const classes = useStyles();
   const { user: sessionUser } = getAuthData();
   const companyID = sessionUser?.companyOwner?.company?.id;
-  const { variables, initialState, setVariables } = useTableQueryVariables<ProductsOfCompanyQueryVariables, Product>(
+  const { initialState, variables, setVariables } = useTableQueryVariables<ProductsOfCompanyQueryVariables, Product>(
     { companyID },
     { sortBy: [{ id: 'title', desc: false }] },
   );
