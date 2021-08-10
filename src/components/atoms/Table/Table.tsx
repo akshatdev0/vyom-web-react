@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import { makeStyles } from '@material-ui/core/styles';
-import { TableOptions as ReactTableOptions, useTable, useSortBy, SortingRule } from 'react-table';
+import { TableOptions as ReactTableOptions, useTable, useSortBy, TableState } from 'react-table';
 
 import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
 
@@ -21,13 +21,12 @@ import {
   TableCell,
 } from './TableParts';
 
-type OnFetchDataProps<D extends Record<string, unknown>> = {
-  sortBy: SortingRule<D>[];
-};
-
-type TableOptions<D extends Record<string, unknown>> = Pick<ReactTableOptions<D>, 'columns' | 'data'> & {
+type TableOptions<D extends Record<string, unknown>> = Pick<
+  ReactTableOptions<D>,
+  'columns' | 'data' | 'initialState'
+> & {
   title: string;
-  onFetchData: ({ sortBy }: OnFetchDataProps<D>) => void;
+  setVariables: (tableState: TableState<D>) => void;
 };
 
 const useTableStyles = makeStyles(tableComponentStyles);
@@ -36,28 +35,23 @@ const Table = <D extends Record<string, unknown>>({
   title,
   columns,
   data,
-  onFetchData,
+  initialState,
+  setVariables,
 }: TableOptions<D>): JSX.Element => {
   const classes = useTableStyles();
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-    state: { sortBy },
-  } = useTable(
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state } = useTable(
     {
       columns,
       data,
       manualSortBy: true,
+      initialState,
     },
     useSortBy,
   );
 
   useEffect(() => {
-    onFetchData({ sortBy });
-  }, [onFetchData, sortBy]);
+    setVariables(state);
+  }, [setVariables, state]);
 
   return (
     <>
