@@ -7628,7 +7628,8 @@ export type ProductCategoriesOfCompanyQuery = { __typename?: 'Query' } & {
 };
 
 export type ProductsOfCompanyQueryVariables = Exact<{
-  companyID: Scalars['ID'];
+  companyID?: Maybe<Scalars['ID']>;
+  sortBy?: Maybe<Scalars['String']>;
 }>;
 
 export type ProductsOfCompanyQuery = { __typename?: 'Query' } & {
@@ -8177,8 +8178,8 @@ export const ProductCategoriesOfCompany = gql`
   }
 `;
 export const ProductsOfCompany = gql`
-  query ProductsOfCompany($companyID: ID!) {
-    products(where: { company: { id: $companyID } }) {
+  query ProductsOfCompany($companyID: ID, $sortBy: String) {
+    products(where: { company: { id: $companyID } }, sort: $sortBy) {
       id
       title
       sku
@@ -8886,8 +8887,8 @@ export const useProductCategoriesOfCompanyQuery = <TData = ProductCategoriesOfCo
     options,
   );
 export const ProductsOfCompanyDocument = `
-    query ProductsOfCompany($companyID: ID!) {
-  products(where: {company: {id: $companyID}}) {
+    query ProductsOfCompany($companyID: ID, $sortBy: String) {
+  products(where: {company: {id: $companyID}}, sort: $sortBy) {
     id
     title
     sku
@@ -8908,7 +8909,7 @@ export const ProductsOfCompanyDocument = `
 }
     `;
 export const useProductsOfCompanyQuery = <TData = ProductsOfCompanyQuery, TError = unknown>(
-  variables: ProductsOfCompanyQueryVariables,
+  variables?: ProductsOfCompanyQueryVariables,
   options?: UseQueryOptions<ProductsOfCompanyQuery, TError, TData>,
 ) =>
   useQuery<ProductsOfCompanyQuery, TError, TData>(
