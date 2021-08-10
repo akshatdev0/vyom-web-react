@@ -1,5 +1,5 @@
-query ProductsOfCompany($companyID: ID!) {
-  products(where: { company: { id: $companyID } }) {
+query ProductsOfCompany($companyID: ID, $sortBy: String) {
+  products(where: { company: { id: $companyID } }, sort: $sortBy) {
     id
     title
     sku
