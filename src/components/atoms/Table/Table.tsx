@@ -9,6 +9,7 @@ import { TableOptions as ReactTableOptions, useTable, useSortBy, TableState } fr
 
 import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
 
+import TablePagination from './TablePagination';
 import {
   TableContainer,
   TableElement,
@@ -103,6 +104,7 @@ const Table = <D extends Record<string, unknown>>({
             </TableBody>
           </TableElement>
         </TableContainer>
+        <TablePagination />
       </Card>
     </>
   );
