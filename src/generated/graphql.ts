@@ -3974,6 +3974,7 @@ export type Query = {
   user?: Maybe<UsersPermissionsUser>;
   users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
   usersConnection?: Maybe<UsersPermissionsUserConnection>;
+  productsCount: Scalars['Int'];
   _getShoppingCartOfShop?: Maybe<Cart>;
   me?: Maybe<UsersPermissionsMe>;
 };
@@ -4634,6 +4635,10 @@ export type QueryUsersConnectionArgs = {
   sort?: Maybe<Scalars['String']>;
   limit?: Maybe<Scalars['Int']>;
   start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+export type QueryProductsCountArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
@@ -7632,19 +7637,19 @@ export type ProductsOfCompanyQueryVariables = Exact<{
   sortBy?: Maybe<Scalars['String']>;
 }>;
 
-export type ProductsOfCompanyQuery = { __typename?: 'Query' } & {
-  products?: Maybe<
-    Array<
-      Maybe<
-        { __typename?: 'Product' } & Pick<Product, 'id' | 'title' | 'sku' | 'price'> & {
-            productCategory?: Maybe<{ __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id' | 'name'>>;
-            brand?: Maybe<{ __typename?: 'Brand' } & Pick<Brand, 'id' | 'name'>>;
-            company?: Maybe<{ __typename?: 'Company' } & Pick<Company, 'id' | 'name'>>;
-          }
+export type ProductsOfCompanyQuery = { __typename?: 'Query' } & Pick<Query, 'productsCount'> & {
+    products?: Maybe<
+      Array<
+        Maybe<
+          { __typename?: 'Product' } & Pick<Product, 'id' | 'title' | 'sku' | 'price'> & {
+              productCategory?: Maybe<{ __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id' | 'name'>>;
+              brand?: Maybe<{ __typename?: 'Brand' } & Pick<Brand, 'id' | 'name'>>;
+              company?: Maybe<{ __typename?: 'Company' } & Pick<Company, 'id' | 'name'>>;
+            }
+        >
       >
-    >
-  >;
-};
+    >;
+  };
 
 export type StatesOfCountryQueryVariables = Exact<{
   id: Scalars['ID'];
@@ -8179,7 +8184,8 @@ export const ProductCategoriesOfCompany = gql`
 `;
 export const ProductsOfCompany = gql`
   query ProductsOfCompany($companyID: ID, $sortBy: String) {
-    products(where: { company: { id: $companyID } }, sort: $sortBy) {
+    productsCount(where: { company: $companyID })
+    products(where: { company: $companyID }, sort: $sortBy) {
       id
       title
       sku
@@ -8888,7 +8894,8 @@ export const useProductCategoriesOfCompanyQuery = <TData = ProductCategoriesOfCo
   );
 export const ProductsOfCompanyDocument = `
     query ProductsOfCompany($companyID: ID, $sortBy: String) {
-  products(where: {company: {id: $companyID}}, sort: $sortBy) {
+  productsCount(where: {company: $companyID})
+  products(where: {company: $companyID}, sort: $sortBy) {
     id
     title
     sku

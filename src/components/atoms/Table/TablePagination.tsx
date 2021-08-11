@@ -8,12 +8,16 @@ import tableComponentStyles from 'assets/theme/components/cards/tables/card-ligh
 
 const useTableStyles = makeStyles(tableComponentStyles);
 
-const TablePagination: React.FunctionComponent = () => {
+type Props = {
+  pageCount?: number | undefined;
+};
+
+const TablePagination: React.FunctionComponent<Props> = ({ pageCount }: Props) => {
   const classes = useTableStyles();
   return (
     <>
       <CardActions classes={{ root: classes.cardActionsRoot }}>
-        <MuiPagination count={11} defaultPage={6} boundaryCount={2} color="primary" variant="outlined" />
+        <MuiPagination count={pageCount} defaultPage={1} boundaryCount={2} color="primary" variant="outlined" />
       </CardActions>
     </>
   );

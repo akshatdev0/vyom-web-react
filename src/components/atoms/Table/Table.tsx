@@ -45,7 +45,7 @@ const useTableOptions = <D extends Record<string, unknown>>(options: TableOption
   if (!disablePagination) {
     tableOptions.manualPagination = true;
     if (initialState && initialState.pageSize && options.totalItems) {
-      tableOptions.pageCount = Math.floor(options.totalItems / initialState.pageSize);
+      tableOptions.pageCount = Math.ceil(options.totalItems / initialState.pageSize);
     }
   }
 
@@ -65,6 +65,9 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
   useEffect(() => {
     setQueryVariables(state);
   }, [setQueryVariables, state]);
+
+  const showPagination =
+    !options.disablePagination && tableOptions.pageCount !== undefined && tableOptions.pageCount > 1;
 
   return (
     <>
@@ -116,7 +119,7 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
             </TableBody>
           </TableElement>
         </TableContainer>
-        {!options.disablePagination && tableOptions.pageCount && tableOptions.pageCount > 1 && <TablePagination />}
+        {showPagination && <TablePagination pageCount={tableOptions.pageCount} />}
       </Card>
     </>
   );
