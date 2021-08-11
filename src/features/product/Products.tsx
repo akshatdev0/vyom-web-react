@@ -50,7 +50,7 @@ const Products: React.FunctionComponent = () => {
     Product
   >({ companyID }, { sortBy: [{ id: 'title', desc: false }] });
   const productsQuery = useProductsOfCompanyQuery(queryVariables);
-  const { data: { products = [] } = {} } = productsQuery;
+  const { data: { productsCount, products = [] } = {} } = productsQuery;
 
   return (
     <>
@@ -60,6 +60,7 @@ const Products: React.FunctionComponent = () => {
           title="Products"
           columns={columns}
           data={products}
+          totalItems={productsCount}
           initialState={initialState}
           setQueryVariables={setQueryVariables}
         />
