@@ -45,11 +45,11 @@ const Products: React.FunctionComponent = () => {
   const classes = useStyles();
   const { user: sessionUser } = getAuthData();
   const companyID = sessionUser?.companyOwner?.company?.id;
-  const { initialState, variables, setVariables } = useTableQueryVariables<ProductsOfCompanyQueryVariables, Product>(
-    { companyID },
-    { sortBy: [{ id: 'title', desc: false }] },
-  );
-  const productsQuery = useProductsOfCompanyQuery(variables);
+  const { initialState, queryVariables, setQueryVariables } = useTableQueryVariables<
+    ProductsOfCompanyQueryVariables,
+    Product
+  >({ companyID }, { sortBy: [{ id: 'title', desc: false }] });
+  const productsQuery = useProductsOfCompanyQuery(queryVariables);
   const { data: { products = [] } = {} } = productsQuery;
 
   return (
@@ -61,7 +61,7 @@ const Products: React.FunctionComponent = () => {
           columns={columns}
           data={products}
           initialState={initialState}
-          setVariables={setVariables}
+          setQueryVariables={setQueryVariables}
         />
       </Container>
     </>

@@ -5,7 +5,7 @@ import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import { makeStyles } from '@material-ui/core/styles';
-import { TableOptions as ReactTableOptions, useTable, useSortBy, TableState } from 'react-table';
+import { TableOptions as ReactTableOptions, TableState, useTable, usePagination, useSortBy } from 'react-table';
 
 import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
 
@@ -24,35 +24,47 @@ import {
 
 type TableOptions<D extends Record<string, unknown>> = Pick<
   ReactTableOptions<D>,
-  'columns' | 'data' | 'initialState'
+  'columns' | 'data' | 'initialState' | 'disableSortBy'
 > & {
   title: string;
-  setVariables: (tableState: TableState<D>) => void;
+  setQueryVariables: (tableState: TableState<D>) => void;
+  totalItems?: number;
+  disablePagination?: boolean;
 };
 
 const useTableStyles = makeStyles(tableComponentStyles);
 
-const Table = <D extends Record<string, unknown>>({
-  title,
-  columns,
-  data,
-  initialState,
-  setVariables,
-}: TableOptions<D>): JSX.Element => {
+const useTableOptions = <D extends Record<string, unknown>>(options: TableOptions<D>): ReactTableOptions<D> => {
+  const { columns, data, initialState, disableSortBy = false, disablePagination = false } = options;
+  const tableOptions: ReactTableOptions<D> = { columns, data, initialState, disableSortBy };
+
+  if (!disableSortBy) {
+    tableOptions.manualSortBy = true;
+  }
+
+  if (!disablePagination) {
+    tableOptions.manualPagination = true;
+    if (initialState && initialState.pageSize && options.totalItems) {
+      tableOptions.pageCount = Math.floor(options.totalItems / initialState.pageSize);
+    }
+  }
+
+  return tableOptions;
+};
+
+const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX.Element => {
   const classes = useTableStyles();
+  const tableOptions = useTableOptions(options);
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state } = useTable(
-    {
-      columns,
-      data,
-      manualSortBy: true,
-      initialState,
-    },
+    tableOptions,
     useSortBy,
+    usePagination,
   );
 
+  const { title, setQueryVariables } = options;
   useEffect(() => {
-    setVariables(state);
-  }, [setVariables, state]);
+    setQueryVariables(state);
+  }, [setQueryVariables, state]);
 
   return (
     <>
@@ -104,7 +116,7 @@ const Table = <D extends Record<string, unknown>>({
             </TableBody>
           </TableElement>
         </TableContainer>
-        <TablePagination />
+        {!options.disablePagination && tableOptions.pageCount && tableOptions.pageCount > 1 && <TablePagination />}
       </Card>
     </>
   );
