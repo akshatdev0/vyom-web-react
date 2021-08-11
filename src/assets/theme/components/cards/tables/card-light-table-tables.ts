@@ -53,6 +53,12 @@ const componentStyles = (theme: Theme) => createStyles({
     paddingTop: "1.5rem!important",
     borderTop: "0!important",
     justifyContent: "flex-end",
+    "& .MuiPaginationItem-ellipsis": {
+      border: "none",
+    },
+    "& .MuiPaginationItem-ellipsis:hover": {
+      backgroundColor: theme.palette.transparent.main,
+    },
   },
   containerRoot: {
     marginTop: "-4.5rem",
@@ -81,10 +87,10 @@ const componentStyles = (theme: Theme) => createStyles({
   tableLabel: {},
   tableSortLabel: {
     '& svg': {
-      width: 16,
-      height: 16,
+      width: 14,
+      height: 14,
       marginTop: 0,
-      marginLeft: 2,
+      marginLeft: 4,
     },
   },
   headerIcon: {
