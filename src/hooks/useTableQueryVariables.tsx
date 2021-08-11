@@ -11,8 +11,8 @@ type QueryVariables<T extends Record<string, unknown>> = T & {
 
 type TableQueryVariables<T extends Record<string, unknown>, D extends Record<string, unknown>> = {
   initialState: Partial<TableState<D>>;
-  variables: QueryVariables<T>;
-  setVariables: (tableState: TableState<D>) => void;
+  queryVariables: QueryVariables<T>;
+  setQueryVariables: (tableState: TableState<D>) => void;
 };
 
 const produceQueryVariables = <T extends Record<string, unknown>, D extends Record<string, unknown>>(
@@ -34,16 +34,25 @@ const useTableQueryVariables = <T extends Record<string, unknown>, D extends Rec
   initialVariables: T,
   initialState: Partial<TableState<D>>,
 ): TableQueryVariables<T, D> => {
-  const [variables, _setVariables] = useState<QueryVariables<T>>(produceQueryVariables(initialVariables, initialState));
+  const [queryVariables, setVariables] = useState<QueryVariables<T>>(
+    produceQueryVariables(initialVariables, initialState),
+  );
 
-  const setVariables = (tableState: TableState<D>) => {
-    _setVariables((prevVariables) => produceQueryVariables(prevVariables, tableState));
+  const setQueryVariables = (tableState: TableState<D>) => {
+    setVariables((prevVariables) => produceQueryVariables(prevVariables, tableState));
   };
+
+  if (!initialState.pageIndex) {
+    initialState.pageIndex = 0;
+  }
+  if (!initialState.pageSize) {
+    initialState.pageSize = 10;
+  }
 
   return {
     initialState,
-    variables,
-    setVariables,
+    queryVariables,
+    setQueryVariables,
   };
 };
 
