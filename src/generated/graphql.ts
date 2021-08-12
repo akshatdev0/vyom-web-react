@@ -7635,6 +7635,8 @@ export type ProductCategoriesOfCompanyQuery = { __typename?: 'Query' } & {
 export type ProductsOfCompanyQueryVariables = Exact<{
   companyID?: Maybe<Scalars['ID']>;
   sortBy?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
 }>;
 
 export type ProductsOfCompanyQuery = { __typename?: 'Query' } & Pick<Query, 'productsCount'> & {
@@ -8183,9 +8185,9 @@ export const ProductCategoriesOfCompany = gql`
   }
 `;
 export const ProductsOfCompany = gql`
-  query ProductsOfCompany($companyID: ID, $sortBy: String) {
+  query ProductsOfCompany($companyID: ID, $sortBy: String, $start: Int, $limit: Int) {
     productsCount(where: { company: $companyID })
-    products(where: { company: $companyID }, sort: $sortBy) {
+    products(where: { company: $companyID }, sort: $sortBy, start: $start, limit: $limit) {
       id
       title
       sku
@@ -8893,9 +8895,14 @@ export const useProductCategoriesOfCompanyQuery = <TData = ProductCategoriesOfCo
     options,
   );
 export const ProductsOfCompanyDocument = `
-    query ProductsOfCompany($companyID: ID, $sortBy: String) {
+    query ProductsOfCompany($companyID: ID, $sortBy: String, $start: Int, $limit: Int) {
   productsCount(where: {company: $companyID})
-  products(where: {company: $companyID}, sort: $sortBy) {
+  products(
+    where: {company: $companyID}
+    sort: $sortBy
+    start: $start
+    limit: $limit
+  ) {
     id
     title
     sku

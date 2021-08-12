@@ -67,6 +67,9 @@ const componentStyles = (theme: Theme) => createStyles({
       paddingRight: "30px",
     },
   },
+  tableContainerRoot: {
+    minHeight: "355px",
+  },
   tableRoot: {
     marginBottom: "0!important",
   },

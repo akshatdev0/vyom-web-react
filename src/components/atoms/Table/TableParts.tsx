@@ -44,7 +44,8 @@ const areEqual = (prevProps: any, nextProps: any) =>
   prevProps.checked === nextProps.checked && prevProps.indeterminate === nextProps.indeterminate;
 
 export const TableContainer: React.FunctionComponent<CN> = ({ children }: CN) => {
-  return <MuiTableContainer>{children}</MuiTableContainer>;
+  const classes = useTableStyles();
+  return <MuiTableContainer classes={{ root: classes.tableContainerRoot }}>{children}</MuiTableContainer>;
 };
 
 export const TableElement: React.FunctionComponent<TableProps & CN> = ({ children, ...rest }: TableProps & CN) => {

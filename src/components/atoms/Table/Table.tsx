@@ -55,7 +55,7 @@ const useTableOptions = <D extends Record<string, unknown>>(options: TableOption
 const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX.Element => {
   const classes = useTableStyles();
   const tableOptions = useTableOptions(options);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, state } = useTable(
+  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, gotoPage, state } = useTable(
     tableOptions,
     useSortBy,
     usePagination,
@@ -119,7 +119,9 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
             </TableBody>
           </TableElement>
         </TableContainer>
-        {showPagination && <TablePagination pageCount={tableOptions.pageCount} />}
+        {showPagination && (
+          <TablePagination pageIndex={state.pageIndex} pageCount={tableOptions.pageCount} gotoPage={gotoPage} />
+        )}
       </Card>
     </>
   );
