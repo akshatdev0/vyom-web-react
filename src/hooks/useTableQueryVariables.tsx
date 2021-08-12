@@ -7,6 +7,8 @@ import { Maybe, Scalars } from 'generated/graphql';
 
 type QueryVariables<T extends Record<string, unknown>> = T & {
   sortBy?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
 };
 
 type TableQueryVariables<T extends Record<string, unknown>, D extends Record<string, unknown>> = {
@@ -20,7 +22,7 @@ const produceQueryVariables = <T extends Record<string, unknown>, D extends Reco
   tableState: Partial<TableState<D>>,
 ) =>
   produce<QueryVariables<T>>(base, (draft) => {
-    const { sortBy } = tableState;
+    const { sortBy, pageIndex, pageSize } = tableState;
 
     // Sort By
     if (sortBy && sortBy.length > 0) {
@@ -28,12 +30,25 @@ const produceQueryVariables = <T extends Record<string, unknown>, D extends Reco
     } else {
       draft.sortBy = undefined;
     }
+
+    // Pagination
+    if (pageIndex !== undefined && pageSize !== undefined && pageSize !== 0) {
+      draft.start = pageIndex * pageSize;
+      draft.limit = pageSize;
+    }
   });
 
 const useTableQueryVariables = <T extends Record<string, unknown>, D extends Record<string, unknown>>(
   initialVariables: T,
   initialState: Partial<TableState<D>>,
 ): TableQueryVariables<T, D> => {
+  if (!initialState.pageIndex) {
+    initialState.pageIndex = 0;
+  }
+  if (!initialState.pageSize) {
+    initialState.pageSize = 10;
+  }
+
   const [queryVariables, setVariables] = useState<QueryVariables<T>>(
     produceQueryVariables(initialVariables, initialState),
   );
@@ -41,13 +56,6 @@ const useTableQueryVariables = <T extends Record<string, unknown>, D extends Rec
   const setQueryVariables = (tableState: TableState<D>) => {
     setVariables((prevVariables) => produceQueryVariables(prevVariables, tableState));
   };
-
-  if (!initialState.pageIndex) {
-    initialState.pageIndex = 0;
-  }
-  if (!initialState.pageSize) {
-    initialState.pageSize = 10;
-  }
 
   return {
     initialState,

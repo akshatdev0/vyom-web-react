@@ -1,6 +1,6 @@
-query ProductsOfCompany($companyID: ID, $sortBy: String) {
+query ProductsOfCompany($companyID: ID, $sortBy: String, $start: Int, $limit: Int) {
   productsCount(where: { company: $companyID })
-  products(where: { company: $companyID }, sort: $sortBy) {
+  products(where: { company: $companyID }, sort: $sortBy, start: $start, limit: $limit) {
     id
     title
     sku
