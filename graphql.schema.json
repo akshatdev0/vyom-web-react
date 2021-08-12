@@ -32895,7 +32895,7 @@
             "deprecationReason": null
           },
           {
-            "name": "productsCount",
+            "name": "countProducts",
             "description": null,
             "args": [
               {
