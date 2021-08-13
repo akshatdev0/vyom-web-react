@@ -64,7 +64,14 @@ const useTableOptions = <D extends Record<string, unknown>>(options: TableOption
 };
 
 const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX.Element => {
-  const { title, pageCount = 0, setQueryVariables } = options;
+  const {
+    title,
+    totalItems = 0,
+    pageCount = 0,
+    rowsPerPageOptions = DEFAULT_ROWS_PER_PAGE_OPTIONS,
+    disablePagination,
+    setQueryVariables,
+  } = options;
   const classes = useTableStyles();
   const tableOptions = useTableOptions(options);
   const { headerGroups, rows, state, getTableProps, getTableBodyProps, prepareRow, gotoPage, setPageSize } = useTable(
@@ -72,6 +79,7 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
     useSortBy,
     usePagination,
   );
+  const { pageSize, pageIndex } = state;
 
   useEffect(() => {
     setQueryVariables(state);
@@ -127,13 +135,13 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
             </TableBody>
           </TableElement>
         </TableContainer>
-        {!options.disablePagination && (
+        {!disablePagination && (
           <TablePagination
-            rowsPerPage={state.pageSize}
-            pageIndex={state.pageIndex}
-            totalItems={options.totalItems || 0}
+            rowsPerPage={pageSize}
+            currentPage={pageIndex + 1}
+            totalItems={totalItems}
             pageCount={pageCount}
-            rowsPerPageOptions={options.rowsPerPageOptions || DEFAULT_ROWS_PER_PAGE_OPTIONS}
+            rowsPerPageOptions={rowsPerPageOptions}
             gotoPage={gotoPage}
             setRowsPerPage={setPageSize}
           />

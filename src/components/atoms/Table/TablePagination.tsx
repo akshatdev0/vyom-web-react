@@ -14,7 +14,7 @@ const useTableStyles = makeStyles(tableComponentStyles);
 
 type Props = {
   rowsPerPage: number;
-  pageIndex: number;
+  currentPage: number;
   totalItems: number;
   pageCount: number;
   rowsPerPageOptions: Array<number>;
@@ -24,7 +24,7 @@ type Props = {
 
 const TablePagination: React.FunctionComponent<Props> = ({
   rowsPerPage,
-  pageIndex,
+  currentPage,
   totalItems,
   pageCount,
   rowsPerPageOptions,
@@ -32,9 +32,8 @@ const TablePagination: React.FunctionComponent<Props> = ({
   setRowsPerPage,
 }: Props) => {
   const classes = useTableStyles();
-  const currentPage = pageIndex !== undefined ? pageIndex + 1 : 1;
   const firstRow = rowsPerPage * (currentPage - 1) + 1;
-  const lastRow = firstRow + rowsPerPage - 1 < totalItems ? firstRow + rowsPerPage - 1 : totalItems;
+  const lastRow = Math.min(totalItems, firstRow + rowsPerPage - 1);
   const showPageActions = pageCount !== undefined && pageCount > 1;
 
   const onChange = (_event: React.ChangeEvent<unknown>, page: number) => gotoPage(page - 1);
