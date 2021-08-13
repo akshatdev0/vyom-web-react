@@ -1,5 +1,6 @@
-query OrdersOfCompany {
-  orders {
+query OrdersOfCompany($sortBy: String, $start: Int, $limit: Int) {
+  countOrders
+  orders(sort: $sortBy, start: $start, limit: $limit) {
     id
     number
     currentStatus
