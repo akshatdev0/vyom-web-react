@@ -3974,6 +3974,7 @@ export type Query = {
   user?: Maybe<UsersPermissionsUser>;
   users?: Maybe<Array<Maybe<UsersPermissionsUser>>>;
   usersConnection?: Maybe<UsersPermissionsUserConnection>;
+  countOrders: Scalars['Int'];
   countProducts: Scalars['Int'];
   _getShoppingCartOfShop?: Maybe<Cart>;
   me?: Maybe<UsersPermissionsMe>;
@@ -4635,6 +4636,10 @@ export type QueryUsersConnectionArgs = {
   sort?: Maybe<Scalars['String']>;
   limit?: Maybe<Scalars['Int']>;
   start?: Maybe<Scalars['Int']>;
+  where?: Maybe<Scalars['JSON']>;
+};
+
+export type QueryCountOrdersArgs = {
   where?: Maybe<Scalars['JSON']>;
 };
 
@@ -7575,42 +7580,46 @@ export type CountriesQuery = { __typename?: 'Query' } & {
   countries?: Maybe<Array<Maybe<{ __typename?: 'Country' } & Pick<Country, 'id' | 'name'>>>>;
 };
 
-export type OrdersOfCompanyQueryVariables = Exact<{ [key: string]: never }>;
+export type OrdersOfCompanyQueryVariables = Exact<{
+  sortBy?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+}>;
 
-export type OrdersOfCompanyQuery = { __typename?: 'Query' } & {
-  orders?: Maybe<
-    Array<
-      Maybe<
-        { __typename?: 'Order' } & Pick<Order, 'id' | 'number' | 'currentStatus' | 'paymentStatus' | 'created_at'> & {
-            shop?: Maybe<
-              { __typename?: 'Shop' } & Pick<Shop, 'name'> & {
-                  shopkeepers?: Maybe<
-                    Array<
-                      Maybe<
-                        { __typename?: 'Shopkeeper' } & {
-                          user?: Maybe<
-                            { __typename?: 'UsersPermissionsUser' } & Pick<UsersPermissionsUser, 'mobileNumber'>
-                          >;
-                        }
-                      >
-                    >
-                  >;
-                  billingAddress?: Maybe<
-                    { __typename?: 'Address' } & {
-                      area?: Maybe<
-                        { __typename?: 'Area' } & Pick<Area, 'name'> & {
-                            city?: Maybe<{ __typename?: 'City' } & Pick<City, 'name'>>;
+export type OrdersOfCompanyQuery = { __typename?: 'Query' } & Pick<Query, 'countOrders'> & {
+    orders?: Maybe<
+      Array<
+        Maybe<
+          { __typename?: 'Order' } & Pick<Order, 'id' | 'number' | 'currentStatus' | 'paymentStatus' | 'created_at'> & {
+              shop?: Maybe<
+                { __typename?: 'Shop' } & Pick<Shop, 'name'> & {
+                    shopkeepers?: Maybe<
+                      Array<
+                        Maybe<
+                          { __typename?: 'Shopkeeper' } & {
+                            user?: Maybe<
+                              { __typename?: 'UsersPermissionsUser' } & Pick<UsersPermissionsUser, 'mobileNumber'>
+                            >;
                           }
-                      >;
-                    }
-                  >;
-                }
-            >;
-          }
+                        >
+                      >
+                    >;
+                    billingAddress?: Maybe<
+                      { __typename?: 'Address' } & {
+                        area?: Maybe<
+                          { __typename?: 'Area' } & Pick<Area, 'name'> & {
+                              city?: Maybe<{ __typename?: 'City' } & Pick<City, 'name'>>;
+                            }
+                        >;
+                      }
+                    >;
+                  }
+              >;
+            }
+        >
       >
-    >
-  >;
-};
+    >;
+  };
 
 export type ProductCategoriesOfCompanyQueryVariables = Exact<{
   companyID: Scalars['ID'];
@@ -8138,8 +8147,9 @@ export const Countries = gql`
   }
 `;
 export const OrdersOfCompany = gql`
-  query OrdersOfCompany {
-    orders {
+  query OrdersOfCompany($sortBy: String, $start: Int, $limit: Int) {
+    countOrders
+    orders(sort: $sortBy, start: $start, limit: $limit) {
       id
       number
       currentStatus
@@ -8825,8 +8835,9 @@ export const useCountriesQuery = <TData = CountriesQuery, TError = unknown>(
     options,
   );
 export const OrdersOfCompanyDocument = `
-    query OrdersOfCompany {
-  orders {
+    query OrdersOfCompany($sortBy: String, $start: Int, $limit: Int) {
+  countOrders
+  orders(sort: $sortBy, start: $start, limit: $limit) {
     id
     number
     currentStatus
