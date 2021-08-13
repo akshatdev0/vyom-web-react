@@ -42,13 +42,6 @@ const useTableQueryVariables = <T extends Record<string, unknown>, D extends Rec
   initialVariables: T,
   initialState: Partial<TableState<D>>,
 ): TableQueryVariables<T, D> => {
-  if (!initialState.pageIndex) {
-    initialState.pageIndex = 0;
-  }
-  if (!initialState.pageSize) {
-    initialState.pageSize = 10;
-  }
-
   const [queryVariables, setVariables] = useState<QueryVariables<T>>(
     produceQueryVariables(initialVariables, initialState),
   );

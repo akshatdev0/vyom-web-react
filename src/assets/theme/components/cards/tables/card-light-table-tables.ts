@@ -52,7 +52,7 @@ const componentStyles = (theme: Theme) => createStyles({
     paddingBottom: "1.5rem!important",
     paddingTop: "1.5rem!important",
     borderTop: "0!important",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
     "& .MuiPaginationItem-ellipsis": {
       border: "none",
     },
@@ -72,6 +72,15 @@ const componentStyles = (theme: Theme) => createStyles({
   },
   tableRoot: {
     marginBottom: "0!important",
+  },
+  tableFooter: {
+    fontSize: ".875rem",
+    whiteSpace: "nowrap",
+  },
+  tableFooterSelect: {
+    height: "calc(1.8125rem + 6px)",
+    top: "10px",
+    margin: "0 .375rem",
   },
   tableCellRoot: {
     verticalAlign: "middle",
