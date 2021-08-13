@@ -66,6 +66,7 @@ const useTableOptions = <D extends Record<string, unknown>>(options: TableOption
 const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX.Element => {
   const {
     title,
+    data,
     totalItems = 0,
     pageCount = 0,
     rowsPerPageOptions = DEFAULT_ROWS_PER_PAGE_OPTIONS,
@@ -79,7 +80,9 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
     useSortBy,
     usePagination,
   );
-  const { pageSize, pageIndex } = state;
+  const { pageSize: rowsPerPage, pageIndex } = state;
+
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length);
 
   useEffect(() => {
     setQueryVariables(state);
@@ -132,12 +135,19 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
                   </TableRow>
                 );
               })}
+              {emptyRows > 0 && (
+                <TableRow key="empty-rows" style={{ height: 51.5 * emptyRows }}>
+                  <TableCell key="empty-cell">
+                    <span> </span>
+                  </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </TableElement>
         </TableContainer>
         {!disablePagination && (
           <TablePagination
-            rowsPerPage={pageSize}
+            rowsPerPage={rowsPerPage}
             currentPage={pageIndex + 1}
             totalItems={totalItems}
             pageCount={pageCount}
