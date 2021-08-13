@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
@@ -60,7 +60,14 @@ const Orders: React.FunctionComponent = () => {
     OrdersOfCompanyQueryVariables,
     Order
   >({}, { sortBy: [{ id: 'number', desc: false }] });
-  const ordersQuery = useOrdersOfCompanyQuery(queryVariables);
+  const [pageCount, setPageCount] = useState(0);
+  const ordersQuery = useOrdersOfCompanyQuery(queryVariables, {
+    onSuccess: ({ countOrders }) => {
+      if (queryVariables.limit) {
+        setPageCount(Math.ceil(countOrders / queryVariables.limit));
+      }
+    },
+  });
   const { data: { countOrders, orders = [] } = {} } = ordersQuery;
 
   return (
@@ -72,6 +79,7 @@ const Orders: React.FunctionComponent = () => {
           columns={columns}
           data={orders}
           totalItems={countOrders}
+          pageCount={pageCount}
           initialState={initialState}
           setQueryVariables={setQueryVariables}
         />
