@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
@@ -49,7 +49,14 @@ const Products: React.FunctionComponent = () => {
     ProductsOfCompanyQueryVariables,
     Product
   >({ companyID }, { sortBy: [{ id: 'title', desc: false }] });
-  const productsQuery = useProductsOfCompanyQuery(queryVariables);
+  const [pageCount, setPageCount] = useState(0);
+  const productsQuery = useProductsOfCompanyQuery(queryVariables, {
+    onSuccess: ({ countProducts }) => {
+      if (queryVariables.limit) {
+        setPageCount(Math.ceil(countProducts / queryVariables.limit));
+      }
+    },
+  });
   const { data: { countProducts, products = [] } = {} } = productsQuery;
 
   return (
@@ -61,6 +68,7 @@ const Products: React.FunctionComponent = () => {
           columns={columns}
           data={products}
           totalItems={countProducts}
+          pageCount={pageCount}
           initialState={initialState}
           setQueryVariables={setQueryVariables}
         />

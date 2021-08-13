@@ -29,13 +29,27 @@ type TableOptions<D extends Record<string, unknown>> = Pick<
   title: string;
   setQueryVariables: (tableState: TableState<D>) => void;
   totalItems?: number;
+  pageCount?: number;
   disablePagination?: boolean;
+  rowsPerPageOptions?: Array<number>;
 };
+
+const DEFAULT_ROWS_PER_PAGE_OPTIONS = [10, 25, 50, 100];
 
 const useTableStyles = makeStyles(tableComponentStyles);
 
 const useTableOptions = <D extends Record<string, unknown>>(options: TableOptions<D>): ReactTableOptions<D> => {
   const { columns, data, initialState, disableSortBy = false, disablePagination = false } = options;
+
+  if (initialState) {
+    if (!initialState.pageIndex) {
+      initialState.pageIndex = 0;
+    }
+    if (!initialState.pageSize) {
+      initialState.pageSize = options.rowsPerPageOptions?.[0] || DEFAULT_ROWS_PER_PAGE_OPTIONS[0];
+    }
+  }
+
   const tableOptions: ReactTableOptions<D> = { columns, data, initialState, disableSortBy };
 
   if (!disableSortBy) {
@@ -44,30 +58,24 @@ const useTableOptions = <D extends Record<string, unknown>>(options: TableOption
 
   if (!disablePagination) {
     tableOptions.manualPagination = true;
-    if (initialState && initialState.pageSize && options.totalItems) {
-      tableOptions.pageCount = Math.ceil(options.totalItems / initialState.pageSize);
-    }
   }
 
   return tableOptions;
 };
 
 const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX.Element => {
+  const { title, pageCount = 0, setQueryVariables } = options;
   const classes = useTableStyles();
   const tableOptions = useTableOptions(options);
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow, gotoPage, state } = useTable(
-    tableOptions,
+  const { headerGroups, rows, state, getTableProps, getTableBodyProps, prepareRow, gotoPage, setPageSize } = useTable(
+    { ...tableOptions, pageCount },
     useSortBy,
     usePagination,
   );
 
-  const { title, setQueryVariables } = options;
   useEffect(() => {
     setQueryVariables(state);
   }, [setQueryVariables, state]);
-
-  const showPagination =
-    !options.disablePagination && tableOptions.pageCount !== undefined && tableOptions.pageCount > 1;
 
   return (
     <>
@@ -119,8 +127,16 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
             </TableBody>
           </TableElement>
         </TableContainer>
-        {showPagination && (
-          <TablePagination pageIndex={state.pageIndex} pageCount={tableOptions.pageCount} gotoPage={gotoPage} />
+        {!options.disablePagination && (
+          <TablePagination
+            rowsPerPage={state.pageSize}
+            pageIndex={state.pageIndex}
+            totalItems={options.totalItems || 0}
+            pageCount={pageCount}
+            rowsPerPageOptions={options.rowsPerPageOptions || DEFAULT_ROWS_PER_PAGE_OPTIONS}
+            gotoPage={gotoPage}
+            setRowsPerPage={setPageSize}
+          />
         )}
       </Card>
     </>
