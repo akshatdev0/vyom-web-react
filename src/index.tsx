@@ -14,8 +14,6 @@ import { composeStore } from './store';
 
 // plugins styles from node_modules
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import '@fullcalendar/common/main.min.css';
-import '@fullcalendar/daygrid/main.min.css';
 import 'react-quill/dist/quill.snow.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 

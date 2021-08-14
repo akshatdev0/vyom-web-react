@@ -8,6 +8,10 @@ const componentStyles = (theme: Theme) => createStyles({
     color: theme.palette.gray[600],
     fontSize: ".875rem",
   },
+  copyrightGridRoot: {
+    display: "flex",
+    alignItems: "center", 
+  },
   copyrightWrapper: {
     color: theme.palette.gray[600],
     fontSize: ".875rem",
