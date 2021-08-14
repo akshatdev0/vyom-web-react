@@ -9,6 +9,7 @@ import { TableOptions as ReactTableOptions, TableState, useTable, usePagination,
 
 import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
 
+import LoadingOverlay from './LoadingOverlay';
 import TablePagination from './TablePagination';
 import {
   TableContainer,
@@ -102,6 +103,7 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
         />
         <TableContainer>
           <TableElement {...getTableProps()}>
+            <LoadingOverlay />
             <TableHead>
               {headerGroups.map((headerGroup) => (
                 <TableHeadRow {...headerGroup.getHeaderGroupProps()}>
