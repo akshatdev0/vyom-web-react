@@ -15,14 +15,14 @@ const UserFooter = (): JSX.Element => {
   return (
     <Box component="footer" width="100%">
       <Grid container classes={{ root: classes.justifyContentCenter }}>
-        <Box component={Grid} display="flex" alignItems="center" className={classes.justifyContentCenter}>
+        <Grid item xs={12} xl={6} className={classes.copyrightGridRoot + ' ' + classes.justifyContentCenter}>
           <div className={classes.copyrightWrapper}>
             © {new Date().getFullYear()}{' '}
             <a className={classes.copyrightLink} href="#" rel="noopener noreferrer" target="_blank">
               Vyom
             </a>
           </div>
-        </Box>
+        </Grid>
         <Grid item xl={6} component={Box} display="flex" justifyContent="flex-end">
           <Box
             component={List}
