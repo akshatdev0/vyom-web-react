@@ -47,6 +47,7 @@ const componentStyles = (theme: Theme) => createStyles({
   },
   cardHeader: {
     backgroundColor: "initial",
+    height: "66px!important"
   },
   cardActionsRoot: {
     paddingBottom: "1.5rem!important",
@@ -67,6 +68,21 @@ const componentStyles = (theme: Theme) => createStyles({
       paddingRight: "30px",
     },
   },
+  tableOverlay: {
+    display: 'flex',
+    position: 'absolute',
+    top: 120,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    "& .MuiLinearProgress-root": {
+      height: "4px",
+      borderRadius: "0px",
+    },
+  },  
   tableContainerRoot: {
   },
   tableRoot: {
@@ -90,6 +106,7 @@ const componentStyles = (theme: Theme) => createStyles({
   tableCellRootHead: {
     backgroundColor: theme.palette.gray[100],
     color: theme.palette.gray[600],
+    height: "54px!important",
   },
   tableCellRootBodyHead: {
     textTransform: "unset!important" as "unset",
