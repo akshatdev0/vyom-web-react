@@ -66,7 +66,8 @@ const Products: React.FunctionComponent = () => {
         <Table<Product>
           title="Products"
           columns={columns}
-          loading={productsQuery.isLoading}
+          isError={productsQuery.isError}
+          isLoading={productsQuery.isLoading}
           data={products}
           totalItems={countProducts}
           pageCount={pageCount}

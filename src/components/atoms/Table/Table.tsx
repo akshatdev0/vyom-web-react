@@ -9,6 +9,7 @@ import { TableOptions as ReactTableOptions, TableState, useTable, usePagination,
 
 import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
 
+import ErrorOverlay from './ErrorOverlay';
 import LoadingOverlay from './LoadingOverlay';
 import NoRowsOverlay from './NoRowsOverlay';
 import TablePagination from './TablePagination';
@@ -29,7 +30,8 @@ type TableOptions<D extends Record<string, unknown>> = Pick<
   'columns' | 'data' | 'initialState' | 'disableSortBy'
 > & {
   title: string;
-  loading?: boolean;
+  isError?: boolean;
+  isLoading?: boolean;
   totalItems?: number;
   pageCount?: number;
   disablePagination?: boolean;
@@ -70,7 +72,8 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
   const {
     title,
     data,
-    loading = false,
+    isError = false,
+    isLoading = false,
     totalItems = 0,
     pageCount = 0,
     rowsPerPageOptions = DEFAULT_ROWS_PER_PAGE_OPTIONS,
@@ -86,8 +89,8 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
   );
   const { pageSize: rowsPerPage, pageIndex } = state;
 
-  const showNoRowsOverlay = !loading && data.length === 0;
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length);
+  const showNoRowsOverlay = !isError && !isLoading && data.length === 0;
 
   useEffect(() => {
     setQueryVariables(state);
@@ -106,8 +109,9 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
           }}
         />
         <TableContainer>
+          {isError && <ErrorOverlay />}
+          {isLoading && <LoadingOverlay />}
           {showNoRowsOverlay && <NoRowsOverlay />}
-          {loading && <LoadingOverlay />}
           <TableElement {...getTableProps()}>
             <TableHead>
               {headerGroups.map((headerGroup) => (
