@@ -106,9 +106,9 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
           }}
         />
         <TableContainer>
+          {showNoRowsOverlay && <NoRowsOverlay />}
+          {loading && <LoadingOverlay />}
           <TableElement {...getTableProps()}>
-            {showNoRowsOverlay && <NoRowsOverlay />}
-            {loading && <LoadingOverlay />}
             <TableHead>
               {headerGroups.map((headerGroup) => (
                 <TableHeadRow {...headerGroup.getHeaderGroupProps()}>
