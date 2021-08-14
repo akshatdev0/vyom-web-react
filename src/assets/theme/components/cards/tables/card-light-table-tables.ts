@@ -50,6 +50,7 @@ const componentStyles = (theme: Theme) => createStyles({
     height: "66px!important"
   },
   cardActionsRoot: {
+    height: "90px!important",
     paddingBottom: "1.5rem!important",
     paddingTop: "1.5rem!important",
     borderTop: "0!important",
@@ -71,10 +72,10 @@ const componentStyles = (theme: Theme) => createStyles({
   tableOverlay: {
     display: 'flex',
     position: 'absolute',
-    top: 120,
+    top: "120px",
     left: 0,
     right: 0,
-    bottom: 0,
+    bottom: "90px",
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
