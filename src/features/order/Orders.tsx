@@ -77,6 +77,7 @@ const Orders: React.FunctionComponent = () => {
         <Table<Order>
           title="Orders"
           columns={columns}
+          loading={ordersQuery.isLoading}
           data={orders}
           totalItems={countOrders}
           pageCount={pageCount}
