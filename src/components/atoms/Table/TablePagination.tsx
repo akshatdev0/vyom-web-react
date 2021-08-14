@@ -41,34 +41,32 @@ const TablePagination: React.FunctionComponent<Props> = ({
   return (
     <>
       <CardActions classes={{ root: classes.cardActionsRoot }}>
-        {totalItems > 0 && (
-          <Box className={classes.tableFooter}>
-            {rowsPerPageOptions.length > 1 && (
-              <Box display="inline-block">
-                <label>
-                  Show{' '}
-                  {
-                    <MuiSelect
-                      IconComponent={KeyboardArrowDown}
-                      variant="outlined"
-                      className={classes.tableFooterSelect}
-                      value={rowsPerPage}
-                      onChange={(event) => setRowsPerPage(event.target.value as number)}
-                    >
-                      {rowsPerPageOptions.map((rowsPerPageOption) => (
-                        <MenuItem key={rowsPerPageOption} value={rowsPerPageOption}>
-                          {rowsPerPageOption}
-                        </MenuItem>
-                      ))}
-                    </MuiSelect>
-                  }{' '}
-                  rows.
-                </label>
-              </Box>
-            )}
-            <span>{` Showing ${firstRow}-${lastRow} of ${totalItems}`}</span>
-          </Box>
-        )}
+        <Box className={classes.tableFooter}>
+          {rowsPerPageOptions.length > 1 && (
+            <Box display="inline-block">
+              <label>
+                Show{' '}
+                {
+                  <MuiSelect
+                    IconComponent={KeyboardArrowDown}
+                    variant="outlined"
+                    className={classes.tableFooterSelect}
+                    value={rowsPerPage}
+                    onChange={(event) => setRowsPerPage(event.target.value as number)}
+                  >
+                    {rowsPerPageOptions.map((rowsPerPageOption) => (
+                      <MenuItem key={rowsPerPageOption} value={rowsPerPageOption}>
+                        {rowsPerPageOption}
+                      </MenuItem>
+                    ))}
+                  </MuiSelect>
+                }{' '}
+                rows.
+              </label>
+            </Box>
+          )}
+          {totalItems > 0 && <span>{` Showing ${firstRow}-${lastRow} of ${totalItems}`}</span>}
+        </Box>
         {showPageActions && (
           <MuiPagination
             count={pageCount}

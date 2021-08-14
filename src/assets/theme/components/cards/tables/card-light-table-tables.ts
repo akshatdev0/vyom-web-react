@@ -92,11 +92,21 @@ const componentStyles = (theme: Theme) => createStyles({
   tableFooter: {
     fontSize: ".875rem",
     whiteSpace: "nowrap",
+    "& label": {
+      marginBottom: 0,
+    }
   },
   tableFooterSelect: {
     height: "calc(1.8125rem + 6px)",
-    top: "10px",
     margin: "0 .375rem",
+  },
+  "@supports ( -moz-appearance:none )": {
+    tableFooter: {
+      marginTop: "-19px",
+    },
+    tableFooterSelect: {
+      top: "10px",
+    },
   },
   tableCellRoot: {
     verticalAlign: "middle",

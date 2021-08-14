@@ -31,7 +31,8 @@ const columns: Array<Column<Order>> = [
     id: 'shopkeeperMobilenumber',
     Header: 'Mobile Number',
     accessor: (row) => row.shop?.shopkeepers?.[0]?.user?.mobileNumber,
-    disableSortBy: true,
+    // TODO: Disable sorting. Enabled to showcase ErrorOverlay!
+    // disableSortBy: true,
   },
   {
     id: 'shop.name',
@@ -79,7 +80,8 @@ const Orders: React.FunctionComponent = () => {
         <Table<Order>
           title="Orders"
           columns={columns}
-          loading={ordersQuery.isLoading}
+          isError={ordersQuery.isError}
+          isLoading={ordersQuery.isLoading}
           data={orders}
           totalItems={countOrders}
           pageCount={pageCount}

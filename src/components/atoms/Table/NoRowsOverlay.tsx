@@ -28,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     label: {
       marginTop: theme.spacing(1),
+      fontSize: '16px',
     },
   }),
 );
