@@ -1,80 +1,93 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { Internationalization } from '@syncfusion/ej2-base';
-import {
-  ColumnDirective,
-  ColumnsDirective,
-  Filter,
-  GridComponent,
-  Group,
-  Inject,
-  Page,
-  PageSettingsModel,
-  Sort,
-} from '@syncfusion/ej2-react-grids';
+import { Column } from 'react-table';
 
-import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
 import componentStyles from 'assets/theme/views/admin/tables';
+import { Table } from 'components/atoms';
 import { SimpleHeader } from 'components/molecules';
-import { useOrdersOfCompanyQuery } from 'generated/graphql';
+import { OrdersOfCompanyQuery, OrdersOfCompanyQueryVariables, useOrdersOfCompanyQuery } from 'generated/graphql';
+import { useTableQueryVariables } from 'hooks';
+import { Unarray } from 'types';
+
+type Order = NonNullable<Unarray<OrdersOfCompanyQuery['orders']>>;
+
+const intl = new Internationalization();
+const dateFormat = intl.getDateFormat({ skeleton: 'medium', type: 'dateTime' });
+
+const columns: Array<Column<Order>> = [
+  {
+    Header: 'Order Number',
+    accessor: 'number',
+  },
+  {
+    id: 'created_at',
+    Header: 'Date',
+    accessor: (row) => dateFormat(new Date(row.created_at)),
+  },
+  {
+    id: 'shopkeeperMobilenumber',
+    Header: 'Mobile Number',
+    accessor: (row) => row.shop?.shopkeepers?.[0]?.user?.mobileNumber,
+    // TODO: Disable sorting. Enabled to showcase ErrorOverlay!
+    // disableSortBy: true,
+  },
+  {
+    id: 'shop.name',
+    Header: 'Shop',
+    accessor: (row) => row.shop?.name,
+  },
+  {
+    id: 'shop.billingAddress.area.name',
+    Header: 'Area, City',
+    accessor: (row) => row?.shop?.billingAddress?.area?.name + ', ' + row?.shop?.billingAddress?.area?.city?.name,
+    disableSortBy: true,
+  },
+  {
+    Header: 'Status',
+    accessor: 'currentStatus',
+  },
+  {
+    Header: 'Payment Status',
+    accessor: 'paymentStatus',
+  },
+];
 
 const useStyles = makeStyles(componentStyles);
-const useTableStyles = makeStyles(tableComponentStyles);
 
 const Orders: React.FunctionComponent = () => {
-  const classes = { ...useStyles(), ...useTableStyles() };
-  const ordersQuery = useOrdersOfCompanyQuery();
-  const { data: { orders = [] } = {} } = ordersQuery;
-  const pageSettings: PageSettingsModel = { pageSize: 10 };
-
-  const intl = new Internationalization();
-  const dateFormat = intl.getDateFormat({ skeleton: 'medium', type: 'dateTime' });
-
-  const tableData = orders?.map((order) => {
-    return {
-      id: order?.id,
-      number: order?.number,
-      currentStatus: order?.currentStatus,
-      paymentStatus: order?.paymentStatus,
-      createdAt: dateFormat(new Date(order?.created_at)),
-      shop: order?.shop?.name,
-      shopkeeperMobileNumber: order?.shop?.shopkeepers?.[0]?.user?.mobileNumber,
-      areaAndCity: order?.shop?.billingAddress?.area?.name + ', ' + order?.shop?.billingAddress?.area?.city?.name,
-    };
+  const classes = useStyles();
+  const { initialState, queryVariables, setQueryVariables } = useTableQueryVariables<
+    OrdersOfCompanyQueryVariables,
+    Order
+  >({}, { sortBy: [{ id: 'number', desc: false }] });
+  const [pageCount, setPageCount] = useState(0);
+  const ordersQuery = useOrdersOfCompanyQuery(queryVariables, {
+    onSuccess: ({ countOrders }) => {
+      if (queryVariables.limit) {
+        setPageCount(Math.ceil(countOrders / queryVariables.limit));
+      }
+    },
   });
+  const { data: { countOrders, orders = [] } = {} } = ordersQuery;
 
   return (
     <>
       <SimpleHeader section="Orders" subsection="Orders" />
       <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
-        <Card classes={{ root: classes.cardRoot }}>
-          <CardHeader
-            className={classes.cardHeader}
-            title="Orders"
-            titleTypographyProps={{
-              component: Box,
-              marginBottom: '0!important',
-              variant: 'h3',
-            }}
-          />
-          <GridComponent dataSource={tableData} allowPaging={true} pageSettings={pageSettings} allowSorting={true}>
-            <ColumnsDirective>
-              <ColumnDirective field="number" headerText="Order Number" autoFit={true} />
-              <ColumnDirective field="createdAt" headerText="Date" />
-              <ColumnDirective field="shopkeeperMobileNumber" headerText="MobileNumber" />
-              <ColumnDirective field="shop" headerText="Shop" />
-              <ColumnDirective field="areaAndCity" headerText="Area, City" />
-              <ColumnDirective field="currentStatus" headerText="Status" />
-              <ColumnDirective field="paymentStatus" headerText="Payment Status" />
-            </ColumnsDirective>
-            <Inject services={[Page, Sort, Filter, Group]} />
-          </GridComponent>
-        </Card>
+        <Table<Order>
+          title="Orders"
+          columns={columns}
+          isError={ordersQuery.isError}
+          isLoading={ordersQuery.isLoading}
+          data={orders}
+          totalItems={countOrders}
+          pageCount={pageCount}
+          initialState={initialState}
+          setQueryVariables={setQueryVariables}
+        />
       </Container>
     </>
   );
