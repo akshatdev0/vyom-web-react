@@ -28,11 +28,12 @@ type TableOptions<D extends Record<string, unknown>> = Pick<
   'columns' | 'data' | 'initialState' | 'disableSortBy'
 > & {
   title: string;
-  setQueryVariables: (tableState: TableState<D>) => void;
+  loading?: boolean;
   totalItems?: number;
   pageCount?: number;
   disablePagination?: boolean;
   rowsPerPageOptions?: Array<number>;
+  setQueryVariables: (tableState: TableState<D>) => void;
 };
 
 const DEFAULT_ROWS_PER_PAGE_OPTIONS = [10, 25, 50, 100];
@@ -68,6 +69,7 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
   const {
     title,
     data,
+    loading = false,
     totalItems = 0,
     pageCount = 0,
     rowsPerPageOptions = DEFAULT_ROWS_PER_PAGE_OPTIONS,
@@ -103,7 +105,7 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
         />
         <TableContainer>
           <TableElement {...getTableProps()}>
-            <LoadingOverlay />
+            {loading && <LoadingOverlay />}
             <TableHead>
               {headerGroups.map((headerGroup) => (
                 <TableHeadRow {...headerGroup.getHeaderGroupProps()}>
