@@ -10,6 +10,7 @@ import { TableOptions as ReactTableOptions, TableState, useTable, usePagination,
 import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
 
 import LoadingOverlay from './LoadingOverlay';
+import NoRowsOverlay from './NoRowsOverlay';
 import TablePagination from './TablePagination';
 import {
   TableContainer,
@@ -85,6 +86,7 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
   );
   const { pageSize: rowsPerPage, pageIndex } = state;
 
+  const showNoRowsOverlay = !loading && data.length === 0;
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length);
 
   useEffect(() => {
@@ -105,6 +107,7 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
         />
         <TableContainer>
           <TableElement {...getTableProps()}>
+            {showNoRowsOverlay && <NoRowsOverlay />}
             {loading && <LoadingOverlay />}
             <TableHead>
               {headerGroups.map((headerGroup) => (
