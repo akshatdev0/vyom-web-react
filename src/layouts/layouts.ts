@@ -6,7 +6,7 @@ export const Layouts = {
     path: '/auth',
   },
   COMPANY_OWNER: {
-    path: '/company-owner',
+    path: '/co',
   },
   UNKNOWN: {
     path: '/',

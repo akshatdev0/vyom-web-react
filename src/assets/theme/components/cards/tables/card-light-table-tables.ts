@@ -47,12 +47,20 @@ const componentStyles = (theme: Theme) => createStyles({
   },
   cardHeader: {
     backgroundColor: "initial",
+    height: "66px!important"
   },
   cardActionsRoot: {
+    height: "90px!important",
     paddingBottom: "1.5rem!important",
     paddingTop: "1.5rem!important",
     borderTop: "0!important",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
+    "& .MuiPaginationItem-ellipsis": {
+      border: "none",
+    },
+    "& .MuiPaginationItem-ellipsis:hover": {
+      backgroundColor: theme.palette.transparent.main,
+    },
   },
   containerRoot: {
     marginTop: "-4.5rem",
@@ -61,8 +69,44 @@ const componentStyles = (theme: Theme) => createStyles({
       paddingRight: "30px",
     },
   },
+  tableOverlay: {
+    display: 'flex',
+    position: 'absolute',
+    top: "120px",
+    left: 0,
+    right: 0,
+    bottom: "90px",
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    "& .MuiLinearProgress-root": {
+      height: "4px",
+      borderRadius: "0px",
+    },
+  },  
+  tableContainerRoot: {
+  },
   tableRoot: {
     marginBottom: "0!important",
+  },
+  tableFooter: {
+    fontSize: ".875rem",
+    whiteSpace: "nowrap",
+    "& label": {
+      marginBottom: 0,
+    }
+  },
+  tableFooterSelect: {
+    height: "calc(1.8125rem + 6px)",
+    margin: "0 .375rem",
+  },
+  "@supports ( -moz-appearance:none )": {
+    tableFooter: {
+      marginTop: "-19px",
+    },
+    tableFooterSelect: {
+      top: "10px",
+    },
   },
   tableCellRoot: {
     verticalAlign: "middle",
@@ -73,11 +117,29 @@ const componentStyles = (theme: Theme) => createStyles({
   tableCellRootHead: {
     backgroundColor: theme.palette.gray[100],
     color: theme.palette.gray[600],
+    height: "54px!important",
   },
   tableCellRootBodyHead: {
     textTransform: "unset!important" as "unset",
     fontSize: ".8125rem",
   },
+  tableLabel: {},
+  tableSortLabel: {
+    '& svg': {
+      width: 14,
+      height: 14,
+      marginTop: 0,
+      marginLeft: 4,
+    },
+  },
+  headerIcon: {
+    '& svg': {
+      width: 16,
+      height: 16,
+      marginTop: 4,
+      marginRight: 0,
+    },
+  },  
   linearProgressRoot: {
     height: "3px!important",
     width: "120px!important",
