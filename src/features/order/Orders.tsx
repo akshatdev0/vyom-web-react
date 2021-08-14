@@ -23,7 +23,7 @@ const columns: Array<Column<Order>> = [
     accessor: 'number',
   },
   {
-    id: 'date',
+    id: 'created_at',
     Header: 'Date',
     accessor: (row) => dateFormat(new Date(row.created_at)),
   },
@@ -31,16 +31,18 @@ const columns: Array<Column<Order>> = [
     id: 'shopkeeperMobilenumber',
     Header: 'Mobile Number',
     accessor: (row) => row.shop?.shopkeepers?.[0]?.user?.mobileNumber,
+    disableSortBy: true,
   },
   {
-    id: 'shop',
+    id: 'shop.name',
     Header: 'Shop',
     accessor: (row) => row.shop?.name,
   },
   {
-    id: 'areaAndCity',
+    id: 'shop.billingAddress.area.name',
     Header: 'Area, City',
     accessor: (row) => row?.shop?.billingAddress?.area?.name + ', ' + row?.shop?.billingAddress?.area?.city?.name,
+    disableSortBy: true,
   },
   {
     Header: 'Status',
