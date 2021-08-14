@@ -1,5 +1,6 @@
-query ProductsOfCompany($companyID: ID!) {
-  products(where: { company: { id: $companyID } }) {
+query ProductsOfCompany($companyID: ID, $sortBy: String, $start: Int, $limit: Int) {
+  countProducts(where: { company: $companyID })
+  products(where: { company: $companyID }, sort: $sortBy, start: $start, limit: $limit) {
     id
     title
     sku
