@@ -77,6 +77,7 @@ declare module '*/product-category.graphql' {
   import { DocumentNode } from 'graphql';
   const defaultDocument: DocumentNode;
   export const ProductCategoriesOfCompany: DocumentNode;
+  export const ProductCategoriesOfCategory: DocumentNode;
 
   export default defaultDocument;
 }

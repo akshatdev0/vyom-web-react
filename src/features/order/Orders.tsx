@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
-import { Internationalization } from '@syncfusion/ej2-base';
+import { format } from 'date-fns';
 import { Column } from 'react-table';
 
 import componentStyles from 'assets/theme/views/admin/tables';
@@ -14,8 +14,7 @@ import { Unarray } from 'types';
 
 type Order = NonNullable<Unarray<OrdersOfCompanyQuery['orders']>>;
 
-const intl = new Internationalization();
-const dateFormat = intl.getDateFormat({ skeleton: 'medium', type: 'dateTime' });
+const DATE_FORMAT = 'MMM dd, yyyy, HH:mm aa';
 
 const columns: Array<Column<Order>> = [
   {
@@ -25,7 +24,7 @@ const columns: Array<Column<Order>> = [
   {
     id: 'created_at',
     Header: 'Date',
-    accessor: (row) => dateFormat(new Date(row.created_at)),
+    accessor: (row) => format(new Date(row.created_at), DATE_FORMAT),
   },
   {
     id: 'shopkeeperMobilenumber',
