@@ -1,18 +1,27 @@
-query ProductCategoriesOfCompany($companyID: ID!) {
-  productCategories(where: { company: { id: $companyID }, parentCategory_null: true }, sort: "name") {
+query ProductCategoriesOfCompany($companyID: ID, $sortBy: String, $start: Int, $limit: Int) {
+  productCategories(
+    where: { company: { id: $companyID }, parentCategory_null: true }
+    sort: $sortBy
+    start: $start
+    limit: $limit
+  ) {
     id
     name
     description
-    company {
-      id
-    }
+    hasSubCategories
     subcategories {
       id
       name
       description
     }
-    parentCategory {
-      id
-    }
+  }
+}
+
+query ProductCategoriesOfCategory($categoryID: ID, $sortBy: String) {
+  productCategories(where: { parentCategory: $categoryID }, sort: $sortBy) {
+    id
+    name
+    description
+    hasSubCategories
   }
 }

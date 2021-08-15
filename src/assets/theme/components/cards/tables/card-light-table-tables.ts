@@ -140,6 +140,17 @@ const componentStyles = (theme: Theme) => createStyles({
       marginRight: 0,
     },
   },  
+  expanderIcon: {
+    '& svg': {
+      width: 16,
+      height: 16,
+      marginTop: 0,
+      marginRight: 0,
+      position: "relative",
+      top: "-1px",
+      left: "-4px",
+    },
+  },  
   linearProgressRoot: {
     height: "3px!important",
     width: "120px!important",

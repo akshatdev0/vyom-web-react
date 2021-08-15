@@ -1,69 +1,99 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
-import Box from '@material-ui/core/Box';
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  TreeGridComponent,
-  ColumnsDirective,
-  ColumnDirective,
-  Inject,
-  Page,
-  PageSettingsModel,
-} from '@syncfusion/ej2-react-treegrid';
+import { CellProps, Column } from 'react-table';
 
-import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
 import componentStyles from 'assets/theme/views/admin/tables';
+import { Table } from 'components/atoms';
+import { SubComponentProps } from 'components/atoms/Table/Table';
+import { TableExpanderCell } from 'components/atoms/Table/TableParts';
+import TableSubRow from 'components/atoms/Table/TableSubRow';
 import { SimpleHeader } from 'components/molecules';
-import { useAuthState } from 'features/auth';
-import { useProductCategoriesOfCompanyQuery } from 'generated/graphql';
+import { getAuthData } from 'features/auth';
+import {
+  ProductCategoriesOfCompanyQuery,
+  ProductCategoriesOfCompanyQueryVariables,
+  useProductCategoriesOfCategoryQuery,
+  useProductCategoriesOfCompanyQuery,
+} from 'generated/graphql';
+import { useTableQueryVariables } from 'hooks';
+import { Unarray } from 'types';
+
+type ProductCategory = NonNullable<Unarray<ProductCategoriesOfCompanyQuery['productCategories']>>;
+
+const columns: Array<Column<ProductCategory>> = [
+  {
+    Header: 'Name',
+    accessor: 'name',
+    // eslint-disable-next-line react/display-name
+    Cell: (props: CellProps<ProductCategory>) => (
+      <TableExpanderCell<ProductCategory> canExpand={(row) => row.original.hasSubCategories} {...props} />
+    ),
+  },
+  {
+    Header: 'Description',
+    accessor: 'description',
+  },
+];
 
 const useStyles = makeStyles(componentStyles);
-const useTableStyles = makeStyles(tableComponentStyles);
+
+function ProductSubCategories({ depth, columns, visibleColumns, row }: SubComponentProps<ProductCategory>) {
+  const productCategoriesQuery = useProductCategoriesOfCategoryQuery({ categoryID: row.original.id });
+  const { data: { productCategories = [] } = {} } = productCategoriesQuery;
+
+  const renderSubCategories = useCallback(
+    ({ visibleColumns, row }) => (
+      <ProductSubCategories depth={depth + 1} columns={columns} visibleColumns={visibleColumns} row={row} />
+    ),
+    [depth, columns],
+  );
+
+  return (
+    <TableSubRow<ProductCategory>
+      depth={depth}
+      columns={columns}
+      visibleColumns={visibleColumns}
+      data={productCategories}
+      renderSubComponent={renderSubCategories}
+    />
+  );
+}
 
 const ProductCategories: React.FunctionComponent = () => {
-  const classes = { ...useStyles(), ...useTableStyles() };
-  const { user: sessionUser } = useAuthState();
+  const classes = useStyles();
+  const { user: sessionUser } = getAuthData();
   const companyID = sessionUser?.companyOwner?.company?.id;
-  const productCategoriesQuery = useProductCategoriesOfCompanyQuery(
-    { companyID: companyID || '' },
-    { enabled: !!companyID },
-  );
-  const { data: { productCategories = [] } = {} } = productCategoriesQuery;
-  const pageSettings: PageSettingsModel = { pageSize: 12 };
+  const { initialState, queryVariables, setQueryVariables } = useTableQueryVariables<
+    ProductCategoriesOfCompanyQueryVariables,
+    ProductCategory
+  >({ companyID }, { sortBy: [{ id: 'name', desc: false }] });
+  const productCategoriesQuery = useProductCategoriesOfCompanyQuery(queryVariables);
 
-  const gridData = productCategories ? productCategories : undefined;
+  const renderSubCategories = useCallback(
+    ({ visibleColumns, row }) => (
+      <ProductSubCategories depth={1} columns={columns} visibleColumns={visibleColumns} row={row} />
+    ),
+    [columns],
+  );
+
+  const { data: { productCategories = [] } = {} } = productCategoriesQuery;
 
   return (
     <>
       <SimpleHeader section="Product Catalog" subsection="Categories" />
       <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
-        <Card classes={{ root: classes.cardRoot }}>
-          <CardHeader
-            className={classes.cardHeader}
-            title="Product Categories"
-            titleTypographyProps={{
-              component: Box,
-              marginBottom: '0!important',
-              variant: 'h3',
-            }}
-          />
-          <TreeGridComponent
-            dataSource={gridData}
-            treeColumnIndex={0}
-            childMapping="subcategories"
-            allowPaging={true}
-            pageSettings={pageSettings}
-          >
-            <ColumnsDirective>
-              <ColumnDirective field="name" headerText="Name" width="100"></ColumnDirective>
-              <ColumnDirective field="description" headerText="Description" width="200" />
-            </ColumnsDirective>
-            <Inject services={[Page]} />
-          </TreeGridComponent>
-        </Card>
+        <Table<ProductCategory>
+          title="Product Categories"
+          columns={columns}
+          isError={productCategoriesQuery.isError}
+          isLoading={productCategoriesQuery.isLoading}
+          data={productCategories}
+          initialState={initialState}
+          setQueryVariables={setQueryVariables}
+          renderSubComponent={renderSubCategories}
+        />
       </Container>
     </>
   );

@@ -3340,6 +3340,7 @@ export type ProductCategory = {
   subcategories?: Maybe<Array<Maybe<ProductCategory>>>;
   appliedPriceRules?: Maybe<Array<Maybe<PriceRule>>>;
   products?: Maybe<Array<Maybe<Product>>>;
+  hasSubCategories?: Maybe<Scalars['Boolean']>;
 };
 
 export type ProductCategorySubcategoriesArgs = {
@@ -7622,20 +7623,38 @@ export type OrdersOfCompanyQuery = { __typename?: 'Query' } & Pick<Query, 'count
   };
 
 export type ProductCategoriesOfCompanyQueryVariables = Exact<{
-  companyID: Scalars['ID'];
+  companyID?: Maybe<Scalars['ID']>;
+  sortBy?: Maybe<Scalars['String']>;
+  start?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
 }>;
 
 export type ProductCategoriesOfCompanyQuery = { __typename?: 'Query' } & {
   productCategories?: Maybe<
     Array<
       Maybe<
-        { __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id' | 'name' | 'description'> & {
-            company?: Maybe<{ __typename?: 'Company' } & Pick<Company, 'id'>>;
+        { __typename?: 'ProductCategory' } & Pick<
+          ProductCategory,
+          'id' | 'name' | 'description' | 'hasSubCategories'
+        > & {
             subcategories?: Maybe<
               Array<Maybe<{ __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id' | 'name' | 'description'>>>
             >;
-            parentCategory?: Maybe<{ __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id'>>;
           }
+      >
+    >
+  >;
+};
+
+export type ProductCategoriesOfCategoryQueryVariables = Exact<{
+  categoryID?: Maybe<Scalars['ID']>;
+}>;
+
+export type ProductCategoriesOfCategoryQuery = { __typename?: 'Query' } & {
+  productCategories?: Maybe<
+    Array<
+      Maybe<
+        { __typename?: 'ProductCategory' } & Pick<ProductCategory, 'id' | 'name' | 'description' | 'hasSubCategories'>
       >
     >
   >;
@@ -8175,22 +8194,32 @@ export const OrdersOfCompany = gql`
   }
 `;
 export const ProductCategoriesOfCompany = gql`
-  query ProductCategoriesOfCompany($companyID: ID!) {
-    productCategories(where: { company: { id: $companyID }, parentCategory_null: true }, sort: "name") {
+  query ProductCategoriesOfCompany($companyID: ID, $sortBy: String, $start: Int, $limit: Int) {
+    productCategories(
+      where: { company: { id: $companyID }, parentCategory_null: true }
+      sort: $sortBy
+      start: $start
+      limit: $limit
+    ) {
       id
       name
       description
-      company {
-        id
-      }
+      hasSubCategories
       subcategories {
         id
         name
         description
       }
-      parentCategory {
-        id
-      }
+    }
+  }
+`;
+export const ProductCategoriesOfCategory = gql`
+  query ProductCategoriesOfCategory($categoryID: ID) {
+    productCategories(where: { parentCategory: $categoryID }, sort: "name") {
+      id
+      name
+      description
+      hasSubCategories
     }
   }
 `;
@@ -8872,36 +8901,54 @@ export const useOrdersOfCompanyQuery = <TData = OrdersOfCompanyQuery, TError = u
     options,
   );
 export const ProductCategoriesOfCompanyDocument = `
-    query ProductCategoriesOfCompany($companyID: ID!) {
+    query ProductCategoriesOfCompany($companyID: ID, $sortBy: String, $start: Int, $limit: Int) {
   productCategories(
     where: {company: {id: $companyID}, parentCategory_null: true}
-    sort: "name"
+    sort: $sortBy
+    start: $start
+    limit: $limit
   ) {
     id
     name
     description
-    company {
-      id
-    }
+    hasSubCategories
     subcategories {
       id
       name
       description
     }
-    parentCategory {
-      id
-    }
   }
 }
     `;
 export const useProductCategoriesOfCompanyQuery = <TData = ProductCategoriesOfCompanyQuery, TError = unknown>(
-  variables: ProductCategoriesOfCompanyQueryVariables,
+  variables?: ProductCategoriesOfCompanyQueryVariables,
   options?: UseQueryOptions<ProductCategoriesOfCompanyQuery, TError, TData>,
 ) =>
   useQuery<ProductCategoriesOfCompanyQuery, TError, TData>(
     ['ProductCategoriesOfCompany', variables],
     useFetcher<ProductCategoriesOfCompanyQuery, ProductCategoriesOfCompanyQueryVariables>(
       ProductCategoriesOfCompanyDocument,
+    ).bind(null, variables),
+    options,
+  );
+export const ProductCategoriesOfCategoryDocument = `
+    query ProductCategoriesOfCategory($categoryID: ID) {
+  productCategories(where: {parentCategory: $categoryID}, sort: "name") {
+    id
+    name
+    description
+    hasSubCategories
+  }
+}
+    `;
+export const useProductCategoriesOfCategoryQuery = <TData = ProductCategoriesOfCategoryQuery, TError = unknown>(
+  variables?: ProductCategoriesOfCategoryQueryVariables,
+  options?: UseQueryOptions<ProductCategoriesOfCategoryQuery, TError, TData>,
+) =>
+  useQuery<ProductCategoriesOfCategoryQuery, TError, TData>(
+    ['ProductCategoriesOfCategory', variables],
+    useFetcher<ProductCategoriesOfCategoryQuery, ProductCategoriesOfCategoryQueryVariables>(
+      ProductCategoriesOfCategoryDocument,
     ).bind(null, variables),
     options,
   );
