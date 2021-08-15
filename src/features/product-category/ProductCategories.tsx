@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
@@ -39,13 +39,29 @@ const columns: Array<Column<ProductCategory>> = [
 
 const useStyles = makeStyles(componentStyles);
 
-function ProductSubCategories({ depth, columns, visibleColumns, row }: SubComponentProps<ProductCategory>) {
+function ProductSubCategories({
+  depth,
+  columns,
+  visibleColumns,
+  row,
+  setLoading,
+}: SubComponentProps<ProductCategory> & { setLoading: (loading: boolean) => void }) {
   const productCategoriesQuery = useProductCategoriesOfCategoryQuery({ categoryID: row.original.id });
   const { data: { productCategories = [] } = {} } = productCategoriesQuery;
 
+  useEffect(() => {
+    setLoading(productCategoriesQuery.isLoading);
+  }, [productCategoriesQuery.isLoading]);
+
   const renderSubCategories = useCallback(
     ({ visibleColumns, row }) => (
-      <ProductSubCategories depth={depth + 1} columns={columns} visibleColumns={visibleColumns} row={row} />
+      <ProductSubCategories
+        depth={depth + 1}
+        columns={columns}
+        visibleColumns={visibleColumns}
+        row={row}
+        setLoading={setLoading}
+      />
     ),
     [depth, columns],
   );
@@ -65,6 +81,7 @@ const ProductCategories: React.FunctionComponent = () => {
   const classes = useStyles();
   const { user: sessionUser } = getAuthData();
   const companyID = sessionUser?.companyOwner?.company?.id;
+  const [loading, setLoading] = useState(true);
   const { initialState, queryVariables, setQueryVariables } = useTableQueryVariables<
     ProductCategoriesOfCompanyQueryVariables,
     ProductCategory
@@ -73,10 +90,20 @@ const ProductCategories: React.FunctionComponent = () => {
 
   const renderSubCategories = useCallback(
     ({ visibleColumns, row }) => (
-      <ProductSubCategories depth={1} columns={columns} visibleColumns={visibleColumns} row={row} />
+      <ProductSubCategories
+        depth={1}
+        columns={columns}
+        visibleColumns={visibleColumns}
+        row={row}
+        setLoading={setLoading}
+      />
     ),
     [columns],
   );
+
+  useEffect(() => {
+    setLoading(productCategoriesQuery.isLoading);
+  }, [productCategoriesQuery.isLoading]);
 
   const { data: { productCategories = [] } = {} } = productCategoriesQuery;
 
@@ -88,7 +115,7 @@ const ProductCategories: React.FunctionComponent = () => {
           title="Product Categories"
           columns={columns}
           isError={productCategoriesQuery.isError}
-          isLoading={productCategoriesQuery.isLoading}
+          isLoading={loading}
           data={productCategories}
           initialState={initialState}
           setQueryVariables={setQueryVariables}
