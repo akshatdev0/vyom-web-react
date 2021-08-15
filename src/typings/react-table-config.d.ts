@@ -95,6 +95,10 @@ declare module 'react-table' {
       UseRowStateState<D>,
       UseSortByState<D> {}
 
+  export interface ColumnInterfaceBasedOnValue<D extends Record<string, unknown>, V = any> {
+    SubCell?: Renderer<CellProps<D, V>> | undefined;
+  }
+
   export interface ColumnInterface<D extends Record<string, unknown> = Record<string, unknown>>
     extends UseFiltersColumnOptions<D>,
       UseGlobalFiltersColumnOptions<D>,
