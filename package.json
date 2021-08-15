@@ -34,8 +34,6 @@
     "@material-ui/icons": "4.11.2",
     "@material-ui/lab": "4.0.0-alpha.57",
     "@reduxjs/toolkit": "^1.5.1",
-    "@syncfusion/ej2-react-grids": "^19.1.65",
-    "@syncfusion/ej2-react-treegrid": "^19.1.67",
     "bootstrap": "4.6.0",
     "chart.js": "2.9.4",
     "classnames": "2.2.6",
