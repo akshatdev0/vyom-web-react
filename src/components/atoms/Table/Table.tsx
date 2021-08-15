@@ -5,13 +5,24 @@ import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import { makeStyles } from '@material-ui/core/styles';
-import { TableOptions as ReactTableOptions, TableState, useTable, usePagination, useSortBy } from 'react-table';
+import {
+  TableOptions as ReactTableOptions,
+  TableState,
+  useTable,
+  usePagination,
+  useSortBy,
+  useExpanded,
+  ColumnInstance,
+  Column,
+  Row,
+} from 'react-table';
 
 import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
 
 import ErrorOverlay from './ErrorOverlay';
 import LoadingOverlay from './LoadingOverlay';
 import NoRowsOverlay from './NoRowsOverlay';
+import TableBodyContent from './TableBodyContent';
 import TablePagination from './TablePagination';
 import {
   TableContainer,
@@ -21,9 +32,14 @@ import {
   TableHeadCell,
   TableHeadCellContent,
   TableBody,
-  TableRow,
-  TableCell,
 } from './TableParts';
+
+export type SubComponentProps<D extends Record<string, unknown>> = {
+  depth: number;
+  columns: Column<D>[];
+  visibleColumns: ColumnInstance<D>[];
+  row: Row<D>;
+};
 
 type TableOptions<D extends Record<string, unknown>> = Pick<
   ReactTableOptions<D>,
@@ -37,6 +53,7 @@ type TableOptions<D extends Record<string, unknown>> = Pick<
   disablePagination?: boolean;
   rowsPerPageOptions?: Array<number>;
   setQueryVariables: (tableState: TableState<D>) => void;
+  renderSubComponent?: (props: SubComponentProps<D>) => JSX.Element;
 };
 
 const DEFAULT_ROWS_PER_PAGE_OPTIONS = [10, 25, 50, 100];
@@ -71,6 +88,7 @@ const useTableOptions = <D extends Record<string, unknown>>(options: TableOption
 const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX.Element => {
   const {
     title,
+    columns,
     data,
     isError = false,
     isLoading = false,
@@ -79,14 +97,21 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
     rowsPerPageOptions = DEFAULT_ROWS_PER_PAGE_OPTIONS,
     disablePagination,
     setQueryVariables,
+    renderSubComponent,
   } = options;
   const classes = useTableStyles();
   const tableOptions = useTableOptions(options);
-  const { headerGroups, rows, state, getTableProps, getTableBodyProps, prepareRow, gotoPage, setPageSize } = useTable(
-    { ...tableOptions, pageCount },
-    useSortBy,
-    usePagination,
-  );
+  const {
+    headerGroups,
+    rows,
+    state,
+    visibleColumns,
+    getTableProps,
+    getTableBodyProps,
+    prepareRow,
+    gotoPage,
+    setPageSize,
+  } = useTable({ ...tableOptions, pageCount }, useSortBy, useExpanded, usePagination);
   const { pageSize: rowsPerPage, pageIndex } = state;
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, data.length);
@@ -136,23 +161,15 @@ const Table = <D extends Record<string, unknown>>(options: TableOptions<D>): JSX
               ))}
             </TableHead>
             <TableBody {...getTableBodyProps()}>
-              {rows.map((row) => {
-                prepareRow(row);
-                return (
-                  <TableRow {...row.getRowProps()}>
-                    {row.cells.map((cell) => {
-                      return <TableCell {...cell.getCellProps()}>{cell.render('Cell')}</TableCell>;
-                    })}
-                  </TableRow>
-                );
-              })}
-              {emptyRows > 0 && (
-                <TableRow key="empty-rows" style={{ height: 51.5 * emptyRows }}>
-                  <TableCell key="empty-cell">
-                    <span> </span>
-                  </TableCell>
-                </TableRow>
-              )}
+              <TableBodyContent
+                depth={0}
+                rows={rows}
+                prepareRow={prepareRow}
+                columns={columns}
+                visibleColumns={visibleColumns}
+                emptyRows={emptyRows}
+                renderSubComponent={renderSubComponent}
+              />
             </TableBody>
           </TableElement>
         </TableContainer>

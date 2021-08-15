@@ -11,8 +11,12 @@ import MuiTableHead from '@material-ui/core/TableHead';
 import MuiTableRow from '@material-ui/core/TableRow';
 import MuiTableSortLabel from '@material-ui/core/TableSortLabel';
 import MuiTooltip from '@material-ui/core/Tooltip';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import {
+  CellProps,
+  Row,
   TableBodyProps,
   TableCellProps,
   TableGroupByToggleProps,
@@ -157,6 +161,24 @@ export const TableHeadCellContent: React.FunctionComponent<TableHeadCellContentP
         </div>
       )}
     </>
+  );
+};
+
+export const TableExpanderCell = <D extends Record<string, unknown>>({
+  canExpand,
+  ...rest
+}: CellProps<D> & {
+  canExpand: (props: Row<D>) => boolean | undefined;
+}): JSX.Element => {
+  const classes = useTableStyles();
+  const { row, value } = rest;
+  return canExpand(row) || false ? (
+    <Box className={classes.expanderIcon} {...row.getToggleRowExpandedProps()}>
+      {row.isExpanded ? <ExpandMoreIcon /> : <ChevronRightIcon />}
+      {value}
+    </Box>
+  ) : (
+    <Box>{value}</Box>
   );
 };
 
