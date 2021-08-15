@@ -85,8 +85,13 @@ const componentStyles = (theme: Theme) => createStyles({
     },
   },  
   tableContainerRoot: {
+    maxHeight: "calc(100vh - 415px)",
   },
   tableRoot: {
+    marginBottom: "0!important",
+  },
+  tableElement: {
+    alignItems: "center",
     marginBottom: "0!important",
   },
   tableFooter: {
