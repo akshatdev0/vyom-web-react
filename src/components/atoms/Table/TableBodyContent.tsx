@@ -52,7 +52,7 @@ const TableBodyContent = <D extends Record<string, unknown>>({
         );
       })}
       {emptyRows > 0 && (
-        <TableRow key="empty-rows" style={{ height: 51.5 * emptyRows }}>
+        <TableRow key="empty-rows" style={{ height: 51 * emptyRows }}>
           <TableCell key="empty-cell">
             <span> </span>
           </TableCell>

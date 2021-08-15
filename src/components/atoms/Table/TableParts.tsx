@@ -53,10 +53,11 @@ export const TableContainer: React.FunctionComponent<CN> = ({ children }: CN) =>
 };
 
 export const TableElement: React.FunctionComponent<TableProps & CN> = ({ children, ...rest }: TableProps & CN) => {
+  const classes = useTableStyles();
   return (
-    <Box component={MuiTable} {...rest} alignItems="center" marginBottom="0!important">
+    <MuiTable className={classes.tableElement} stickyHeader {...rest}>
       {children}
-    </Box>
+    </MuiTable>
   );
 };
 
