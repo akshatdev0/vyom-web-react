@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
 import componentStyles from 'assets/theme/views/admin/profile';
-import { SimpleHeader } from 'components/molecules';
+import { ViewHeader } from 'components/molecules';
 import { useAuthState } from 'features/auth';
 import { useCompanyQuery } from 'generated/graphql';
 
@@ -29,7 +29,7 @@ const Company: React.FunctionComponent = () => {
 
   return (
     <>
-      <SimpleHeader section="Settings" subsection="Company" />
+      <ViewHeader section="Settings" subsection="Company" />
       <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
         <Grid container>
           <Grid

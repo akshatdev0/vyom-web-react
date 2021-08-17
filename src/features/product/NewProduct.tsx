@@ -9,7 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
 import componentStyles from 'assets/theme/views/admin/tables';
-import { SimpleHeader } from 'components/molecules';
+import { ViewHeader } from 'components/molecules';
 
 const useStyles = makeStyles(componentStyles);
 const useTableStyles = makeStyles(tableComponentStyles);
@@ -23,7 +23,7 @@ const NewProduct: React.FunctionComponent = () => {
 
   return (
     <>
-      <SimpleHeader section="Product Catalog" subsection="New Product" />
+      <ViewHeader section="Product Catalog" subsection="New Product" />
       <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
         <Card classes={{ root: classes.cardRoot }}>
           <CardHeader

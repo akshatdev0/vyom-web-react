@@ -9,7 +9,7 @@ import { Table } from 'components/atoms';
 import { SubComponentProps } from 'components/atoms/Table/Table';
 import { TableExpanderCell } from 'components/atoms/Table/TableParts';
 import TableSubRow from 'components/atoms/Table/TableSubRow';
-import { SimpleHeader } from 'components/molecules';
+import { ViewHeader } from 'components/molecules';
 import { getAuthData } from 'features/auth';
 import {
   ProductCategoriesOfCompanyQuery,
@@ -109,7 +109,7 @@ const ProductCategories: React.FunctionComponent = () => {
 
   return (
     <>
-      <SimpleHeader section="Product Catalog" subsection="Categories" />
+      <ViewHeader section="Product Catalog" subsection="Categories" />
       <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
         <Table<ProductCategory>
           title="Product Categories"
