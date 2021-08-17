@@ -21,16 +21,36 @@ const componentStyles = (theme: Theme) => createStyles({
   gridItem: {
     display: "flex",
     alignItems: "center",
+    minHeight: "45px",
+    height: "45px",
   },
-  buttonRoot: {
-    color: theme.palette.primary.main,
-    backgroundColor: theme.palette.white.main,
-    borderColor: theme.palette.white.main,
-    "&:first-of-type": { marginRight: ".75rem" },
-    "&:hover": {
+  toolbarGrid: {
+    "& .MuiToolbar-root": {
+      justifyContent: "flex-end",
+      minHeight: "45px",
+      height: "45px",
+    },
+    "& .MuiButton-root": {
+      color: theme.palette.primary.main,
       backgroundColor: theme.palette.white.main,
       borderColor: theme.palette.white.main,
-      color: theme.palette.dark.main,
+      display: 'inline-flex',
+      fontSize: '0.825rem',
+      marginLeft: theme.spacing(1),
+      borderRadius: '0.25rem',
+      textTransform: 'uppercase',
+      "&:hover": {
+        backgroundColor: theme.palette.white.main,
+        borderColor: theme.palette.white.main,
+        color: theme.palette.dark.main,
+      },
+      "& .MuiButton-startIcon": {
+        marginRight: "6px",
+      },
+      "& .MuiSvgIcon-root": {
+        width: "22px",
+        height: "22px",
+      }
     },
   },
   displayInlineBlock: {

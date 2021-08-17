@@ -6,7 +6,7 @@ const componentStyles = (theme: Theme) => createStyles({
   containerRoot: {
     marginTop: "-4.5rem",
     [theme.breakpoints.up("md")]: {
-      minHeight: "calc(100vh - 239px)",
+      minHeight: "calc(100vh - 241px)",
       paddingLeft: "30px",
       paddingRight: "30px",
     },

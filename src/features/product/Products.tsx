@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 
+import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
+import Toolbar from '@material-ui/core/Toolbar';
+import AddIcon from '@material-ui/icons/Add';
 import { Column } from 'react-table';
 
 import componentStyles from 'assets/theme/views/admin/tables';
-import { Table } from 'components/atoms';
+import { RouteLink, Table } from 'components/atoms';
 import { ViewHeader } from 'components/molecules';
 import { getAuthData } from 'features/auth';
 import { ProductsOfCompanyQuery, ProductsOfCompanyQueryVariables, useProductsOfCompanyQuery } from 'generated/graphql';
 import { useTableQueryVariables } from 'hooks';
+import routes from 'routes';
 import { Unarray } from 'types';
 
 type Product = NonNullable<Unarray<ProductsOfCompanyQuery['products']>>;
@@ -61,7 +65,15 @@ const Products: React.FunctionComponent = () => {
 
   return (
     <>
-      <ViewHeader section="Product Catalog" subsection="Products" />
+      <ViewHeader section="Product Catalog" subsection="Products">
+        <Toolbar disableGutters>
+          <RouteLink to={routes.newProduct}>
+            <Button variant="contained" size="small" startIcon={<AddIcon />}>
+              Create
+            </Button>
+          </RouteLink>
+        </Toolbar>
+      </ViewHeader>
       <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
         <Table<Product>
           title="Products"
