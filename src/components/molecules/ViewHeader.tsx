@@ -2,13 +2,12 @@ import React from 'react';
 
 import Box from '@material-ui/core/Box';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Home from '@material-ui/icons/Home';
+import HomeIcon from '@material-ui/icons/Home';
 import clsx from 'clsx';
 
 import componentStyles from 'assets/theme/components/headers/simple-header';
@@ -16,11 +15,12 @@ import componentStyles from 'assets/theme/components/headers/simple-header';
 type Props = {
   section: string;
   subsection: string;
+  children?: React.ReactNode;
 };
 
 const useStyles = makeStyles(componentStyles);
 
-const ViewHeader: React.FunctionComponent<Props> = ({ section, subsection }: Props) => {
+const ViewHeader: React.FunctionComponent<Props> = ({ section, subsection, children }: Props) => {
   const classes = useStyles();
   return (
     <>
@@ -45,7 +45,7 @@ const ViewHeader: React.FunctionComponent<Props> = ({ section, subsection }: Pro
                 }}
               >
                 <Link color="inherit" href="/" onClick={(e: any) => e.preventDefault()}>
-                  <Box component={Home} width="1.25rem!important" height="1.25rem!important" position="relative" />
+                  <Box component={HomeIcon} width="1.25rem!important" height="1.25rem!important" position="relative" />
                 </Link>
                 <Link color="inherit" href="/getting-started/installation/" onClick={(e: any) => e.preventDefault()}>
                   {section}
@@ -55,13 +55,8 @@ const ViewHeader: React.FunctionComponent<Props> = ({ section, subsection }: Pro
                 </Typography>
               </Breadcrumbs>
             </Grid>
-            <Grid item xs={5} lg={6} component={Box} textAlign="right">
-              <Button variant="contained" size="small" className={classes.buttonRoot}>
-                New
-              </Button>
-              <Button variant="contained" size="small" className={classes.buttonRoot}>
-                Filters
-              </Button>
+            <Grid className={classes.toolbarGrid} item xs={5} lg={6}>
+              {children}
             </Grid>
           </Grid>
         </Container>
