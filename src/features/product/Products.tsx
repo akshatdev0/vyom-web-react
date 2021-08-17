@@ -6,7 +6,7 @@ import { Column } from 'react-table';
 
 import componentStyles from 'assets/theme/views/admin/tables';
 import { Table } from 'components/atoms';
-import { SimpleHeader } from 'components/molecules';
+import { ViewHeader } from 'components/molecules';
 import { getAuthData } from 'features/auth';
 import { ProductsOfCompanyQuery, ProductsOfCompanyQueryVariables, useProductsOfCompanyQuery } from 'generated/graphql';
 import { useTableQueryVariables } from 'hooks';
@@ -61,7 +61,7 @@ const Products: React.FunctionComponent = () => {
 
   return (
     <>
-      <SimpleHeader section="Product Catalog" subsection="Products" />
+      <ViewHeader section="Product Catalog" subsection="Products" />
       <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
         <Table<Product>
           title="Products"
