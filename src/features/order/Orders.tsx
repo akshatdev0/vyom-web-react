@@ -7,7 +7,7 @@ import { Column } from 'react-table';
 
 import componentStyles from 'assets/theme/views/admin/tables';
 import { Table } from 'components/atoms';
-import { SimpleHeader } from 'components/molecules';
+import { ViewHeader } from 'components/molecules';
 import { OrdersOfCompanyQuery, OrdersOfCompanyQueryVariables, useOrdersOfCompanyQuery } from 'generated/graphql';
 import { useTableQueryVariables } from 'hooks';
 import { Unarray } from 'types';
@@ -74,7 +74,7 @@ const Orders: React.FunctionComponent = () => {
 
   return (
     <>
-      <SimpleHeader section="Orders" subsection="Orders" />
+      <ViewHeader section="Orders" subsection="Orders" />
       <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
         <Table<Order>
           title="Orders"

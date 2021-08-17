@@ -10,7 +10,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Home from '@material-ui/icons/Home';
 import clsx from 'clsx';
-import PropTypes from 'prop-types';
 
 import componentStyles from 'assets/theme/components/headers/simple-header';
 
@@ -21,8 +20,7 @@ type Props = {
 
 const useStyles = makeStyles(componentStyles);
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-const SimpleHeader = ({ section, subsection }: Props) => {
+const ViewHeader: React.FunctionComponent<Props> = ({ section, subsection }: Props) => {
   const classes = useStyles();
   return (
     <>
@@ -72,9 +70,4 @@ const SimpleHeader = ({ section, subsection }: Props) => {
   );
 };
 
-SimpleHeader.propTypes = {
-  section: PropTypes.string,
-  subsection: PropTypes.string,
-};
-
-export default SimpleHeader;
+export default ViewHeader;
