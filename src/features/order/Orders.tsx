@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { format } from 'date-fns';
 import { Column } from 'react-table';
 
-import componentStyles from 'assets/theme/views/admin/tables';
+import componentStyles from 'assets/theme/views/admin/container';
 import { Table } from 'components/atoms';
 import { ViewHeader } from 'components/molecules';
 import { OrdersOfCompanyQuery, OrdersOfCompanyQueryVariables, useOrdersOfCompanyQuery } from 'generated/graphql';
@@ -74,7 +74,7 @@ const Orders: React.FunctionComponent = () => {
 
   return (
     <>
-      <ViewHeader section="Orders" subsection="Orders" />
+      <ViewHeader breadcrumbs={['Orders']} />
       <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
         <Table<Order>
           title="Orders"

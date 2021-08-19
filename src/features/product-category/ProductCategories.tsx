@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import { CellProps, Column } from 'react-table';
 
-import componentStyles from 'assets/theme/views/admin/tables';
+import componentStyles from 'assets/theme/views/admin/container';
 import { Table } from 'components/atoms';
 import { SubComponentProps } from 'components/atoms/Table/Table';
 import { TableExpanderCell } from 'components/atoms/Table/TableParts';
@@ -109,7 +109,7 @@ const ProductCategories: React.FunctionComponent = () => {
 
   return (
     <>
-      <ViewHeader section="Product Catalog" subsection="Categories" />
+      <ViewHeader breadcrumbs={['Product Catalog', 'Categories']} />
       <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
         <Table<ProductCategory>
           title="Product Categories"

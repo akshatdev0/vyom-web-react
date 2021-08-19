@@ -15,20 +15,20 @@ const componentStyles = (theme: Theme) => createStyles({
     },
   },
   containerRow: {
-    paddingTop: "1.5rem",
-    paddingBottom: "1.5rem",
+    paddingTop: "0.25rem",
+    paddingBottom: "1rem",
   },
   gridItem: {
     display: "flex",
-    alignItems: "center",
-    minHeight: "45px",
-    height: "45px",
+    justifyContent: "center",
+    minHeight: "60px",
+    height: "60px",
   },
   toolbarGrid: {
     "& .MuiToolbar-root": {
       justifyContent: "flex-end",
-      minHeight: "45px",
-      height: "45px",
+      minHeight: "60px",
+      height: "60px",
     },
     "& .MuiButton-root": {
       color: theme.palette.primary.main,
@@ -55,20 +55,22 @@ const componentStyles = (theme: Theme) => createStyles({
   },
   displayInlineBlock: {
     display: "inline-block",
+    paddingLeft: "0.325rem",
   },
   mb0: {
     marginBottom: 0,
   },
   breadcrumbRoot: {
     display: "none",
+    paddingLeft: "0.325rem",
     [theme.breakpoints.up("md")]: {
-      marginLeft: "1.5rem",
       display: "inline-block",
     },
   },
   breadcrumbOl: {
     background: "transparent",
     marginBottom: 0,
+    paddingLeft: 0,
   },
   breadcrumbLi: {
     "& a": {
@@ -86,7 +88,7 @@ const componentStyles = (theme: Theme) => createStyles({
   },
   breadcrumbActive: {
     fontSize: ".875rem",
-    color: theme.palette.gray[300],
+    color: theme.palette.white.main,
     fontWeight: 600,
   },
   textWhite: {

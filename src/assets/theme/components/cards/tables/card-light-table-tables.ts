@@ -7,7 +7,9 @@ import hexToRgb from "assets/theme/hex-to-rgb.js";
 
 const componentStyles = (theme: Theme) => createStyles({
   cardRoot: {
+    flexGrow: 1,
     boxShadow: boxShadows.boxShadow + "!important",
+    marginBottom: "10px",
   },
   cardRootTranslucent: {
     backgroundColor: theme.palette.transparent.main,
@@ -50,9 +52,9 @@ const componentStyles = (theme: Theme) => createStyles({
     height: "66px!important"
   },
   cardActionsRoot: {
-    height: "90px!important",
-    paddingBottom: "1.5rem!important",
-    paddingTop: "1.5rem!important",
+    height: "70px!important",
+    paddingBottom: "0.75rem!important",
+    paddingTop: "0.75rem!important",
     borderTop: "0!important",
     justifyContent: "space-between",
     "& .MuiPaginationItem-ellipsis": {
@@ -63,8 +65,10 @@ const componentStyles = (theme: Theme) => createStyles({
     },
   },
   containerRoot: {
+    display: "flex",
     marginTop: "-4.5rem",
     [theme.breakpoints.up("md")]: {
+      minHeight: "calc(100vh - 230px)",
       paddingLeft: "30px",
       paddingRight: "30px",
     },
@@ -85,7 +89,7 @@ const componentStyles = (theme: Theme) => createStyles({
     },
   },  
   tableContainerRoot: {
-    maxHeight: "calc(100vh - 415px)",
+    height: "calc(100vh - 375px)",
   },
   tableRoot: {
     marginBottom: "0!important",
@@ -122,11 +126,12 @@ const componentStyles = (theme: Theme) => createStyles({
   tableCellRootHead: {
     backgroundColor: theme.palette.gray[100],
     color: theme.palette.gray[600],
-    height: "54px!important",
+    height: "55px!important",
+    fontSize: "0.7125rem",
   },
   tableCellRootBodyHead: {
     textTransform: "unset!important" as "unset",
-    fontSize: ".8125rem",
+    fontSize: ".85rem",
   },
   tableLabel: {},
   tableSortLabel: {
