@@ -8,34 +8,29 @@ import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import HomeIcon from '@material-ui/icons/Home';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import clsx from 'clsx';
 
 import componentStyles from 'assets/theme/components/headers/simple-header';
 
 type Props = {
-  section: string;
-  subsection: string;
+  title?: string;
+  breadcrumbs?: Array<string>;
   children?: React.ReactNode;
 };
 
 const useStyles = makeStyles(componentStyles);
 
-const ViewHeader: React.FunctionComponent<Props> = ({ section, subsection, children }: Props) => {
+const ViewHeader: React.FunctionComponent<Props> = ({ title, breadcrumbs, children }: Props) => {
   const classes = useStyles();
   return (
     <>
       <div className={classes.header}>
         <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
           <Grid container alignItems="center" className={classes.containerRow}>
-            <Grid item xs={7} lg={6} className={classes.gridItem}>
-              <Typography
-                variant="h2"
-                component="h6"
-                className={clsx(classes.displayInlineBlock, classes.mb0, classes.textWhite)}
-              >
-                {subsection}
-              </Typography>
+            <Grid item xs={7} lg={6} className={classes.gridItem} direction="column">
               <Breadcrumbs
+                separator={<NavigateNextIcon fontSize="small" />}
                 aria-label="breadcrumb"
                 classes={{
                   root: classes.breadcrumbRoot,
@@ -47,13 +42,29 @@ const ViewHeader: React.FunctionComponent<Props> = ({ section, subsection, child
                 <Link color="inherit" href="/" onClick={(e: any) => e.preventDefault()}>
                   <Box component={HomeIcon} width="1.25rem!important" height="1.25rem!important" position="relative" />
                 </Link>
-                <Link color="inherit" href="/getting-started/installation/" onClick={(e: any) => e.preventDefault()}>
-                  {section}
-                </Link>
-                <Typography component="span" className={classes.breadcrumbActive}>
-                  {subsection}
-                </Typography>
+                {breadcrumbs &&
+                  breadcrumbs.map((value, index) => {
+                    const last = index === breadcrumbs.length - 1;
+                    return last ? (
+                      <Link color="inherit" href="/" onClick={(e: any) => e.preventDefault()}>
+                        {value}
+                      </Link>
+                    ) : (
+                      <Typography component="span" className={classes.breadcrumbActive}>
+                        {value}
+                      </Typography>
+                    );
+                  })}
               </Breadcrumbs>
+              {title && (
+                <Typography
+                  variant="h2"
+                  component="h6"
+                  className={clsx(classes.displayInlineBlock, classes.mb0, classes.textWhite)}
+                >
+                  {title}
+                </Typography>
+              )}
             </Grid>
             <Grid className={classes.toolbarGrid} item xs={5} lg={6}>
               {children}

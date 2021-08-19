@@ -29,7 +29,7 @@ const Company: React.FunctionComponent = () => {
 
   return (
     <>
-      <ViewHeader section="Settings" subsection="Company" />
+      <ViewHeader breadcrumbs={['Settings', 'Company']} />
       <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
         <Grid container>
           <Grid
