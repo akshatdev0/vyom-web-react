@@ -1,14 +1,12 @@
 import React from 'react';
 
-import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
 import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 
 import tableComponentStyles from 'assets/theme/components/cards/tables/card-light-table-tables';
-import componentStyles from 'assets/theme/views/admin/tables';
+import componentStyles from 'assets/theme/views/admin/container';
 import { ViewHeader } from 'components/molecules';
 
 const useStyles = makeStyles(componentStyles);
@@ -23,18 +21,9 @@ const NewProduct: React.FunctionComponent = () => {
 
   return (
     <>
-      <ViewHeader section="Product Catalog" subsection="New Product" />
+      <ViewHeader title="Add a New Product" breadcrumbs={['Product Catalog', 'New Product']} />
       <Container maxWidth={false} classes={{ root: classes.containerRoot }}>
         <Card classes={{ root: classes.cardRoot }}>
-          <CardHeader
-            className={classes.cardHeader}
-            title="New Product"
-            titleTypographyProps={{
-              component: Box,
-              marginBottom: '0!important',
-              variant: 'h3',
-            }}
-          />
           <CardContent></CardContent>
         </Card>
       </Container>

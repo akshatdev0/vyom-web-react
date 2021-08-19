@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import AddIcon from '@material-ui/icons/Add';
 import { Column } from 'react-table';
 
-import componentStyles from 'assets/theme/views/admin/tables';
+import componentStyles from 'assets/theme/views/admin/container';
 import { RouteLink, Table } from 'components/atoms';
 import { ViewHeader } from 'components/molecules';
 import { getAuthData } from 'features/auth';
@@ -65,11 +65,11 @@ const Products: React.FunctionComponent = () => {
 
   return (
     <>
-      <ViewHeader section="Product Catalog" subsection="Products">
+      <ViewHeader breadcrumbs={['Product Catalog', 'Products']}>
         <Toolbar disableGutters>
           <RouteLink to={routes.newProduct}>
             <Button variant="contained" size="small" startIcon={<AddIcon />}>
-              Create
+              Add Product
             </Button>
           </RouteLink>
         </Toolbar>
