@@ -1,8 +1,9 @@
 import { AdminProfile } from 'features/admin';
 import { Company } from 'features/company';
 import { CompanyOwnerProfile } from 'features/company-owner';
+import { NewProduct } from 'features/new-product';
 import { Orders } from 'features/order';
-import { NewProduct, Products } from 'features/product';
+import { Products } from 'features/product';
 import { ProductCategories } from 'features/product-category';
 import { Layouts } from 'layouts';
 import SignIn from 'views/SignIn';
@@ -10,7 +11,6 @@ import SignUp from 'views/SignUp';
 
 const ADD = 'add';
 const COMPANY = 'company';
-// const DASHBOARD = 'dashboard';
 const ORDERS = 'orders';
 const PRODUCTS = 'products';
 const PRODUCT_CATEGORIES = 'product-categories';
