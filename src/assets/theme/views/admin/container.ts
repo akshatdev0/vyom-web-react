@@ -12,6 +12,16 @@ const componentStyles = (theme: Theme) => createStyles({
       paddingRight: "30px",
     },
   },
+  cardRoot: {
+    flexGrow: 1,
+    marginBottom: "10px",
+  },
+  paperRoot: {
+    flexGrow: 1,
+    marginBottom: "10px",
+    position: "relative",
+    borderRadius: "0.375rem",
+  },
 });
 
 export default componentStyles;
