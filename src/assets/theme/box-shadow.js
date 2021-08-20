@@ -4,6 +4,7 @@ import hexToRgb from "assets/theme/hex-to-rgb.js";
 const boxShadows = {
   boxShadow: "0 0 2rem 0 rgba(" + hexToRgb(colors.gray[600]) + ",.15)",
   boxShadowLg: "0 0 3rem rgba(" + hexToRgb(colors.gray[600]) + ",.175)",
+  boxShadowRight: "0.5rem 0 2rem 0 rgba(" + hexToRgb(colors.gray[600]) + ",.15)",
   buttonBoxShadow:
     "0 7px 14px rgba(" +
     hexToRgb(colors.gray[800]) +
