@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Box from '@material-ui/core/Box';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
 import Grid from '@material-ui/core/Grid';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -19,21 +22,26 @@ const useStyles = makeStyles((theme: Theme) =>
       width: 'calc(100% - 15px)',
     },
     overlineRoot: {
-      fontSize: '.675rem!important',
-      color: theme.palette.gray[800] + '!important',
-      display: 'block',
-      marginTop: '-0.25rem',
-    },
-    typographyRootH6: {
-      fontSize: '.875rem!important',
+      fontSize: '0.95rem',
       color: theme.palette.gray[600] + '!important',
+      display: 'inline',
+    },
+    typographyRoot: {
+      fontSize: '1rem',
+      color: theme.palette.gray[800] + '!important',
       fontWeight: 400,
-      marginTop: '-0.25rem',
-      marginBottom: 0,
+      display: 'inline',
     },
     containerRoot: {
       marginLeft: '0',
       width: 'calc(100% - 15px)',
+      height: 'calc(100vh - 355px)',
+      '& .MuiGrid-item': {
+        height: '100%',
+        '& .MuiPaper-root': {
+          height: '100%',
+        },
+      },
     },
   }),
 );
@@ -51,7 +59,7 @@ function renderRow(props: ListChildComponentProps) {
 function VirtualizedList() {
   return (
     <div>
-      <FixedSizeList height={650} width="auto" itemSize={46} itemCount={200}>
+      <FixedSizeList height={625} width="auto" itemSize={46} itemCount={200}>
         {renderRow}
       </FixedSizeList>
     </div>
@@ -76,10 +84,10 @@ const SelectVertical = (): JSX.Element => {
         </Grid>
         <Grid item md={8}>
           <Typography variant="overline" classes={{ root: classes.overlineRoot }}>
-            Vertical
-          </Typography>
-          <Typography variant="h6" classes={{ root: classes.typographyRootH6 }}>
-            {'/some/product/path'}
+            Vertical:
+          </Typography>{' '}
+          <Typography variant="body1" classes={{ root: classes.typographyRoot }}>
+            {'some / product / path'}
           </Typography>
         </Grid>
       </Grid>
@@ -98,6 +106,18 @@ const SelectVertical = (): JSX.Element => {
           <Paper elevation={2}>
             <VirtualizedList />
           </Paper>
+        </Grid>
+        <Grid item xs>
+          <Card elevation={2}>
+            <CardHeader
+              title="Add a New Category"
+              titleTypographyProps={{
+                component: Box,
+                marginBottom: '0!important',
+                variant: 'h3',
+              }}
+            />
+          </Card>
         </Grid>
       </Grid>
     </>

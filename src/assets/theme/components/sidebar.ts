@@ -11,7 +11,6 @@ const componentStyles = (theme: Theme) => createStyles({
   },
   listRoot: {
     marginTop: "2rem",
-    height: "100%",
   },
   listRootCollapse: {
     padding: "0!important",
