@@ -294,7 +294,6 @@ const theme = createMuiTheme({
     },
     MuiListItem: {
       root: {
-        display: "block",
         paddingTop: "1rem",
         paddingBottom: "1rem",
         color: themeColors.gray[700],
