@@ -16,6 +16,11 @@ const componentStyles = (theme: Theme) => createStyles({
     flexGrow: 1,
     marginBottom: "10px",
   },
+  cardRootLightGray: {
+    flexGrow: 1,
+    marginBottom: "10px",
+    backgroundColor: theme.palette.gray[100],
+  },
   paperRoot: {
     flexGrow: 1,
     marginBottom: "10px",
