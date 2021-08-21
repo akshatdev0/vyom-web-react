@@ -360,16 +360,12 @@ const Sidebar: React.FunctionComponent<Props> = ({ layout, sidebarOpen, closeSid
           onMouseEnter={onMouseEnterSidebar}
           onMouseLeave={onMouseLeaveSidebar}
         >
-          {navigator.platform.indexOf('Win') > -1 ? (
-            <PerfectScrollbar>{desktopObject}</PerfectScrollbar>
-          ) : (
-            desktopObject
-          )}
+          <PerfectScrollbar>{desktopObject}</PerfectScrollbar>
         </Drawer>
       </Hidden>
       <Hidden xlUp implementation="js">
         <Drawer variant="temporary" anchor="left" open={sidebarOpen} onClose={closeSidebar}>
-          {navigator.platform.indexOf('Win') > -1 ? <PerfectScrollbar>{mobileObject}</PerfectScrollbar> : mobileObject}
+          <PerfectScrollbar>{mobileObject}</PerfectScrollbar>
         </Drawer>
       </Hidden>
     </>
